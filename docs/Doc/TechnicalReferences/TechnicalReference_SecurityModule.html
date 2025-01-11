@@ -1,0 +1,3688 @@
+---
+layout: default
+title: TechnicalReference_SecurityModule
+nav_order: 42
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>Security Module  </b></p>
+<p>Technical Reference </p>
+<p> </p>
+<p>  </p>
+<p>Version 2.2.0 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Authors </p>
+<p>Markus Schneider </p>
+<p>Status </p>
+<p>Released </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>2 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Document Information </b></p>
+<p><b>History </b></p>
+<p><b>Author </b></p>
+<p><b>Date </b></p>
+<p><b>Version </b></p>
+<p><b>Remarks </b></p>
+<p>Christian Bäuerle </p>
+<p>2010-10-13 </p>
+<p>1.0.4 </p>
+<p>Generalized technical reference </p>
+<p>Christian Bäuerle </p>
+<p>2012-07-02 </p>
+<p>1.0.5 </p>
+<p>Minor corrections </p>
+<p>Markus Schneider </p>
+<p>2013-11-27 </p>
+<p>2.0.0 </p>
+<p>Major rework </p>
+<p>Markus Schneider </p>
+<p>2014-03-13 </p>
+<p>2.1.0 </p>
+<p>Rework of ‘Functional Description’; added </p>
+<p>additional informations; minor corrections </p>
+<p>André Caspari </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>2016-08-02 </p>
+<p>2.2.0 </p>
+<p>Updated API description </p>
+<p><b>Reference Documents </b></p>
+<p><b>No. </b></p>
+<p><b>Source </b></p>
+<p><b>Title </b></p>
+<p><b>Version </b></p>
+<p>[1] </p>
+<p> HIS </p>
+<p>API IO Library </p>
+<p>2.0.3 </p>
+<p>[2] </p>
+<p> HIS </p>
+<p>Security Module Specification </p>
+<p>1.1 </p>
+<p>[3] </p>
+<p> Vector </p>
+<p>HexView Reference Manual </p>
+<p>1.6 </p>
+<p>[4] </p>
+<p> RSA </p>
+<p>PKCS #1: RSA Cryptography Standard </p>
+<p>2.1 </p>
+<p>[5] </p>
+<p> IETF </p>
+<p>HMAC: Keyed-Hashing for Message Authentication RFC2104 </p>
+<p>Feb 1997 </p>
+<p>[6] </p>
+<p> ANSI </p>
+<p>Keyed Hash Message Authentication Code X9.71 </p>
+<p>2000 </p>
+<p><b>Scope of the Document </b></p>
+<p>This technical reference describes the general use of the Security Module software.  </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>3 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Contents </b></p>
+<p><b>1</b></p>
+<p> </p>
+<p><b>Introduction................................................................................................................... 8</b></p>
+<p> </p>
+<p><b>2</b></p>
+<p> </p>
+<p><b>Software Architecture ................................................................................................... 9</b></p>
+<p> </p>
+<p>2.1</p>
+<p> </p>
+<p>Security Module Components ............................................................................ 9</p>
+<p> </p>
+<p><b>3</b></p>
+<p> </p>
+<p><b>Integration ................................................................................................................... 10</b></p>
+<p> </p>
+<p>3.1</p>
+<p> </p>
+<p>Scope of Delivery ............................................................................................. 10</p>
+<p> </p>
+<p>3.2</p>
+<p> </p>
+<p>Include Structure .............................................................................................. 10</p>
+<p> </p>
+<p>3.3</p>
+<p> </p>
+<p>Compiler Abstraction and Memory Mapping ..................................................... 10</p>
+<p> </p>
+<p><b>4</b></p>
+<p> </p>
+<p><b>Configuration .............................................................................................................. 11</b></p>
+<p> </p>
+<p>4.1</p>
+<p> </p>
+<p>GENy ............................................................................................................... 11</p>
+<p> </p>
+<p>4.2</p>
+<p> </p>
+<p>Security Module Configuration ......................................................................... 11</p>
+<p> </p>
+<p>4.3</p>
+<p> </p>
+<p>Configuration Parameters ................................................................................ 11</p>
+<p> </p>
+<p>4.4</p>
+<p> </p>
+<p>Key Files .......................................................................................................... 13</p>
+<p> </p>
+<p>4.4.1</p>
+<p> </p>
+<p>Authenticity file mode ....................................................................... 14</p>
+<p> </p>
+<p>4.4.2</p>
+<p> </p>
+<p>INI-Key file mode ............................................................................. 16</p>
+<p> </p>
+<p>4.5</p>
+<p> </p>
+<p>Running the Generator .................................................................................... 17</p>
+<p> </p>
+<p><b>5</b></p>
+<p> </p>
+<p><b>Preparation of the Application ................................................................................... 18</b></p>
+<p> </p>
+<p>5.1</p>
+<p> </p>
+<p>HexView........................................................................................................... 19</p>
+<p> </p>
+<p>5.1.1</p>
+<p> </p>
+<p>Fill and align the hex file with HexView ............................................. 19</p>
+<p> </p>
+<p>5.1.2</p>
+<p> </p>
+<p>Create a checksum / signature file with HexView ............................. 19</p>
+<p> </p>
+<p>5.1.3</p>
+<p> </p>
+<p>Create an AES128 Encrypted file with HexView ............................... 19</p>
+<p> </p>
+<p>5.2</p>
+<p> </p>
+<p>Signature Generation ....................................................................................... 20</p>
+<p> </p>
+<p>5.2.1</p>
+<p> </p>
+<p>Hash calculation ............................................................................... 20</p>
+<p> </p>
+<p>5.2.2</p>
+<p> </p>
+<p>Signing operation ............................................................................. 21</p>
+<p> </p>
+<p>5.2.2.1</p>
+<p> </p>
+<p>Security class C ............................................................. 21</p>
+<p> </p>
+<p>5.2.2.2</p>
+<p> </p>
+<p>Security class CCC ........................................................ 23</p>
+<p> </p>
+<p>5.3</p>
+<p> </p>
+<p>MkPsKeys ........................................................................................................ 25</p>
+<p> </p>
+<p><b>6</b></p>
+<p> </p>
+<p><b>Functional Description ............................................................................................... 27</b></p>
+<p> </p>
+<p>6.1</p>
+<p> </p>
+<p>Verification Module ........................................................................................... 27</p>
+<p> </p>
+<p>6.1.1</p>
+<p> </p>
+<p>Variants ............................................................................................ 27</p>
+<p> </p>
+<p>6.1.2</p>
+<p> </p>
+<p>Description of the verification process .............................................. 27</p>
+<p> </p>
+<p>6.1.3</p>
+<p> </p>
+<p>Usage .............................................................................................. 28</p>
+<p> </p>
+<p>6.2</p>
+<p> </p>
+<p>CRC Module .................................................................................................... 31</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>4 </p>
+<p>based on template version 5.6.0 </p>
+<p>6.2.1</p>
+<p> </p>
+<p>Variants ............................................................................................ 31</p>
+<p> </p>
+<p>6.2.2</p>
+<p> </p>
+<p>CRCTotal ......................................................................................... 31</p>
+<p> </p>
+<p>6.2.3</p>
+<p> </p>
+<p>Speed / size optimization ................................................................. 32</p>
+<p> </p>
+<p>6.2.4</p>
+<p> </p>
+<p>Operation mode flags ....................................................................... 32</p>
+<p> </p>
+<p>6.2.5</p>
+<p> </p>
+<p>Usage .............................................................................................. 32</p>
+<p> </p>
+<p>6.3</p>
+<p> </p>
+<p>Encryption / Decryption Module ....................................................................... 34</p>
+<p> </p>
+<p>6.3.1</p>
+<p> </p>
+<p>Variants ............................................................................................ 34</p>
+<p> </p>
+<p>6.3.2</p>
+<p> </p>
+<p>Using an explicit initialization vector ................................................. 34</p>
+<p> </p>
+<p>6.3.3</p>
+<p> </p>
+<p>Internal / external Key ...................................................................... 36</p>
+<p> </p>
+<p>6.3.4</p>
+<p> </p>
+<p>Operation mode flags ....................................................................... 36</p>
+<p> </p>
+<p>6.3.5</p>
+<p> </p>
+<p>Operation mode modifiers ................................................................ 37</p>
+<p> </p>
+<p>6.3.6</p>
+<p> </p>
+<p>Usage .............................................................................................. 37</p>
+<p> </p>
+<p>6.4</p>
+<p> </p>
+<p>Seed / Key ....................................................................................................... 40</p>
+<p> </p>
+<p>6.4.1</p>
+<p> </p>
+<p>Variants ............................................................................................ 40</p>
+<p> </p>
+<p>6.4.2</p>
+<p> </p>
+<p>Default and extended API................................................................. 41</p>
+<p> </p>
+<p>6.4.3</p>
+<p> </p>
+<p>Usage .............................................................................................. 41</p>
+<p> </p>
+<p>6.5</p>
+<p> </p>
+<p>Workspace ....................................................................................................... 42</p>
+<p> </p>
+<p>6.5.1</p>
+<p> </p>
+<p>Variants ............................................................................................ 42</p>
+<p> </p>
+<p>6.5.2</p>
+<p> </p>
+<p>Usage .............................................................................................. 42</p>
+<p> </p>
+<p>6.6</p>
+<p> </p>
+<p>Accessing the Security Module from within the Application .............................. 43</p>
+<p> </p>
+<p>6.6.1</p>
+<p> </p>
+<p>Usage .............................................................................................. 43</p>
+<p> </p>
+<p><b>7</b></p>
+<p> </p>
+<p><b>API Description ........................................................................................................... 45</b></p>
+<p> </p>
+<p>7.1</p>
+<p> </p>
+<p>Type Definitions ............................................................................................... 45</p>
+<p> </p>
+<p>7.1.1</p>
+<p> </p>
+<p>General Types .................................................................................. 45</p>
+<p> </p>
+<p>7.1.2</p>
+<p> </p>
+<p>Structures used by Verification ......................................................... 46</p>
+<p> </p>
+<p>7.1.3</p>
+<p> </p>
+<p>Structures used by CRC .................................................................. 47</p>
+<p> </p>
+<p>7.1.4</p>
+<p> </p>
+<p>Structures used by Encryption / Decryption ...................................... 47</p>
+<p> </p>
+<p>7.1.5</p>
+<p> </p>
+<p>Structures used by Seed / Key ......................................................... 48</p>
+<p> </p>
+<p>7.2</p>
+<p> </p>
+<p>Common .......................................................................................................... 48</p>
+<p> </p>
+<p>7.2.1</p>
+<p> </p>
+<p>SecM_InitPowerOn .......................................................................... 48</p>
+<p> </p>
+<p>7.2.2</p>
+<p> </p>
+<p>SecM_Task ...................................................................................... 48</p>
+<p> </p>
+<p>7.3</p>
+<p> </p>
+<p>CRC ................................................................................................................. 49</p>
+<p> </p>
+<p>7.3.1</p>
+<p> </p>
+<p>SecM_ComputeCRC ........................................................................ 49</p>
+<p> </p>
+<p>7.4</p>
+<p> </p>
+<p>Encryption / Decryption .................................................................................... 49</p>
+<p> </p>
+<p>7.4.1</p>
+<p> </p>
+<p>SecM_InitDecryption ........................................................................ 49</p>
+<p> </p>
+<p>7.4.2</p>
+<p> </p>
+<p>SecM_DeinitDecryption .................................................................... 50</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>5 </p>
+<p>based on template version 5.6.0 </p>
+<p>7.4.3</p>
+<p> </p>
+<p>SecM_Decryption ............................................................................. 50</p>
+<p> </p>
+<p>7.4.4</p>
+<p> </p>
+<p>SecM_InitEncryption ........................................................................ 51</p>
+<p> </p>
+<p>7.4.5</p>
+<p> </p>
+<p>SecM_DeinitEncryption .................................................................... 51</p>
+<p> </p>
+<p>7.4.6</p>
+<p> </p>
+<p>SecM_Encryption ............................................................................. 52</p>
+<p> </p>
+<p>7.5</p>
+<p> </p>
+<p>Seed / Key Common ........................................................................................ 53</p>
+<p> </p>
+<p>7.5.1</p>
+<p> </p>
+<p>SecM_GenerateSeed ....................................................................... 53</p>
+<p> </p>
+<p>7.5.2</p>
+<p> </p>
+<p>SecM_CompareKey (HIS Specification &lt; 1.0.1) ............................... 53</p>
+<p> </p>
+<p>7.5.3</p>
+<p> </p>
+<p>SecM_CompareKey (HIS Specification &gt;= 1.0.1) ............................. 54</p>
+<p> </p>
+<p>7.6</p>
+<p> </p>
+<p>Seed / Key default API ..................................................................................... 54</p>
+<p> </p>
+<p>7.6.1</p>
+<p> </p>
+<p>SecM_ComputeKey ......................................................................... 54</p>
+<p> </p>
+<p>7.7</p>
+<p> </p>
+<p>Seed / Key extended API ................................................................................. 55</p>
+<p> </p>
+<p>7.7.1</p>
+<p> </p>
+<p>SecM_ComputeKey ......................................................................... 55</p>
+<p> </p>
+<p>7.8</p>
+<p> </p>
+<p>Verification ....................................................................................................... 56</p>
+<p> </p>
+<p>7.8.1</p>
+<p> </p>
+<p>SecM_InitVerification ........................................................................ 56</p>
+<p> </p>
+<p>7.8.2</p>
+<p> </p>
+<p>SecM_DeinitVerification ................................................................... 56</p>
+<p> </p>
+<p>7.8.3</p>
+<p> </p>
+<p>SecM_Verification ............................................................................ 57</p>
+<p> </p>
+<p>7.8.4</p>
+<p> </p>
+<p>SecM_VerifySignature ...................................................................... 57</p>
+<p> </p>
+<p><b>8</b></p>
+<p> </p>
+<p><b>Contact ........................................................................................................................ 59</b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>6 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Illustrations </b></p>
+<p>Figure 4-1</p>
+<p> </p>
+<p>Security Component configuration ............................................................ 11</p>
+<p> </p>
+<p>Figure 4-2</p>
+<p> </p>
+<p>Key file selection in the INI-file mode ........................................................ 17</p>
+<p> </p>
+<p>Figure 5-1 </p>
+<p> </p>
+<p>Hash calculation ....................................................................................... 21</p>
+<p> </p>
+<p>Figure 5-2</p>
+<p> </p>
+<p> Security class C signature ....................................................................... 23</p>
+<p> </p>
+<p>Figure 5-3 </p>
+<p> </p>
+<p>Security class CCC signature ................................................................... 24</p>
+<p> </p>
+<p>Figure 6-1</p>
+<p> </p>
+<p>Logical Blocks ........................................................................................... 27</p>
+<p> </p>
+<p>Figure 6-2</p>
+<p> </p>
+<p>Explicit usage of an initialization vector with the encryption API ................ 35</p>
+<p> </p>
+<p>Figure 6-3</p>
+<p> </p>
+<p>Explicit usage of an initialization vector with the decryption API ................ 36</p>
+<p> </p>
+<p><b> </b></p>
+<p><b>Tables </b></p>
+<p>Table 2-1 </p>
+<p> </p>
+<p>Security Module Components ..................................................................... 9</p>
+<p> </p>
+<p>Table 3-1 </p>
+<p> </p>
+<p>Scope of Delivery ..................................................................................... 10</p>
+<p> </p>
+<p>Table 4-1 </p>
+<p> </p>
+<p>GENy configuration parameter ................................................................. 13</p>
+<p> </p>
+<p>Table 4-2 </p>
+<p> </p>
+<p>Format of HMAC key ................................................................................ 14</p>
+<p> </p>
+<p>Table 4-3 </p>
+<p> </p>
+<p>Key structure of the example key .............................................................. 14</p>
+<p> </p>
+<p>Table 4-4 </p>
+<p> </p>
+<p>Format of public key without additional information ................................... 14</p>
+<p> </p>
+<p>Table 4-5 </p>
+<p> </p>
+<p>Format of public key and private key ........................................................ 15</p>
+<p> </p>
+<p>Table 4-6 </p>
+<p> </p>
+<p>Key structure of the example key .............................................................. 15</p>
+<p> </p>
+<p>Table 4-7 </p>
+<p> </p>
+<p>INI-Key file parameter ............................................................................... 16</p>
+<p> </p>
+<p>Table 4-8 </p>
+<p> </p>
+<p>Generated files ......................................................................................... 17</p>
+<p> </p>
+<p>Table 5-1 </p>
+<p> </p>
+<p>Algorithm information digest ..................................................................... 25</p>
+<p> </p>
+<p>Table 6-1 </p>
+<p> </p>
+<p>External workspace usage ........................................................................ 42</p>
+<p> </p>
+<p>Table 6-2 </p>
+<p> </p>
+<p>Function access macros for the FBL header structure .............................. 43</p>
+<p> </p>
+<p>Table 7-1 </p>
+<p> </p>
+<p>Type definitions ......................................................................................... 45</p>
+<p> </p>
+<p>Table 7-2 </p>
+<p> </p>
+<p>SecM_VerifyParamType ........................................................................... 46</p>
+<p> </p>
+<p>Table 7-3 </p>
+<p> </p>
+<p>SecM_SignatureParamType ..................................................................... 47</p>
+<p> </p>
+<p>Table 7-4 </p>
+<p> </p>
+<p>SecM_CRCParamType ............................................................................ 47</p>
+<p> </p>
+<p>Table 7-5 </p>
+<p> </p>
+<p>SecM_DecInputParamType ...................................................................... 47</p>
+<p> </p>
+<p>Table 7-6 </p>
+<p> </p>
+<p>SecM_DecOutputParamType ................................................................... 47</p>
+<p> </p>
+<p>Table 7-7 </p>
+<p> </p>
+<p>SecM_DecParamType .............................................................................. 48</p>
+<p> </p>
+<p>Table 7-8 </p>
+<p> </p>
+<p>SecM_KeyType ........................................................................................ 48</p>
+<p> </p>
+<p>Table 7-9 </p>
+<p> </p>
+<p>SecM_InitPowerOn ................................................................................... 48</p>
+<p> </p>
+<p>Table 7-10 </p>
+<p> </p>
+<p>SecM_Task ............................................................................................... 49</p>
+<p> </p>
+<p>Table 7-11 </p>
+<p> </p>
+<p>SecM_ComputeCRC ................................................................................ 49</p>
+<p> </p>
+<p>Table 7-12 </p>
+<p> </p>
+<p>SecM_InitDecryption ................................................................................. 50</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>7 </p>
+<p>based on template version 5.6.0 </p>
+<p>Table 7-13 </p>
+<p> </p>
+<p>SecM_DeinitDecryption ............................................................................ 50</p>
+<p> </p>
+<p>Table 7-14 </p>
+<p> </p>
+<p>SecM_Decryption ..................................................................................... 51</p>
+<p> </p>
+<p>Table 7-15 </p>
+<p> </p>
+<p>SecM_InitEncryption ................................................................................. 51</p>
+<p> </p>
+<p>Table 7-16 </p>
+<p> </p>
+<p>SecM_DeinitEncryption ............................................................................ 52</p>
+<p> </p>
+<p>Table 7-17 </p>
+<p> </p>
+<p>SecM_Encryption ..................................................................................... 52</p>
+<p> </p>
+<p>Table 7-18 </p>
+<p> </p>
+<p>SecM_GenerateSeed ............................................................................... 53</p>
+<p> </p>
+<p>Table 7-19 </p>
+<p> </p>
+<p>SecM_CompareKey .................................................................................. 54</p>
+<p> </p>
+<p>Table 7-20 </p>
+<p> </p>
+<p>SecM_CompareKey .................................................................................. 54</p>
+<p> </p>
+<p>Table 7-21 </p>
+<p> </p>
+<p>SecM_ComputeKey .................................................................................. 55</p>
+<p> </p>
+<p>Table 7-22 </p>
+<p> </p>
+<p>SecM_ComputeKey .................................................................................. 55</p>
+<p> </p>
+<p>Table 7-23 </p>
+<p> </p>
+<p>SecM_InitVerification ................................................................................ 56</p>
+<p> </p>
+<p>Table 7-24 </p>
+<p> </p>
+<p>SecM_DeinitVerification ............................................................................ 56</p>
+<p> </p>
+<p>Table 7-25 </p>
+<p> </p>
+<p>SecM_Verification ..................................................................................... 57</p>
+<p> </p>
+<p>Table 7-26 </p>
+<p> </p>
+<p>SecM_VerifySignature .............................................................................. 58</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>8 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>1 </b></p>
+<p><b>Introduction </b></p>
+<p>This document describes the interface and configuration of the security module. The main </p>
+<p>target  of  this  component  is  the  usage  within  a  flash  process  to  provide  the  following </p>
+<p>functionalities depending on your order: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Authorization </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Authentication, verification and error detection </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Confidentiality </p>
+<p>The authorization part of the security component can be used for the Seed/Key procedure </p>
+<p>to  unlock  an  ECU.  The  module  provides  a  standard  interface  for  both,  seed  and  key </p>
+<p>generation. </p>
+<p>Usually the functions are available in source code and can be adapted if needed. Parts of </p>
+<p>the cryptographic algorithms can be delivered in a library. </p>
+<p>Authentication,  verification and  error detection  is  available  in three  different  levels. They </p>
+<p>are distinguished by so-called security classes:  </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Class DDD </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Class C </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Class CCC </p>
+<p>Only one of the three classes can be selected at a time and differs in the strength of the </p>
+<p>mathematical algorithm. </p>
+<p>The security classes C and CCC calculate a signature on one or more data segments. The </p>
+<p>resulting  signature  is  compared  against  a  signature  that  is  given  through  the  flash </p>
+<p>download. The checksum calculation with the security class DDD has in principle the same </p>
+<p>mechanism. </p>
+<p>As  the  security  class  DDD  uses  a  checksum  algorithm,  a  key  file  is  not  needed.  The </p>
+<p>classes  C  and  CCC  are  using  signature  algorithm.  They  require  a  key  parameter  for </p>
+<p>calculation.  </p>
+<p>The given signatures must be calculated off-line on exactly the same set of data that the </p>
+<p>security component uses for verification. For security class C, key parameter for the on-</p>
+<p>line and off-line signature is the same. This is called a symmetric signature calculation. </p>
+<p>For security class CCC, an asymmetric signature calculation is used. The off-line signature </p>
+<p>is  calculated  with  a  private  key,  and  the  on-line  signature  calculation  (respectively  the </p>
+<p>verification) uses the public key. </p>
+<p>The length of the signature varies depending on the used security classes. </p>
+<p>Confidentiality  can  be  achieved  by  data  encryption  and decryption. The  security  module </p>
+<p>offers an interface for symmetrical encryption / decryption. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>9 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>2 </b></p>
+<p><b>Software Architecture </b></p>
+<p>The Security Module delivery contains the following components: </p>
+<p><b>&gt; </b></p>
+<p>The security module itself (with its sub-packages)   </p>
+<p><b>&gt; </b></p>
+<p>The cryptographic algorithms as a library </p>
+<p><b>&gt; </b></p>
+<p>Configuration tool GENy  </p>
+<p>In addition, the following tool is delivered: </p>
+<p><b>&gt; </b></p>
+<p>The  software  tool  HexView.  It  can  be  used  to  change  and  show  the  contents  of a </p>
+<p>binary file. Also it can be used for signature and checksum calculation. Besides, the </p>
+<p>creation of encrypted download files is possible with HexView. </p>
+<p><b>2.1 </b></p>
+<p><b>Security Module Components </b></p>
+<p>The  functionalities  of  the  Security  Module  are  separated  into  several  sub-packages.  A </p>
+<p>functional description for the individual modules can be found in chapter 6. </p>
+<p>Depending on your order the following modules can be provided with the Security Module: </p>
+<p><b>Name </b></p>
+<p><b>Description </b></p>
+<p>CRC </p>
+<p>Implementation  of  the  HIS  security  module  -  CRC  calculation.  Offers </p>
+<p>CRC calculation according to CRC-16 CCITT or CRC-32 (IEEE 802.3). </p>
+<p>Decryption </p>
+<p>Implementation of the HIS security module – Decryption. Offers API for </p>
+<p>decryption and encryption. </p>
+<p>SeedKey </p>
+<p>Implementation  of  the  HIS  security  module  -  Seed/key  authentication. </p>
+<p>Offers challenge/response authentication interface. </p>
+<p>Verification </p>
+<p>Implementation of the verification component of the HIS security module </p>
+<p>- Signature verification. Offers signature/checksum verification interface. </p>
+<p>Workspace </p>
+<p>Defines the default workspaces used by the library parts for verification, </p>
+<p>seed/key and decryption. </p>
+<p>Sec </p>
+<p>Implementation of the HIS security module.  </p>
+<p>Table 2-1  </p>
+<p>Security Module Components </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>10 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>3 </b></p>
+<p><b>Integration </b></p>
+<p>This chapter gives necessary information for the integration of the Vector Security Module </p>
+<p>into an application environment of an ECU. </p>
+<p><b>3.1 </b></p>
+<p><b>Scope of Delivery </b></p>
+<p>The delivery of the Security Module contains the following files: </p>
+<p><b>Module </b></p>
+<p><b>Filename </b></p>
+<p><b>Delivery Type </b></p>
+<p><b>Description </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Source </b></p>
+<p><b>Lib </b></p>
+<p><b> </b></p>
+<p>CRC </p>
+<p>Sec_Crc.c </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Source file of the CRC Module. </p>
+<p>Sec_Crc.h </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Header file of the CRC Module. </p>
+<p>Decryption </p>
+<p>Sec_Decryption.c </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Source file of the Decryption Module. </p>
+<p>Sec_Decryption.h </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Header file of the Decryption Module. </p>
+<p>SeedKey </p>
+<p>Sec_SeedKey.c </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Source file of the Seed/Key Module. </p>
+<p>Sec_SeedKey.h </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Header file of the Seed/Key Module. </p>
+<p>Verification </p>
+<p>Sec_Verification.c </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Source file of the Verification Module. </p>
+<p>Sec_Verification.h </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Header file of the Verification Module. </p>
+<p>Workspace </p>
+<p>Sec_Workspace.h </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Header file of the Workspace. </p>
+<p>Common </p>
+<p>Sec_Inc.h </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Header file used internally. </p>
+<p>Sec_Types.h </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Defines </p>
+<p>types, </p>
+<p>constantans </p>
+<p>and </p>
+<p>configuration </p>
+<p>switches. </p>
+<p>Sec.c </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Source file of the Security Module. </p>
+<p>Sec.h </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Header file of the Security Module. </p>
+<p>SecModLib.a </p>
+<p>1</p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>Contains cryptographic primitives and partial code </p>
+<p>of the Security Module. </p>
+<p>Table 3-1  </p>
+<p>Scope of Delivery </p>
+<p><b>3.2 </b></p>
+<p><b>Include Structure </b></p>
+<p>For usage of the Security Module within an application it is necessary to include the ‘Sec.h’ </p>
+<p>header file. </p>
+<p><b>3.3 </b></p>
+<p><b>Compiler Abstraction and Memory Mapping </b></p>
+<p>Depending on the configuration the workspace is mapped to a specific section according </p>
+<p>to the ‘memmap.h’ file. </p>
+<p>                                            </p>
+<p>1</p>
+<p> The filename and file extension may differ from your delivery </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>11 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>4 </b></p>
+<p><b>Configuration </b></p>
+<p><b>4.1 </b></p>
+<p><b>GENy </b></p>
+<p>We </p>
+<p>recommend </p>
+<p>configuring </p>
+<p>the </p>
+<p>Security </p>
+<p>Module </p>
+<p>with </p>
+<p>the </p>
+<p>configuration </p>
+<p>tool </p>
+<p>GENy. </p>
+<p>Depending on your order the tool can be downloaded from our FTP and installed. </p>
+<p><b>4.2 </b></p>
+<p><b>Security Module Configuration </b></p>
+<p>The  features  of  the  security  component  are  configured  in  the  ‘SysService_SecModHis’ </p>
+<p>component. The available features or pre-set features are shown on the right side of the </p>
+<p>window. </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 4-1 </p>
+<p>Security Component configuration </p>
+<p><b>4.3 </b></p>
+<p><b>Configuration Parameters </b></p>
+<p>Due  to  the  OEM  pre-configuration  the  following  parameter  may  appear  in  the  GENy </p>
+<p>configuration. Note that the default values may differ depending on the OEM. </p>
+<p><b>Attribute Name </b></p>
+<p><b>Default </b></p>
+<p><b>Values </b></p>
+<p><b>Description </b></p>
+<p>Constant for key </p>
+<p>0x0 </p>
+<p>This </p>
+<p>is </p>
+<p>the </p>
+<p>key </p>
+<p>constant </p>
+<p>to </p>
+<p>adjust </p>
+<p>the </p>
+<p>authentication  algorithm  for  a  specific  type  of </p>
+<p>ECU. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>12 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Attribute Name </b></p>
+<p><b>Default </b></p>
+<p><b>Values </b></p>
+<p><b>Description </b></p>
+<p>Timeout for key </p>
+<p>100 ms </p>
+<p>This parameter is currently not used and is only </p>
+<p>provided  for  compatibility  reasons  to  the  HIS </p>
+<p>specification. </p>
+<p>The  timeout  handling  of  the  authorization  is </p>
+<p>managed within the diagnostic layer, not in the </p>
+<p>security </p>
+<p>component </p>
+<p>according </p>
+<p>to </p>
+<p>OEM </p>
+<p>specification and cannot be adjusted. </p>
+<p>Call cycle </p>
+<p>10 </p>
+<p>Specifies </p>
+<p>the </p>
+<p>call </p>
+<p>cycle </p>
+<p>to </p>
+<p>the </p>
+<p>function </p>
+<p>SecTask(). Commonly SecTask() is not used. In </p>
+<p>most  cases  this  parameter  is  only  for  HIS-</p>
+<p>conformance. </p>
+<p>CRC </p>
+<p>Size </p>
+<p>optimized </p>
+<p>The </p>
+<p>CRC-module </p>
+<p>can </p>
+<p>run </p>
+<p>in </p>
+<p>two </p>
+<p>different </p>
+<p>modes: SIZE optimized and SPEED optimized. </p>
+<p>When  ‘SPEED  optimized’  is  selected,  a  RAM </p>
+<p>table </p>
+<p>will </p>
+<p>be </p>
+<p>generated. </p>
+<p>If </p>
+<p>the </p>
+<p>checksum </p>
+<p>calculation </p>
+<p>shall </p>
+<p>also </p>
+<p>been </p>
+<p>used </p>
+<p>within </p>
+<p>the </p>
+<p>application, </p>
+<p>we </p>
+<p>strongly </p>
+<p>recommend </p>
+<p>to </p>
+<p>use </p>
+<p>“SIZE optimized”. </p>
+<p>Enable CRC Total</p>
+<p> </p>
+<p>True </p>
+<p>The  security  component  always  calculates  a </p>
+<p>CRCtotal  for </p>
+<p>a  logical </p>
+<p>block  when  enabled. </p>
+<p>Thus, the application is able to verify the values </p>
+<p>within the application. </p>
+<p>Memory access mode </p>
+<p>Memory </p>
+<p>access </p>
+<p>The access mode of the security component is </p>
+<p>fixed </p>
+<p>to </p>
+<p>the </p>
+<p>memory </p>
+<p>access </p>
+<p>function. </p>
+<p>The </p>
+<p>setting </p>
+<p>is </p>
+<p>displayed </p>
+<p>for </p>
+<p>documentation </p>
+<p>purposes only. </p>
+<p>Operation mode </p>
+<p>Production </p>
+<p>The mode of the security component is set to </p>
+<p>Production. </p>
+<p>The </p>
+<p>setting </p>
+<p>is </p>
+<p>displayed </p>
+<p>for </p>
+<p>documentation purposes only. </p>
+<p>Enable CRC Total </p>
+<p>True </p>
+<p>The  security  component  always  calculates  a </p>
+<p>CRCtotal  for </p>
+<p>a  logical </p>
+<p>block </p>
+<p>when  enabled. </p>
+<p>Thus, the application is able to verify the values </p>
+<p>within the application. </p>
+<p>Select Hash algorithm </p>
+<p>SHA1 </p>
+<p>Select </p>
+<p>the </p>
+<p>hash </p>
+<p>function </p>
+<p>for </p>
+<p>the </p>
+<p>security </p>
+<p>classes C and CCC. </p>
+<p>Verify bytes per block </p>
+<p>64 </p>
+<p>Number </p>
+<p>of </p>
+<p>bytes </p>
+<p>that </p>
+<p>are </p>
+<p>reserved </p>
+<p>by </p>
+<p>the </p>
+<p>security module for verification. </p>
+<p>This value determines the number of bytes that </p>
+<p>are verified in one block operation. </p>
+<p>Enable Decryption </p>
+<p>False </p>
+<p>Enables </p>
+<p>or </p>
+<p>disables </p>
+<p>the </p>
+<p>AES </p>
+<p>decryption </p>
+<p>functionality of the security module. </p>
+<p>Enable Encryption </p>
+<p>False </p>
+<p>Enables </p>
+<p>or </p>
+<p>disables </p>
+<p>the </p>
+<p>AES </p>
+<p>encryption </p>
+<p>functionality of the security module. </p>
+<p>Add </p>
+<p>segment </p>
+<p>address </p>
+<p>and </p>
+<p>length to the signature </p>
+<p>True </p>
+<p>For </p>
+<p>the </p>
+<p>security </p>
+<p>classes </p>
+<p>C </p>
+<p>and </p>
+<p>CCC, </p>
+<p>the </p>
+<p>address </p>
+<p>and </p>
+<p>length </p>
+<p>information </p>
+<p>of </p>
+<p>every </p>
+<p>segment  is  part  of  the  signature  calculation. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>13 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Attribute Name </b></p>
+<p><b>Default </b></p>
+<p><b>Values </b></p>
+<p><b>Description </b></p>
+<p>This setting is usually given by the OEM. </p>
+<p>Offset to the signature </p>
+<p>0 </p>
+<p>Specifies  the  offset  to  the  signature  /  CRC </p>
+<p>within the verification input data stream. If both </p>
+<p>offsets are default (zero), the Security Module </p>
+<p>treats the first part of the verification input data </p>
+<p>stream as signature and the following data as </p>
+<p>checksum. </p>
+<p>Offset to the CRC </p>
+<p>0 </p>
+<p>Select file type for key </p>
+<p>Authenticity </p>
+<p>File </p>
+<p>The  key  for  the  security  classes  C  and  CCC </p>
+<p>can  be  read  and  interpreted  in  two  different </p>
+<p>formats: </p>
+<p>Authenticity key file format:  </p>
+<p> </p>
+<p>A file that simply contains the data in the </p>
+<p>HIS/ASN.1-format </p>
+<p>INI-key file: </p>
+<p> </p>
+<p>An INI-file format that contains the key and </p>
+<p>other additional information </p>
+<p>The dialog below will change when the file type </p>
+<p>is changed. </p>
+<p><b>Authenticity file mode </b></p>
+<p>Path for Authenticity key file </p>
+<p>- </p>
+<p>Select </p>
+<p>the </p>
+<p>key-file </p>
+<p>that </p>
+<p>contains </p>
+<p>the </p>
+<p>key </p>
+<p>information </p>
+<p>for </p>
+<p>the </p>
+<p>corresponding </p>
+<p>security </p>
+<p>class.  The  data  is  simply  a  one-line  text  file </p>
+<p>with  a  hex  byte  stream  in  the  HIS  ASN.1  file </p>
+<p>format. </p>
+<p>Security class </p>
+<p>DDD </p>
+<p>Select </p>
+<p>the </p>
+<p>required </p>
+<p>security </p>
+<p>class </p>
+<p>for </p>
+<p>the </p>
+<p>Bootloader.  Note  that  the  selected  key  must </p>
+<p>contain  the  keys  in  the  appropriate  format.  If </p>
+<p>not, </p>
+<p>GENy </p>
+<p>will </p>
+<p>generate </p>
+<p>an </p>
+<p>error </p>
+<p>during </p>
+<p>generation. </p>
+<p><b>INI-Key file mode </b></p>
+<p>Path for ini key file </p>
+<p>- </p>
+<p>Specify the path to an INI-file that contains one </p>
+<p>or more key information for the security classes </p>
+<p>C, CCC or AAA. </p>
+<p>See chapter 4.4.2. </p>
+<p>Read section from INI-file </p>
+<p>- </p>
+<p>This button must be pressed to let GENy read </p>
+<p>in </p>
+<p>the </p>
+<p>sections </p>
+<p>of </p>
+<p>the </p>
+<p>selected </p>
+<p>INI-file. </p>
+<p>Afterwards,  you  need  to  change  to  another </p>
+<p>component </p>
+<p>and </p>
+<p>then </p>
+<p>back </p>
+<p>to </p>
+<p>the </p>
+<p>SysService_SecModHis, to update the GUI.  </p>
+<p>Table 4-1  </p>
+<p>GENy configuration parameter </p>
+<p><b>4.4 </b></p>
+<p><b>Key Files  </b></p>
+<p>The key files can be selected in two different modes: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Authenticity file mode </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>14 </p>
+<p>based on template version 5.6.0 </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>INI-Key file mode </p>
+<p>The appearance of the dialog will differ depending on the selection. This affects only the </p>
+<p>key-file  selection  for  the  security  classes  C  and  CCC.  The  default  configuration  in  the </p>
+<p>upper  part  of  the  configuration  window  is  not  affected  and  appears  the  same  in  both </p>
+<p>configuration options. </p>
+<p><b>4.4.1 </b></p>
+<p><b>Authenticity file mode </b></p>
+<p>If the authenticity file mode is selected, GENy expects the data in a simply one-line text file </p>
+<p>with a hex byte stream in a special format (pseudo-ASN.1) which has been specified in the </p>
+<p>HIS  security  module  specification  [2].  GENy  as  well  as  HexView  require  this  format  for </p>
+<p>data processing. </p>
+<p><b>Security Class C: </b></p>
+<p><b>Tag </b></p>
+<p><b>Length description </b></p>
+<p><b>Length (byte) </b></p>
+<p><b>Value </b></p>
+<p>‘FF 59’ </p>
+<p>‘XX’ resp. </p>
+<p>’81 XX’ </p>
+<p>max. 34 </p>
+<p>Object with key components of a </p>
+<p>private key </p>
+<p>‘D3’ </p>
+<p>’XX’ resp. </p>
+<p>‘81’ XX </p>
+<p>typically ‘14’ </p>
+<p>xx resp. </p>
+<p>20 </p>
+<p>HMAC key </p>
+<p>Table 4-2  </p>
+<p>Format of HMAC key </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>FF5916D3145F1CBE397C4AF8956E26DC4DAED95DB25A14B429 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Tag </b></p>
+<p><b>Description </b></p>
+<p>‘FF 59’ </p>
+<p>Tag: Private key </p>
+<p>‘16’ </p>
+<p>Total length information </p>
+<p>‘D3’ </p>
+<p>Tag: HMAC key </p>
+<p>‘14’ </p>
+<p>Length of key data </p>
+<p>‘5F…29’ </p>
+<p>Key data </p>
+<p>Table 4-3  </p>
+<p>Key structure of the example key </p>
+<p><b>Security Class CCC: </b></p>
+<p>Object with key components of a public key: </p>
+<p><b>Tag </b></p>
+<p><b>Length description </b></p>
+<p><b>Length (byte) </b></p>
+<p><b>Value </b></p>
+<p>‘7F 49’ </p>
+<p>’81 XX’ </p>
+<p>’82 XX XX’ </p>
+<p>- </p>
+<p>Object with key components of a </p>
+<p>public key </p>
+<p>‘81’ </p>
+<p>’81 80’ resp. </p>
+<p>’82 01 00’ </p>
+<p>128 resp. 256 </p>
+<p>Modulus ‘n’ </p>
+<p>‘82’ </p>
+<p>XX </p>
+<p>typically 2…3 </p>
+<p>Public (encryption) exponent ‘e’ </p>
+<p>Table 4-4  </p>
+<p>Format of public key without additional information </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>15 </p>
+<p>based on template version 5.6.0 </p>
+<p>Object with key components of a public and a private key: </p>
+<p><b>Tag </b></p>
+<p><b>Length description </b></p>
+<p><b>Length (byte) </b></p>
+<p><b>Value </b></p>
+<p>‘FF 49’ </p>
+<p>’81 XX’ resp. </p>
+<p>’82 XX XX’ </p>
+<p>- </p>
+<p>Object with key components of a </p>
+<p>public and private key </p>
+<p>‘81’ </p>
+<p>’81 80’ resp. </p>
+<p>’82 01 00’ </p>
+<p>128 resp. 256 </p>
+<p>Modulus ‘n’ </p>
+<p>‘82’ </p>
+<p>XX </p>
+<p>typically 2…3 </p>
+<p>Public (encryption) exponent ‘e’ </p>
+<p>‘91’ </p>
+<p>’81 80’ resp. </p>
+<p>’82 01 00’ </p>
+<p>128 resp. 256 </p>
+<p>Private (decryption) exponent ‘d’ </p>
+<p>Table 4-5  </p>
+<p>Format of public key and private key </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>FF49 82 010B 81 81 80 D7D9F92AF1E4DD67DABC9169E76F880D49CE9707BA95  </p>
+<p>CFDBE3C6F1D8AAEE2887F04F3F1447DBDF66F70AE282D8701F74D65281203413 </p>
+<p>F86E0FD3014FF3D80099C01FBEE2E4316EEB64A6412D285AC52010762BD79994 </p>
+<p>4A80333A74B4B59164773291F26A162680E61A764764DC04FC86C133CCF008A09 </p>
+<p>AF601434C4025C15507 82 03 010001 91 81 80 4AD2D69ADA6B598CACB87D37D  </p>
+<p>6F0449B46A0849E3B41BF621C1D54ACA4E415CCB9B2DECCEAF3FF07344FE3A1 </p>
+<p>33E1FA25883DE561026C81CBB55491B9E36F571551DA6B2D1FF42A03BD5F5DDF </p>
+<p>2FCA2F3BC3EF9F409A6B9B5E91C80811AB80B294A0A3ED9CA122255EF5C0CEC </p>
+<p>DEBD2652A613B2DB6AFA588D71B42005528FAB231 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Tag </b></p>
+<p><b>Description </b></p>
+<p>‘FF 49’ </p>
+<p>Tag: Private key </p>
+<p>‘82’ </p>
+<p>2 byte length information (length &gt;= 0x80) </p>
+<p>’01 0B’ </p>
+<p>Total length </p>
+<p>‘81’ </p>
+<p>Tag: Modulus ‘n’ </p>
+<p>‘81’ </p>
+<p>1 byte length information (length &gt;= 0x80) </p>
+<p>‘80’ </p>
+<p>Length of modulus </p>
+<p>‘D7 … 07’ </p>
+<p>Modulus ‘n’ </p>
+<p>‘82’ </p>
+<p>Tag: Public exponent ‘e’ </p>
+<p>‘03’ </p>
+<p>Length of exponent (length &lt; 0x80; no additional length information) </p>
+<p>’01 00 01’ </p>
+<p>Public exponent ‘e’ </p>
+<p>‘91’ </p>
+<p>Tag: Private exponent ‘d’ </p>
+<p>‘81’ </p>
+<p>1 byte length information (length &gt;= 0x80) </p>
+<p>‘80’ </p>
+<p>Length of exponent </p>
+<p>‘4A … 31’ </p>
+<p>Private exponent ‘d’ </p>
+<p>Table 4-6  </p>
+<p>Key structure of the example key </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>16 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>4.4.2 </b></p>
+<p><b>INI-Key file mode </b></p>
+<p>The  INI-Key  mode  is  a  proper  way  to  manage  the  keys.  The  key  is  also  based  on  the </p>
+<p>ASN.1 format (see 4.4.1) but this file can be used to provide additional informations and </p>
+<p>can include multiple keys. </p>
+<p><b>Parameter </b></p>
+<p><b>Description </b></p>
+<p>DESC </p>
+<p>Description text which is showed in GENy. </p>
+<p>VALUE (C) or KEY-PRIV (CCC) </p>
+<p>The key in ASN.1 format. </p>
+<p>ECU </p>
+<p>ECU identifier. </p>
+<p>CREATION-DATE </p>
+<p>Timestamp of the creation of the key </p>
+<p>PURPOSE </p>
+<p>Describes the purpose of the key being used. </p>
+<p>E.g. production, development … </p>
+<p>SECURITY-CLASS </p>
+<p>Information about the security class. </p>
+<p>Table 4-7  </p>
+<p>INI-Key file parameter </p>
+<p>An example can be seen below: </p>
+<p>[RSAKey01] </p>
+<p>DESC = 'This is the development key.' </p>
+<p>KEY-PRIV =  </p>
+<p>'FF4982010B818180D7D9F92AF1E4DD67DABC9169E76F880D49CE9707BA95CFDBE3C6F1D8AAEE288</p>
+<p>7F04F3F1447DBDF66F70AE282D8701F74D65281203413F86E0FD3014FF3D80099C01FBEE2E4316EE</p>
+<p>B64A6412D285AC52010762BD799944A80333A74B4B59164773291F26A162680E61A764764DC04FC8</p>
+<p>6C133CCF008A09AF601434C4025C1550782030100019181804AD2D69ADA6B598CACB87D37D6F0449</p>
+<p>B46A0849E3B41BF621C1D54ACA4E415CCB9B2DECCEAF3FF07344FE3A133E1FA25883DE561026C81C</p>
+<p>BB55491B9E36F571551DA6B2D1FF42A03BD5F5DDF2FCA2F3BC3EF9F409A6B9B5E91C80811AB80B29</p>
+<p>4A0A3ED9CA122255EF5C0CECDEBD2652A613B2DB6AFA588D71B42005528FAB231' </p>
+<p>ECU = My ECU </p>
+<p>CREATION-DATE = 2006-04-13T12:02:09+02:00 </p>
+<p>PURPOSE = Development </p>
+<p>SECURITY-CLASS = CCC </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>17 </p>
+<p>based on template version 5.6.0 </p>
+<p> </p>
+<p>Figure 4-2 </p>
+<p>Key file selection in the INI-file mode </p>
+<p><b>4.5 </b></p>
+<p><b>Running the Generator </b></p>
+<p>When you have finished your configuration selections, you need to run the generator to </p>
+<p>produce the files needed to compile the FBL. To generate the files, click on the lightning-</p>
+<p>bolt button on the toolbar, or select “Generate System” from the Configuration menu. The </p>
+<p>following table describes the contents of the generated files: </p>
+<p> </p>
+<p><b>File Name </b></p>
+<p><b>Description </b></p>
+<p>Secm_cfg.h </p>
+<p>The  configuration  file  of  the  security  module. </p>
+<p>For the most  part  the file  defines  switches  in </p>
+<p>the </p>
+<p>form </p>
+<p>of </p>
+<p>SEC_ENABLE_&lt;feature&gt; </p>
+<p>or </p>
+<p>SEC_DISABLE_&lt;feature&gt; </p>
+<p>according </p>
+<p>to </p>
+<p>the </p>
+<p>settings in the dialog. </p>
+<p>Secmpar.c, Secmpar.h </p>
+<p>This  file  contains  the  secret  key  if  security </p>
+<p>class  C  or  the  public  key  (on  security  class </p>
+<p>CCC) has been selected. </p>
+<p>The file is generated from the contents of the </p>
+<p>key given in the authenticity key file definition. </p>
+<p>You  must  compile  and  link  these  files  with </p>
+<p>your security component. </p>
+<p>v_cfg.h </p>
+<p>Contains macro definitions to your hardware. </p>
+<p>v_inc.h </p>
+<p>Includes the generated headers,  so  that they </p>
+<p>may be obtained from a single source. </p>
+<p>v_par.c, v_par.h </p>
+<p>Contains  information  about  your  license. The </p>
+<p>files </p>
+<p>are </p>
+<p>not </p>
+<p>necessary </p>
+<p>for </p>
+<p>a </p>
+<p>successful </p>
+<p>compile/link </p>
+<p>procedure </p>
+<p>with </p>
+<p>the </p>
+<p>security </p>
+<p>component. </p>
+<p>Table 4-8  </p>
+<p>Generated files </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>18 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>5 </b></p>
+<p><b>Preparation of the Application </b></p>
+<p>Before  a  download  can  be  made  preparing  the  download  file  is  a  necessary  step.  For </p>
+<p>bootloaders  with  logical  block  tables,  the  address  space  used  by  one  single  file  has  to </p>
+<p>match  information  of  a  single  block  stored  in  the  logical  block  table.  It  is  possible  to </p>
+<p>download multi region files, but the region count is limited by the Bootloader. </p>
+<p>Each download file requires a signature or resp. a checksum file, which is created out of </p>
+<p>the  file  contents.  A  signature  file  is  a  byte  stream  in  hexadecimal  format  with  comma </p>
+<p>separation  (e.g.  0x12,  0x34,  0x45).  The  number  of  bytes  within  a  signature  file  and  its </p>
+<p>creation depend on the security class that is used for the download. </p>
+<p>The following three different security classes are distinguished (see chapter 1): </p>
+<p><b>&gt; </b></p>
+<p>Security Class DDD </p>
+<p><b>&gt; </b></p>
+<p>Security Class C </p>
+<p><b>&gt; </b></p>
+<p>Security Class CCC </p>
+<p>For  Security  class  DDD,  the  checksum file contains  4 bytes,  which  reflects  the  CRC-32 </p>
+<p>checksum from the download file or 2 bytes in case of CRC-16. </p>
+<p> </p>
+<p>For Security Class C, the signature file contains 20 byte for SHA-1 or RIPEMD-160. The </p>
+<p>signature  of  SHA-256  has  a  length  of  32  bytes.  The  security  class  C  requires  a  secret </p>
+<p>key</p>
+<p>2</p>
+<p>. The key information for security class C and CCC are required by a tool (HexView) to </p>
+<p>create this signature from the download file.  </p>
+<p>For  class  C  the  same  secret  key  information  is  needed  by  the  Bootloader  for  the </p>
+<p>verification process after a successful flash download. Thus, the contents of the secret key </p>
+<p>must be stored in the generation tool. This is done by referencing the key within GENy tool </p>
+<p>(see chapter 4.4). The tool will then create the file ‘Secmpar.c’. This file must be compiled </p>
+<p>and linked with the Bootloader. </p>
+<p>Store the secret key carefully away and do not provide this information to others, as this is </p>
+<p>the secret for further updates of your ECU software. </p>
+<p> </p>
+<p>The signature file for the Security Class CCC is depending on the key length of the chosen </p>
+<p>RSA (e.g.: 128 bytes for RSA-1024). It uses a public and a private key, similar to PGP. The </p>
+<p>private key is necessary to create the signature files, whereas the public key is used for </p>
+<p>the  verification  process  within  the  Bootloader.  It  is  necessary  to  use  the  private  key  to </p>
+<p>create the signature files. </p>
+<p>The key files for Security Class CCC are also stored in the ASN.1 format. The creation of </p>
+<p>the verification data through GENy and the signature files through HexView are similar to </p>
+<p>the Security Class C. </p>
+<p>                                            </p>
+<p>2</p>
+<p>  The keys  for series  production  are  usually  provided  by  the  OEM.  However,  to  support  the  development </p>
+<p>process,  some  sample  keys  are  part  of  the  Bootloader  delivery  (see  folder </p>
+<p>.\Demo\DemoKeys</p>
+<p>  in  the </p>
+<p>delivery). They are NOT INTENDED for series production, but only for development purposes. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>19 </p>
+<p>based on template version 5.6.0 </p>
+<p>To  support  you  in  the  development  process,  the  Bootloader  product  comes  along  with </p>
+<p>some tools to support you to create these checksum and signature files. </p>
+<p><b>5.1 </b></p>
+<p><b>HexView </b></p>
+<p>HexView is a software tool from Vector Informatik. It can be used to change and show the </p>
+<p>contents  of  a  binary  file,  an  Intel  Hex  file  or  a  Motorola  S-Record  file.  HexView  has  an </p>
+<p>extensive list of features. These features are important for the application: </p>
+<p><b>&gt; </b></p>
+<p>HexView can be used to fill the gaps of your application hex file and align the data to </p>
+<p>the memory segment size. </p>
+<p><b>&gt; </b></p>
+<p>HexView can be used to calculate the checksum or signature of your application. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>For detailed information about HexView please refer to the ‘HexView Reference </p>
+<p>Manual’ [3]. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>5.1.1 </b></p>
+<p><b>Fill and align the hex file with HexView </b></p>
+<p>These are the command line arguments to fill and align a hex file: </p>
+<p><b>&gt; </b></p>
+<p>hexview.exe demo.hex –S –e:error.txt –ad:0x08 –fa –xi –o </p>
+<p>demo_out.hex</p>
+<p> </p>
+<p>The hex file regions are aligned to 8 bytes addresses, the gaps are filled and the </p>
+<p>output is written into the file </p>
+<p>demo_out.hex</p>
+<p> </p>
+<p><b>5.1.2 </b></p>
+<p><b>Create a checksum / signature file with HexView </b></p>
+<p>These are the command line arguments for the signature and checksum calculation. </p>
+<p><b>&gt; </b></p>
+<p>Security Class DDD: </p>
+<p>hexview.exe demo.hex –S –e:error.txt –cs9:demo.crc</p>
+<p> </p>
+<p>The 4-byte CRC-32 value is directly written into the file demo.crc </p>
+<p><b>&gt; </b></p>
+<p>Security Class C:  </p>
+<p>hexview.exe demo.hex –S –e:error.txt –dp5:..\key.txt</p>
+<p> </p>
+<p>by default, HexView writes the signature into the file SignDAL_sha1.txt. The file is </p>
+<p>located where the hex-file has been loaded from. </p>
+<p><b>&gt; </b></p>
+<p>Security Class CCC:  </p>
+<p>hexview.exe demo.hex –S –e:error.txt –dp10:..\key.txt</p>
+<p> </p>
+<p>by default, HexView writes the signature into the file SignDAL_sha1.rsa. The file is </p>
+<p>located where the hex-file has been loaded from. </p>
+<p><b>5.1.3 </b></p>
+<p><b>Create an AES128 Encrypted file with HexView </b></p>
+<p>The AES128 encryption standard operates on blocks of 16 bytes. As the module operates </p>
+<p>in  streaming  mode,  the  file  to  be  encrypted  has  to  be  padded  so  that  all  contiguous </p>
+<p>address  ranges  consist  of  an  integer  multiple  of  16  bytes.  The  padding  is  performed </p>
+<p>according to PKCS#5. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>20 </p>
+<p>based on template version 5.6.0 </p>
+<p>Additionally, AES128 with CBC mode requires an initialization vector. It can either be used </p>
+<p>explicit  by  prefixing  on  each  segment  of  the  download  file  or  as  an  implicit  initialization </p>
+<p>vector. </p>
+<p><b>5.2 </b></p>
+<p><b>Signature Generation </b></p>
+<p>This  sub-chapter  covers  the  off-board  signature  generation  without  using  HexView.  The </p>
+<p>signature generation is split into two main parts: </p>
+<p><b>&gt; </b></p>
+<p>Hash calculation </p>
+<p><b>&gt; </b></p>
+<p>Signing operation </p>
+<p><b>5.2.1 </b></p>
+<p><b>Hash calculation </b></p>
+<p>The hash is used to verify the integrity of the signed message. If the hash calculated on </p>
+<p>the received data matches the one from the signature one can be confident the message </p>
+<p>contents are unaltered. </p>
+<p>Varying hash algorithms can be used to generate a signature, with SHA-1 and RIPEMD-</p>
+<p>160  being  the  most  commonly  used  for  the  Bootloader  use-case.  The  exact  choice  is </p>
+<p>defined by the OEM specification. </p>
+<p> </p>
+<p>The hash value is calculated as following: </p>
+<p> </p>
+<p><b>&gt; </b></p>
+<p>Initialize hash (algorithm dependent) </p>
+<p>Depending on the utilized security class the initialization includes some additional </p>
+<p>steps. Those are explained in the respective subchapter of the signing operation. </p>
+<p><b>&gt; </b></p>
+<p>Update the hash value with the following information. </p>
+<p>In case the input data is split into multiple segments the next steps have to be </p>
+<p>performed for each segment one after another </p>
+<p><b>&gt; </b></p>
+<p>Address information, padded to 4 byte (big-endian order) </p>
+<p>Depending on the OEM requirements this could be a physical or logical address </p>
+<p>(e.g. block index). </p>
+<p><b>&gt; </b></p>
+<p>Length information, padded to 4 byte (big-endian order) </p>
+<p>Usually this represents the length of the original data as it is written to memory, </p>
+<p>especially before being compressed and encrypted. </p>
+<p><b>&gt; </b></p>
+<p>Actual segment data, usually processed in smaller chunks (e.g. 64 byte) </p>
+<p>Depending on the OEM requirements this is either the original (uncompressed and </p>
+<p>unencrypted) data as written to memory or the processed (compressed and/or </p>
+<p>encrypted) data as transferred over the bus. </p>
+<p><b>&gt; </b></p>
+<p>Finalize hash (algorithm dependent) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>21 </p>
+<p>based on template version 5.6.0 </p>
+<p> </p>
+<p>Figure 5-1   Hash calculation </p>
+<p><b>5.2.2 </b></p>
+<p><b>Signing operation </b></p>
+<p>The  actual  signature  is  generated  by  signing  the  hash,  calculated  in  the  previous  step, </p>
+<p>using  either  the  secret  key  (symmetrical  algorithm)  or  the  private  key  of  the  signer </p>
+<p>(asymmetrical algorithm). This assures the authenticity of the signed message as only an </p>
+<p>authority with knowledge of the respective key is able to create a signature matching the </p>
+<p>data. </p>
+<p><b>5.2.2.1 </b></p>
+<p><b>Security class C </b></p>
+<p>Class  C  implements  a  HMAC  (Hash-based  Message Authentication  Code)  according  to </p>
+<p>RFC  2104  [5]  (HMAC,  Keyed-Hashing  for  Message Authentication)  and ANSI  X9.71  [6] </p>
+<p>(Key Hash Message Authentication Code). </p>
+<p>Init hash </p>
+<p>Update hash </p>
+<p>Address </p>
+<p>Update hash </p>
+<p>Length </p>
+<p>Update hash </p>
+<p>Data chunk </p>
+<p>yes </p>
+<p>no </p>
+<p>yes </p>
+<p>no </p>
+<p>Finalize hash </p>
+<p> </p>
+<p>Data chunk left? </p>
+<p> </p>
+<p>Segments left?</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>22 </p>
+<p>based on template version 5.6.0 </p>
+<p>It uses a secret key, typically of a length between the hash length (typically 20 byte) and </p>
+<p>the hash chunk length (typically 64 byte). But larger keys can be used by first hashing the </p>
+<p>key itself. </p>
+<p>To generate a class C signature the following operations are performed: </p>
+<p><b>&gt; </b></p>
+<p>Prepare the secret key </p>
+<p><b>&gt; </b></p>
+<p>If the input key is longer than the hash chunk length (typically 64 byte) hash the key </p>
+<p>value and use this value </p>
+<p><b>&gt; </b></p>
+<p>Otherwise use the key value directly </p>
+<p><b>&gt; </b></p>
+<p>Pad key value with zeroes to fill it up to a length of the hash chunk size (typically 64 </p>
+<p>byte) </p>
+<p><b>&gt; </b></p>
+<p>XOR each byte of the padded key with 0x36 (“ipad”) </p>
+<p><b>&gt; </b></p>
+<p>Initialize hash algorithm </p>
+<p><b>&gt; </b></p>
+<p>Update hash with “ipad” value </p>
+<p><b>&gt; </b></p>
+<p>Perform hash updates on input data </p>
+<p><b>&gt; </b></p>
+<p>Finalize hash calculation (“inner hash”) </p>
+<p><b>&gt; </b></p>
+<p>XOR each byte of the padded key with 0x5C (“opad”) </p>
+<p><b>&gt; </b></p>
+<p>Initialize hash algorithm </p>
+<p><b>&gt; </b></p>
+<p>Update hash with “opad” value </p>
+<p><b>&gt; </b></p>
+<p>Update hash with “inner hash” </p>
+<p><b>&gt; </b></p>
+<p>Finalize hash calculation (“outer hash”) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>23 </p>
+<p>based on template version 5.6.0 </p>
+<p> </p>
+<p>Figure 5-2   Security class C signature </p>
+<p><b>5.2.2.2 </b></p>
+<p><b>Security class CCC </b></p>
+<p>Class CCC is implements an RSA based signature according to PKCS #1 ([4] RSASSA-</p>
+<p>PKCS1-v1_5, Signature Schemes with Appendix). It uses a private RSA key pair to sign </p>
+<p>Secret </p>
+<p>key </p>
+<p>Input </p>
+<p>data </p>
+<p>Hash value </p>
+<p>Zero pad </p>
+<p>Key </p>
+<p>XOR 0x36 </p>
+<p>XOR 0x5C </p>
+<p>Init hash </p>
+<p>Update hash </p>
+<p>Hash </p>
+<p>calculation </p>
+<p>Finalize hash </p>
+<p>Inner </p>
+<p>hash </p>
+<p>Init hash </p>
+<p>Update hash </p>
+<p>Update hash </p>
+<p>Finalize hash </p>
+<p>yes </p>
+<p>no </p>
+<p> </p>
+<p>Length &gt; chunk </p>
+<p>size?</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>24 </p>
+<p>based on template version 5.6.0 </p>
+<p>the hash value of the input data and the corresponding public RSA key pair to verify the </p>
+<p>signature afterwards. </p>
+<p>The calculation of an RSA signature requires the following steps: </p>
+<p><b>&gt; </b></p>
+<p>Calculate the hash value of the input data (without any further modifications) </p>
+<p><b>&gt; </b></p>
+<p>Prepend  the  following  header  information  to  the  hash  value,  forming  the  encoded </p>
+<p>message </p>
+<p><b>&gt; </b></p>
+<p>0x00 0x01 </p>
+<p><b>&gt; </b></p>
+<p>Fill up with 0xFF to match RSA encryption length (e.g. total of 128 byte with 1024 bit </p>
+<p>RSA): </p>
+<p>Number of fill bytes = signature length – digest length – hash length - 3 </p>
+<p><b>&gt; </b></p>
+<p>0x00 </p>
+<p><b>&gt; </b></p>
+<p>Algorithm </p>
+<p>information </p>
+<p>digest </p>
+<p>(see </p>
+<p>the </p>
+<p>information </p>
+<p>below) </p>
+<p>0x00 0x01 0xFF … 0xFF 0x00 &lt;digest&gt; &lt;hash&gt; </p>
+<p><b>&gt; </b></p>
+<p>Encrypt encoded message using private RSA key pair </p>
+<p> </p>
+<p>Figure 5-3   Security class CCC signature </p>
+<p> </p>
+<p>Private </p>
+<p>key </p>
+<p>Input </p>
+<p>data </p>
+<p>Init hash </p>
+<p>Hash </p>
+<p>calculation </p>
+<p>Finalize hash </p>
+<p>Algorith</p>
+<p>m digest </p>
+<p>Prepend </p>
+<p>header </p>
+<p>Encrypt </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>25 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Algorithm information digest </b></p>
+<p>The utilized hash algorithm is identified through the algorithm information digest. Table 5-1 </p>
+<p>lists some commonly used digest values. </p>
+<p><b>Hash algorithm </b></p>
+<p><b>Digest </b></p>
+<p>SHA-1 </p>
+<p>(0x)30 21 30 09 06 05 2b 0e 03 02 1a 05 00 04 14 </p>
+<p>SHA-256 </p>
+<p>(0x)30 31 30 0d 06 09 60 86 48 01 65 03 04 02 01 05 00 04 20 </p>
+<p>RIPEMD-160 </p>
+<p>(0x)30 21 30 09 06 05 2b 24 03 02 01 05 00 04 14 </p>
+<p>Table 5-1  </p>
+<p>Algorithm information digest </p>
+<p><b>5.3 </b></p>
+<p><b>MkPsKeys </b></p>
+<p>MkPsKeys stands for MaKePSeudoKEYS and can be used to create further keys for your </p>
+<p>validation. The tool is a command line tool to create the secret key for security class and </p>
+<p>the  private  key  for  the  security  class  CCC.  The  key  values  are  pseudo-random  and </p>
+<p>especially the RSA-keys are not fully approved since there is only a simple verification. </p>
+<p>Besides the key information, created in the ASN-like (a further description can be found in </p>
+<p>4.4), the tool can create the output into a C file. This file contains the secret key for the </p>
+<p>security class C resp. public key information for Security Class CCC. </p>
+<p>MkPsKey provides the following options: </p>
+<p> </p>
+<p>-hmac </p>
+<p>Create  an  HMAC key  for security  class.  If  this option  is </p>
+<p>omitted,  an  RSA  key  for  security  class </p>
+<p>CCC </p>
+<p>will  be </p>
+<p>generated. </p>
+<p> </p>
+<p>-d </p>
+<p>Add a timestamp to the key. </p>
+<p> </p>
+<p>-o filename </p>
+<p>Overwrites the default output name rsakeys.txt. </p>
+<p> </p>
+<p>-v file.c </p>
+<p>Overwrites the default output name SecMpar</p>
+<p>.c</p>
+<p> for the C </p>
+<p>file. </p>
+<p> </p>
+<p>-n keyname </p>
+<p>Specifies a keyname. This name will be inserted into the </p>
+<p>byte stream. </p>
+<p> </p>
+<p>-? </p>
+<p>Show help. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example: Creating an HMAC key for Security Class C </b></p>
+<p> </p>
+<p> </p>
+<p>Mkpskeys –hmac –o hmackey.txt </p>
+<p>This will generate the file SecMpar.c and the HMAC key for security class C into </p>
+<p>the file hmackey.txt. This file can be compiled and linked with the Security </p>
+<p>Module. However we recommend using GENy to generate the SecMpar.c. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>26 </p>
+<p>based on template version 5.6.0 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Key selection </b></p>
+<p>In the sub-chapter 4.4.1 you can obtain supplemental information about the key </p>
+<p>selection in GENy. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>27 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>6 </b></p>
+<p><b>Functional Description </b></p>
+<p>This chapter describes the security modules, their variants and provides  implementation </p>
+<p>samples for some common use-cases. </p>
+<p><b>6.1 </b></p>
+<p><b>Verification Module </b></p>
+<p>In the Bootloader case the security component is used to verify one or more sections of </p>
+<p>data. Depending on the security class, it consists of more or less complex mathematical </p>
+<p>routines that create a set of data with fixed length out of these sections of data. This fixed </p>
+<p>length data is called the signature or checksum. </p>
+<p>It  is  specific  to  the  mathematical  routines  that  the  signature  changes  drastically  even </p>
+<p>though just a small portion or even a bit in the data stream has changed. It is also specific, </p>
+<p>that a key is necessary to create this signature.  </p>
+<p><b>6.1.1 </b></p>
+<p><b>Variants </b></p>
+<p><b>&gt; </b></p>
+<p>RSA and SHA-1 signature verification </p>
+<p><b>&gt; </b></p>
+<p>Internal/external workspace </p>
+<p><b>6.1.2 </b></p>
+<p><b>Description of the verification process </b></p>
+<p>As  mentioned  above,  the  signature  is  created  on  a  set  of  data.  This  is  usually  a  data </p>
+<p>stream that shall be downloaded and programmed into the memory of an ECU. </p>
+<p>For this purpose, the flash memory is partitioned into logical blocks. Each logical block can </p>
+<p>store a program or other code that consists of one or more sections. </p>
+<p> </p>
+<p>Figure 6-1 </p>
+<p>Logical Blocks </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>28 </p>
+<p>based on template version 5.6.0 </p>
+<p>The  signature  is  created  over  the  segments  of  a  logical  block. Thus,  for  the  module  of </p>
+<p>logical block #1, there are two segments available.  </p>
+<p>Usually  the  signature  is  not  only  generated  on  the  data  itself.  The  address  and  length </p>
+<p>information of each segment is also added to the creation of the signature.  </p>
+<p>The segments reside in physical address regions. However, it can be necessary, that the </p>
+<p>address  information  for  the  download  does  not  correspond  to  the  physical  addresses, </p>
+<p>because of necessary address translations during the download, e.g. for banked systems </p>
+<p>or  re-locatable  modules.  Here,  logical  or  virtual  addresses  are  used  instead  of  physical </p>
+<p>addresses.  Note  that  the  signature  will  be  based  only  on  the  logical  or  virtual  address </p>
+<p>information,  because  only  this  information  is  available </p>
+<p>when </p>
+<p>creating  the  signature. </p>
+<p>However, when the data shall be read from the memory, the physical address information </p>
+<p>is required. </p>
+<p>As a result, the SecM_Verification process requires both the address information that was </p>
+<p>given by the download and the address information where the data resides in memory. The </p>
+<p>logical  or  virtual  address  information  is  stored  in  the  transferredAddress  element  of  the </p>
+<p>segment definition. </p>
+<p><b>6.1.3 </b></p>
+<p><b>Usage </b></p>
+<p>The following sample demonstrates how to use the verification module in monolithic use </p>
+<p>for verification on two sections and a logical block. </p>
+<p>/* Function to read the data from memory */ </p>
+<p>SecM_SizeType ReadMemoryFct(SecM_AddrType address, vuint8 *buffer, SecM_SizeType length) </p>
+<p>{ </p>
+<p>   memcpy(buffer, (void *)address, length); </p>
+<p>} </p>
+<p> </p>
+<p>/* Function is called frequently during the verification. */ </p>
+<p>/* At least in a shorter time distance than 1 ms.         */ </p>
+<p>void WatchdogFct( void ) </p>
+<p>{ </p>
+<p>   return 0u; </p>
+<p>} </p>
+<p> </p>
+<p>/* Verification parameters */ </p>
+<p>SecM_VerifyParamType verifyParam; </p>
+<p> </p>
+<p>/* Signature to be verified */ </p>
+<p>vuint8 signature[128u]; </p>
+<p> </p>
+<p>/* List of memory segments */ </p>
+<p>FL_SegmentListType segmentList; </p>
+<p> </p>
+<p>/* Setup section information of section #1 */ </p>
+<p>segmentList.segmentInfo[0].targetAddress      = FLASH_SECTION1_MEMORY_ADDRESS; </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>29 </p>
+<p>based on template version 5.6.0 </p>
+<p>segmentList.segmentInfo[0].transferredAddress = FLASH_SECTION1_DOWNLOAD_ADDRESS; </p>
+<p>segmentList.segmentInfo[0].length             = FLASH_SECTION1_LENGTH; </p>
+<p> </p>
+<p>/* Setup section information of section #2 */ </p>
+<p>segmentList.segmentInfo[1].targetAddress      = FLASH_SECTION2_MEMORY_ADDRESS; </p>
+<p>segmentList.segmentInfo[1].transferredAddress = FLASH_SECTION2_DOWNLOAD_ADDRESS; </p>
+<p>segmentList.segmentInfo[1].length             = FLASH_SECTION2_LENGTH; </p>
+<p> </p>
+<p>/* Number of memory segments */ </p>
+<p>segmentList.nrOfSegments                      = 2u; </p>
+<p> </p>
+<p>/* Initialize verification structure */ </p>
+<p>/* Start address of full block */ </p>
+<p>verifyParam.blockStartAddress = FLASHREGION_LBT0_ADDRESS; </p>
+<p>/* Length of full block */ </p>
+<p>verifyParam.blockLength       = FLASHREGION_LBT0_LENGTH; </p>
+<p>/* Pass segment list */ </p>
+<p>verifyParam.segmentList       = &amp;segmentList; </p>
+<p>/* Function to read memory at given address */ </p>
+<p>verifyParam.readMemory        = ReadMemoryFct; </p>
+<p>/* Cyclically called function */ </p>
+<p>verifyParam.wdTriggerFct      = WatchdogFct; </p>
+<p>/* Pass signature */ </p>
+<p>verifyParam.verificationData  = (SecM_VerifyDataType)signature; </p>
+<p>/* Use internal workspace */ </p>
+<p>verifyParam.workspace.size    = SEC_DEFAULT_WORKSPACE_SIZE; </p>
+<p> </p>
+<p>/* Perform signature verification */ </p>
+<p>if ( (SECM_OK == SecM_InitVerification(V_NULL)) </p>
+<p>  &amp;&amp; (SECM_VER_OK == SecM_Verification(&amp;verifyParam)) </p>
+<p>  &amp;&amp; (SECM_OK == SecM_DeinitVerification(V_NULL)) ) </p>
+<p>{ </p>
+<p>   /* Verification successful */ </p>
+<p>} </p>
+<p> </p>
+<p>The example below shows the verification with the streaming use-case. </p>
+<p> </p>
+<p>/* Verification parameters */ </p>
+<p>SecM_SignatureParamType sigParam; </p>
+<p>/* Buffer for data to be verified */ </p>
+<p>vuint8 inputData[0x100u]; </p>
+<p>/* Control variable */ </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>30 </p>
+<p>based on template version 5.6.0 </p>
+<p>SecM_LengthType inputLength; </p>
+<p> </p>
+<p>/* Read and hash input data */ </p>
+<p>SecM_AddrType inputAddress   = 0x10000u; </p>
+<p>SecM_SizeType inputRemainder = 0x1000u; </p>
+<p> </p>
+<p>/* Cyclically called function */ </p>
+<p>sigParam.wdTriggerFct = WatchdogFct; </p>
+<p>/* Pass input buffer (not relevant for initialization) */ </p>
+<p>sigParam.sigSourceBuffer = inputData; </p>
+<p> </p>
+<p>/* Initialize signature verification */ </p>
+<p>sigParam.sigState = SEC_HASH_INIT; </p>
+<p>sigParam.sigByteCount = 0u; </p>
+<p> </p>
+<p>if (SECM_VER_OK != SecM_VerifySignature(&amp;sigParam)) </p>
+<p>{ </p>
+<p>   /* Initialization failed */ </p>
+<p>} </p>
+<p> </p>
+<p>/* Proceed computation */ </p>
+<p>while (inputRemainder &gt; 0u) </p>
+<p>{ </p>
+<p>   /* Truncate input length */ </p>
+<p>   inputLength = sizeof(inputData); </p>
+<p>   if (inputLength &gt; inputRemainder) </p>
+<p>   { </p>
+<p>      inputLength = (SecM_LengthType)inputRemainder; </p>
+<p>   } </p>
+<p> </p>
+<p>   /* Read data into temporary buffer */ </p>
+<p>   sigParam.sigByteCount = (SecM_LengthType)ReadMemoryFct(inputAddress, inputData, </p>
+<p>inputLength); </p>
+<p> </p>
+<p>   if (SECM_VER_OK != SecM_VerifySignature(&amp;sigParam)) </p>
+<p>   { </p>
+<p>      /* Computation has failed */ </p>
+<p>      break; </p>
+<p>   } </p>
+<p> </p>
+<p>   /* Update control variables */ </p>
+<p>   inputRemainder -= inputLength; </p>
+<p>   inputAddress   += inputLength; </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>31 </p>
+<p>based on template version 5.6.0 </p>
+<p>} </p>
+<p> </p>
+<p>/* Finalize hash calculation */ </p>
+<p>sigParam.sigState       = SEC_HASH_FINALIZE; </p>
+<p>sigParam.sigByteCount   = 0u; </p>
+<p> </p>
+<p>if (SECM_VER_OK == SecM_VerifySignature(&amp;sigParam)) </p>
+<p>{ </p>
+<p>   /* Verify signature */ </p>
+<p>   sigParam.sigState          = SEC_SIG_VERIFY; </p>
+<p>   /* Pass signature */ </p>
+<p>   sigParam.sigSourceBuffer   = signature; </p>
+<p>   sigParam.sigByteCount      = sizeof(signature); </p>
+<p> </p>
+<p>   if (SECM_VER_OK == SecM_VerifySignature(&amp;sigParam)) </p>
+<p>   { </p>
+<p>      /* Verification successful */ </p>
+<p>   } </p>
+<p>} </p>
+<p><b>6.2 </b></p>
+<p><b>CRC Module </b></p>
+<p>The CRC is an error-detecting code which can be used to build a checksum over a defined </p>
+<p>segment. If this module was ordered a 16 or 32 Bit CRC implementation is included in the </p>
+<p>delivery.  The  SecM_ComputeCRC  function  can  be  called  multiple  times.  The  so  called </p>
+<p>streaming approach can be used for the verification of a data stream. It can be necessary </p>
+<p>to verify the integrity of a logical block. </p>
+<p><b>6.2.1 </b></p>
+<p><b>Variants </b></p>
+<p><b>&gt; </b></p>
+<p>CRC-16 (CCITT) or CRC-32 (IEEE 802.3) </p>
+<p><b>&gt; </b></p>
+<p>CRCTotal </p>
+<p><b>&gt; </b></p>
+<p>Speed/Size optimized </p>
+<p><b>6.2.2 </b></p>
+<p><b>CRCTotal </b></p>
+<p>To avoid storing the whole segment information with the resulting signature, the security </p>
+<p>module  calculates  a  CRCTotal.  This  CRCTotal  is  generated  internally  by  the  security </p>
+<p>component  during  the  verification  process  by  the  function  SecM_Verification().  It  is  only </p>
+<p>necessary  to  pass  the  blockStartAddress  and  the  blockLength  of  the  logical  block.  The </p>
+<p>results will be placed into the CRCtotal field by the security module. If the CRCTotal option </p>
+<p>is activated in GENy it is always calculated, regardless of the security class. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>32 </p>
+<p>based on template version 5.6.0 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The CRCWritten is the CRC-value as the signature value calculated over the segments </p>
+<p>for the security class DDD.  </p>
+<p>The CRCwritten is not available for the Security Class C or CCC. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>6.2.3 </b></p>
+<p><b>Speed / size optimization </b></p>
+<p>In the GENy configuration the CRC module can be switched between two different modes: </p>
+<p>Speed or size optimized. When ‘SPEED optimized’ is chosen, a 1024 byte look-up table </p>
+<p>will be generated in case of CRC-32 or 256 byte for CRC-16. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>If the checksum calculation shall also be used within the application, we strongly </p>
+<p>recommend to use ‘SIZE optimized’ </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>6.2.4 </b></p>
+<p><b>Operation mode flags </b></p>
+<p>These operation mode flags are valid and can be set by using the ‘crcState’. </p>
+<p><b>&gt; </b></p>
+<p>SEC_CRC_INIT </p>
+<p>Sets the initial CRC value and initialize the look-up table. </p>
+<p><b>&gt; </b></p>
+<p>SEC_CRC_COMPUTE </p>
+<p>Update the CRC calculation using the provided data. </p>
+<p><b>&gt; </b></p>
+<p>SEC_CRC_FINALIZE </p>
+<p>Optional: Complete the CRC value </p>
+<p><b>6.2.5 </b></p>
+<p><b>Usage </b></p>
+<p>The following sample shows the usage of the CRC calculation. The usage of the module is </p>
+<p>similar to the stream verification. </p>
+<p>The initialization sets up the environment: </p>
+<p>/* CRC parameters */ </p>
+<p>SecM_CRCParamType crcParam; </p>
+<p>/* Buffer for data to be verified */ </p>
+<p>vuint8            inputData[0x100u]; </p>
+<p> </p>
+<p>/* Cyclically called function */ </p>
+<p>crcParam.wdTriggerFct      = WatchdogFct; </p>
+<p>/* Pass input buffer (not relevant for initialization) */ </p>
+<p>crcParam.crcSourceBuffer   = inputData; </p>
+<p>    </p>
+<p>/* Initialize signature verification */ </p>
+<p>crcParam.crcState          = SEC_CRC_INIT; </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>33 </p>
+<p>based on template version 5.6.0 </p>
+<p>crcParam.crcByteCount      = 0u; </p>
+<p> </p>
+<p>if (SECM_OK == SecM_ComputeCRC(&amp;crcParam)) </p>
+<p>{ </p>
+<p>   ... </p>
+<p>} </p>
+<p>In the computation phase the processing will be done. Addresses and length information </p>
+<p>are  typically  not  included  in  the  CRC.  The  CRC  Module  doesn’t  have  access  to  the </p>
+<p>memory in the function. Therefore a function to read from the memory is needed (in the </p>
+<p>example represented as ‘ReadMemoryFct’). </p>
+<p>/* Control variable */ </p>
+<p>SecM_AddrType     inputAddress   = 0x10000u; </p>
+<p>SecM_SizeType     inputRemainder = 0x1000u; </p>
+<p>SecM_LengthType   inputLength; </p>
+<p> </p>
+<p>/* Read input data and update checksum */ </p>
+<p>crcParam.crcState = SEC_HASH_COMPUTE; </p>
+<p>while (inputRemainder &gt; 0u) </p>
+<p>{ </p>
+<p>   /* Truncate input length */ </p>
+<p>   inputLength = sizeof(inputData); </p>
+<p>   if (inputLength &gt; inputRemainder) </p>
+<p>   { </p>
+<p>      inputLength = (SecM_LengthType)inputRemainder; </p>
+<p>   } </p>
+<p> </p>
+<p>   /* Read data into temporary buffer */ </p>
+<p>   crcParam.crcByteCount = (SecM_LengthType)ReadMemoryFct( </p>
+<p>      inputAddress, inputData, inputLength); </p>
+<p> </p>
+<p>   if (SECM_VER_OK != SecM_ComputeCRC(&amp;crcParam)) </p>
+<p>   { </p>
+<p>      break; </p>
+<p>   } </p>
+<p> </p>
+<p>   /* Update control variables */ </p>
+<p>   inputRemainder -= inputLength; </p>
+<p>   inputAddress   += inputLength; </p>
+<p>} </p>
+<p> </p>
+<p>During  the finalization  no  additional data  are  required. The  checksum  is provided  in  the </p>
+<p>member currentCRC. </p>
+<p>/* Checksum to be verified */ </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>34 </p>
+<p>based on template version 5.6.0 </p>
+<p>SecM_CRCType      checksum; </p>
+<p> </p>
+<p>/* Finalize CRC calculation */ </p>
+<p>crcParam.crcState       = SECM_CRC_FINALIZE; </p>
+<p>crcParam.crcByteCount   = 0u; </p>
+<p> </p>
+<p>if (SECM_VER_OK == SecM_ComputeCRC(&amp;crcParam)) </p>
+<p>{ </p>
+<p>   /* Compare checksum */ </p>
+<p>   if (crcParam.currentCRC == checksum) </p>
+<p>   { </p>
+<p>      /* Checksum comparison successful */ </p>
+<p>   } </p>
+<p>} </p>
+<p><b>6.3 </b></p>
+<p><b>Encryption / Decryption Module </b></p>
+<p>The Encryption / Decryption Module provide encryption and decryption of data using AES. </p>
+<p>The current implementation supports AES encryption / decryption with CBC and PKCS#5 </p>
+<p>padding mode. The key length depends on your order and can be 128, 192 or 256 bit. </p>
+<p><b>6.3.1 </b></p>
+<p><b>Variants </b></p>
+<p><b>&gt; </b></p>
+<p>AES 128/192/256 bit encryption / decryption in CBC mode </p>
+<p><b>&gt; </b></p>
+<p>With or without initialization vector </p>
+<p><b>&gt; </b></p>
+<p>Internal/external workspace usage </p>
+<p><b>6.3.2 </b></p>
+<p><b>Using an explicit initialization vector </b></p>
+<p>The first 16 bytes (block size) of data will be interpreted as the initialization vector, when </p>
+<p>the operation mode flag SEC_DECRYPTION_MODE_AES_&lt;xxx&gt;_PKCS_CBC_IV is set. </p>
+<p>By  using  the  encryption  API  ‘SecM_Encryption’  the  IV  will  be  used  for  the  AES  CBC </p>
+<p>encryption and will be copied to the output buffer. </p>
+<p>Figure 6-2 describes the usage of the explicit initialization vector with the encryption use </p>
+<p>case. The input buffer consists of the IV (one block size) and the plaintext data. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>35 </p>
+<p>based on template version 5.6.0 </p>
+<p> </p>
+<p>Figure 6-2 </p>
+<p>Explicit usage of an initialization vector with the encryption API </p>
+<p>By  the  usage  of  an  explicit  initialization  vector,  the  first  block  will  be  used  as  the </p>
+<p>initialization  vector  and  will  be  copied  to  the  output  buffer.  Due  to  the  padding  mode </p>
+<p>PKCS#5  the  output  data  will  be  padded  to  the  next  multiple  of  the  block  size.  If  the </p>
+<p>plaintext is aligned to the 16 byte block size an additional padding block will be added. </p>
+<p>Using an explicit initialization vector with the decryption API is shown in the Figure 6-3. </p>
+<p> </p>
+<p> </p>
+<p>plaintext data </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>AES CBC </p>
+<p>encryption </p>
+<p> </p>
+<p> </p>
+<p>ciphertext data </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>IV </p>
+<p>IV</p>
+<p> </p>
+<p>IV</p>
+<p> </p>
+<p>Input buffer </p>
+<p>Output buffer</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>36 </p>
+<p>based on template version 5.6.0 </p>
+<p> </p>
+<p>Figure 6-3 </p>
+<p>Explicit usage of an initialization vector with the decryption API </p>
+<p>Similar to the encryption API the decryption mode will treat the first 16 bytes as the IV. This </p>
+<p>has the effect that no result will be written to the output buffer when the first round provides </p>
+<p>an input buffer size of less than 32 bytes. Hence the output buffer data will be smaller as </p>
+<p>the input buffer data due to the removed padding from the result and the obsolete IV data. </p>
+<p><b>6.3.3 </b></p>
+<p><b>Internal / external Key </b></p>
+<p>An  external  key  can  be  passed  to  the  decryption  /  encryption  in  case  enabled  in  the </p>
+<p>configuration. When the provided key.size is equal to zero and the usage of internal key is </p>
+<p>enabled, the internal key is used for encryption / decryption.  </p>
+<p>The  internal  key  symbol  is  SecM_AES&lt;xxx&gt;key  (e.g.:  SecM_AES128key)  and  will  be </p>
+<p>located in configuration file Secmpar.c. </p>
+<p><b>6.3.4 </b></p>
+<p><b>Operation mode flags </b></p>
+<p>The operation mode is set by the member ‘mode’ of the function parameter ‘pEncParam’ </p>
+<p>respectively ‘pDecParam’. </p>
+<p>On  these  operation  modes  the  CBC  initialization  vector  will  be  filled  with  zero.  No </p>
+<p>additional data have to be passed with the input data buffer: </p>
+<p><b>&gt; </b></p>
+<p>SEC_DECRYPTION_MODE_AES_128_PKCS_CBC </p>
+<p><b>&gt; </b></p>
+<p>SEC_DECRYPTION_MODE_AES_192_PKCS_CBC </p>
+<p><b>&gt; </b></p>
+<p>SEC_DECRYPTION_MODE_AES_256_PKCS_CBC </p>
+<p>Using an explicit initialization vector requires one of these flags: </p>
+<p><b>&gt; </b></p>
+<p>SEC_DECRYPTION_MODE_AES_128_PKCS_CBC_IV </p>
+<p> </p>
+<p> </p>
+<p>ciphertext data </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>AES CBC </p>
+<p>decryption </p>
+<p> </p>
+<p>plaintext data </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>IV</p>
+<p> </p>
+<p>IV</p>
+<p> </p>
+<p>Input buffer</p>
+<p> </p>
+<p>Output buffer</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>37 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>&gt; </b></p>
+<p>SEC_DECRYPTION_MODE_AES_192_PKCS_CBC_IV </p>
+<p><b>&gt; </b></p>
+<p>SEC_DECRYPTION_MODE_AES_256_PKCS_CBC_IV </p>
+<p><b>6.3.5 </b></p>
+<p><b>Operation mode modifiers </b></p>
+<p>The  operation  mode  modifier  triggers  the  initialization  or  the  finalization  of  the  AES </p>
+<p>operation.  These  modifiers  can  be  combined  with  the  operation  mode  flags  by  an  OR-</p>
+<p>operation. </p>
+<p><b>&gt; </b></p>
+<p>SEC_DECRYPTION_MODE_INIT </p>
+<p>This flag will initialize the workspace, set up the key and copy the IV if necessary. </p>
+<p><b>&gt; </b></p>
+<p>SEC_DECRYPTION_MODE_FINALIZE </p>
+<p>Setting the flag will process the last input data as well as applying the padding. </p>
+<p><b>6.3.6 </b></p>
+<p><b>Usage </b></p>
+<p>This  sample  shows  how  to  encrypt  a  cipher  text  and  decrypt  in  streaming  mode.  The </p>
+<p>usage of the decryption is similar. </p>
+<p>   /* Variables for the encryption / decryption loop */ </p>
+<p>   vuint8 retVal = 0; </p>
+<p>   vuint8 blocksize; </p>
+<p>   vsint8 remainingInput, remainingOutput; </p>
+<p>   vuint8 inputOffset, outputOffset; </p>
+<p> </p>
+<p>   /* Variables for encryption / decryption */ </p>
+<p>   SecM_DecInputParamType pInBlock; </p>
+<p>   SecM_DecOutputParamType pOutBlock; </p>
+<p>   SecM_DecParamType pEncParam; </p>
+<p> </p>
+<p>   SecM_DecInputParamType pDecInBlock; </p>
+<p>   SecM_DecOutputParamType pDecOutBlock; </p>
+<p>   SecM_DecParamType pDecParam; </p>
+<p> </p>
+<p>   SecM_SymKeyType key; </p>
+<p> </p>
+<p>   /* Plaintext buffer */ </p>
+<p>   vuint8 plaintext[34] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, </p>
+<p>0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, </p>
+<p>0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff, 0xaa, 0xbb}; </p>
+<p> </p>
+<p>   /* Ciphertext buffer */ </p>
+<p>   vuint8 ciphertext[48] = {0}; </p>
+<p> </p>
+<p>   /* Plaintext output buffer (decryption) */ </p>
+<p>   vuint8 plaintext_out[48] = {0}; </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>38 </p>
+<p>based on template version 5.6.0 </p>
+<p> </p>
+<p>   /* Key data */ </p>
+<p>   vuint8 keydata[16] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, </p>
+<p>0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f}; </p>
+<p> </p>
+<p>   /* Set the encryption buffer */ </p>
+<p>   pInBlock.DataBuffer = plaintext; </p>
+<p>   pOutBlock.DataBuffer = ciphertext; </p>
+<p> </p>
+<p>   /* Set encryption parameter */ </p>
+<p>   pEncParam.key.data = keydata; </p>
+<p>   pEncParam.key.size = 16; </p>
+<p>   pEncParam.wdTriggerFct = (FL_WDTriggerFctType)V_NULL; </p>
+<p> </p>
+<p>   /* Set the decryption buffer */ </p>
+<p>   pDecInBlock.DataBuffer = ciphertext; </p>
+<p>   pDecOutBlock.DataBuffer = plaintext_out; </p>
+<p> </p>
+<p>   /* Set decryption parameter */ </p>
+<p>   pDecParam.key = pEncParam.key; </p>
+<p>   pDecParam.wdTriggerFct = pEncParam.wdTriggerFct; </p>
+<p> </p>
+<p> </p>
+<p>   /* Encryption sample */ </p>
+<p>   blocksize = 16;                       /* Bytes to process per call */ </p>
+<p>   remainingInput  = sizeof(plaintext);  /* Remaining input byte counter */ </p>
+<p>   remainingOutput = sizeof(ciphertext); /* Remaining output byte counter */ </p>
+<p> </p>
+<p>   /* Pre-set init mode */ </p>
+<p>   pEncParam.mode = SEC_DECRYPTION_MODE_AES_128_PKCS_CBC | SEC_DECRYPTION_MODE_INIT; </p>
+<p> </p>
+<p>   while ( ( remainingInput &gt;= 0 ) &amp;&amp; ( retVal == 0 ) ) </p>
+<p>   { </p>
+<p>      if ( remainingInput &gt;= blocksize ) </p>
+<p>      { </p>
+<p>         /* Normal round */ </p>
+<p>         pInBlock.Length = blocksize; </p>
+<p>      } </p>
+<p>      else if ( remainingInput == 0 ) </p>
+<p>      { </p>
+<p>         /* Last round */ </p>
+<p>         pInBlock.Length = 0; </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>39 </p>
+<p>based on template version 5.6.0 </p>
+<p>         pEncParam.mode |= SEC_DECRYPTION_MODE_FINALIZE; </p>
+<p>         remainingInput--; /* leave the loop after this round */ </p>
+<p>      } </p>
+<p>      else </p>
+<p>      { </p>
+<p>         /* Before last round */ </p>
+<p>         pInBlock.Length = remainingInput; </p>
+<p>      } </p>
+<p>      pOutBlock.Length = remainingOutput; </p>
+<p> </p>
+<p>      /* Set input data */ </p>
+<p>      pInBlock.DataBuffer  = &amp;plaintext[sizeof(plaintext)-remainingInput]; </p>
+<p>      /* Set output data */ </p>
+<p>      pOutBlock.DataBuffer = &amp;ciphertext[sizeof(ciphertext)-remainingOutput]; </p>
+<p> </p>
+<p>      /* Perform operation */ </p>
+<p>      retVal |= SecM_Encryption( &amp;pInBlock, &amp;pOutBlock , &amp;pEncParam ); </p>
+<p> </p>
+<p>      pEncParam.mode  = SEC_DECRYPTION_MODE_AES_128_PKCS_CBC; /* Set normal mode */ </p>
+<p>      remainingInput  -= pInBlock.Length;        /* Update remaining input bytes */ </p>
+<p>      remainingOutput -= pOutBlock.Length;       /* Update remaining output bytes */ </p>
+<p>   } </p>
+<p> </p>
+<p>   /* Decryption sample */ </p>
+<p>   remainingInput  = sizeof(ciphertext);    /* Remaining input byte counter */ </p>
+<p>   remainingOutput = sizeof(plaintext_out); /* Remaining output byte counter */ </p>
+<p> </p>
+<p>   /* Pre-set init mode */ </p>
+<p>   pDecParam.mode = SEC_DECRYPTION_MODE_AES_128_PKCS_CBC | SEC_DECRYPTION_MODE_INIT; </p>
+<p> </p>
+<p>   while ( ( remainingInput &gt;= 0 ) &amp;&amp; ( retVal == 0 ) ) </p>
+<p>   { </p>
+<p>      if ( remainingInput &gt;= blocksize ) </p>
+<p>      { </p>
+<p>         /* Normal round */ </p>
+<p>         pDecInBlock.Length = blocksize; </p>
+<p>      } </p>
+<p>      else if ( remainingInput == 0 ) </p>
+<p>      { </p>
+<p>         /* Last round */ </p>
+<p>         pDecInBlock.Length = 0; </p>
+<p>         pDecParam.mode |= SEC_DECRYPTION_MODE_FINALIZE; </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>40 </p>
+<p>based on template version 5.6.0 </p>
+<p>         remainingInput--; /* leave the loop after this round */ </p>
+<p>      } </p>
+<p>      else </p>
+<p>      { </p>
+<p>         /* Before last round */ </p>
+<p>         pDecInBlock.Length = remainingInput; </p>
+<p>      } </p>
+<p>      pDecOutBlock.Length = remainingOutput; </p>
+<p> </p>
+<p>      /* Set input data */ </p>
+<p>      pDecInBlock.DataBuffer  = &amp;ciphertext[sizeof(ciphertext)-remainingInput];  </p>
+<p>      /* Set output data */ </p>
+<p>      pDecOutBlock.DataBuffer = &amp;plaintext_out[sizeof(plaintext_out)-remainingOutput]; </p>
+<p> </p>
+<p>      /* Perform operation */ </p>
+<p>      retVal |= SecM_Decryption( &amp;pDecInBlock, &amp;pDecOutBlock , &amp;pDecParam ); </p>
+<p> </p>
+<p>      pDecParam.mode   = SEC_DECRYPTION_MODE_AES_128_PKCS_CBC; /* Set normal mode */ </p>
+<p>      remainingInput  -= pDecInBlock.Length;      /* Update remaining input bytes */ </p>
+<p>      remainingOutput -= pDecOutBlock.Length;     /* Update remaining output bytes */ </p>
+<p>   } </p>
+<p> </p>
+<p>On </p>
+<p>the </p>
+<p>first </p>
+<p>call </p>
+<p>of </p>
+<p>SecM_Encryption </p>
+<p>/ </p>
+<p>SecM_Decryption </p>
+<p>the </p>
+<p>mode </p>
+<p>flag </p>
+<p>SEC_DECRYPTION_MODE_INIT has to be set as well as the operation mode flag (in the </p>
+<p>example  above:  SEC_DECRYPTION_MODE_AES_128_PKCS_CBC).  After  processing </p>
+<p>the output length contains the length of the produced data and the input length contains </p>
+<p>the length of the consumed data. </p>
+<p>While there is input data left, only the operation mode flag has to be set before calling the </p>
+<p>function. Before the last round the remaining input bytes have to be read.  </p>
+<p>On the last round the latest data input stored in the workspace will be processed and the </p>
+<p>padding will be appended. Therefore the input length has to be zero and the mode flag </p>
+<p>SEC_DECRYPTION_MODE_FINALIZE  has  to  be  set  in  addition  to  the  operation  mode </p>
+<p>flag. </p>
+<p><b>6.4 </b></p>
+<p><b>Seed / Key </b></p>
+<p>The Seed/Key interface provides the generation of a pseudo random seed, the generation </p>
+<p>of a key and a comparison function. </p>
+<p> </p>
+<p><b>6.4.1 </b></p>
+<p><b>Variants </b></p>
+<p><b>&gt; </b></p>
+<p>Default and extended API </p>
+<p><b>&gt; </b></p>
+<p>RSA, HMAC SHA1 or OEM specific Seed/Key generation </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>41 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>&gt; </b></p>
+<p>Internal/External workspace usage </p>
+<p><b>6.4.2 </b></p>
+<p><b>Default and extended API </b></p>
+<p>Depending  on  the  OEM  either  the  default API  or  the  extended API  is  being  used.  The </p>
+<p>extended API additionally provides an external key and workspace. </p>
+<p><b>6.4.3 </b></p>
+<p><b>Usage  </b></p>
+<p>This demonstration generates a seed and computes a key. The usage of the module can </p>
+<p>vary between the OEMs. If the Security Module comes along with a Bootloader delivery </p>
+<p>the OEM related demo implementation can be found in the ‘fbl_ap.c’ file. </p>
+<p>Seed generation: </p>
+<p>SecM_WordType EntropySource( void ) </p>
+<p>{ </p>
+<p>   return &lt;random value&gt;; </p>
+<p>} </p>
+<p> </p>
+<p>/* Generate seed value */ </p>
+<p>SecM_SeedType seed; </p>
+<p> </p>
+<p>/* Provide initial seed for pseudo random number generator */ </p>
+<p>seed.seedX = EntropySource(); </p>
+<p>seed.seedY = EntropySource(); </p>
+<p> </p>
+<p>/* Generate seed */ </p>
+<p>if (SECM_OK == SecM_GenerateSeed(&amp;seed)) </p>
+<p>{ </p>
+<p>   /* Seed successfully generated in seed.seedX */ </p>
+<p>} </p>
+<p> </p>
+<p>The provided key can be send to the tester. The tester has to generate a key and send it </p>
+<p>back to the ECU. The ECU has to generate with the seed value an own key and compare </p>
+<p>the received key from the tester with the generated one: </p>
+<p>/* Check key from tester */ </p>
+<p>#if ( SECM_HIS_SECURITY_MODULE_VERSION &lt; 0x010002u ) </p>
+<p>if (SECM_OK == SecM_CompareKey(key)) </p>
+<p>#else </p>
+<p>if (SECM_OK == SecM_CompareKey(key, seed) </p>
+<p>#endif </p>
+<p>{ </p>
+<p>   /* Security access granted */ </p>
+<p>} </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>42 </p>
+<p>based on template version 5.6.0 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The API varies depending on the version of the HIS specification. In case of HIS </p>
+<p>specification 1.0.1 or earlier the last seed is stored in an internal structure. Later </p>
+<p>versions do use an additional parameter for the seed. However the Security Module </p>
+<p>supports both variants. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>6.5 </b></p>
+<p><b>Workspace </b></p>
+<p>The  workspace  is  needed  for  the  cryptographic  algorithms.  The  workspaces  for  the </p>
+<p>specific services are included in the Security Module Library. There are three variants of </p>
+<p>workspace usage as described in the following sub-chapter. </p>
+<p><b>6.5.1 </b></p>
+<p><b>Variants </b></p>
+<p><b>&gt; </b></p>
+<p>Only internal workspace can be used </p>
+<p><b>&gt; </b></p>
+<p>Only external workspace can be used </p>
+<p><b>&gt; </b></p>
+<p>Internal and external workspace can be used </p>
+<p><b>6.5.2 </b></p>
+<p><b>Usage </b></p>
+<p>The </p>
+<p>following </p>
+<p>table </p>
+<p>describes </p>
+<p>which </p>
+<p>parameter </p>
+<p>of </p>
+<p>the  API </p>
+<p>provides </p>
+<p>the </p>
+<p>workspace </p>
+<p>information for external workspace use-case. </p>
+<p><b>Module </b></p>
+<p><b>Usage </b></p>
+<p>Encryption / </p>
+<p>Decryption </p>
+<p>Pointer and length information of the workspace buffer are provided by the </p>
+<p>‘SecM_Decryption’ and ‘SecM_Encryption’ parameter: </p>
+<p>SecM_DecParamType * pDecParam </p>
+<p>‘SecM_DecParamType’ contains an element workspace of type </p>
+<p>‘SecM_WorkspaceType’ </p>
+<p>SeedKey </p>
+<p>Only available with the extended API: </p>
+<p>‘SecM_CompareKey’ provides the parameter key. Its type definition </p>
+<p>‘SecM_KeyType’ declares the element ‘context’ as a void pointer type. The </p>
+<p>‘SecM_WorkspaceType’ can be casted for this element. </p>
+<p>Verification </p>
+<p>SecM_Verification: </p>
+<p>‘SecM_Verification’ provides the parameter pVerifyParam of type </p>
+<p>SecM_VerifyParamType. The type definition of this parameter provides the </p>
+<p>element workspace of type SecM_WorkspaceType. </p>
+<p>SecM_VerifySignature: </p>
+<p>‘SecM_Verification’ provides the parameter pVerifyParam of type </p>
+<p>SecM_SignatureParamType. The type definition of this parameter provides </p>
+<p>the element workspace of type SecM_WorkspaceType. </p>
+<p>Table 6-1  </p>
+<p>External workspace usage </p>
+<p>The variant ‘Internal/External’ needs to distinguish whether the API is using the internal or </p>
+<p>external workspace. Explicit usage of the internal buffer in this variant can be achieved by </p>
+<p>setting the workspace length information to SEC_DEFAULT_WORKSPACE_SIZE.  </p>
+<p>A demo of using the external workspace can be found in chapter 6.6.1. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>43 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>6.6 </b></p>
+<p><b>Accessing the Security Module from within the Application </b></p>
+<p>This chapter is only relevant if the security component comes along with the Bootloader.  </p>
+<p>There  might  be  the  necessity  to  use  the  features  of  the  security  module,  located  in  the </p>
+<p>Bootloader,  also  within  the  application.  This  can  be  useful  if  functions  of  the  Security </p>
+<p>Module  shall  be  used  in  a  consistent  way,  or  ROM  memory  shall  be  saved.  For  this,  a </p>
+<p>user-interface  is  available  to  call  some  routines  of  the  security  module  from  within  the </p>
+<p>application. The file “fbl_def.h” contains the necessary definitions for the security module </p>
+<p>interface. </p>
+<p>The usage of the definitions is equivalent to the API (chapter 7). </p>
+<p><b>Definition </b></p>
+<p><b>Description </b></p>
+<p>ApplSecComputeKey </p>
+<p>Definition for the key computation function. </p>
+<p>ApplSecComputeCRC </p>
+<p>Definition for the CRC computation function. </p>
+<p>ApplSecVerifySignatureFct </p>
+<p>Definition for the signature verification </p>
+<p>function. </p>
+<p>ApplSecInitDecryption </p>
+<p>Definition for the decryption initialization. </p>
+<p>ApplSecDecryption </p>
+<p>Definition for the decryption function. </p>
+<p>ApplSecDeinitDecryption </p>
+<p>Definition for the decryption de-initialization. </p>
+<p>ApplSecGenerateSeed </p>
+<p>Definition for the seed generation function. </p>
+<p>Table 6-2  </p>
+<p>Function access macros for the FBL header structure </p>
+<p><b>6.6.1 </b></p>
+<p><b>Usage </b></p>
+<p>This demo shows how to use the Security Module within an application and the usage of </p>
+<p>an external workspace. It is adapted from the sample in 6.1.3. </p>
+<p>/* Verification parameters */ </p>
+<p>SecM_VerifyParamType verifyParam; </p>
+<p> </p>
+<p>/* Signature to be verified */ </p>
+<p>vuint8 signature[128u]; </p>
+<p> </p>
+<p>/* Workspace */ </p>
+<p>vuint8 workspaceData[WORKSPACE_SIZE]; </p>
+<p> </p>
+<p>/* List of memory segments */ </p>
+<p>FL_SegmentListType segmentList; </p>
+<p> </p>
+<p>/* Setup section information of section #1 */ </p>
+<p>segmentList.segmentInfo[0].targetAddress      = FLASH_SECTION1_MEMORY_ADDRESS; </p>
+<p>segmentList.segmentInfo[0].transferredAddress = FLASH_SECTION1_DOWNLOAD_ADDRESS; </p>
+<p>segmentList.segmentInfo[0].length             = FLASH_SECTION1_LENGTH; </p>
+<p> </p>
+<p>/* Setup section information of section #2 */ </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>44 </p>
+<p>based on template version 5.6.0 </p>
+<p>segmentList.segmentInfo[1].targetAddress      = FLASH_SECTION2_MEMORY_ADDRESS; </p>
+<p>segmentList.segmentInfo[1].transferredAddress = FLASH_SECTION2_DOWNLOAD_ADDRESS; </p>
+<p>segmentList.segmentInfo[1].length             = FLASH_SECTION2_LENGTH; </p>
+<p> </p>
+<p>/* Number of memory segments */ </p>
+<p>segmentList.nrOfSegments                      = 2u; </p>
+<p> </p>
+<p>/* Initialize verification structure */ </p>
+<p>/* Start address of full block */ </p>
+<p>verifyParam.blockStartAddress = FLASHREGION_LBT0_ADDRESS; </p>
+<p>/* Length of full block */ </p>
+<p>verifyParam.blockLength       = FLASHREGION_LBT0_LENGTH; </p>
+<p>/* Pass segment list */ </p>
+<p>verifyParam.segmentList       = &amp;segmentList; </p>
+<p>/* Function to read memory at given address */ </p>
+<p>verifyParam.readMemory        = ReadMemoryFct; </p>
+<p>/* Cyclically called function */ </p>
+<p>verifyParam.wdTriggerFct      = WatchdogFct; </p>
+<p>/* Pass signature */ </p>
+<p>verifyParam.verificationData  = (SecM_VerifyDataType)signature; </p>
+<p>/* Use external workspace */ </p>
+<p>verifyParam.workspace.data = (SecM_WorkspacePtrType)workspaceData; </p>
+<p>verifyParam.workspace.size = sizeof(workspaceData); </p>
+<p> </p>
+<p>/* Perform signature verification */ </p>
+<p>if ( (SECM_OK == ApplSecInitVerificationFct(V_NULL)) </p>
+<p>  &amp;&amp; (SECM_VER_OK == ApplSecVerificationFct(&amp;verifyParam)) </p>
+<p>  &amp;&amp; (SECM_OK == ApplSecDeinitVerificationFct(V_NULL)) ) </p>
+<p>{ </p>
+<p>   /* Verification successful */ </p>
+<p>} </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>45 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>7 </b></p>
+<p><b>API Description </b></p>
+<p><b>7.1 </b></p>
+<p><b>Type Definitions </b></p>
+<p>This chapter describes the types used by the interface functions of the security module. </p>
+<p><b>7.1.1 </b></p>
+<p><b>General Types </b></p>
+<p><b>Typedef </b></p>
+<p><b>Elements </b></p>
+<p><b>Basetype </b></p>
+<p><b>Description </b></p>
+<p>SecM_StatusType </p>
+<p>Not particularly </p>
+<p>defined. Typically, </p>
+<p>returns SECM_OK or </p>
+<p>SECM_NOT_OK. See </p>
+<p>function description for </p>
+<p>details. </p>
+<p>vuint8 </p>
+<p>Return value from any </p>
+<p>function of the security </p>
+<p>module </p>
+<p>SecM_WordType </p>
+<p>- </p>
+<p>vuint32 </p>
+<p>Typically used by the </p>
+<p>seed/key functions for seed </p>
+<p>and key values. </p>
+<p>SecM_KeyType </p>
+<p>- </p>
+<p>SecM_Word</p>
+<p>Type </p>
+<p>The length of the key for </p>
+<p>seed/key calculation. </p>
+<p>SecM_CRCType </p>
+<p>- </p>
+<p>SecM_Word</p>
+<p>Type </p>
+<p>Used to store the CRC </p>
+<p>SecM_LengthType </p>
+<p>- </p>
+<p>vuint32 </p>
+<p>Used to store length </p>
+<p>information for CRC </p>
+<p>calculation and decryption </p>
+<p>SecM_AddrType </p>
+<p>- </p>
+<p>vuint32 </p>
+<p>Used to store address </p>
+<p>information for segments </p>
+<p>SecM_SizeType </p>
+<p>- </p>
+<p>vuint32 </p>
+<p>Used to store length </p>
+<p>information of segments </p>
+<p>SecM_VerifyInitType </p>
+<p>- </p>
+<p>void * </p>
+<p>- </p>
+<p>SecM_VerifyDeinitType </p>
+<p>- </p>
+<p>void * </p>
+<p>- </p>
+<p>SecM_VerifyDataType </p>
+<p>- </p>
+<p>vuint8 * </p>
+<p>- </p>
+<p>FL_WDTriggerFctType </p>
+<p>typedef void (*)(void); </p>
+<p> </p>
+<p>Pointer to a function that is </p>
+<p>frequently called from the </p>
+<p>security module on long-</p>
+<p>lasting mathematical </p>
+<p>functions. </p>
+<p>FL_ReadMemoryFctType </p>
+<p>typedef </p>
+<p>SecM_SizeType </p>
+<p>(*)(SecM_AddrType, </p>
+<p>vuint8 *, </p>
+<p>SecM_SizeType); </p>
+<p> </p>
+<p>Function is used by </p>
+<p>SecM_Verification() to read </p>
+<p>data from memory. </p>
+<p>Table 7-1  </p>
+<p>Type definitions </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>46 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>7.1.2 </b></p>
+<p><b>Structures used by Verification </b></p>
+<p><b>Structure </b></p>
+<p><b>Element </b></p>
+<p><b>Type </b></p>
+<p><b>Description </b></p>
+<p>SecM_Verify </p>
+<p>ParamType </p>
+<p>segmentList </p>
+<p>FL_SegmentListType / </p>
+<p>FL_SegmentListType* </p>
+<p>3</p>
+<p> </p>
+<p>Address and length </p>
+<p>information of download </p>
+<p>segments </p>
+<p>blockStartAddress </p>
+<p>SecM_AddrType </p>
+<p>Start address of logical block </p>
+<p>blockLength </p>
+<p>SecM_SizeType </p>
+<p>Length of logical block </p>
+<p>verificationData </p>
+<p>SecM_VerifyDataType </p>
+<p>Pointer to verification data </p>
+<p>(e.g. checksum and/or </p>
+<p>signature) </p>
+<p>crcTotal </p>
+<p>SecM_CRCType </p>
+<p>CRC total calculated over </p>
+<p>full logical block </p>
+<p>wdTriggerFct </p>
+<p>FL_WDTriggerFctType </p>
+<p>Pointer to watchdog trigger </p>
+<p>function </p>
+<p>workspace </p>
+<p>SecM_WorkspaceType </p>
+<p>Reference to workspace </p>
+<p>(extension of the HIS </p>
+<p>specification) </p>
+<p>key </p>
+<p>SecM_VerifyKeyType </p>
+<p>Pointer to verification key </p>
+<p>(extension of the HIS </p>
+<p>specification) </p>
+<p>Table 7-2  </p>
+<p>SecM_VerifyParamType </p>
+<p><b>Structure </b></p>
+<p><b>Element </b></p>
+<p><b>Type </b></p>
+<p><b>Description </b></p>
+<p>SecM_Signature </p>
+<p>ParamType </p>
+<p>currentHash </p>
+<p>SecM_SignatureType </p>
+<p>Reference to current hash </p>
+<p>value (also used to pass </p>
+<p>workspace) </p>
+<p>currentDataLength </p>
+<p>SecM_SizeType * </p>
+<p>Pointer to the current length </p>
+<p>of the hashed data. Is only </p>
+<p>set when </p>
+<p>SEC_ENABLE_VERIFICATI</p>
+<p>ON_DATA_LENGTH is </p>
+<p>activated. </p>
+<p>sigState </p>
+<p>SecM_StatusType </p>
+<p>Signature state / operation </p>
+<p>to be executed </p>
+<p>sigSourceBuffer </p>
+<p>SecM_VerifyDataType </p>
+<p>Pointer to input or </p>
+<p>verification data </p>
+<p>sigByteCount </p>
+<p>SecM_LengthType </p>
+<p>Size of input or verification </p>
+<p>data </p>
+<p>wdTriggerFct </p>
+<p>FL_WDTriggerFctType </p>
+<p>Pointer to watchdog trigger </p>
+<p>function </p>
+<p>key </p>
+<p>SecM_VerifyKeyType </p>
+<p>Pointer to verification key </p>
+<p>(extension of the HIS </p>
+<p>                                            </p>
+<p>3</p>
+<p> As an extension to the HIS specification the segment list can be used as a pointer. This depends on the </p>
+<p>OEM. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>47 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Structure </b></p>
+<p><b>Element </b></p>
+<p><b>Type </b></p>
+<p><b>Description </b></p>
+<p>specification) </p>
+<p>Table 7-3  </p>
+<p>SecM_SignatureParamType </p>
+<p><b>7.1.3 </b></p>
+<p><b>Structures used by CRC </b></p>
+<p><b>Structure </b></p>
+<p><b>Element </b></p>
+<p><b>Type </b></p>
+<p><b>Description </b></p>
+<p>SecM_CRCParam </p>
+<p>Type </p>
+<p>currentCRC </p>
+<p>SecM_CRCType </p>
+<p>Current CRC-value </p>
+<p>crcState </p>
+<p>SecM_ByteType </p>
+<p>Operation state to be carried </p>
+<p>out </p>
+<p>crcSourceBuffer </p>
+<p>SecM_ConstRamDataT</p>
+<p>ype </p>
+<p>Pointer to source data </p>
+<p>crcByteCount </p>
+<p>SecM_LengthType </p>
+<p>Number of bytes in source </p>
+<p>buffer </p>
+<p>wdTriggerFct </p>
+<p>FL_WDTriggerFctType </p>
+<p>Watchdog trigger function </p>
+<p>Table 7-4  </p>
+<p>SecM_CRCParamType </p>
+<p><b>7.1.4 </b></p>
+<p><b>Structures used by Encryption / Decryption </b></p>
+<p><b>Structure </b></p>
+<p><b>Element </b></p>
+<p><b>Type </b></p>
+<p><b>Description </b></p>
+<p>SecM_DecInput </p>
+<p>ParamType </p>
+<p>DataBuffer </p>
+<p>SecM_ConstRamDataT</p>
+<p>ype </p>
+<p>Pointer to input data </p>
+<p>Length </p>
+<p>SecM_LengthType </p>
+<p>Length of input data </p>
+<p>Table 7-5  </p>
+<p>SecM_DecInputParamType </p>
+<p><b>Structure </b></p>
+<p><b>Element </b></p>
+<p><b>Type </b></p>
+<p><b>Description </b></p>
+<p>SecM_DecOutput </p>
+<p>ParamType </p>
+<p>DataBuffer </p>
+<p>SecM_RamDataType </p>
+<p>Pointer to output data </p>
+<p>Length </p>
+<p>SecM_LengthType </p>
+<p>Length of output buffer / </p>
+<p>data </p>
+<p>Table 7-6  </p>
+<p>SecM_DecOutputParamType </p>
+<p><b>Structure </b></p>
+<p><b>Element </b></p>
+<p><b>Type </b></p>
+<p><b>Description </b></p>
+<p>SecM_DecParam </p>
+<p>Type </p>
+<p>segmentAddress </p>
+<p>SecM_AddrType </p>
+<p>Start address of the </p>
+<p>segment </p>
+<p>segmentLength </p>
+<p>SecM_SizeType </p>
+<p>Length of segment in bytes </p>
+<p>mode </p>
+<p>SecM_ByteType </p>
+<p>Data format ID of encryption </p>
+<p>and compression </p>
+<p>wdTriggerFct </p>
+<p>FL_WDTriggerFctType </p>
+<p>Pointer to watchdog trigger </p>
+<p>function </p>
+<p>workspace </p>
+<p>SecM_WorkspaceType </p>
+<p>Reference to workspace </p>
+<p>(extension of the HIS </p>
+<p>specification) </p>
+<p>key </p>
+<p>SecM_SymKeyType </p>
+<p>Reference to decryption key </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>48 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Structure </b></p>
+<p><b>Element </b></p>
+<p><b>Type </b></p>
+<p><b>Description </b></p>
+<p>(extension of the HIS </p>
+<p>specification) </p>
+<p>Table 7-7  </p>
+<p>SecM_DecParamType </p>
+<p><b>7.1.5 </b></p>
+<p><b>Structures used by Seed / Key  </b></p>
+<p><b>Structure </b></p>
+<p><b>Element </b></p>
+<p><b>Type </b></p>
+<p><b>Description </b></p>
+<p>SecM_KeyType </p>
+<p>data </p>
+<p>SecM_KeyBaseType * </p>
+<p>Pointer to actual key data </p>
+<p>context </p>
+<p>SecM_VoidPtrType </p>
+<p>Additional context </p>
+<p>information, e.g. workspace </p>
+<p>Table 7-8  </p>
+<p>SecM_KeyType </p>
+<p><b>7.2 </b></p>
+<p><b>Common </b></p>
+<p><b>7.2.1 </b></p>
+<p><b>SecM_InitPowerOn </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_InitPowerOn </b>(SecM_InitType initParam) </p>
+<p><b>Parameter </b></p>
+<p>SecM_InitType initParam </p>
+<p>Initialization parameters (unused - reserved for future use) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if initialization successful </p>
+<p>SECM_NOT_OK otherwise </p>
+<p><b>Functional Description </b></p>
+<p>Initialize security module </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-9  </p>
+<p>SecM_InitPowerOn </p>
+<p><b>7.2.2 </b></p>
+<p><b>SecM_Task </b></p>
+<p><b>Prototype </b></p>
+<p>void <b>SecM_Task </b>(void) </p>
+<p><b>Parameter </b></p>
+<p>void </p>
+<p>none </p>
+<p><b>Return Code </b></p>
+<p>void </p>
+<p>none </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>49 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Functional Description </b></p>
+<p>Cyclic task of security module </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p> </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-10  </p>
+<p>SecM_Task </p>
+<p><b>7.3 </b></p>
+<p><b>CRC </b></p>
+<p><b>7.3.1 </b></p>
+<p><b>SecM_ComputeCRC </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_ComputeCRC </b>(V_MEMRAM1 SecM_CRCParamType V_MEMRAM2 </p>
+<p>V_MEMRAM3 *crcParam) </p>
+<p><b>Parameter </b></p>
+<p>SecM_CRCParamType </p>
+<p>crcParam </p>
+<p>Pointer to parameter structure </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if operation was successful </p>
+<p>SECM_NOT_OK otherwise </p>
+<p><b>Functional Description </b></p>
+<p>Function that manages the state of CRC computation </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-11  </p>
+<p>SecM_ComputeCRC </p>
+<p><b>7.4 </b></p>
+<p><b>Encryption / Decryption </b></p>
+<p><b>7.4.1 </b></p>
+<p><b>SecM_InitDecryption </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_InitDecryption </b>(SecM_DecInitType init) </p>
+<p><b>Parameter </b></p>
+<p>SecM_DecInitType init </p>
+<p>Dummy pointer (currently not used) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>50 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if initialization successful </p>
+<p>SECM_NOT_OK if error occurred during initialization </p>
+<p><b>Functional Description </b></p>
+<p>Initialize decryption </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-12  </p>
+<p>SecM_InitDecryption </p>
+<p><b>7.4.2 </b></p>
+<p><b>SecM_DeinitDecryption </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_DeinitDecryption </b>(SecM_DecDeinitType deinit) </p>
+<p><b>Parameter </b></p>
+<p>SecM_DecDeinitType </p>
+<p>deinit </p>
+<p>Dummy pointer (currently not used) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if deinitialization successful </p>
+<p>SECM_NOT_OK if error occurred during deinitialization </p>
+<p><b>Functional Description </b></p>
+<p>Deinitialize decryption </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-13  </p>
+<p>SecM_DeinitDecryption </p>
+<p><b>7.4.3 </b></p>
+<p><b>SecM_Decryption </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_Decryption </b>(const V_MEMRAM1 SecM_DecInputParamType </p>
+<p>V_MEMRAM2 V_MEMRAM3 *pInBlock, V_MEMRAM1 SecM_DecOutputParamType </p>
+<p>V_MEMRAM2 V_MEMRAM3 *pOutBlock, V_MEMRAM1 SecM_DecParamType V_MEMRAM2 </p>
+<p>V_MEMRAM3 *pDecParam) </p>
+<p><b>Parameter </b></p>
+<p>SecM_DecInputParamTyp</p>
+<p>e pInBlock </p>
+<p>Reference to input data </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>51 </p>
+<p>based on template version 5.6.0 </p>
+<p>SecM_DecOutputParamTy</p>
+<p>pe pOutBlock </p>
+<p>Reference to output data. Length contains available buffer size as input and </p>
+<p>length of decrypted data as output </p>
+<p>SecM_DecParamType </p>
+<p>pDecParam </p>
+<p>Decryption parameters (segmentAddress and segmentLength not used yet) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if decryption successful </p>
+<p>SECM_NOT_OK if error occurred during decryption </p>
+<p><b>Functional Description </b></p>
+<p>Decrypts all encrypted data referenced in input block into buffer provided in output block. Operation reports </p>
+<p>an error in case the output buffer isn't large enough. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-14  </p>
+<p>SecM_Decryption </p>
+<p><b>7.4.4 </b></p>
+<p><b>SecM_InitEncryption </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_InitEncryption </b>(SecM_EncInitType init) </p>
+<p><b>Parameter </b></p>
+<p>SecM_EncInitType init </p>
+<p>Dummy pointer (currently not used) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if initialization successful </p>
+<p>SECM_NOT_OK if error occurred during initialization </p>
+<p><b>Functional Description </b></p>
+<p>Initialize encryption </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-15  </p>
+<p>SecM_InitEncryption </p>
+<p><b>7.4.5 </b></p>
+<p><b>SecM_DeinitEncryption </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_DeinitEncryption </b>(SecM_EncDeinitType deinit) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>52 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Parameter </b></p>
+<p>SecM_EncDeinitType </p>
+<p>deinit </p>
+<p>Dummy pointer (currently not used) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if deinitialization successful </p>
+<p>SECM_NOT_OK if error occurred during deinitialization </p>
+<p><b>Functional Description </b></p>
+<p>Deinitialize encryption </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-16  </p>
+<p>SecM_DeinitEncryption </p>
+<p><b>7.4.6 </b></p>
+<p><b>SecM_Encryption </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_Encryption </b>(const V_MEMRAM1 SecM_EncInputParamType </p>
+<p>V_MEMRAM2 V_MEMRAM3 *pInBlock, V_MEMRAM1 SecM_EncOutputParamType </p>
+<p>V_MEMRAM2 V_MEMRAM3 *pOutBlock, V_MEMRAM1 SecM_EncParamType V_MEMRAM2 </p>
+<p>V_MEMRAM3 *pEncParam) </p>
+<p><b>Parameter </b></p>
+<p>SecM_EncInputParamTyp</p>
+<p>e pInBlock </p>
+<p>Reference to input data </p>
+<p>SecM_EncOutputParamTy</p>
+<p>pe pOutBlock </p>
+<p>Reference to output data. Length contains available buffer size as input and </p>
+<p>length of encrypted data as output </p>
+<p>SecM_EncParamType </p>
+<p>pEncParam </p>
+<p>Encryption parameters (segmentAddress and segmentLength not used yet) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if decryption successful </p>
+<p>SECM_NOT_OK if error occurred during decryption </p>
+<p><b>Functional Description </b></p>
+<p>Encrypts all data referenced in input block into buffer provided in output block. Operation reports an error in </p>
+<p>case the output buffer isn't large enough. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-17  </p>
+<p>SecM_Encryption </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>53 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>7.5 </b></p>
+<p><b>Seed / Key Common </b></p>
+<p><b>7.5.1 </b></p>
+<p><b>SecM_GenerateSeed </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_GenerateSeed </b>(V_MEMRAM1 SecM_SeedType V_MEMRAM2 </p>
+<p>V_MEMRAM3 *seed) </p>
+<p><b>Parameter </b></p>
+<p>SecM_SeedType seed </p>
+<p>Pointer to seed, where the random values shall be stored </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK </p>
+<p><b>Functional Description </b></p>
+<p>Uses a pseudo random number generator and an initial seed to generate a seed value. In case of HIS </p>
+<p>specification 1.0.1 or earlier the last seed is stored in an internal structure. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>The values of seedX and seedY (default API) or seed[0] (extended API) should have a random start value. </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-18  </p>
+<p>SecM_GenerateSeed </p>
+<p><b>7.5.2 </b></p>
+<p><b>SecM_CompareKey (HIS Specification &lt; 1.0.1</b></p>
+<p><b>4</b></p>
+<p><b>) </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_CompareKey </b>(SecM_KeyType key) </p>
+<p><b>Parameter </b></p>
+<p>SecM_KeyType key </p>
+<p>Key for the authorisation </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if key calculation and comparison was successful </p>
+<p>SECM_FAILED if key calculation failed or key mismatch </p>
+<p><b>Functional Description </b></p>
+<p>Runs the key calculation and compares the calculated key against the received key </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Function SecM_GenerateSeed must have been called before. </p>
+<p>Call Context </p>
+<p>                                            </p>
+<p>4</p>
+<p> Depending on the OEM </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>54 </p>
+<p>based on template version 5.6.0 </p>
+<p>none </p>
+<p>Table 7-19  </p>
+<p>SecM_CompareKey </p>
+<p><b>7.5.3 </b></p>
+<p><b>SecM_CompareKey (HIS Specification &gt;= 1.0.1) </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_CompareKey </b>(SecM_KeyType key, SecM_SeedType </p>
+<p>lastSeed) </p>
+<p><b>Parameter </b></p>
+<p>SecM_KeyType key </p>
+<p>Key for the authorization contains additional parameters (workspace, secret </p>
+<p>key) in case of extended API </p>
+<p>SecM_SeedType lastSeed </p>
+<p>Start value (seed) for the authorisation </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>none </p>
+<p><b>Functional Description </b></p>
+<p>Runs the key calculation and compares the calculated key against the received key </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Function SecM_GenerateSeed must have been called before. </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-20  </p>
+<p>SecM_CompareKey </p>
+<p><b>7.6 </b></p>
+<p><b>Seed / Key default API </b></p>
+<p><b>7.6.1 </b></p>
+<p><b>SecM_ComputeKey </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_ComputeKey </b>(SecM_SeedType inputSeed, </p>
+<p>SecM_ConstType constant, V_MEMRAM1 SecM_KeyStorageType V_MEMRAM2 </p>
+<p>V_MEMRAM3 *computedKey) </p>
+<p><b>Parameter </b></p>
+<p>SecM_SeedType </p>
+<p>inputSeed </p>
+<p>The random seed the key calculation shall be based on </p>
+<p>SecM_ConstType constant </p>
+<p>A fixed constant used by the key calculation algorithm contains additional </p>
+<p>parameters (workspace, secret key) in case of extended API </p>
+<p>SecM_KeyStorageType </p>
+<p>computedKey </p>
+<p>Pointer to resulting key data as a formula of key = f(seed,k) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if calculation was successful </p>
+<p>SECM_FAILED if calculation has failed (e.g. wrong parameters) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>55 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Functional Description </b></p>
+<p>Calculates a key value based on the provided seed and constant value </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Function SecM_GenerateSeed must have been called at least once. </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-21  </p>
+<p>SecM_ComputeKey </p>
+<p><b>7.7 </b></p>
+<p><b>Seed / Key extended API </b></p>
+<p><b>7.7.1 </b></p>
+<p><b>SecM_ComputeKey </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_ComputeKey </b>(SecM_KeyType inputKey, SecM_ConstType </p>
+<p>constant, V_MEMRAM1 SecM_SeedType V_MEMRAM2 V_MEMRAM3 *computedSeed) </p>
+<p><b>Parameter </b></p>
+<p>SecM_KeyType inputKey </p>
+<p>The received key on which calculation shall be based </p>
+<p>SecM_ConstType constant </p>
+<p>A fixed constant used by the key calculation algorithm contains additional </p>
+<p>parameters (workspace, secret key) in case of extended API </p>
+<p>SecM_SeedType </p>
+<p>computedSeed </p>
+<p>Pointer to resulting seed as a formula of seed = f(key,k) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if calculation was successful </p>
+<p>SECM_FAILED if calculation has failed (e.g. wrong parameters) </p>
+<p><b>Functional Description </b></p>
+<p>API is a deviation from the HIS specification. Modified to support asymmetric key calculation where only the </p>
+<p>tester is able to generate the key from the original seed value, e.g. using a private key. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Function SecM_GenerateSeed must have been called at least once. </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-22  </p>
+<p>SecM_ComputeKey </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>56 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>7.8 </b></p>
+<p><b>Verification </b></p>
+<p><b>7.8.1 </b></p>
+<p><b>SecM_InitVerification </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_InitVerification </b>(SecM_VerifyInitType init) </p>
+<p><b>Parameter </b></p>
+<p>SecM_VerifyInitType init </p>
+<p>Dummy pointer (currently not used) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if initalization successful </p>
+<p>SECM_NOT_OK if error occured during initalization </p>
+<p><b>Functional Description </b></p>
+<p>Initializes the verification </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-23  </p>
+<p>SecM_InitVerification </p>
+<p><b>7.8.2 </b></p>
+<p><b>SecM_DeinitVerification </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_DeinitVerification </b>(SecM_VerifyDeinitType deinit) </p>
+<p><b>Parameter </b></p>
+<p>SecM_VerifyDeinitType </p>
+<p>deinit </p>
+<p>Dummy pointer (currently not used) </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_OK if deinitalization successful </p>
+<p>SECM_NOT_OK if error occured during deinitalization </p>
+<p><b>Functional Description </b></p>
+<p>Deinitializes the verification </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-24  </p>
+<p>SecM_DeinitVerification </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>57 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>7.8.3 </b></p>
+<p><b>SecM_Verification </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_Verification </b>(V_MEMRAM1 SecM_VerifyParamType </p>
+<p>V_MEMRAM2 V_MEMRAM3 *pVerifyParam) </p>
+<p><b>Parameter </b></p>
+<p>SecM_VerifyParamType </p>
+<p>pVerifyParam </p>
+<p>Pointer to parameter structure for signature verification crcTotal. </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_VER_OK if signature verification successful </p>
+<p>SECM_VER_ERROR if error occured during verification </p>
+<p>SECM_VER_CRC if CRC verification failed </p>
+<p>SECM_VER_SIG if HMAC/Signature verification failed </p>
+<p><b>Functional Description </b></p>
+<p>Calculates the checksum or signature of all segments present in the verification parameter function passed </p>
+<p>in readMemory is used to access memory. Afterwards the calculated value is used to verify the </p>
+<p>checksum/signature provided in verificationData. If configured a CRC over the complete block, defined by </p>
+<p>blockStartAddress and blockLength, including all readable gaps between the actual segments is calculated </p>
+<p>too and returned in parameter </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-25  </p>
+<p>SecM_Verification </p>
+<p><b>7.8.4 </b></p>
+<p><b>SecM_VerifySignature </b></p>
+<p><b>Prototype </b></p>
+<p>SecM_StatusType <b>SecM_VerifySignature </b>(V_MEMRAM1 SecM_SignatureParamType </p>
+<p>V_MEMRAM2 V_MEMRAM3 *pVerifyParam) </p>
+<p><b>Parameter </b></p>
+<p>pVerifyParam </p>
+<p>Pointer to parameter structure for signature verification member currentHash </p>
+<p>must (SEC_DISABLE_DEFAULT_WORKSPACE) or may </p>
+<p>(SEC_ENABLE_WORKSPACE_INTERNAL) contain reference to buffer used </p>
+<p>as workspace. </p>
+<p><b>Return Code </b></p>
+<p>SecM_StatusType </p>
+<p>SECM_VER_OK if verification operation successful </p>
+<p>SECM_VER_ERROR if error occurred during verification </p>
+<p>SECM_VER_CRC if CRC verification failed </p>
+<p>SECM_VER_SIG if HMAC/Signature verification failed </p>
+<p><b>Functional Description </b></p>
+<p>Calculate and verify checksum or signature using primitive of configured security class </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>58 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>Particularities and Limitations </b></p>
+<p>none </p>
+<p>Pre-Conditions </p>
+<p>Call Context </p>
+<p>none </p>
+<p>Table 7-26  </p>
+<p>SecM_VerifySignature </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Security Module  </p>
+<p>© 2016 Vector Informatik GmbH </p>
+<p>Version 2.2.0 </p>
+<p>59 </p>
+<p>based on template version 5.6.0 </p>
+<p><b>8 </b></p>
+<p><b>Contact </b></p>
+<p>Visit our website for more information on </p>
+<p> </p>
+<p><b>&gt; </b></p>
+<p>News </p>
+<p><b>&gt; </b></p>
+<p>Products </p>
+<p><b>&gt; </b></p>
+<p>Demo software </p>
+<p><b>&gt; </b></p>
+<p>Support </p>
+<p><b>&gt; </b></p>
+<p>Training data </p>
+<p><b>&gt; </b></p>
+<p>Addresses </p>
+<p> </p>
+<p>www.vector.com </p>
+<p> </p>
+<p> </p>
+<p> </p>
+</body>
+</html>
+{% endraw %}

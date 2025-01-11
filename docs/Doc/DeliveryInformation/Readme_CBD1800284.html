@@ -1,0 +1,479 @@
+---
+layout: default
+title: Readme_CBD1800284
+nav_order: 15
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>1 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>Flash Bootloader </b></p>
+<p>Readme </p>
+<p> </p>
+<p>CBD1800284 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Authors </p>
+<p>Stephen Mara </p>
+<p>Status </p>
+<p>Released </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>2 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Contents </b></p>
+<p><b>1</b></p>
+<p> </p>
+<p><b>Introduction................................................................................................................... 3</b></p>
+<p> </p>
+<p><b>2</b></p>
+<p> </p>
+<p><b>Software Tools .............................................................................................................. 4</b></p>
+<p> </p>
+<p><b>3</b></p>
+<p> </p>
+<p><b>Documentation ............................................................................................................. 5</b></p>
+<p> </p>
+<p><b>4</b></p>
+<p> </p>
+<p><b>Delivery Log .................................................................................................................. 6</b></p>
+<p> </p>
+<p><b>5</b></p>
+<p> </p>
+<p><b>Build .............................................................................................................................. 7</b></p>
+<p> </p>
+<p>5.1</p>
+<p> </p>
+<p>Compiler and Linker Options .............................................................................. 7</p>
+<p> </p>
+<p>5.2</p>
+<p> </p>
+<p>Compiler Warnings............................................................................................. 7</p>
+<p> </p>
+<p><b>6</b></p>
+<p> </p>
+<p><b>Bootloader Setup .......................................................................................................... 8</b></p>
+<p> </p>
+<p>6.1</p>
+<p> </p>
+<p>DaVinci Configurator .......................................................................................... 8</p>
+<p> </p>
+<p>6.2</p>
+<p> </p>
+<p>User Configuration File ...................................................................................... 8</p>
+<p> </p>
+<p><b>7</b></p>
+<p> </p>
+<p><b>Demonstration Project ................................................................................................. 9</b></p>
+<p> </p>
+<p>7.1</p>
+<p> </p>
+<p>Build Demonstration Bootloader/ Application ...................................................... 9</p>
+<p> </p>
+<p>7.2</p>
+<p> </p>
+<p>Memory Map ...................................................................................................... 9</p>
+<p> </p>
+<p><b>8</b></p>
+<p> </p>
+<p><b>Known Issues &amp; Restrictions..................................................................................... 10</b></p>
+<p> </p>
+<p>8.1</p>
+<p> </p>
+<p>Beta Delivery Restrictions ................................................................................ 10</p>
+<p> </p>
+<p><b>9</b></p>
+<p> </p>
+<p><b>Contact ........................................................................................................................ 11</b></p>
+<p> </p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>3 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>1 </b></p>
+<p><b>Introduction </b></p>
+<p>This document contains project specific information, which cannot be found in any other </p>
+<p>documentation, like special information to setup the project (if necessary), hints for Demos, </p>
+<p>restrictions </p>
+<p>and </p>
+<p>limitations, </p>
+<p>common </p>
+<p>pitfalls </p>
+<p>and </p>
+<p>justifications </p>
+<p>for </p>
+<p>observed </p>
+<p>compiler </p>
+<p>warning and changed project details (i.e. compiler options). </p>
+<p>This document  can  restrict  descriptions  in  other  documents  and  contain  latest  warnings </p>
+<p>and hints. </p>
+<p>This delivery contains a FBL_FCA_SLP5 specific bootloader that complies with the OEM </p>
+<p>flashing specification and flashing sequence. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>We have configured the software and programs in accordance with your specifications </p>
+<p>in the questionnaire. Whereas the programs support other configurations than the one </p>
+<p>specified in your questionnaire, Vector´s release of the programs delivered to your </p>
+<p>company is expressly restricted to the configuration you have specified in the </p>
+<p>questionnaire. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>4 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>2 </b></p>
+<p><b>Software Tools </b></p>
+<p>The following Vector tools are included in your Flash Bootloader package. </p>
+<p><b>Program </b></p>
+<p><b>Description </b></p>
+<p> DaVinci </p>
+<p>Configurator </p>
+<p>Code generation tool which auto generates parameter files for the Flash </p>
+<p>Bootloader based on customer input. </p>
+<p>vFlash </p>
+<p>Template </p>
+<p>Flash tool which is capable of downloading application as well as calibration data </p>
+<p>to an ECU running the Flash Bootloader.  The tool itself is not a standard part of </p>
+<p>the delivery and must be purchased separately.  The delivery comes with an OEM </p>
+<p>specific template to be used with the vFlash tool. </p>
+<p>Hexview </p>
+<p>Viewer and editor of container files. May be used to edit &amp; create required </p>
+<p>containers manually. A script solution that generates the required header formats </p>
+<p>automatically will be provided. </p>
+<p>Table 2-1  </p>
+<p>Software tools needed to configure and run the bootloader. </p>
+<p>The following Vector tools are recommended but not part of the delivery: </p>
+<p><b>Program </b></p>
+<p><b>Description </b></p>
+<p>vFlash </p>
+<p>Flash tool which is capable of downloading application as well as calibration data to </p>
+<p>an ECU running the Flash Bootloader. </p>
+<p>This tool offers OEM container independent download of raw data files (binaries or </p>
+<p>hex files instead of i.e. PDX containers), which makes it very helpful setting up and </p>
+<p>testing the bootloader. </p>
+<p>CANoe </p>
+<p>This tool can be used for logging bus traces (maybe requested if you need support) </p>
+<p>over residual bus simulations until testing. </p>
+<p>ODX Studio </p>
+<p>This tool can be useful for flashing ODX based containers based on OEM </p>
+<p>requirements. </p>
+<p>CANape </p>
+<p>This tool is used for XCP based downloads. </p>
+<p>Table 2-2  </p>
+<p>Recommended Software tools </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>5 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>3 </b></p>
+<p><b>Documentation </b></p>
+<p>The following documentation is included in this delivery: </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Documentation concerning the Flash Bootloader can be found in the <b>Doc </b>folder of your </p>
+<p>delivery. Note that the Hexview reference manual is found in the Misc/Hexview </p>
+<p>directory. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Document </b></p>
+<p><b>Content </b></p>
+<p>Readme_CBD1800284.pdf </p>
+<p>Latest information for your project collected by the </p>
+<p>integrator who setup and tested your delivery. </p>
+<p>IssueReport_CBD1800284.pdf </p>
+<p>The issue report for the delivery. Please check the file </p>
+<p>carefully and contact Vector if one of these issues needs to </p>
+<p>be fixed. </p>
+<p>Legal documents </p>
+<p>Legal documents dependent on the sales site. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>6 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>4 </b></p>
+<p><b>Delivery Log </b></p>
+<p><b>Delivery </b></p>
+<p><b>Number </b></p>
+<p><b>Date </b></p>
+<p><b>Details / Updates </b></p>
+<p>D00 </p>
+<p>2018-08-03 </p>
+<p>Beta Delivery </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>7 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>5 </b></p>
+<p><b>Build </b></p>
+<p><b>5.1 </b></p>
+<p><b>Compiler and Linker Options </b></p>
+<p>The </p>
+<p>Compiler </p>
+<p>and </p>
+<p>Linker </p>
+<p>Options </p>
+<p>used </p>
+<p>in </p>
+<p>this </p>
+<p>Bootloader </p>
+<p>can </p>
+<p>be </p>
+<p>found </p>
+<p>in </p>
+<p>DeliveryDescription_CBD1800284.html. </p>
+<p><b>5.2 </b></p>
+<p><b>Compiler Warnings </b></p>
+<p><b>Warning </b></p>
+<p><b>Module(s) </b></p>
+<p><b>Line(s) </b></p>
+<p><b>Justification </b></p>
+<p>variable &quot;rxBuffer&quot; was set but </p>
+<p>never used </p>
+<p>Fbl_cw.c </p>
+<p>287 </p>
+<p>Used in some configurations </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>8 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>6 </b></p>
+<p><b>Bootloader Setup </b></p>
+<p><b>6.1 </b></p>
+<p><b> DaVinci Configurator  </b></p>
+<p> </p>
+<p> </p>
+<p>Figure 6-1 </p>
+<p>Configuration Setup </p>
+<p>In this configuration tool you’ll find the same information by opening the Project Settings </p>
+<p>view under Project Settings as shown in the following picture. </p>
+<p><b>6.2 </b></p>
+<p><b>User Configuration File </b></p>
+<p>A user configuration file is required to properly setup certain parts of the bootloader. </p>
+<p>The following configurations are required for configuring the bootloader. </p>
+<p><b>Required Macro </b></p>
+<p><b>Definition </b></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Table 6-1 User Config File Macros </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>An example user configuration file is included with the bootloader demo </p>
+<p>(.\Demo\DemoFbl\Config\user_config.cfg) </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>6.3 </b></p>
+<p><b>Flash Library </b></p>
+<p>The Renesas Flash Library must be added to the .\BSW\Flash folder in order to compile </p>
+<p>the flash driver files.    </p>
+<p><b>6.4 </b></p>
+<p><b>MCAL </b></p>
+<p>A  Third  Party  MCAL  must  be  added  to  the  .\external  folder  in  order  to  compile  the </p>
+<p>bootloader.   </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>9 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>7 </b></p>
+<p><b>Demonstration Project </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>The demo projects were setup on a local ECU. The configurations as well as the code </p>
+<p>in the user callback functions are adapted to handle the local setups. Please check </p>
+<p>configuration and user callbacks carefully before working with the demo projects. </p>
+<p>The files from _Template folder do not contain the hardware initialization routines. </p>
+<p>Please refer to the Demo project to get the bootloader running. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>7.1 </b></p>
+<p><b>Build Demonstration Bootloader/ Application </b></p>
+<p>This delivery comes with a demo for the bootloader.  </p>
+<p>The  demo  comes  along  with  a  make  support. This  system  can  be  used  to  compile  the </p>
+<p>demo with just a few modifications on your computer. </p>
+<p>Please follow these steps to recompile the demonstration projects: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Adapt the compiler path. This is done in the file “Demo/DemoFbl/Appl/Makefile“: </p>
+<p>COMPILER_BASE = &lt;base folder of your compiler-installation&gt;</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The compiler path should not have any spaces. If your compiler path is installed in a </p>
+<p>directory that includes spaces, the entire path must be enclosed in quotes.  </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Run “m.bat”. First, a dependency list is generated. If this was successful, the compile </p>
+<p>and link process is started. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Try “</p>
+<p>m help</p>
+<p>” to see a list of all available options of the delivered Make Support. </p>
+<p><b>7.2 </b></p>
+<p><b>Memory Map </b></p>
+<p>Please  reference  the  linker  file  provided  in  the  Demo/DemoFbl/Appl  directory  for  an </p>
+<p>example. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>10 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>8 </b></p>
+<p><b>Known Issues &amp; Restrictions </b></p>
+<p>See IssueReport_CBD1800284.pdf. </p>
+<p><b>8.1 </b></p>
+<p><b>Beta Delivery Restrictions </b></p>
+<p>Beta includes a demo flash bootloader and bootmanager.  This version of the bootloader </p>
+<p>has not been tested for the jump from application to the bootloader. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>This is a beta development delivery. This delivery is not fully tested and may have the </p>
+<p>following limitations: </p>
+<p>- </p>
+<p>The delivery content may change between the beta and final delivery. </p>
+<p>Components and versions may be different between the two. </p>
+<p>- </p>
+<p>The delivery may contain only a subset of the features and components ordered </p>
+<p>compared to the final delivery. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Readme Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version  1.0 </p>
+<p>11 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>9 </b></p>
+<p><b>Contact </b></p>
+<p>Any questions concerning the Flash Bootloader package should be sent to the following </p>
+<p>email address: </p>
+<p>support@vector.com </p>
+<p> </p>
+<p>Visit our website for more information on </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>News </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Products </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Demo software </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Support </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Training data </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Addresses </p>
+<p> </p>
+<p><b>www.vector.com </b></p>
+</body>
+</html>
+{% endraw %}

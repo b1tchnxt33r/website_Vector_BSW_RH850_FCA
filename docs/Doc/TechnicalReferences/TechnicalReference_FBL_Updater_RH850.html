@@ -1,0 +1,271 @@
+---
+layout: default
+title: TechnicalReference_FBL_Updater_RH850
+nav_order: 33
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>FBL Updater RH850 </b></p>
+<p>Technical Reference </p>
+<p> </p>
+<p>Hardware specific information </p>
+<p>Version 1.0 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Authors </p>
+<p>Sebastian Loos </p>
+<p>Status </p>
+<p>Released </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference FBL Updater RH850 </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.0 </p>
+<p>2 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Document Information </b></p>
+<p><b>History </b></p>
+<p><b>Author </b></p>
+<p><b>Date </b></p>
+<p><b>Version </b></p>
+<p><b>Remarks </b></p>
+<p>Sebastian Loos </p>
+<p>2018-06-26 </p>
+<p>1.00.00 </p>
+<p>Initial Version </p>
+<p><b>Reference Documents </b></p>
+<p><b>No. </b></p>
+<p><b>Source </b></p>
+<p><b>Title </b></p>
+<p><b>Version </b></p>
+<p>[1] </p>
+<p> </p>
+<p>Vector </p>
+<p>TechnicalReference_FBL_Updater.pdf </p>
+<p>1.xx.xx </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>We have configured the programs in accordance with your specifications in the </p>
+<p>questionnaire. Whereas the programs do support other configurations than the one </p>
+<p>specified in your questionnaire, Vector´s release of the programs delivered to your </p>
+<p>company is expressly restricted to the configuration you have specified in the </p>
+<p>questionnaire. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference FBL Updater RH850 </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.0 </p>
+<p>3 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Contents </b></p>
+<p><b>1</b></p>
+<p> </p>
+<p><b>Introduction .................................................................................................................... 5</b></p>
+<p> </p>
+<p>1.1</p>
+<p> </p>
+<p>Theory of operation .................................................................................................. 5</p>
+<p> </p>
+<p><b>2</b></p>
+<p> </p>
+<p><b>Integration ...................................................................................................................... 6</b></p>
+<p> </p>
+<p>2.1</p>
+<p> </p>
+<p>Flash Driver Settings ................................................................................................ 6</p>
+<p> </p>
+<p>2.2</p>
+<p> </p>
+<p>New Bootloader ........................................................................................................ 6</p>
+<p> </p>
+<p><b>3</b></p>
+<p> </p>
+<p><b>Configuration.................................................................................................................. 7</b></p>
+<p> </p>
+<p><b>4</b></p>
+<p> </p>
+<p><b>Contact............................................................................................................................ 8</b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference FBL Updater RH850 </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.0 </p>
+<p>4 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Illustrations </b></p>
+<p>Figure 1-1</p>
+<p> </p>
+<p>Typical configuration for reset-safe Updater ................................................ 5</p>
+<p> </p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference FBL Updater RH850 </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.0 </p>
+<p>5 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>1 </b></p>
+<p><b>Introduction </b></p>
+<p>This document will give a brief overview on the Renesas RH850 specific aspects of the FBL </p>
+<p>Updater. A general description of the updater can be found in [1]. </p>
+<p><b>1.1 </b></p>
+<p><b>Theory of operation </b></p>
+<p>To ensure a reset-safe update process, the Set-Reset-Vector ability of the FlashLib (FCL) is </p>
+<p>used. </p>
+<p> </p>
+<p>Figure 1-1 </p>
+<p>Typical configuration for reset-safe Updater </p>
+<p>Prior to erasing the (old) FBL, the Updater will set the reset vector to its own starting address </p>
+<p>as shown in Figure 1-1. If the whole update process is successful finished, it will set the </p>
+<p>reset vector back to the FBL.  </p>
+<p>This  will  avoid  that  if  the update process  gets  interrupted by  e.g. a  power-down  reset  a </p>
+<p>partially deleted or partially written bootloader gets executed. </p>
+<p>1</p>
+<p>16K Block 0</p>
+<p>16K Block 1</p>
+<p>16K Block 2</p>
+<p>16K Block 3</p>
+<p>32K Block 4</p>
+<p>32K Block 5</p>
+<p>32K Block 6</p>
+<p>32K Block 7</p>
+<p>0x00000</p>
+<p>RH850 Resetvector</p>
+<p>FBL</p>
+<p>Updater</p>
+<p>Interrupt Vector Table</p>
+<p>__usr_init()</p>
+<p>0x18000</p>
+<p>0x18200</p>
+<p>New FBL</p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference FBL Updater RH850 </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.0 </p>
+<p>6 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>2 </b></p>
+<p><b>Integration </b></p>
+<p><b>2.1 </b></p>
+<p><b>Flash Driver Settings </b></p>
+<p>The RH850 Updater uses the Set-Reset-Vector-Api, which means it requires a Flash Driver </p>
+<p>which is compiled with </p>
+<p>#define FLASH_ENABLE_SET_RESETVECTOR_API </p>
+<p><b>2.2 </b></p>
+<p><b>New Bootloader </b></p>
+<p>It may be required that the image of the new FBL is aligned according to the flash segment </p>
+<p>size (0x100). To ensure this, a batch file is provided (FblUpd_Prepare_Hw.bat). It will be </p>
+<p>used by the other provided preparing batch scripts. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference FBL Updater RH850 </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.0 </p>
+<p>7 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>3 </b></p>
+<p><b>Configuration </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Add all necessary initializations (especially: Oscillator, PLL settings) to the initialization </p>
+<p>routine </p>
+<p>ApplFblUpdHwInit(</p>
+<p>. If the System clock is not set as expected by the </p>
+<p>FlashLib, the Updater will not be able to write the flash memory. </p>
+<p> </p>
+<p>This is especially necessary if the Updater shall be reset-safe, because if it is re-started </p>
+<p>from a reset, the PLL is not initialized. If the Updater is started by the FBL, the FBL has </p>
+<p>already initialized the PLL. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>The following Reset Vectors need to be configured in the upd_hw_cfg.h: </p>
+<p><b>&gt; </b></p>
+<p>#define FBL_UPD_FBL_RESET_VECTOR_ADDR</p>
+<p> </p>
+<p>Is usually set to 0x00000, which is the default entry address of the RH850. </p>
+<p><b>&gt; </b></p>
+<p>#define FBL_UPD_UPDATER_RESET_VECTOR_ADDR</p>
+<p> </p>
+<p>Entry address of the Updater. Can usually be configured to </p>
+<p>_usr_init</p>
+<p>. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Reset Vectors have to be aligned to multiples of 0x200.  </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference FBL Updater RH850 </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.0 </p>
+<p>8 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>4 </b></p>
+<p><b>Contact </b></p>
+<p>Visit our website for more information on </p>
+<p> </p>
+<p><b>&gt; </b> News </p>
+<p><b>&gt; </b> Products </p>
+<p><b>&gt; </b> Demo software </p>
+<p><b>&gt; </b> Support </p>
+<p><b>&gt; </b> Training data </p>
+<p><b>&gt; </b> Addresses </p>
+<p> </p>
+<p><b>www.vector.com </b></p>
+</body>
+</html>
+{% endraw %}

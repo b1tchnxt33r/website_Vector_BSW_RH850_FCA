@@ -1,0 +1,1297 @@
+---
+layout: default
+title: TechnicalReference_FBL_Updater
+nav_order: 32
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>Flash Bootloader Updater </b></p>
+<p>Technical Reference </p>
+<p> </p>
+<p>Updating the Flash Bootloader to a new version </p>
+<p>Version 1.02.00 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Authors </p>
+<p>Torben </p>
+<p>Stößel, </p>
+<p>Jörn </p>
+<p>Herwig, </p>
+<p>Marco </p>
+<p>Riedl, </p>
+<p>Robert </p>
+<p>Schäffner </p>
+<p>Status </p>
+<p>Released </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>2 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Document Information </b></p>
+<p><b>History </b></p>
+<p><b>Author </b></p>
+<p><b>Date </b></p>
+<p><b>Version </b></p>
+<p><b>Remarks </b></p>
+<p>Torben Stößel </p>
+<p>Jörn Herwig </p>
+<p>Marco Riedl </p>
+<p>2016-10-20 </p>
+<p>1.00.00 </p>
+<p>Initial version </p>
+<p>Marco Riedl </p>
+<p>Robert Schäffner </p>
+<p>2018-02-01 </p>
+<p>1.01.00 </p>
+<p>Fixed typos Rephrase </p>
+<p>sentence in chapter “2.2.3.1 </p>
+<p>Hardware support” for RL78 </p>
+<p>Added chapter “4 Testing the </p>
+<p>Updater” </p>
+<p>Marco Riedl </p>
+<p>2018-06-29 </p>
+<p>1.02.00 </p>
+<p>Reworked chapter 3.2 </p>
+<p>Preparing new FBL version </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>3 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Contents </b></p>
+<p><b>1</b></p>
+<p> </p>
+<p><b>Introduction .................................................................................................................... 6</b></p>
+<p> </p>
+<p>1.1</p>
+<p> </p>
+<p>Overview .................................................................................................................. 6</p>
+<p> </p>
+<p><b>2</b></p>
+<p> </p>
+<p><b>Update process .............................................................................................................. 7</b></p>
+<p> </p>
+<p>2.1</p>
+<p> </p>
+<p>Download of Updater ................................................................................................ 7</p>
+<p> </p>
+<p>2.2</p>
+<p> </p>
+<p>Update process ........................................................................................................ 8</p>
+<p> </p>
+<p>2.2.1</p>
+<p> </p>
+<p>Initialization of communication stack ............................................................... 8</p>
+<p> </p>
+<p>2.2.2</p>
+<p> </p>
+<p>Initialization of the Flash Driver ....................................................................... 8</p>
+<p> </p>
+<p>2.2.3</p>
+<p> </p>
+<p>Preparing reset safe FBL Updater ................................................................... 8</p>
+<p> </p>
+<p>2.2.3.1</p>
+<p> </p>
+<p>Hardware support ..................................................................................... 9</p>
+<p> </p>
+<p>2.2.3.2</p>
+<p> </p>
+<p>Bootmanager ............................................................................................ 9</p>
+<p> </p>
+<p>2.2.4</p>
+<p> </p>
+<p>Erasure of FBL Memory Area .......................................................................... 9</p>
+<p> </p>
+<p>2.2.5</p>
+<p> </p>
+<p>Programming of new FBL version ................................................................... 9</p>
+<p> </p>
+<p>2.2.6</p>
+<p> </p>
+<p>Verification of new FBL .................................................................................... 9</p>
+<p> </p>
+<p>2.2.7</p>
+<p> </p>
+<p>Validation of new FBL .................................................................................... 10</p>
+<p> </p>
+<p>2.2.8</p>
+<p> </p>
+<p>Invalidation of Updater .................................................................................. 10</p>
+<p> </p>
+<p>2.2.9</p>
+<p> </p>
+<p>Erasure of the FBL Updater ........................................................................... 10</p>
+<p> </p>
+<p>2.2.10</p>
+<p> </p>
+<p>Reset ............................................................................................................ 10</p>
+<p> </p>
+<p>2.3</p>
+<p> </p>
+<p>Reprogramming the Application.............................................................................. 10</p>
+<p> </p>
+<p><b>3</b></p>
+<p> </p>
+<p><b>Integration .................................................................................................................... 11</b></p>
+<p> </p>
+<p>3.1</p>
+<p> </p>
+<p>Scope of Delivery ................................................................................................... 11</p>
+<p> </p>
+<p>3.1.1</p>
+<p> </p>
+<p>Core Files ...................................................................................................... 11</p>
+<p> </p>
+<p>3.1.2</p>
+<p> </p>
+<p>Application files ............................................................................................. 11</p>
+<p> </p>
+<p>3.1.2.1</p>
+<p> </p>
+<p>OEM specific application files ................................................................. 11</p>
+<p> </p>
+<p>3.1.2.2</p>
+<p> </p>
+<p>Hardware specific application files .......................................................... 12</p>
+<p> </p>
+<p>3.1.3</p>
+<p> </p>
+<p>Script files ..................................................................................................... 12</p>
+<p> </p>
+<p>3.2</p>
+<p> </p>
+<p>Preparing new FBL version .................................................................................... 12</p>
+<p> </p>
+<p>3.3</p>
+<p> </p>
+<p>Flash Driver ............................................................................................................ 13</p>
+<p> </p>
+<p>3.4</p>
+<p> </p>
+<p>Updater configuration ............................................................................................. 14</p>
+<p> </p>
+<p><b>4</b></p>
+<p> </p>
+<p><b>Testing the Updater ...................................................................................................... 15</b></p>
+<p> </p>
+<p><b>5</b></p>
+<p> </p>
+<p><b>API Description ............................................................................................................ 16</b></p>
+<p> </p>
+<p>5.1</p>
+<p> </p>
+<p>Hook ...................................................................................................................... 16</p>
+<p> </p>
+<p>5.1.1</p>
+<p> </p>
+<p>Processing hooks .......................................................................................... 16</p>
+<p> </p>
+<p>5.1.1.1</p>
+<p> </p>
+<p>Function API ........................................................................................... 17</p>
+<p> </p>
+<p>5.1.2</p>
+<p> </p>
+<p>Segment handling hooks ............................................................................... 19</p>
+<p> </p>
+<p>5.1.2.1</p>
+<p> </p>
+<p>Function API ........................................................................................... 19</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>4 </p>
+<p>based on template version 6.0.1 </p>
+<p>5.2</p>
+<p> </p>
+<p>Callout .................................................................................................................... 20</p>
+<p> </p>
+<p>5.3</p>
+<p> </p>
+<p>Default Implementation .......................................................................................... 21</p>
+<p> </p>
+<p>5.3.1</p>
+<p> </p>
+<p>Validity Range ............................................................................................... 22</p>
+<p> </p>
+<p>5.3.2</p>
+<p> </p>
+<p>Response Pending ........................................................................................ 22</p>
+<p> </p>
+<p>5.3.3</p>
+<p> </p>
+<p>Reset ............................................................................................................ 22</p>
+<p> </p>
+<p><b>6</b></p>
+<p> </p>
+<p><b>Glossary and Abbreviations ........................................................................................ 23</b></p>
+<p> </p>
+<p>6.1</p>
+<p> </p>
+<p>Abbreviations ......................................................................................................... 23</p>
+<p> </p>
+<p><b>7</b></p>
+<p> </p>
+<p><b>Contact.......................................................................................................................... 24</b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>5 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Illustrations </b></p>
+<p>Figure 2-1</p>
+<p> </p>
+<p>Updater concept ......................................................................................... 7</p>
+<p> </p>
+<p><b> </b></p>
+<p><b>Tables </b></p>
+<p>Table 2-1 </p>
+<p> </p>
+<p>Hardware support mechanisms .................................................................. 9</p>
+<p> </p>
+<p>Table 3-1 </p>
+<p> </p>
+<p>Core files .................................................................................................. 11</p>
+<p> </p>
+<p>Table 3-2 </p>
+<p> </p>
+<p>General application files ........................................................................... 11</p>
+<p> </p>
+<p>Table 3-3 </p>
+<p> </p>
+<p>Hardware specific application files ............................................................ 11</p>
+<p> </p>
+<p>Table 3-4 </p>
+<p> </p>
+<p>OEM specific application files ................................................................... 12</p>
+<p> </p>
+<p>Table 3-5 </p>
+<p> </p>
+<p>Script files ................................................................................................. 12</p>
+<p> </p>
+<p>Table 5-1 </p>
+<p> </p>
+<p>Update process steps ............................................................................... 17</p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>6 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>1 </b></p>
+<p><b>Introduction </b></p>
+<p><b>1.1 </b></p>
+<p><b>Overview </b></p>
+<p>On  a  regular  reprogrammable  ECU,  an  application  can  be  reprogrammed  by  the  Flash </p>
+<p>Bootloader  (FBL).  The  FBL  itself  cannot  be  replaced  without  an  additional  software </p>
+<p>component.  The  FBL  Updater  is  intended  to  be  downloaded  to  the  ECU  as  a  regular </p>
+<p>application to replace an existing Flash Bootloader with a newer version. </p>
+<p>This document gives an overview of the basic properties and tasks of the Updater. </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>7 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>2 </b></p>
+<p><b>Update process </b></p>
+<p>The general update process is shown in Figure 2-1  . </p>
+<p> </p>
+<p>Figure 2-1 </p>
+<p>Updater concept </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The Bootmanager is optional and is mainly relevant, if the Controller cannot be </p>
+<p>configured to be reset-safe (see chapter 2.2.3). </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>2.1 </b></p>
+<p><b>Download of Updater </b></p>
+<p>The Updater is a component that is downloaded to the ECU like a regular application. The </p>
+<p>FBL  does  not  have  any  knowledge  about  the  Updater  and  therefore  this  process  is </p>
+<p>completely transparent. The Updater has to pass the OEM specific validation process (e.g. </p>
+<p>checksum and/or signature verification) like any other application. </p>
+<p>The Updater is started if all OEM conditions are met (e.g. all mandatory blocks present). </p>
+<p> </p>
+<p>FBL v1.0</p>
+<p>Application</p>
+<p>Bootmanager</p>
+<p></p>
+<p>FBL v1.0</p>
+<p>Updater</p>
+<p>Bootmanager</p>
+<p></p>
+<p>FBL v2.0</p>
+<p>Initial</p>
+<p>Download </p>
+<p>Updater</p>
+<p> Running Software</p>
+<p> Block valid</p>
+<p> Block invalid</p>
+<p>Bootmanager</p>
+<p>FBL v2.0</p>
+<p>Update</p>
+<p>Bootmanager</p>
+<p>FBL v2.0</p>
+<p>Invalid </p>
+<p>application</p>
+<p>Bootmanager</p>
+<p>FBL v2.0</p>
+<p>Application</p>
+<p></p>
+<p>(Re)-download </p>
+<p>application</p>
+<p>Application</p>
+<p>Bootmanager</p>
+<p></p>
+<p>Valid application</p>
+<p>FBL v2.0</p>
+<p>Updater</p>
+<p>FBL v2.0</p>
+<p></p>
+<p>Updater</p>
+<p>FBL v2.0</p>
+<p></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>8 </p>
+<p>based on template version 6.0.1 </p>
+<p>In order to avoid potential disturbances, the Updater does not perform a download of the </p>
+<p>flash driver and the new FBL version. Instead, the flash driver and the new FBL version are </p>
+<p>part of the Updater. </p>
+<p><b>2.2 </b></p>
+<p><b>Update process </b></p>
+<p>The Updater performs the following steps: </p>
+<p>1. </p>
+<p>Initialization of the communication stack (optional) </p>
+<p>2. </p>
+<p>Initialization of the flash driver </p>
+<p>3. </p>
+<p>Preparing reset safe FBL Updater </p>
+<p>4. </p>
+<p>Erasure of the FBL memory area </p>
+<p>5. </p>
+<p>Programming of new FBL </p>
+<p>6. </p>
+<p>Verification of new FBL </p>
+<p>7. </p>
+<p>Validation of new FBL </p>
+<p>8. </p>
+<p>Invalidation of the FBL Updater (OEM specific) </p>
+<p>9. </p>
+<p>Erasure of the FBL Updater (optional) </p>
+<p>10. Reset </p>
+<p> </p>
+<p>If the update process fails at some point, the Updater retries the process until a configurable </p>
+<p>maximum number of retries exceeded. </p>
+<p> </p>
+<p><b>2.2.1 </b></p>
+<p><b>Initialization of communication stack </b></p>
+<p>This step is optional. If the Updater has to send Response Pending messages for a certain </p>
+<p>request to keep the tester alive, the communication stack and the RP message has to be </p>
+<p>initialized. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The Updater only sends Response Pending messages during the updater process. It </p>
+<p>does not process any requests to this ECU. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>2.2.2 </b></p>
+<p><b>Initialization of the Flash Driver </b></p>
+<p>With this step, the flash driver is initialized in a hardware-specific manner. If applicable, the </p>
+<p>flash programming voltage has to be activated before. </p>
+<p><b>2.2.3 </b></p>
+<p><b>Preparing reset safe FBL Updater </b></p>
+<p>There is more than one approach to make the FBL Updater reset safe. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>9 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>2.2.3.1 </b></p>
+<p><b>Hardware support </b></p>
+<p>On some hardware platforms, a reset safe FBL Updater is achievable by using a hardware </p>
+<p>dependent startup mechanism. Some startup mechanisms are described in the following </p>
+<p>table: </p>
+<p> </p>
+<p><b>Hardware </b></p>
+<p><b>Mechanism </b></p>
+<p>MPC </p>
+<p>The PowerPC controller has a so called reset configuration half-word </p>
+<p>(RCHW) located on specific addresses. The controller evaluates all RCHW </p>
+<p>addresses of this controller in a specific order. If an RCHW is evaluated as </p>
+<p>valid, the controller jumps to the entry address defined in the RCHW. </p>
+<p>The FBL Updater uses this feature to set its own RCHW to a higher priority </p>
+<p>address or erase the higher priority RCHW of the Bootloader.  </p>
+<p>RL78 </p>
+<p>The RL78 uses the boot swap feature. The first 8KB flash block can be </p>
+<p>changed with the second 8KB. The FBL does not occupy the second 8KB </p>
+<p>flash block, as the FBL Updater uses this 8KB block as a boot block. </p>
+<p>RH850 </p>
+<p>The FBL Updater configures the variable reset vector to the startup code to </p>
+<p>itself on the RH850 controller. At the end of the update process the FBL </p>
+<p>Updater changes the reset vector back to the startup of the new FBL. </p>
+<p>Table 2-1  </p>
+<p>Hardware support mechanisms </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>For some hardware platforms, no reset-safe configuration can be achieved. If the </p>
+<p>update process is interrupted e.g. by a power failure or a reset, the ECU is probably no </p>
+<p>longer reprogrammable. In this case a boot manager is required (see chapter 2.2.3.2). </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>2.2.3.2 </b></p>
+<p><b>Bootmanager </b></p>
+<p>It is also possible to use a Bootmanager to make the controller reset safe. In this case the </p>
+<p>Bootmanager is always started first and determines if the FBL should be started or the FBL </p>
+<p>Updater. This is determined by a Bootmanager header structure which is inside the FBL and </p>
+<p>the FBL Updater. The FBL Updater is always started, if the structure is available. This means </p>
+<p>also that this structure needs to be removed at the end of the update process (see chapter </p>
+<p>2.2.9). </p>
+<p><b>2.2.4 </b></p>
+<p><b>Erasure of FBL Memory Area </b></p>
+<p>Before the new FBL version can be programmed, the FBL memory area has to be erased. </p>
+<p>The Updater will only erase the flash blocks which are occupied by the new FBL. </p>
+<p><b>2.2.5 </b></p>
+<p><b>Programming of new FBL version </b></p>
+<p>After erasing the relevant flash blocks, the new FBL version is flashed. </p>
+<p><b>2.2.6 </b></p>
+<p><b>Verification of new FBL </b></p>
+<p>After the flash process has finished, a verification step has to make sure that all bytes of the </p>
+<p>new FBL version have been programmed correctly. As the updater has been downloaded </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>10 </p>
+<p>based on template version 6.0.1 </p>
+<p>via the OEM specific download process, the new FBL version has already been checked </p>
+<p>with the OEM specific verification procedure. Therefore the Updater makes a simple 1:1 </p>
+<p>comparison of the programmed data against the intended data. </p>
+<p><b>2.2.7 </b></p>
+<p><b>Validation of new FBL </b></p>
+<p>After the FBL Updater confirmed that the new FBL has been written successfully, the FBL </p>
+<p>Updater writes the validity range (see chapter 5.3.1) into the new FBL. This validity range </p>
+<p>can be hardware specific (e.g. MPC controller the RCHW, TriCore controller the BMI header) </p>
+<p>or the Bootmanager header structure. </p>
+<p><b>2.2.8 </b></p>
+<p><b>Invalidation of Updater </b></p>
+<p>The validity status of the Updater is set to the invalid state after the FBL update is finished. </p>
+<p>The basic goal of this task is to prevent a restart of the Updater after successful programming </p>
+<p>of the new FBL version. </p>
+<p><b>2.2.9 </b></p>
+<p><b>Erasure of the FBL Updater </b></p>
+<p>Optionally, the Updater can erase itself from flash. This does not necessary mean that the </p>
+<p>complete FBL Updater memory area is erased, but only the relevant part of the memory </p>
+<p>which holds the reset safe information. </p>
+<p>In case the Bootmanager is used, the header structure for the Bootmanager must be erased. </p>
+<p>Otherwise the Bootmanager always starts the FBL Updater again. </p>
+<p><b>2.2.10 </b></p>
+<p><b>Reset </b></p>
+<p>At last the Updater makes a reset to start the new Bootloader. </p>
+<p><b>2.3 </b></p>
+<p><b>Reprogramming the Application </b></p>
+<p>As the updater has invalidated itself, the FBL does not jump to the application. Therefore it </p>
+<p>is necessary to download the real application software to the ECU after the update process </p>
+<p>finished. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>11 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>3 </b></p>
+<p><b>Integration </b></p>
+<p><b>3.1 </b></p>
+<p><b>Scope of Delivery </b></p>
+<p>The  delivery  of the  FBL  Updater contains  the files,  which  are  described  in  the following </p>
+<p>chapters. </p>
+<p><b>3.1.1 </b></p>
+<p><b>Core Files </b></p>
+<p>The first group contains components found in the BSW\FblUpd folder of your delivery. Do </p>
+<p>not modify the contents of the files in this group without prior written permission from Vector </p>
+<p>(modification of these files will void your warranty). </p>
+<p> </p>
+<p><b>File </b></p>
+<p><b>Description </b></p>
+<p>upd_main.c/h </p>
+<p>Updater main component, which provides necessary routine to </p>
+<p>update the FBL. Furthermore hooks are provided to add </p>
+<p>additional functionality to the update process. </p>
+<p>upd_types.h </p>
+<p>Defines public types of the FBL Updater. </p>
+<p>Table 3-1  </p>
+<p>Core files </p>
+<p><b>3.1.2 </b></p>
+<p><b>Application files </b></p>
+<p>The second group consists of components that can be customized for your configuration. </p>
+<p>The files may be found in the BSW\FblUpd\_Template folder. You should copy these files to </p>
+<p>your FBL Updater project folder and rename them, removing the leading underscore from </p>
+<p>the filename. </p>
+<p> </p>
+<p><b>File </b></p>
+<p><b>Description </b></p>
+<p>_upd_cfg.h </p>
+<p>Configuration file for the FBL Updater. </p>
+<p>_upd_ap.c/h </p>
+<p>_upd_ap_cfg.h </p>
+<p>Template files which implement the user callouts used in </p>
+<p>upd_main.c. They may be overwritten by the hardware or OEM </p>
+<p>specific files. </p>
+<p>Table 3-2  </p>
+<p>General application files </p>
+<p><b>3.1.2.1 </b></p>
+<p><b>OEM specific application files </b></p>
+<p>If available, there are OEM specific FBL Updater files. </p>
+<p> </p>
+<p><b>File </b></p>
+<p><b>Description </b></p>
+<p>_upd_oem_ap.c/h </p>
+<p> </p>
+<p>OEM specific template files, which may contain: </p>
+<p>•</p>
+<p> </p>
+<p>OEM initialization </p>
+<p>•</p>
+<p> </p>
+<p>Updater invalidation process </p>
+<p>•</p>
+<p> </p>
+<p>ResponsePending handling </p>
+<p>_upd_oem_cfg.h </p>
+<p>OEM specific configuration file. </p>
+<p>Table 3-3  </p>
+<p>Hardware specific application files </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>12 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>3.1.2.2 </b></p>
+<p><b>Hardware specific application files </b></p>
+<p>If available, there are hardware specific FBL Updater files. </p>
+<p> </p>
+<p><b>File </b></p>
+<p><b>Description </b></p>
+<p>_upd_hw_ap.c/h </p>
+<p> </p>
+<p>Hardware specific template files, which may contain: </p>
+<p>•</p>
+<p> </p>
+<p>Hardware initialization (e.g. PLL) </p>
+<p>•</p>
+<p> </p>
+<p>Set of programming voltage </p>
+<p>•</p>
+<p> </p>
+<p>Activate transceiver </p>
+<p>•</p>
+<p> </p>
+<p>Reconfiguration of reset vector </p>
+<p>_upd_hw_cfg.h </p>
+<p>Hardware specific configuration file. </p>
+<p>Table 3-4  </p>
+<p>OEM specific application files </p>
+<p><b>3.1.3 </b></p>
+<p><b>Script files </b></p>
+<p>The third group includes scripts to prepare the FBL hex-file to be compiled and linked with </p>
+<p>the Updater. The scripts can be found in the Misc\FblUpd folder. These scripts may have to </p>
+<p>be adapted to use the correct paths. </p>
+<p> </p>
+<p><b>File </b></p>
+<p><b>Description </b></p>
+<p>FblUpd_Prepare.bat </p>
+<p>Script to generate a C-Array file from a hex-file. </p>
+<p>FblUpd_Prepare_Hw.bat </p>
+<p>(optional) </p>
+<p>This script is called by the script FblUpd_Prepare.bat before the </p>
+<p>C-Array is generated to e.g. cut data, remap addresses. </p>
+<p>Table 3-5  </p>
+<p>Script files </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>It may be possible that there are additional scripts located in the Misc\FblUpd folder. </p>
+<p>These scripts are used to make the integration of the Updater easier. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>3.2 </b></p>
+<p><b>Preparing new FBL version </b></p>
+<p>As described in chapter 2.1, the new FBL version is not downloaded, but included in the </p>
+<p>Updater as a C-Array. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>13 </p>
+<p>based on template version 6.0.1 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Practical Procedure </b></p>
+<p>1. </p>
+<p>Compile and link the new FBL. </p>
+<p>2. </p>
+<p>Convert new FBL into hex-file. </p>
+<p>3. </p>
+<p>Adapt new FBL hex-file, e.g.: </p>
+<p>a. </p>
+<p>Remove memory areas, which do not belong to the actual FBL memory area </p>
+<p>(e.g. ApplVect) </p>
+<p>b. </p>
+<p>Align data to the flash segment size </p>
+<p>4. </p>
+<p>Convert adapted hex-file into a C-Array (FblUpd_Prepare.bat). </p>
+<p>5. </p>
+<p>Add the C-Array to the Updater. </p>
+<p>6. </p>
+<p>Compile and link the Updater. </p>
+<p>7. </p>
+<p>(optionally) Generate OEM specific download container. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>The byte array of the new FBL has to be aligned to the flash segment size of the </p>
+<p>particular flash device to achieve correct flash results. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>The FBL Updater will erase all flash blocks, which are occupied by the new FBL hex-</p>
+<p>file. </p>
+<p>This especially applies to memory areas, which aren’t actually part of the FBL, but </p>
+<p>instead lie within the Updaters memory range. One such example is the ApplVect </p>
+<p>structure. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>3.3 </b></p>
+<p><b>Flash Driver </b></p>
+<p>The flash driver is stored in the flash memory area of the FBL Updater. Before the update </p>
+<p>process begins, the flash driver is copied to RAM and executed from there. </p>
+<p>The flash driver is encrypted, to avoid an unintentional activation of the flash driver. The </p>
+<p>decryption of the flash driver is performed, when the driver code is copied to RAM. After the </p>
+<p>update process has finished, the flash driver code is removed from RAM. </p>
+<p>The flash driver code is provided in the files FlashRom.c/h. These files have to be compiled </p>
+<p>and  linked  with  the  FBL  Updater.  Normally  these  files  are  located  in  the  demonstration </p>
+<p>project of the FBL Updater. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>14 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>3.4 </b></p>
+<p><b>Updater configuration </b></p>
+<p>The configuration of the FBL Updater with the GenTool (e.g. GENy or DaVinci Configurator) </p>
+<p>is the same as for the FBL configuration. The main difference is that the flash blocks of the </p>
+<p>FBL area are changed from “Protected” to the respective memory device (mostly “Flash”). </p>
+<p>So that the FBL memory area is known to the FBL Updater and can use it for reprogramming. </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>15 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>4 </b></p>
+<p><b>Testing the Updater </b></p>
+<p>The FBL Updater demo project will be tested at Vector without any of the project specific </p>
+<p>adaptations added later. Therefore, the FBL Updater must be tested again by the </p>
+<p>customer. </p>
+<p> </p>
+<p>Special care must be taken if the updater shall be reset safe. It might happen that the </p>
+<p>startup sequence for the FBL Updater is different after the update was interrupted, </p>
+<p>compared with the standard initialization sequence. Here are two examples: </p>
+<p>1. </p>
+<p>RH850 with reprogrammable reset vector: </p>
+<p>Default initialization path: Reset -&gt; FBL -&gt; FBL Updater </p>
+<p>Initialization path after interrupted update: Reset -&gt; Updater </p>
+<p>2. </p>
+<p>Using BootManager and FBL for application validation: </p>
+<p>Default initialization path: Reset -&gt; BootManager -&gt; FBL -&gt; FBL Updater </p>
+<p>Initialization path after interrupted update: Reset -&gt; BootManager -&gt; FBL Updater </p>
+<p> </p>
+<p>Possible raised issues if the two sequences are different: </p>
+<p>- </p>
+<p>Bus communication is no longer possible or cause errors on bus </p>
+<p>- </p>
+<p>CPU runs to slow, which cause performance or watchdog issues </p>
+<p>- </p>
+<p>Necessary PLL settings for accessing Flash are not set and the update fails </p>
+<p> </p>
+<p>Depending on the implementation it could happen that FBL Updater loose it’s reset safe </p>
+<p>functionality and bring your device in an unrecovered-able state instead. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>It lies within the responsibility of the customer to test the updater. </p>
+<p>In case you have a reset safe updater it’s mandatory to test the interrupted update </p>
+<p>case too. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>16 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>5 </b></p>
+<p><b>API Description </b></p>
+<p>In this chapter only the configurable hooks and callouts are described, as the FBL Updater </p>
+<p>is a standalone program and is not called from another module. </p>
+<p>The FBL Updater already provides a default implementation, which applies to most cases </p>
+<p>(upd_main). For more information about the default implementation, please refer to chapter </p>
+<p>5.3. </p>
+<p>These </p>
+<p>functions </p>
+<p>can </p>
+<p>be </p>
+<p>overwritten </p>
+<p>by </p>
+<p>e.g. </p>
+<p>the </p>
+<p>hardware </p>
+<p>specific </p>
+<p>component </p>
+<p>(upd_hw_ap) by redefining the hook or callout to a custom function. </p>
+<p> </p>
+<p><b>5.1 </b></p>
+<p><b>Hook </b></p>
+<p>There are several so called “hooks”, which are called from the updater main component, to </p>
+<p>add additional functionality to the update process (e.g. send ResponsePending messages).  </p>
+<p>The hooks can be split into two groups. The first group contains the processing hooks and </p>
+<p>the second group can be used to adapt the segment handling. </p>
+<p> </p>
+<p><b>5.1.1 </b></p>
+<p><b>Processing hooks </b></p>
+<p>The processing hooks are used to influence the update process at specific update process </p>
+<p>steps.  </p>
+<p>The  following  table  summarizes  all  update  process  steps,  which  are  performed  by  the </p>
+<p>Updater  in  the  sequence  listed  below.  It  specifies  if  there  is  a  default  implementation </p>
+<p>available (see chapter 5.3) and if there is a possibility to overwrite the step with a custom </p>
+<p>function. For more information about the overwrite hooks, please refer to the chapter 5.1.1.1. </p>
+<p><b>Update Process Step</b></p>
+<p><b>1</b></p>
+<p><b> </b></p>
+<p><b>Default </b></p>
+<p><b>Overwrite Hook </b></p>
+<p>Updater Initialization </p>
+<p> </p>
+<p>FBL_UPD_HOOK_INIT </p>
+<p>Initialization of Response Pending </p>
+<p></p>
+<p> </p>
+<p>FBL_UPD_HOOK_SEND_RESPONSE </p>
+<p>Initialization of device drivers </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Pre-erase </p>
+<p></p>
+<p>2</p>
+<p> </p>
+<p>FBL_UPD_HOOK_PREPARE_ERASE </p>
+<p>Erase </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Post-erase </p>
+<p> </p>
+<p>FBL_UPD_HOOK_FINALIZE_ERASE </p>
+<p>Pre-program </p>
+<p> </p>
+<p>FBL_UPD_HOOK_PREPARE_PROGRAM </p>
+<p>Program </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Post-program </p>
+<p> </p>
+<p>FBL_UPD_HOOK_FINALIZE_PROGRAM </p>
+<p>Verify </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Post-verify </p>
+<p></p>
+<p>2</p>
+<p> </p>
+<p>FBL_UPD_HOOK_FINALIZE_VERIFY </p>
+<p>Invalidate updater </p>
+<p></p>
+<p>3</p>
+<p> </p>
+<p>FBL_UPD_HOOK_INVALIDATE_UPDATER </p>
+<p>Perform reset </p>
+<p></p>
+<p> </p>
+<p>FBL_UPD_HOOK_RESET </p>
+<p>                                            </p>
+<p>1</p>
+<p> All mentioned steps are described in detail in chapter 2.2. </p>
+<p>2</p>
+<p> Only if validity range are enabled (see chapter 5.3.1) </p>
+<p>3</p>
+<p> Only available if respective OEM has this feature enabled. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>17 </p>
+<p>based on template version 6.0.1 </p>
+<p>Table 5-1  </p>
+<p>Update process steps </p>
+<p> </p>
+<p><b>5.1.1.1 </b></p>
+<p><b>Function API </b></p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_INIT( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk on success, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>First hook function of the update process. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_SEND_RESPONSE( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk on success, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Send initial response pending (RCR-RP) message. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>&gt; </p>
+<p>In case sending initial response pending failed it may be wiser to return kFblOk instead of kFblFailed. </p>
+<p>So that at least the update process can continue and will not be aborted. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_PREPARE_ERASE( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk on success, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>This is the first hook function with activated flash driver. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>&gt; </p>
+<p>The default hook implementation erases all flash blocks which are included in the validity range. For </p>
+<p>more information about the validity range, please refer to chapter 5.3.1. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_FINALIZE_ERASE( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk on success, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Hook function which is called after the Updater has erased the Bootloader memory area. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>18 </p>
+<p>based on template version 6.0.1 </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_PREPARE_PROGRAM( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk on success, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Hook function is called before the actual program happens. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_FINALIZE_PROGRAM( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk on success, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Hook function is called after the Bootloader has been programmed.  </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_FINALIZE_VERIFY( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk on success, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Hook function when the verification was successful. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>&gt; </p>
+<p>The default hook implementation programs the validity range at this point. For more information about </p>
+<p>the validity range, please refer to chapter 5.3.1. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_INVALIDATE_UPDATER( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk on success, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Hook function to invalidate the updater/application by clearing the valid flag/pattern. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_RESET( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk on success, otherwise kFblFailed </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>19 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Functional Description </b></p>
+<p>Last callout function in the update process. This hook function shall perform a reset to start the new FBL. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>&gt; </p>
+<p>This function shall not return. </p>
+<p> </p>
+<p><b>5.1.2 </b></p>
+<p><b>Segment handling hooks </b></p>
+<p>The updated Bootloader may consist of multiple segments. </p>
+<p>The segment handling hooks are used to iterate over those segments. Depending on the </p>
+<p>requirements of the programming/erasing/verification routine further modifications may be </p>
+<p>applied to the original segment range. An example for this could be exclusion of a specific </p>
+<p>memory range.  </p>
+<p> </p>
+<p><b>5.1.2.1 </b></p>
+<p><b>Function API </b></p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_GET_SEGMENT( vuintx index, </p>
+<p>  V_MEMRAM1 tFblUpdSegmentInfo V_MEMRAM2 V_MEMRAM3 * pSegment ) </p>
+<p><b>Parameter </b></p>
+<p>index </p>
+<p>pSegment </p>
+<p>Index of referenced segment </p>
+<p>Pointer resulting segment information </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk when referenced segment is available, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Get segment of new FBL referenced by given index. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_ADJUST_SEGMENT_PROGRAM( </p>
+<p>  V_MEMRAM1 tFblUpdSegmentInfo V_MEMRAM2 V_MEMRAM3 * </p>
+<p>pSegmentList, </p>
+<p>  V_MEMRAM1 vuintx V_MEMRAM2 V_MEMRAM3 * pSegmentCount ) </p>
+<p><b>Parameter </b></p>
+<p>pSegmentList </p>
+<p>pSegmetnCount </p>
+<p>Pointer to segment list, first entry contains input segment </p>
+<p>Input: Size of segment list </p>
+<p>Output: Number of resulting segments </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk when segment adjustment was successful, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Adjust segments for programming / verification operation. Skip the area occupied by the validity range. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>20 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Particularities and Limitations </b></p>
+<p>&gt; </p>
+<p>Validity range doesn't cross segment border. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_HOOK_ADJUST_SEGMENT_VALIDITY( </p>
+<p>  V_MEMRAM1 tFblUpdSegmentInfo V_MEMRAM2 V_MEMRAM3 * </p>
+<p>pSegmentList, </p>
+<p>  V_MEMRAM1 vuintx V_MEMRAM2 V_MEMRAM3 * pSegmentCount ) </p>
+<p><b>Parameter </b></p>
+<p>pSegmentList </p>
+<p>pSegmetnCount </p>
+<p>Pointer to segment list, first entry contains input segment </p>
+<p>Input: Size of segment list </p>
+<p>Output: Number of resulting segments </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk when segment adjustment was successful, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Adjust segments for validation operation. Only return a potential validity range lying within the segment </p>
+<p>bounds. </p>
+<p> </p>
+<p><b>5.2 </b></p>
+<p><b>Callout </b></p>
+<p>Furthermore the updater provide callouts to handle hardware or OEM specific requirements. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void FBL_UPD_CALLOUT_INIT_POWER_ON( void ) </p>
+<p><b>Functional Description </b></p>
+<p>Initialization callout function. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void FBL_UPD_CALLOUT_INIT_POWER_ON_HW( void ) </p>
+<p><b>Functional Description </b></p>
+<p>Hardware specific initialization callout function. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void FBL_UPD_CALLOUT_INIT_POWER_ON_OEM( void ) </p>
+<p><b>Functional Description </b></p>
+<p>OEM specific initialization callout function. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>21 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Prototype </b></p>
+<p>void FBL_UPD_CALLOUT_SET_VFP( void ) </p>
+<p><b>Functional Description </b></p>
+<p>Callout to enable programming voltage. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void FBL_UPD_CALLOUT_RESET_VFP( void ) </p>
+<p><b>Functional Description </b></p>
+<p>Callout to disable programming voltage. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void FBL_UPD_CALLOUT_RESET( void ) </p>
+<p><b>Functional Description </b></p>
+<p>Callout to perform a reset. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult FBL_UPD_CALLOUT_CHECK_RESPONSE_PENDING( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult</p>
+<p> </p>
+<p>kFblOk if FBL Updater should send RCR-RP, otherwise kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>Callout function to check if response pending message is required. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void FBL_UPD_CALLOUT_PREPARE_RESPONSE_PENDING( V_MEMRAM1 vuint8 </p>
+<p>V_MEMRAM2 V_MEMRAM3 * pResponse ) </p>
+<p><b>Parameter </b></p>
+<p>pResponse </p>
+<p>Pointer to response pending buffer. </p>
+<p><b>Functional Description </b></p>
+<p>Callout function to prepare the response pending message buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>&gt; </p>
+<p>By default the size of the message buffer is 3 bytes. </p>
+<p> </p>
+<p><b>5.3 </b></p>
+<p><b>Default Implementation </b></p>
+<p>For  some  of  the  hook  functions  the  Updater  already  provides  default  implementations. </p>
+<p>Those implementations are automatically used, if a specific define is set/used. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>22 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>5.3.1 </b></p>
+<p><b>Validity Range </b></p>
+<p>The validity range is used to mark a special range. This range is considered throughout the </p>
+<p>update </p>
+<p>process. </p>
+<p>The </p>
+<p>range </p>
+<p>is </p>
+<p>given </p>
+<p>with </p>
+<p>FBL_UPD_VALIDITY_RANGE_ADDR</p>
+<p> </p>
+<p>and </p>
+<p>FBL_UPD_VALIDITY_RANGE_SIZE</p>
+<p>. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Only one validity range is supported by the default implementation. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>The </p>
+<p>given </p>
+<p>range </p>
+<p>is </p>
+<p>erased </p>
+<p>first </p>
+<p>(see </p>
+<p>FBL_UPD_HOOK_PREPARE_ERASE) </p>
+<p>and </p>
+<p>programmed last after successful verification (see FBL_UPD_HOOK_FINALIZE_VERIFY). </p>
+<p> </p>
+<p>This mechanism is used to make sure that data, which determines whether the Bootloader </p>
+<p>is  started  instead  of  the  Updater,  isn’t  programmed  until  the  update  was  successfully </p>
+<p>finished. This prevents that in case of  an unexpected reset  an incomplete Bootloader is </p>
+<p>started. Instead the Updater is executed again and a retry of the update is performed. </p>
+<p> </p>
+<p><b>5.3.2 </b></p>
+<p><b>Response Pending </b></p>
+<p>The default implementation to send the response pending message checks if a response </p>
+<p>pending </p>
+<p>is </p>
+<p>needed </p>
+<p>(see </p>
+<p>FBL_UPD_CALLOUT_CHECK_RESPONSE_PENDING), </p>
+<p>initializes </p>
+<p>the </p>
+<p>communication </p>
+<p>stack </p>
+<p>and </p>
+<p>prefills </p>
+<p>the </p>
+<p>send </p>
+<p>message </p>
+<p>buffer </p>
+<p>(see </p>
+<p>FBL_UPD_CALLOUT_PREPARE_RESPONSE_PENDING). </p>
+<p> </p>
+<p><b>5.3.3 </b></p>
+<p><b>Reset </b></p>
+<p>After  the  Updater  has  invalidated  itself,  the  Updater  makes  a  reset  to  start  the  new </p>
+<p>Bootloader.  To  trigger  a  reset  a  callout  function  (see  FBL_UPD_CALLOUT_RESET)  is </p>
+<p>called. </p>
+<p>Furthermore, it is possible to adapt the Updater, so that the Updater will erase itself before </p>
+<p>triggering a reset. This requires that all functions/constants, which are used to erase and </p>
+<p>trigger the reset, to be located in RAM. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>23 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>6 </b></p>
+<p><b>Glossary and Abbreviations </b></p>
+<p><b>6.1 </b></p>
+<p><b>Abbreviations </b></p>
+<p><b>Abbreviation </b></p>
+<p><b>Description </b></p>
+<p>ECU </p>
+<p>Electronic control unit </p>
+<p>FBL </p>
+<p>Flash Bootloader </p>
+<p>OEM </p>
+<p>Original Equipment Manufacturer (here: Car Manufacturer) </p>
+<p>RCR-RP </p>
+<p>Response Correctly Received – Response Pending </p>
+<p>RCHW </p>
+<p>Reset Configuration Half-Word </p>
+<p>BMI </p>
+<p>Boot Mode Index </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader Updater </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 1.02.00 </p>
+<p>24 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>7 </b></p>
+<p><b>Contact </b></p>
+<p>Visit our website for more information on </p>
+<p> </p>
+<p><b>&gt; </b> News </p>
+<p><b>&gt; </b> Products </p>
+<p><b>&gt; </b> Demo software </p>
+<p><b>&gt; </b> Support </p>
+<p><b>&gt; </b> Training data </p>
+<p><b>&gt; </b> Addresses </p>
+<p> </p>
+<p><b>www.vector.com </b></p>
+</body>
+</html>
+{% endraw %}

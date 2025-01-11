@@ -1,0 +1,1454 @@
+---
+layout: default
+title: TechnicalReference_NvWrapper
+nav_order: 40
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>NV-Wrapper </b></p>
+<p>Technical Reference </p>
+<p> </p>
+<p>Wrapper for non-volatile memory access </p>
+<p>Version 2.02 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Authors </p>
+<p>Christian Bäuerle, Achim Strobelt, Marco Riedl </p>
+<p>Status </p>
+<p>Released </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>2 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>Document Information </b></p>
+<p><b>History </b></p>
+<p><b>Author </b></p>
+<p><b>Date </b></p>
+<p><b>Version </b></p>
+<p><b>Remarks </b></p>
+<p>Christian Bäuerle </p>
+<p>2009-09-19 </p>
+<p>0.90 </p>
+<p>Initial Draft </p>
+<p>Achim Strobelt </p>
+<p>2012-01-26 </p>
+<p>1.00 </p>
+<p>Configuration with GENy </p>
+<p>Marco Riedl </p>
+<p>2016-03-02 </p>
+<p>2.00 </p>
+<p>Added Fee/NvM </p>
+<p>Marco Riedl </p>
+<p>2016-03-20 </p>
+<p>2.01 </p>
+<p>Changed API </p>
+<p>Marco Riedl </p>
+<p>2017-06-29 </p>
+<p>2.02 </p>
+<p>Added Ea </p>
+<p><b>Reference Documents </b></p>
+<p><b>No. </b></p>
+<p><b>Source </b></p>
+<p><b>Title </b></p>
+<p><b>Version </b></p>
+<p>[1] </p>
+<p> </p>
+<p>Vector </p>
+<p>Flash Bootloader User Manual </p>
+<p>2.7 </p>
+<p>[2] </p>
+<p> </p>
+<p>Vector </p>
+<p>EEPROM Manager, Technical Reference </p>
+<p>1.3 </p>
+<p>[3] </p>
+<p> </p>
+<p>Vector </p>
+<p>Flash Driver Wrapper, Technical Reference </p>
+<p>1.1 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>We have configured the programs in accordance with your specifications in the </p>
+<p>questionnaire. Whereas the programs do support other configurations than the one </p>
+<p>specified in your questionnaire, Vector´s release of the programs delivered to your </p>
+<p>company is expressly restricted to the configuration you have specified in the </p>
+<p>questionnaire. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>3 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>Contents </b></p>
+<p><b>1</b></p>
+<p> </p>
+<p><b>Introduction................................................................................................................... 6</b></p>
+<p> </p>
+<p><b>2</b></p>
+<p> </p>
+<p><b>Functional Description ................................................................................................. 7</b></p>
+<p> </p>
+<p>2.1</p>
+<p> </p>
+<p>Architecture ........................................................................................................ 7</p>
+<p> </p>
+<p>2.2</p>
+<p> </p>
+<p>Data structures .................................................................................................. 8</p>
+<p> </p>
+<p>2.2.1</p>
+<p> </p>
+<p>Single ................................................................................................. 8</p>
+<p> </p>
+<p>2.2.2</p>
+<p> </p>
+<p>List ..................................................................................................... 8</p>
+<p> </p>
+<p>2.2.3</p>
+<p> </p>
+<p>Structure ............................................................................................ 8</p>
+<p> </p>
+<p>2.2.4</p>
+<p> </p>
+<p>Table .................................................................................................. 8</p>
+<p> </p>
+<p>2.3</p>
+<p> </p>
+<p>NV-Wrapper in Application ................................................................................. 8</p>
+<p> </p>
+<p><b>3</b></p>
+<p> </p>
+<p><b>Integration ................................................................................................................... 10</b></p>
+<p> </p>
+<p>3.1</p>
+<p> </p>
+<p>Scope of delivery ............................................................................................. 10</p>
+<p> </p>
+<p>3.1.1</p>
+<p> </p>
+<p>Core files .......................................................................................... 10</p>
+<p> </p>
+<p>3.1.2</p>
+<p> </p>
+<p>Application files ................................................................................ 10</p>
+<p> </p>
+<p>3.1.3</p>
+<p> </p>
+<p>Generated files ................................................................................. 11</p>
+<p> </p>
+<p>3.2</p>
+<p> </p>
+<p>Include structure .............................................................................................. 11</p>
+<p> </p>
+<p>3.2.1</p>
+<p> </p>
+<p>Initialization ...................................................................................... 11</p>
+<p> </p>
+<p>3.2.2</p>
+<p> </p>
+<p>Memory accesses ............................................................................ 12</p>
+<p> </p>
+<p><b>4</b></p>
+<p> </p>
+<p><b>API Description ........................................................................................................... 13</b></p>
+<p> </p>
+<p>4.1</p>
+<p> </p>
+<p>Function API .................................................................................................... 13</p>
+<p> </p>
+<p>4.1.1</p>
+<p> </p>
+<p>Function Description ........................................................................ 13</p>
+<p> </p>
+<p>4.1.1.1</p>
+<p> </p>
+<p>WrapNv_Init ................................................................... 13</p>
+<p> </p>
+<p>4.1.1.2</p>
+<p> </p>
+<p>Synchronous API ........................................................... 13</p>
+<p> </p>
+<p>4.1.1.2.1</p>
+<p> </p>
+<p>WrapNv_ReadSync ................................... 13</p>
+<p> </p>
+<p>4.1.1.2.2</p>
+<p> </p>
+<p>WrapNv_ReadPartialSync ......................... 14</p>
+<p> </p>
+<p>4.1.1.2.3</p>
+<p> </p>
+<p>WrapNv_WriteSync .................................... 14</p>
+<p> </p>
+<p>4.1.1.2.4</p>
+<p> </p>
+<p>WrapNv_DeleteSync .................................. 15</p>
+<p> </p>
+<p>4.1.1.3</p>
+<p> </p>
+<p>Asynchronous API ......................................................... 15</p>
+<p> </p>
+<p>4.1.1.3.1</p>
+<p> </p>
+<p>WrapNv_ReadAsync .................................. 15</p>
+<p> </p>
+<p>4.1.1.3.2</p>
+<p> </p>
+<p>WrapNv_ReadPartialAsync ........................ 16</p>
+<p> </p>
+<p>4.1.1.3.3</p>
+<p> </p>
+<p>WrapNv_WriteAsync .................................. 17</p>
+<p> </p>
+<p>4.1.1.3.4</p>
+<p> </p>
+<p>WrapNv_DeleteAsync ................................ 17</p>
+<p> </p>
+<p>4.2</p>
+<p> </p>
+<p>Naming conventions ........................................................................................ 18</p>
+<p> </p>
+<p>4.3</p>
+<p> </p>
+<p>Interface definitions .......................................................................................... 19</p>
+<p> </p>
+<p><b>5</b></p>
+<p> </p>
+<p><b>Configuration .............................................................................................................. 22</b></p>
+<p> </p>
+<p>5.1</p>
+<p> </p>
+<p>GENy configuration .......................................................................................... 22</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>4 </p>
+<p>based on template version 4.11.3 </p>
+<p>5.1.1</p>
+<p> </p>
+<p>Basic settings ................................................................................... 22</p>
+<p> </p>
+<p>5.1.2</p>
+<p> </p>
+<p>Tree view usage ............................................................................... 23</p>
+<p> </p>
+<p>5.1.2.1</p>
+<p> </p>
+<p>Data node context menu ................................................ 23</p>
+<p> </p>
+<p>5.1.2.2</p>
+<p> </p>
+<p>Data block/element context menu .................................. 23</p>
+<p> </p>
+<p>5.1.3</p>
+<p> </p>
+<p>Data configuration ............................................................................ 23</p>
+<p> </p>
+<p>5.1.3.1</p>
+<p> </p>
+<p>Data Blocks ................................................................... 24</p>
+<p> </p>
+<p>5.1.3.2</p>
+<p> </p>
+<p>Data Element Settings ................................................... 25</p>
+<p> </p>
+<p><b>6</b></p>
+<p> </p>
+<p><b>Terminology ................................................................................................................ 26</b></p>
+<p> </p>
+<p>6.1</p>
+<p> </p>
+<p>Abbreviations ................................................................................................... 26</p>
+<p> </p>
+<p><b>7</b></p>
+<p> </p>
+<p><b>Contact ........................................................................................................................ 27</b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>5 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>Illustrations </b></p>
+<p>Figure 2-1</p>
+<p> </p>
+<p>NV-Wrapper in Flash Bootloader ................................................................ 7</p>
+<p> </p>
+<p>Figure 5-1</p>
+<p> </p>
+<p>Activation of NV-Wrapper in GENy ........................................................... 22</p>
+<p> </p>
+<p>Figure 5-2</p>
+<p> </p>
+<p>NV-Wrapper GENy module ....................................................................... 22</p>
+<p> </p>
+<p>Figure 5-3</p>
+<p> </p>
+<p>Data Block configuration ........................................................................... 24</p>
+<p> </p>
+<p>Figure 5-4</p>
+<p> </p>
+<p>Data Element configuration ....................................................................... 25</p>
+<p> </p>
+<p><b> </b></p>
+<p><b>Tables </b></p>
+<p>Table 3-1 </p>
+<p> </p>
+<p>Core files .................................................................................................. 10</p>
+<p> </p>
+<p>Table 3-2 </p>
+<p> </p>
+<p>Application files ......................................................................................... 11</p>
+<p> </p>
+<p>Table 3-3 </p>
+<p> </p>
+<p>Generted files ........................................................................................... 11</p>
+<p> </p>
+<p>Table 4-1 </p>
+<p> </p>
+<p>WrapNv_Init .............................................................................................. 13</p>
+<p> </p>
+<p>Table 4-2 </p>
+<p> </p>
+<p>WrapNv_ReadSync .................................................................................. 14</p>
+<p> </p>
+<p>Table 4-3 </p>
+<p> </p>
+<p>WrapNv_ReadPartialSync ........................................................................ 14</p>
+<p> </p>
+<p>Table 4-4 </p>
+<p> </p>
+<p>WrapNv_WriteSync .................................................................................. 15</p>
+<p> </p>
+<p>Table 4-5 </p>
+<p> </p>
+<p>WrapNv_DeleteSync ................................................................................ 15</p>
+<p> </p>
+<p>Table 4-6 </p>
+<p> </p>
+<p>WrapNv_ReadAsync ................................................................................ 16</p>
+<p> </p>
+<p>Table 4-7 </p>
+<p> </p>
+<p>WrapNv_ReadPartialAsync ...................................................................... 16</p>
+<p> </p>
+<p>Table 4-8 </p>
+<p> </p>
+<p>WrapNv_WriteAsync ................................................................................. 17</p>
+<p> </p>
+<p>Table 4-9 </p>
+<p> </p>
+<p>WrapNv_DeleteAsync ............................................................................... 18</p>
+<p> </p>
+<p>Table 4-10 </p>
+<p> </p>
+<p>Single ....................................................................................................... 19</p>
+<p> </p>
+<p>Table 4-11 </p>
+<p> </p>
+<p>List ............................................................................................................ 20</p>
+<p> </p>
+<p>Table 4-12 </p>
+<p> </p>
+<p>Structure ................................................................................................... 20</p>
+<p> </p>
+<p>Table 4-13 </p>
+<p> </p>
+<p>Table ......................................................................................................... 21</p>
+<p> </p>
+<p>Table 5-1 </p>
+<p> </p>
+<p>GENy configuration options for Nv-Wrapper ............................................. 23</p>
+<p> </p>
+<p>Table 5-2 </p>
+<p> </p>
+<p>Data Block configuration ........................................................................... 24</p>
+<p> </p>
+<p>Table 5-3 </p>
+<p> </p>
+<p>Data Block configuration ........................................................................... 25</p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>6 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>1 </b></p>
+<p><b>Introduction </b></p>
+<p>The NV-Wrapper component provides an ID-based interface to access data in non-volatile </p>
+<p>memory.  Based  on  this  interface,  data  located  in  EEPROM  devices  with  a  HIS  device </p>
+<p>driver  interface  (DrvEep),  the  EEPROM  emulation  by  the  Vector  EEPROM  manager </p>
+<p>(EepM), Fee, Ea and the NvM can be accessed. </p>
+<p>Each data item is identified by a unique ID. When an address-based DrvEep is used, the </p>
+<p>NV-Wrapper performs a conversion from ID to address. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>7 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>2 </b></p>
+<p><b>Functional Description </b></p>
+<p>The  NV-Wrapper  module  consists  of  a  generated  file  which  provides  access  macros. </p>
+<p>Those macros will then call the respective interface. In case the NV-Wrapper is used to </p>
+<p>access the Fee or NvM, a c-file which implements a synchronous and an asynchronous </p>
+<p>interface is used. For the DrvEep or the EepM the access macros are directly mapped to </p>
+<p>the respective module. </p>
+<p><b>2.1 </b></p>
+<p><b>Architecture </b></p>
+<p>The NV-Wrapper is a layer between the application / FBL and the NV-memory (DrvEep, </p>
+<p>EepM, Fee, Ea or NvM). </p>
+<p> </p>
+<p> </p>
+<p>Figure 2-1 </p>
+<p>NV-Wrapper in Flash Bootloader </p>
+<p>EEPROM Manager</p>
+<p>Flash-Bootloader</p>
+<p>NV-Wrapper</p>
+<p>EEPROM Manager</p>
+<p>Flash Driver Wrapper</p>
+<p>Flash Driver</p>
+<p>EEPROM Driver</p>
+<p>Flash-Bootloader</p>
+<p>NV-Wrapper</p>
+<p>EEPROM Driver</p>
+<p>Fee/Ea</p>
+<p>Flash-Bootloader</p>
+<p>NV-Wrapper</p>
+<p>Fee/Ea</p>
+<p>Fls/Eep</p>
+<p>NvM</p>
+<p>Flash-Bootloader</p>
+<p>NV-Wrapper</p>
+<p>NvM</p>
+<p>MemIf</p>
+<p>Fee/Ea</p>
+<p>Fls/Eep</p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>8 </p>
+<p>based on template version 4.11.3 </p>
+<p>Figure 2-1 </p>
+<p> shows the usage of the NV-Wrapper with the EepM, DrvEep, Fee/Ea and </p>
+<p>NvM. </p>
+<p><b>2.2 </b></p>
+<p><b>Data structures </b></p>
+<p>This section gives a short overview about the supported data types. Each data element </p>
+<p>stored by the NV-Wrapper is either a single byte or a stream of bytes. The NV-Wrapper </p>
+<p>module generates access macros for 4 types of data structures: </p>
+<p><b>2.2.1 </b></p>
+<p><b>Single </b></p>
+<p>A single type data structure is the simplest data structure supported by NV-Wrapper. It can </p>
+<p>be compared to a single variable like an integer variable, e.g. the Security Access Delay </p>
+<p>flag used by the Bootloader. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Data bock multiplicity equals one </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>One data element configured </p>
+<p> </p>
+<p><b>2.2.2 </b></p>
+<p><b>List </b></p>
+<p>A list can be used to store an array of one variable, e.g. a fingerprint history list. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Data bock multiplicity is more than one </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>One data element configured </p>
+<p> </p>
+<p><b>2.2.3 </b></p>
+<p><b>Structure </b></p>
+<p>Structures are used to group several different members of a data structure. This data type </p>
+<p>can be compared to a C struct. One access macro is generated for every member of the </p>
+<p>structure. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Data bock count equals one </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>At least two data elements configured </p>
+<p> </p>
+<p><b>2.2.4 </b></p>
+<p><b>Table </b></p>
+<p>A  table  is  a  list  of  structures.  It  represents  an  array  of  structures  and  can  be  used  to </p>
+<p>access data elements like the meta data table stored for every logical block. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Data bock multiplicity is more than one </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>At least two data elements configured </p>
+<p> </p>
+<p><b>2.3 </b></p>
+<p><b>NV-Wrapper in Application </b></p>
+<p>The  NV-Wrapper can be  used  in  the  application  as  well. The architecture used  there  is </p>
+<p>basically the same compared to the architecture used in the Bootloader. However, special </p>
+<p>care  has  to  be  taken  to  ensure  that  the  used  memory  access  driver,  e.g.  EEPROM </p>
+<p>Manager, is integrated properly into the application environment. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>9 </p>
+<p>based on template version 4.11.3 </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>If the NV-Wrapper is used within the application in connection with the EEPROM </p>
+<p>Manager, an additional wrapper layer has to be used between EEPROM Manager and </p>
+<p>Flash Driver Wrapper. Please see [3] for further hints. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>10 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>3 </b></p>
+<p><b>Integration </b></p>
+<p>This  chapter  provides  information  how  to  integrate  and  configure  the  NV-Wrapper.  The </p>
+<p>configuration  is  mainly  done  within  the  GENy  module  supplied  with  the  NV-Wrapper </p>
+<p>module. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Configurator5 does not support the configuration of the NV-Wrapper module. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>GENy does not support the configuration of the Fee/Ea and NvM. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>3.1 </b></p>
+<p><b>Scope of delivery </b></p>
+<p>All  files  of  the  NV-Wrapper  are  located  in  the  BSW\WrapNv  folder  of  your  delivery  and </p>
+<p>consist of core files, adaptable application files as well as generated files. The application </p>
+<p>files are indicated by a leading underscore. </p>
+<p>Some files are only present or generated if the NV-Wrapper is used in a special use case, </p>
+<p>e.g. Fee or NvM. </p>
+<p><b>3.1.1 </b></p>
+<p><b>Core files </b></p>
+<p>The  first  group  contains  core  files.  Do  not  modify  the  contents  of  the  files  in  this  group </p>
+<p>without prior written permission from Vector. </p>
+<p> </p>
+<p><b>File </b></p>
+<p><b>Use Case </b></p>
+<p><b>Description </b></p>
+<p>WrapNv.h </p>
+<p>DrvEep, EepM, Fee, </p>
+<p>Ea, NvM </p>
+<p>Main module header file. It contains some </p>
+<p>preprocessor macros needed by the generated files. </p>
+<p>WrapNv.c </p>
+<p>Fee, Ea, NvM </p>
+<p>Main module source file. It contains the abstraction </p>
+<p>of the Fee/Ea and NvM access to a </p>
+<p>synchronous/asynchronous API. The generated </p>
+<p>access macros are using these functions. </p>
+<p>Table 3-1  </p>
+<p>Core files </p>
+<p><b>3.1.2 </b></p>
+<p><b>Application files </b></p>
+<p>The second group consists of components that must be customized for your configuration. </p>
+<p>You should copy these files to your project folder and rename them, removing the leading </p>
+<p>underscore from the filename. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>11 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>File </b></p>
+<p><b>Use Case </b></p>
+<p><b>Description </b></p>
+<p>_WrapNv_inc.h </p>
+<p>DrvEep, EepM, Fee, </p>
+<p>Ea, NvM </p>
+<p>This is a template for the include file. The default </p>
+<p>constant of this file is a collection of file includes that </p>
+<p>are necessary for the NV-Wrapper in the used </p>
+<p>scope. </p>
+<p>Table 3-2  </p>
+<p>Application files </p>
+<p> </p>
+<p><b>3.1.3 </b></p>
+<p><b>Generated files </b></p>
+<p><b>File </b></p>
+<p><b>Use Case </b></p>
+<p><b>Description </b></p>
+<p>WrapNv_Cfg.c </p>
+<p>Fee, Ea, NvM </p>
+<p>This file consists of a look-up table, which the NV-</p>
+<p>Wrapper uses. </p>
+<p>WrapNv_Cfg.h </p>
+<p>DrvEep, EepM, Fee, </p>
+<p>Ea, NvM </p>
+<p>Consists of all necessary access macros to read </p>
+<p>from/write to the NV-memory and the size. </p>
+<p>Table 3-3  </p>
+<p>Generted files </p>
+<p> </p>
+<p><b>3.2 </b></p>
+<p><b>Include structure </b></p>
+<p>The NV-Wrapper centralizes the includes of all required header files in WrapNv_inc.h. </p>
+<p> </p>
+<p><b>3.2.1 </b></p>
+<p><b>Initialization </b></p>
+<p>In case the NV-Wrapper is used with the DrvEep or the EepM, then the NV-Wrapper itself </p>
+<p>doesn’t require an explicit initialization, but the memory drivers or managers used by the </p>
+<p>NV-Wrapper normally do.  Please make sure all modules needed to access the memory </p>
+<p>are initialized before the first memory access macro is used. </p>
+<p>If the NV-Wrapper is used to access the Fee, Ea or the NvM, the NV-Wrapper will initialize </p>
+<p>the respective memory drivers. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>12 </p>
+<p>based on template version 4.11.3 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>Initialization if EepM is used: </p>
+<p>   /* Initialize EEPROM manager and the used flash driver */ </p>
+<p>   Flash_XDDriver_InitSync(NULL); </p>
+<p>   (void)EepMgrInitPowerOn(kEepMgrInitFull); </p>
+<p>Initialization if a EEPROM driver is used </p>
+<p>   /* Initialize EEPROM-Driver */ </p>
+<p>   (void)EepromDriver_InitSync(NULL); </p>
+<p>Initialization if Fee, Ea or NvM is used: </p>
+<p>   /* Initialize NV-Wrapper */ </p>
+<p>   WrapNv_Init(); </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>After these initializations, the NV-Wrapper can be used. </p>
+<p> </p>
+<p><b>3.2.2 </b></p>
+<p><b>Memory accesses </b></p>
+<p>The memory access macros normally use a pointer to a byte-array to hand over read or </p>
+<p>write buffers. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>Read access to a single structure, 1 Byte: </p>
+<p>   vuint8 buffer; </p>
+<p> </p>
+<p>   /* Read security access delay flag                */ </p>
+<p>   /* Parameter is not used on a struct and set to 0 */ </p>
+<p>   if (ApplFblNvReadSecAccessDelay(0u, &amp;buffer) != WRAPNV_E_OK) </p>
+<p>   { </p>
+<p>      /* Read failed! Return kEepSecAccessDelayActive */ </p>
+<p>      return kEepSecAccessDelayActive; </p>
+<p>   } </p>
+<p>   else </p>
+<p>   { </p>
+<p>      return buffer; </p>
+<p>   } </p>
+<p>Write access to a member of a table, 10 Bytes: </p>
+<p>   /* Write fingerprint (from RAM buffer) into meta data table */ </p>
+<p>   returnCode = ApplFblNvWriteFingerprint(blockNr, blockFingerprint); </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>13 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>4 </b></p>
+<p><b>API Description </b></p>
+<p>In  case  the  NV-Wrapper  is  used  with  a  Fee,  Ea  or  NvM  the  following  API  description </p>
+<p>(chapter 4.1) applies. The naming conventions described in chapter  4.2 apply to all use </p>
+<p>cases. </p>
+<p><b>4.1 </b></p>
+<p><b>Function API </b></p>
+<p>Only the API of the global functions is listed here. The NV-Wrapper internal functions are </p>
+<p>not included. </p>
+<p>These functions are used by the generated access macros. </p>
+<p><b>4.1.1 </b></p>
+<p><b>Function Description </b></p>
+<p><b>4.1.1.1 </b></p>
+<p><b>WrapNv_Init </b></p>
+<p><b>Prototype </b></p>
+<p>void WrapNv_Init( void ) </p>
+<p><b>Functional Description </b></p>
+<p>This function is called to initialize the NV-Wrapper module. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function should be called when the Application/FBL is started after reset. </p>
+<p>Table 4-1  </p>
+<p>WrapNv_Init </p>
+<p> </p>
+<p><b>4.1.1.2 </b></p>
+<p><b>Synchronous API </b></p>
+<p><b>4.1.1.2.1 </b></p>
+<p><b>WrapNv_ReadSync </b></p>
+<p><b>Prototype </b></p>
+<p>WrapNv_ReturnType WrapNv_ReadSync(uint16 id, uint16 idx, tWrapNvRamData buffer) </p>
+<p><b>Parameter </b></p>
+<p>id </p>
+<p>ID of record </p>
+<p>idx </p>
+<p>Index of the dataset </p>
+<p>buffer </p>
+<p>Pointer to the target buffer </p>
+<p><b>Return code </b></p>
+<p>WRAPNV_E_OK </p>
+<p>Read operation successful </p>
+<p>WRAPNV_E_NOT_OK </p>
+<p>Read operation failed </p>
+<p><b>Functional Description </b></p>
+<p>This function reads the data from Fee/Nvm in the respective buffer. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>14 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>NV-Wrapper has to be initialized. </p>
+<p>Table 4-2  </p>
+<p>WrapNv_ReadSync </p>
+<p> </p>
+<p><b>4.1.1.2.2 </b></p>
+<p><b>WrapNv_ReadPartialSync </b></p>
+<p><b>Prototype </b></p>
+<p>WrapNv_ReturnType WrapNv_ReadPartialSync(uint16 id, uint16 idx,  </p>
+<p>tWrapNvRamData buffer</p>
+<p> </p>
+<p>, uint16 offset, uint16 length ) </p>
+<p><b>Parameter </b></p>
+<p>id </p>
+<p>ID of record </p>
+<p>idx </p>
+<p>Index of the dataset </p>
+<p>buffer </p>
+<p>Pointer to the target buffer </p>
+<p>offset </p>
+<p>Offset in element from where to start to read </p>
+<p>length </p>
+<p>Length of the partial read operation </p>
+<p><b>Return code </b></p>
+<p>WRAPNV_E_OK </p>
+<p>Read operation successful </p>
+<p>WRAPNV_E_NOT_OK </p>
+<p>Read operation failed </p>
+<p><b>Functional Description </b></p>
+<p>This function reads the data from Fee/Nvm in the respective buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>NV-Wrapper has to be initialized. </p>
+<p>Table 4-3  </p>
+<p>WrapNv_ReadPartialSync </p>
+<p> </p>
+<p><b>4.1.1.2.3 </b></p>
+<p><b>WrapNv_WriteSync </b></p>
+<p><b>Prototype </b></p>
+<p>WrapNv_ReturnType WrapNv_</p>
+<p> </p>
+<p>WriteSync( uint16 id, uint16 idx, tWrapNvRamData </p>
+<p>buffer) </p>
+<p><b>Parameter </b></p>
+<p>id </p>
+<p>ID of record </p>
+<p>idx </p>
+<p>Index of the dataset </p>
+<p>buffer </p>
+<p>Pointer to the source buffer </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>15 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>Return code </b></p>
+<p>WRAPNV_E_OK </p>
+<p>Read operation successful </p>
+<p>WRAPNV_E_NOT_OK </p>
+<p>Read operation failed </p>
+<p><b>Functional Description </b></p>
+<p>This function reads the data from Fee/Nvm in the respective buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>NV-Wrapper has to be initialized. </p>
+<p>Table 4-4  </p>
+<p>WrapNv_WriteSync </p>
+<p> </p>
+<p><b>4.1.1.2.4 </b></p>
+<p><b>WrapNv_DeleteSync </b></p>
+<p><b>Prototype </b></p>
+<p>WrapNv_ReturnType WrapNv_DeleteSync( uint16 id, uint16 idx ) </p>
+<p><b>Parameter </b></p>
+<p>id </p>
+<p>ID of record </p>
+<p>idx </p>
+<p>Index of the dataset </p>
+<p><b>Return code </b></p>
+<p>WRAPNV_E_OK </p>
+<p>Delete (invalidate) operation successful </p>
+<p>WRAPNV_E_NOT_OK </p>
+<p>Delete (invalidate) operation failed </p>
+<p><b>Functional Description </b></p>
+<p>This function reads the data from Fee/Nvm in the respective buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>NV-Wrapper has to be initialized. </p>
+<p>Table 4-5  </p>
+<p>WrapNv_DeleteSync </p>
+<p> </p>
+<p> </p>
+<p><b>4.1.1.3 </b></p>
+<p><b>Asynchronous API </b></p>
+<p><b>4.1.1.3.1 </b></p>
+<p><b>WrapNv_ReadAsync </b></p>
+<p><b>Prototype </b></p>
+<p>WrapNv_ReturnType WrapNv_ReadAsync(uint16 id, uint16 idx, tWrapNvRamData </p>
+<p>buffer, tWrapNvOpStatus opStatus ) </p>
+<p><b>Parameter </b></p>
+<p>id </p>
+<p>ID of record </p>
+<p>idx </p>
+<p>Index of the dataset </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>16 </p>
+<p>based on template version 4.11.3 </p>
+<p>buffer </p>
+<p>Pointer to the target buffer </p>
+<p>opStatus </p>
+<p>Operation status </p>
+<p><b>Return code </b></p>
+<p>WRAPNV_E_OK </p>
+<p>Read operation successful </p>
+<p>WRAPNV_E_NOT_OK </p>
+<p>Read operation failed </p>
+<p>WRAPNV_E_PENDING </p>
+<p>Operation is still in progress </p>
+<p><b>Functional Description </b></p>
+<p>This function reads the data from Fee/Nvm in the respective buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>NV-Wrapper has to be initialized. </p>
+<p>Table 4-6  </p>
+<p>WrapNv_ReadAsync </p>
+<p> </p>
+<p><b>4.1.1.3.2 </b></p>
+<p><b>WrapNv_ReadPartialAsync </b></p>
+<p><b>Prototype </b></p>
+<p>WrapNv_ReturnType WrapNv_ReadPartialAsync(uint16 id, uint16 idx,  </p>
+<p>tWrapNvRamData buffer</p>
+<p> </p>
+<p>, uint16 offset, uint16 length, tWrapNvOpStatus opStatus </p>
+<p>) </p>
+<p><b>Parameter </b></p>
+<p>id </p>
+<p>ID of record </p>
+<p>idx </p>
+<p>Index of the dataset </p>
+<p>buffer </p>
+<p>Pointer to the target buffer </p>
+<p>offset </p>
+<p>Offset in element from where to start to read </p>
+<p>length </p>
+<p>Length of the partial read operation </p>
+<p>opStatus </p>
+<p>Operation status </p>
+<p><b>Return code </b></p>
+<p>WRAPNV_E_OK </p>
+<p>Read operation successful </p>
+<p>WRAPNV_E_NOT_OK </p>
+<p>Read operation failed </p>
+<p>WRAPNV_E_PENDING </p>
+<p>Operation is still in progress </p>
+<p><b>Functional Description </b></p>
+<p>This function reads the data from Fee/Nvm in the respective buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>NV-Wrapper has to be initialized. </p>
+<p>Table 4-7  </p>
+<p>WrapNv_ReadPartialAsync </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>17 </p>
+<p>based on template version 4.11.3 </p>
+<p> </p>
+<p><b>4.1.1.3.3 </b></p>
+<p><b>WrapNv_WriteAsync </b></p>
+<p><b>Prototype </b></p>
+<p>WrapNv_ReturnType WrapNv_</p>
+<p> </p>
+<p>WriteAsync( uint16 id, uint16 idx, tWrapNvRamData </p>
+<p>buffer, tWrapNvOpStatus opStatus ) </p>
+<p><b>Parameter </b></p>
+<p>id </p>
+<p>ID of record </p>
+<p>idx </p>
+<p>Index of the dataset </p>
+<p>buffer </p>
+<p>Pointer to the source buffer </p>
+<p>opStatus </p>
+<p>Operation status </p>
+<p><b>Return code </b></p>
+<p>WRAPNV_E_OK </p>
+<p>Read operation successful </p>
+<p>WRAPNV_E_NOT_OK </p>
+<p>Read operation failed </p>
+<p>WRAPNV_E_PENDING </p>
+<p>Operation is still in progress </p>
+<p><b>Functional Description </b></p>
+<p>This function reads the data from Fee/Nvm in the respective buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>NV-Wrapper has to be initialized. </p>
+<p>Table 4-8  </p>
+<p>WrapNv_WriteAsync </p>
+<p> </p>
+<p><b>4.1.1.3.4 </b></p>
+<p><b>WrapNv_DeleteAsync </b></p>
+<p><b>Prototype </b></p>
+<p>WrapNv_ReturnType WrapNv_DeleteAsync( uint16 id, uint16 idx, tWrapNvOpStatus </p>
+<p>opStatus ) </p>
+<p><b>Parameter </b></p>
+<p>id </p>
+<p>ID of record </p>
+<p>idx </p>
+<p>Index of the dataset </p>
+<p>opStatus </p>
+<p>Operation status </p>
+<p><b>Return code </b></p>
+<p>WRAPNV_E_OK </p>
+<p>Delete (invalidate) operation successful </p>
+<p>WRAPNV_E_NOT_OK </p>
+<p>Delete (invalidate) operation failed </p>
+<p>WRAPNV_E_PENDING </p>
+<p>Operation is still in progress </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>18 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>Functional Description </b></p>
+<p>This function reads the data from Fee/Nvm in the respective buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>NV-Wrapper has to be initialized. </p>
+<p>Table 4-9  </p>
+<p>WrapNv_DeleteAsync </p>
+<p> </p>
+<p><b>4.2 </b></p>
+<p><b>Naming conventions </b></p>
+<p>The  access  macros  generated  by  the </p>
+<p>configuration  tool  have  the  following  naming </p>
+<p>conventions: </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>ApplWrapNv&lt;operation&gt;&lt;mode&gt;&lt;element-name&gt;() </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The prefix of ApplWrapNv is for every access macro the same. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Operation can either be Read, ReadPartial, Write or Delete. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Read: Reads a complete element from NV block </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>ReadPartial: Reads only a part of the element from the NV block </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Write: Writes an element into the NV block </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Delete: Deletes/invalidates a complete NV block </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Mode is used to distinguish between the synchronous and asynchronous API. If no </p>
+<p>mode is given, by default this represents the synchronous interface. For asynchronous </p>
+<p>interface the access macro has the mode “Async”. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The element name is generated from the data element specified in the configuration </p>
+<p>tool. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note</b> </p>
+<p>Not every NV module supports the Delete operation. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>19 </p>
+<p>based on template version 4.11.3 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>In case the used NV driver can only be used synchronously, the asynchronous </p>
+<p>interface is mapped to the synchronous interface. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>4.3 </b></p>
+<p><b>Interface definitions </b></p>
+<p><b>Single </b></p>
+<p>synchronous </p>
+<p>WrapNv_ReturnType <b>ApplWrapNv&lt;operation&gt;Single</b>(buf) </p>
+<p>asynchronous </p>
+<p>WrapNv_ReturnType <b>ApplWrapNv&lt;operation&gt;AsyncSingle</b>(buf, </p>
+<p>op) </p>
+<p><b>Parameter </b></p>
+<p>uint8 * buf </p>
+<p>Pointer to the target buffer (read) or the source buffer (write). </p>
+<p>uint8 op </p>
+<p>Operation status </p>
+<p><b>Return code </b></p>
+<p>WrapNv_ReturnType </p>
+<p>WRAPNV_E_OK if the memory access was successful, </p>
+<p>WRAPNV_E_NOT_OK if a failure occurred. </p>
+<p>WRAPNV_E_PENDING if operation is in progress (only in asynchronous </p>
+<p>mode) </p>
+<p><b>Functional Description </b></p>
+<p>Reads or writes a single data structure from the configured memory device and address. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>There is no range check of the target buffer. Please make sure it is big enough, otherwise the buffer will </p>
+<p>overflow. </p>
+<p>Call context </p>
+<p><b>&gt; </b></p>
+<p>Same call context as the used memory driver. </p>
+<p>Table 4-10  </p>
+<p>Single </p>
+<p> </p>
+<p><b>List </b></p>
+<p>synchronous </p>
+<p>WrapNv_ReturnType <b>ApplWrapNv&lt;operation&gt;List</b>(idx, buf) </p>
+<p>asynchronous </p>
+<p>WrapNv_ReturnType <b>ApplWrapNv&lt;operation&gt;AsyncList</b>(idx, </p>
+<p>buf, op) </p>
+<p><b>Parameter </b></p>
+<p>uint8 idx </p>
+<p>Index of the desired element within the list. </p>
+<p>uint8* buf </p>
+<p>Pointer to the target buffer (read) or the source buffer (write). </p>
+<p>uint8 op </p>
+<p>Operation status </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>20 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>Return code </b></p>
+<p>WrapNv_ReturnType </p>
+<p>WRAPNV_E_OK if the memory access was successful, </p>
+<p>WRAPNV_E_NOT_OK if a failure occurred. </p>
+<p>WRAPNV_E_PENDING if operation is in progress (only in asynchronous </p>
+<p>mode) </p>
+<p><b>Functional Description </b></p>
+<p>Reads or writes a list element from a list data structure. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>The list index is not checked. Please make sure only valid list indexes are supplied. </p>
+<p><b>&gt; </b></p>
+<p>There is no range check of the target buffer. Please make sure it is big enough, otherwise the buffer will </p>
+<p>overflow. </p>
+<p>Call context </p>
+<p><b>&gt; </b></p>
+<p>Same call context as the used memory driver. </p>
+<p>Table 4-11  </p>
+<p>List </p>
+<p> </p>
+<p><b>Structure </b></p>
+<p>synchronous </p>
+<p>WrapNv_ReturnType </p>
+<p><b>ApplWrapNv&lt;operation&gt;StructureMember</b>(idx, buf) </p>
+<p>asynchronous </p>
+<p>WrapNv_ReturnType </p>
+<p><b>ApplWrapNv&lt;operation&gt;AsyncStructureMember</b>(idx, buf, op) </p>
+<p><b>Parameter </b></p>
+<p>vuint8 idx </p>
+<p>List index. This parameter is ignored for the actual memory driver call. </p>
+<p>vuint8* buf </p>
+<p>Pointer to the target buffer (read) or the source buffer (write). </p>
+<p>uint8 op </p>
+<p>Operation status </p>
+<p><b>Return code </b></p>
+<p>WrapNv_ReturnType </p>
+<p>WRAPNV_E_OK if the memory access was successful, </p>
+<p>WRAPNV_E_NOT_OK if a failure occurred. </p>
+<p>WRAPNV_E_PENDING if operation is in progress (only in asynchronous </p>
+<p>mode) </p>
+<p><b>Functional Description </b></p>
+<p>Reads or writes a single member from a structure data element. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>The list index is ignored. </p>
+<p><b>&gt; </b></p>
+<p>There is no range check of the target buffer. Please make sure it is big enough, otherwise the buffer will </p>
+<p>overflow. </p>
+<p>Call context </p>
+<p><b>&gt; </b></p>
+<p>Same call context as the used memory driver. </p>
+<p>Table 4-12  </p>
+<p>Structure </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>21 </p>
+<p>based on template version 4.11.3 </p>
+<p> </p>
+<p><b>Table </b></p>
+<p>synchronous </p>
+<p>WrapNv_ReturnType <b>ApplWrapNv&lt;operation&gt;TableMember</b>(idx, </p>
+<p>buf) </p>
+<p>asynchronous </p>
+<p>WrapNv_ReturnType </p>
+<p><b>ApplWrapNv&lt;operation&gt;AsyncTableMember</b>(idx, buf, op) </p>
+<p><b>Parameter </b></p>
+<p>vuint8 idx </p>
+<p>Index of the desired table row. </p>
+<p>vuint8* buf </p>
+<p>Pointer to the target buffer (read) or the source buffer (write). </p>
+<p>uint8 op </p>
+<p>Operation status </p>
+<p><b>Return code </b></p>
+<p>WrapNv_ReturnType </p>
+<p>WRAPNV_E_OK if the memory access was successful, </p>
+<p>WRAPNV_E_NOT_OK if a failure occurred. </p>
+<p>WRAPNV_E_PENDING if operation is in progress (only in asynchronous </p>
+<p>mode) </p>
+<p><b>Functional Description </b></p>
+<p>Reads or writes a structure data element from the desired table row. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>The list index is not checked. Please make sure only valid list indexes are supplied. </p>
+<p><b>&gt; </b></p>
+<p>There is no range check of the target buffer. Please make sure it is big enough, otherwise the buffer will </p>
+<p>overflow. </p>
+<p>Call context </p>
+<p><b>&gt; </b></p>
+<p>Same call context as the used memory driver. </p>
+<p>Table 4-13  </p>
+<p>Table </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>22 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>5 </b></p>
+<p><b>Configuration </b></p>
+<p><b>5.1 </b></p>
+<p><b>GENy configuration </b></p>
+<p>To use the module in GENy, it has to be activated in GENy’s Component Selection: </p>
+<p> </p>
+<p>Figure 5-1 </p>
+<p>Activation of NV-Wrapper in GENy </p>
+<p>The  NV-Wrapper  module  can  be  divided  into  the  tree  view  which  represents  the  data </p>
+<p>structure on the left side of the GENy window and the detail view on the right side: </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-2 </p>
+<p>NV-Wrapper GENy module </p>
+<p> </p>
+<p><b>5.1.1 </b></p>
+<p><b>Basic settings </b></p>
+<p>The  basic  settings  (see  the  detail  view  on  the  right  side  of  Figure  5-2)  configure  some </p>
+<p>global options used for all data structures. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>23 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>User Config File </p>
+<p>Text file with additional includes into WrapNv_Cfg.h </p>
+<p>EEPROM Base Address </p>
+<p>Address offset added to EEPROM driver calls </p>
+<p>First Handle </p>
+<p>Start values of the generated IDs </p>
+<p>Restore default </p>
+<p>Restores defaults from preconfiguration </p>
+<p>Delete everything </p>
+<p>Delete all configured structures </p>
+<p>Import </p>
+<p>Read configuration from .xml file </p>
+<p>Export </p>
+<p>Write configuration to .xml file </p>
+<p>Import/Export file path </p>
+<p>Path for import and export. If a relative path is entered, the </p>
+<p>GENy generation directory is used as base directory. </p>
+<p>Table 5-1  </p>
+<p>GENy configuration options for Nv-Wrapper </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>It is recommended to use an absolute path for import and export to avoid confusion </p>
+<p>regarding the used directory. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>5.1.2 </b></p>
+<p><b>Tree view usage </b></p>
+<p>The data structure used by NV-Wrapper is configured with the tree view on the left part of </p>
+<p>the NV-Wrapper GENy module. To modify the data structure, the context menu accessed </p>
+<p>with the right mouse button is used.  </p>
+<p>There  are  two  types  of  context  menus,  the  context  menus  of  the  Data  nodes  and  the </p>
+<p>context menus of the actual blocks and elements: </p>
+<p> </p>
+<p><b>5.1.2.1 </b></p>
+<p><b>Data node context menu </b></p>
+<p>The data node context menu includes an “Add” context menu. This context menu adds a </p>
+<p>new node as child element to the selected node. </p>
+<p> </p>
+<p><b>5.1.2.2 </b></p>
+<p><b>Data block/element context menu </b></p>
+<p>The data block or data element context menus provide three possibilities: </p>
+<p>1. </p>
+<p>Delete: Removes the selected element. </p>
+<p>2. </p>
+<p>Move up: Changes the selected element’s position with the element placed in front of </p>
+<p>the selected element. </p>
+<p>3. </p>
+<p>Move down: Moves the selected element to a position behind the following element. </p>
+<p> </p>
+<p><b>5.1.3 </b></p>
+<p><b>Data configuration </b></p>
+<p>The  data  identifiers  and  structure  is  configured  starting  with  the  “Memory  Layout\Data </p>
+<p>Blocks”  node  of  the  GENy  component.  A  data  block  is  the  base  node  of  every  data </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>24 </p>
+<p>based on template version 4.11.3 </p>
+<p>structure and is set to one of the four possible types depending on the count of data blocks </p>
+<p>respective child elements: </p>
+<p>At least one data element is assigned to every data block. If one data element is assigned, </p>
+<p>a single or list data structure is generated, if more than one data element is assigned, a </p>
+<p>struct or table element is generated.  </p>
+<p>The  options  of  present  objects  are  configured  on  the  right  side  of  the  GENy  window. </p>
+<p>Objects can be added, moved and removed by the context menu of the tree structure. </p>
+<p> </p>
+<p><b>5.1.3.1 </b></p>
+<p><b>Data Blocks </b></p>
+<p> </p>
+<p>Figure 5-3 </p>
+<p>Data Block configuration </p>
+<p>Data  blocks  are  used  to  group  data  elements.  There  are  some  settings  valid  for  all </p>
+<p>members of this data block. Each field is described below: </p>
+<p> </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Type </p>
+<p>Single, List, Struct or Table depending on the Count setting and </p>
+<p>the number of Data Elements </p>
+<p>Generate </p>
+<p>If checked, the data block will be included into the generated </p>
+<p>data structure. This includes reserved memory respective IDs </p>
+<p>and the access macros. Otherwise, the data blocks are not </p>
+<p>visible in the generated code </p>
+<p>Name </p>
+<p>Name of data block </p>
+<p>Count </p>
+<p>Specifies the number of instances of this data block. If Count is </p>
+<p>set to one, the Data Block will be type “Single” or “Struct”, </p>
+<p>otherwise it will be “List” or “Table” </p>
+<p>Description </p>
+<p>Description of the data block </p>
+<p>Table 5-2  </p>
+<p>Data Block configuration </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>25 </p>
+<p>based on template version 4.11.3 </p>
+<p> </p>
+<p><b>5.1.3.2 </b></p>
+<p><b>Data Element Settings </b></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-4 </p>
+<p>Data Element configuration </p>
+<p>Data Elements contain the settings used by one member of a Data Block. The following </p>
+<p>settings can be configured: </p>
+<p> </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Generate </p>
+<p>Check if the Data Element should be generated </p>
+<p>Name </p>
+<p>Name of data block </p>
+<p>Length </p>
+<p>Length of data block in bytes </p>
+<p>Default </p>
+<p>Not implemented yet </p>
+<p>Description </p>
+<p>Description of the data block </p>
+<p>Table 5-3  </p>
+<p>Data Block configuration </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>26 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>6 </b></p>
+<p><b>Terminology </b></p>
+<p><b>6.1 </b></p>
+<p><b>Abbreviations </b></p>
+<p><b>Abbreviation </b></p>
+<p><b>Description </b></p>
+<p>API </p>
+<p>Application Programming Interface </p>
+<p>DrvEep </p>
+<p>Eeprom Driver </p>
+<p>EepM </p>
+<p>Eeprom Manager </p>
+<p>Ea </p>
+<p>EEPROM Abstraction (Autosar) </p>
+<p>FBL </p>
+<p>Flash Bootloader </p>
+<p>Fee </p>
+<p>Flash EEPROM Emulation Module (Autosar) </p>
+<p>FLIO </p>
+<p>Flash IO </p>
+<p>Fls </p>
+<p>Flash Driver (Autosar) </p>
+<p>NV </p>
+<p>Non-Volatile </p>
+<p>NvM </p>
+<p>Non Volatile RAM Manager (Autosar) </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference NV-Wrapper </p>
+<p>© 2017 Vector Informatik GmbH </p>
+<p>Version 2.02 </p>
+<p>27 </p>
+<p>based on template version 4.11.3 </p>
+<p><b>7 </b></p>
+<p><b>Contact </b></p>
+<p>Visit our website for more information on </p>
+<p> </p>
+<p><b>&gt; </b> News </p>
+<p><b>&gt; </b> Products </p>
+<p><b>&gt; </b> Demo software </p>
+<p><b>&gt; </b> Support </p>
+<p><b>&gt; </b> Training data </p>
+<p><b>&gt; </b> Addresses </p>
+<p> </p>
+<p><b>www.vector.com </b></p>
+</body>
+</html>
+{% endraw %}

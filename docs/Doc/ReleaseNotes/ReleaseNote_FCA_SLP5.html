@@ -1,0 +1,1465 @@
+---
+layout: default
+title: ReleaseNote_FCA_SLP5
+nav_order: 17
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p>Release Notes</p>
+<p>FCA SLP5</p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Content</b></p>
+<p><b>1 Release 20</b></p>
+<p><b>4</b></p>
+<p>General</p>
+<p>4</p>
+<p>Communication</p>
+<p>4</p>
+<p>Diagnostics</p>
+<p>8</p>
+<p>Ethernet</p>
+<p>12</p>
+<p>Gateway</p>
+<p>14</p>
+<p>Inter Process Communication (IPC)</p>
+<p>14</p>
+<p>J1939</p>
+<p>18</p>
+<p>Measurement and Calibration</p>
+<p>18</p>
+<p>Runtime</p>
+<p>18</p>
+<p>Security</p>
+<p>19</p>
+<p>State Management</p>
+<p>20</p>
+<p>V2G</p>
+<p>21</p>
+<p>vVIRTUALtarget</p>
+<p>21</p>
+<p>Watchdog</p>
+<p>22</p>
+<p>Tooling</p>
+<p>22</p>
+<p><b>2 Release 19</b></p>
+<p><b>43</b></p>
+<p>General</p>
+<p>43</p>
+<p>Communication</p>
+<p>43</p>
+<p>Diagnostics</p>
+<p>43</p>
+<p>Ethernet</p>
+<p>47</p>
+<p>FCA SLP5 | Release Notes</p>
+<h1 style="page-break-before:always; "></h1>
+<p>Gateway</p>
+<p>47</p>
+<p>IPC</p>
+<p>48</p>
+<p>J1939</p>
+<p>48</p>
+<p>Measurement and Calibration</p>
+<p>49</p>
+<p>Nv Memory</p>
+<p>52</p>
+<p>Rte</p>
+<p>53</p>
+<p>Security</p>
+<p>55</p>
+<p>Time Synchronization</p>
+<p>56</p>
+<p>V2G</p>
+<p>58</p>
+<p>Tooling</p>
+<p>59</p>
+<p>FCA SLP5 | Release Notes</p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>1 Release 20</b></p>
+<p><b>General</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Information</p>
+<p>Several MICROSAR BSW modules make use of float datatypes. The usage of a &quot;nofloat&quot; compiler option is there-</p>
+<p>fore no longer supported.</p>
+<p>-</p>
+<p><b>Communication</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The time synchronization stack has been extended with more AR4.3 features:</p>
+<p><b>&gt;</b> StbM now supports</p>
+<p><b>&gt;</b> Virtual local time: Rate correction based on the network time</p>
+<p><b>&gt;</b> Pure local time base: Time base derived from a local clock / counter</p>
+<p><b>&gt;</b> New API StbM_GetTimeBaseStatus()</p>
+<p><b>&gt;</b> StbM_SetGlobalTime() can now also be used for offset time bases</p>
+<p><b>&gt;</b> CanTSyn and FrTSyn now support the AR4.3 defined message format which is incompatible to the message</p>
+<p>format defined by AR4.2.2.</p>
+<p><b>&gt;</b> The message format is configurable to support OEMs that require AR4.2.2 message format on the net-</p>
+<p>work.</p>
+<p><b>&gt;</b> EthTsyn is now able to detect Master / Slave conflicts.</p>
+<p><b>&gt;</b> The slave node reports runtime DET error if SYNC messages from multiple master nodes are received.</p>
+<p><b>&gt;</b> The slave node detects the first Master and ignores messages from other master nodes.</p>
+<p><b>&gt;</b> The master node reports a runtime DET error if SYNC messages are received from other master nodes.</p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>If the OEM requires time synchronization according AR4.2.2 (message format) set the configuration parameter</p>
+<p>CanTSynMessageCompatibility resp. FrTSynMessageCompatibility to TRUE.</p>
+<p>FEAT-2461</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>General</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>Additional Information</b></p>
+<p>Typically Vector will preconfigure this item according to the OEM the SIP has been ordered for.</p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The MICROSAR COM Stack is now able to handle PDU fan-outs in the PduR. This reduces resource consumption</p>
+<p>in the Com module as the signals exists only once even if being transmitted on multiple networks.</p>
+<p>The PDU fan-out must be modelled in the system template.</p>
+<p><b>Important Information</b></p>
+<p>In order to realize this feature the naming rules of the upstream mapping have been changed.</p>
+<p><b>&gt;</b> Names of PDUs and signals that are created by DaVinci Configurator Pro based on the System</p>
+<p>Template are changed during the first database update.</p>
+<p><b>&gt;</b> Due to internal improvement in our tooling there have also been other changes with respect to</p>
+<p>names that are created by the upstream mapping (System Extract -&gt; EcuC).</p>
+<p><b>The implementation has some limitations</b></p>
+<p><b>&gt;</b> If a Com I-PDU Group is assigned only to PDUs with a fan-out or fan-in relation the BswM is cur-</p>
+<p>rently not able to switch these PDU groups based on the rules created by the auto configuration.</p>
+<p><b>&gt;</b> This is a absolutely untypical use-case and we are currently not aware that such databases</p>
+<p>are provided by OEMs.</p>
+<p><b>&gt;</b> Enabling and disabling these PDU Groups have to be done manually in the BswM configuration</p>
+<p>as otherwise the PDUs will not be processed. Future release will improve this handling.</p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>Due to the fan-out/fan-in realization and due to the associated renaming of items we have a high impact on the</p>
+<p>ECUC configuration:</p>
+<p><b>&gt;</b> We recommend a ECUC database update when updating to the new SIP. After the update rework may be</p>
+<p>FEAT-3109</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Communication</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>required. The extend of the rework is expected to be low as an automatic conversion has been implemented.</p>
+<p><b>&gt;</b> After the update, delete all Com*Notification parameters with the value &quot;Rte_COMCbk*&quot;. Otherwise the Rte</p>
+<p>will not update the notifications properly. Once this is done the Rte update mechanism will work properly</p>
+<p>again for future updates.</p>
+<p><b>&gt;</b> You can use this as a search query in the Find View using the query &quot;Rte_COMCbk*&quot; to see if you have</p>
+<p>not missed any parameter.</p>
+<p><b>&gt;</b> Use the find view to jump to the related item and use the multi select feature in grid view to remove all</p>
+<p>parameter instances with such a value.</p>
+<p><b>&gt;</b> The affected parameters are /MICROSAR/Com/ComConfig/ComSignal(Group)/Com*Notification</p>
+<p><b>&gt;</b> The correct Com*Notification values will automatically written within the next calculation phase of the</p>
+<p>Rte</p>
+<p><b>&gt;</b> Check connection of Service Ports to your SWCs as some names have changed (especially for ComM)</p>
+<p><b>&gt;</b> Existing configuration items that are created by the upstream mapping will be removed and new items will</p>
+<p>be added during the first database update. Vector has implemented a set of rules that take over most con-</p>
+<p>figuration settings.</p>
+<p><b>&gt;</b> Manual changes to the global PDU in the EcuC module cannot be migrated. If manual changes have been</p>
+<p>done to the global PDU collection (we expect that this is a rather untypical use-case) these must be</p>
+<p>redone.</p>
+<p><b>&gt;</b> As the new items have changed names, symbolic name values that are used in the application code have</p>
+<p>to be adapted. SWCs are not affected as the Rte handles the change.</p>
+<p><b>&gt;</b> The global PDU in the EcuC module has been split. In the past there was one global PDU that was used for</p>
+<p>several BSW module interactions (e.g. CanIf to PduR and PduR to Com). Now there is one global PDU for</p>
+<p>each BSW module interaction (e.g. one PDU for CanIf to PduR and another PDU for PduR to Com).</p>
+<p><b>&gt;</b> This change allows more freedom in the global PDU settings but requires selecting the correct global</p>
+<p>PDU instance when configuring global PDU references manual (e.g. when using complex drivers).</p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The MICROSAR specific tracing feature has been removed from the CAN stack (&lt;MSN&gt;_ENABLE_TRACING). The</p>
+<p>feature is not defined by AUTOSAR and deprecated since some time now.</p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>FEAT-3167</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Communication</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extend the code individually in case runtime measurement or tracing is required. This is possible since typically</p>
+<p>source code is delivered.</p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The Meta Data handling for Tx CAN PDUs now also covers the CAN-FD and extended CAN-ID flags and now have</p>
+<p>32bits instead of 29bit as before.</p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>To continue to have the old behavior the CanIfTxPduCfg/CanIfTxPduIdMask must typically be extended to 32bits</p>
+<p>and the upper 3 bits have to be masked with 1. If the mask is not extended the meta data will be used to define</p>
+<p>the Tx message with respect to CAN identifier format (standard/extended) and CAN2.0/CAN-FD message type.</p>
+<p><b>Additional Information</b></p>
+<p>Please Note:</p>
+<p><b>&gt;</b> The change does not affect standard CAN PDU Tx objects handling fixed and static PDU ID. It is</p>
+<p>relevant for J1939 PDUs and specific gateway PDU configurations where the CAN ID can be set</p>
+<p>dynamically by the upper layer.</p>
+<p><b>&gt;</b> MICROSAR modules will provide solving actions to correct the settings to the new mask. A</p>
+<p>rework is mainly required if the setting has been done by hand in the past.</p>
+<p>FEAT-3173</p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The state machine of the E2E library has been updated to comply with AUTOSAR 4.2.2</p>
+<p><b>&gt;</b> Introduction of a new status E2E_P_NONEWDATA</p>
+<p><b>&gt;</b> Check status E2E_P_NONEWDATA was formerly mapped to state machine status E2E_P_REPEATED</p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>Check if and how the new check (E2E_P_NONEWDATA) status result shall be handled by the application.</p>
+<p>FEAT-3401</p>
+<p>Extension</p>
+<p>The Com module and the Rte now support signals with the (application sided) datatype float32 and float64.</p>
+<p>FEAT-2680</p>
+<p>Extension</p>
+<p>The IpduM now supports the static PDU Layout for contained PDU as defined in AUTOSAR 4.3.1 - RfC76543.</p>
+<p>FEAT-3072</p>
+<p>Extension</p>
+<p>The VASE script that optimizes the signal routing by creating description based routings (instead of standard sig-</p>
+<p>nal routing relations) now also supports signal groups.</p>
+<p>FEAT-3134</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Communication</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>GeneralPurposeIPdus can now also be secured using SecOC. In the past this was limited to ComIPdus. Imple-</p>
+<p>mentation based on AR4.3.1 - RfC77428.</p>
+<p>FEAT-3155</p>
+<p>Information</p>
+<p>ASIL D release of E2eXf and ComXf is now available.</p>
+<p>FEAT-2498</p>
+<p>Information</p>
+<p>QM release of vIpc is now available.</p>
+<p>FEAT-2936</p>
+<p>Information</p>
+<p>The runtime of the &quot;Can over SPI&quot; module was improved.</p>
+<p>FEAT-3308</p>
+<p><b>Diagnostics</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Breaking</p>
+<p>Change</p>
+<p>FiM has been reworked to AR4.3 architecture. The FiM Technical Reference provides in chapter 3.2 (Major</p>
+<p>Changes in AUTOSAR 4.3 version of FiM ) a summary of the changes.</p>
+<p><b>&gt;</b> Usage of Dem monitor status bits for calculating the FID states instead of using the UDS status bits</p>
+<p><b>&gt;</b> FIDs that should be blocked depending on an event’s pending status now need to be</p>
+<p>configured separately. Previously, the pending status of any event that was connected via</p>
+<p>a normal Inhibition configuration was considered.</p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>The configuration is taken over from the previous FIM version.</p>
+<p>In case of OBD projects, please rework your configuration:</p>
+<p><b>&gt;</b> Set the container structure FimInhibitionConfiguration with the parameter FimInhInhibitionMask to FIM_</p>
+<p>PENDING for all IUMPER ports.</p>
+<p>FEAT-2745</p>
+<p>Breaking</p>
+<p>Change</p>
+<p><b>Important Information</b></p>
+<p>Only relevant for diagnostic extract (DEXT) users that were using th R20S2 development (sprint)</p>
+<p>delivery.</p>
+<p>With the final R20 version the names are again in line with the rule set that was used with R19 and before.</p>
+<p>FEAT-3109</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Diagnostics</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>Only relevant if DEXT has been used in combination with a R20S2 (or later) sprint delivery:</p>
+<p><b>&gt;</b> Adapt the port mapping for DCM and DEM ports according to the new names and datatypes</p>
+<p><b>&gt;</b> If Dem and Dcm are used without Rte APIs, the interface has to be adapted.</p>
+<p>In general the new names are the old names without the added hash values.</p>
+<p>The new names are now equal to the names that were derived from the DEXT with R19 deliveries.</p>
+<p>Extension</p>
+<p>The diagnostic extract workflow supports the automatic connection between SWCs and Dem/Dcm ports. This fea-</p>
+<p>ture is now available for:</p>
+<p><b>&gt;</b> DCM IO control ports</p>
+<p><b>&gt;</b> DEM freeze frame data ports (require implementation data types on SWC)</p>
+<p><b>&gt;</b> DEM event monitor and info ports.</p>
+<p>FEAT-2514</p>
+<p>Extension</p>
+<p>Release of Dcm S/R communication as it was introduced by FEAT-371, FEAT-1899 and FEAT-2962. This includes</p>
+<p>the usage of vDiagXf.</p>
+<p><b>Documentation in SIP</b></p>
+<p>Usage of the DiagXf in combination with Dcm is described in AN-ISC-8-1218_Atomic_Dcm_S-R_Inter-</p>
+<p>faces_with_Diagnostic_Transformer.pdf that is delivered as part of the SIP.</p>
+<p>FEAT-2563</p>
+<p>Extension</p>
+<p>A new SWC vDem42 is provided that is able to wrap some of the AR4.3 specific DEM APIs. The module is inten-</p>
+<p>ded to serve as wrapper layer in case a SWC expects AR4.2 DEM interfaces that are no longer provided by the</p>
+<p>new AR4.3 DEM.</p>
+<p>The following APIs are wrapped:</p>
+<p><b>&gt;</b> Dem_ClearDTC</p>
+<p><b>&gt;</b> Dem_SetDTCSuppression</p>
+<p><b>&gt;</b> Dem_GetDTCSuppression</p>
+<p><b>&gt;</b> CallbackEventStatusChange</p>
+<p>FEAT-2894</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Diagnostics</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>&gt;</b> GeneralCallbackEventStatusChange</p>
+<p><b>&gt;</b> GetEventFreezeFrameData</p>
+<p><b>&gt;</b> GetEventFreezeFrameDataEx</p>
+<p><b>&gt;</b> GetDTCOfEvent</p>
+<p><b>&gt;</b> GetDebouncingOfEvent</p>
+<p><b>&gt;</b> GetEventExtendedDataRecord</p>
+<p><b>&gt;</b> GetEventExtendedDataRecordEx</p>
+<p><b>&gt;</b> GetEventFailed</p>
+<p><b>&gt;</b> GetEventTested</p>
+<p><b>&gt;</b> GetEventStatus</p>
+<p><b>&gt;</b> GetFaultDetectionCounter</p>
+<p><b>&gt;</b> ApplicationErrors</p>
+<p>vDem42 is realized as SWC and generated by DaVinci Configurator Pro once the related module has been</p>
+<p>enabled. The module will be part of all deliveries that include the new AR4.3 based DEM.</p>
+<p><b>Additional Information</b></p>
+<p>Quality status is QM. The component is therefore not suitable for usage in a safety partition.</p>
+<p>Extension</p>
+<p>The J1939Dcm now supports the new AR4.3 based Dem.</p>
+<p>FEAT-2897</p>
+<p>Extension</p>
+<p>Support of PR-Ports for Dcm for:</p>
+<p><b>&gt;</b> DIDs with configured DcmDspDidRead and DcmDspDidWrite (DIDs for ReadDataByIdentifier and</p>
+<p>WriteDataByIdentifier)</p>
+<p><b>&gt;</b> DIDs with configured DcmDspDidControl (DIDs for InputOutputControlByIdentifier)</p>
+<p>FEAT-2924</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Diagnostics</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>Additional Information</b></p>
+<p>In most programs the usage of PR ports is disabled to be compatible with existing projects.</p>
+<p>The feature can be enabled with the option DcmSenderReceiverPRPortsEnabled for all Dcm S/R inter-</p>
+<p>faces.</p>
+<p>Extension</p>
+<p>The DID signal handling now provides a backward compatibility to the combined signal structure that has been</p>
+<p>used with MICROSAR3 and older (&lt;R19) MICROSAR4 releases. The backward compatibility simplifies a takeover</p>
+<p>of existing software as the DID signal granularity can remain unchanged.</p>
+<p>Data identifiers to be combined to one signal only must have the CANdela Studio attribute ASR3_Legacy_Com-</p>
+<p>bine_DID set to 1.</p>
+<p><b>&gt;</b> Without this setting signals are not combined. This is the default for AUTOSAR4 based projects.</p>
+<p><b>&gt;</b> If set, the signals are combined to a single signal as it was done by MICROSAR3. The data type of the com-</p>
+<p>bined signal is a byte array.</p>
+<p><b>Additional Information</b></p>
+<p>The attribute (ASR3_Legacy_Combine_DID) must be defined in the CDDT. So it may be necessary to</p>
+<p>contact the CDDT owner (e.g. OEM) and request the addition of the attribute.</p>
+<p>FEAT-3212</p>
+<p>Extension</p>
+<p>Provisioning of the Dem_SetEventAvailable port.</p>
+<p>FEAT-3283</p>
+<p>Information</p>
+<p>Additional performance optimizations for diagnostic data import into DaVinci Configurator Pro.</p>
+<p>FEAT-2470</p>
+<p>Information</p>
+<p>Additional Services of the Dcm are now Safe and can be used in SafeBSW projects.</p>
+<p><b>&gt;</b> DID Service 0x22</p>
+<p><b>&gt;</b> Memory Services 0x23, 0x3D</p>
+<p><b>&gt;</b> RID Services 0x31</p>
+<p>FEAT-2505</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Diagnostics</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>Additional Information</b></p>
+<p>Additional services will be made safe with R21 (Q4 2018).</p>
+<p>Information</p>
+<p>DiagXf, the transformer module used for S/R interaction with Dcm, is now available for projects up to ASIL D.</p>
+<p>FEAT-2510</p>
+<p>Information</p>
+<p>QM release of the Dcm OBD major monitoring feature including DTR functionality.</p>
+<p>FEAT-2572</p>
+<p>FEAT-1724</p>
+<p>FEAT-2635</p>
+<p>FEAT-1723</p>
+<p><b>Ethernet</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The support of DoIP draft standards have been discontinued: DIS/FDIS. From now on only the final standard</p>
+<p>(IS, 2012) is supported.</p>
+<p>FEAT-3362</p>
+<p>Extension</p>
+<p>The SomeIpTp (Transport protocol for SOMEIP) has been realized and is available for development deliveries.</p>
+<p>Using the SomeIpTp very large data (up to 4GB) can be transmitted which cannot be handled using IP frag-</p>
+<p>mentation.</p>
+<p><b>Important Information</b></p>
+<p>SomeIpTp interaction with the Rte will be provided in Q2 2018. Until then SomeIpTp can be evaluated</p>
+<p>standalone without SomeIpXf and Rte interaction. We plan the release of SomeIpTp with R21 (Q4</p>
+<p>2018).</p>
+<p>FEAT-2543</p>
+<p>Extension</p>
+<p>The Soad BSD API option now supports multiple Linux ETH interfaces (e.g. VLANs).</p>
+<p>FEAT-2697</p>
+<p>Extension</p>
+<p>Support &quot;ANY&quot; in the system template as IP address wildcard. In the ECUC the existing implementation still</p>
+<p>expects &quot;&quot;. The upstream mapping now transfers these two representations.</p>
+<p>FEAT-2774</p>
+<p>Extension</p>
+<p>The BSD API of the SoAd now supports also QNX as host operating system.</p>
+<p>FEAT-2971</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Ethernet</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>It is now possible to use only one SoAd Socket Connection (Multicast local address, listen-only) for receiving</p>
+<p>multicast events from multiple servers. When receiving a SD SubAck message Service Discovery sets the</p>
+<p>socket remote address to the servers unicast address.</p>
+<p>By deactivating the configuration option SdGeneral/SdSetRemAddrOfClientRxMulticastSoCon it is now possible</p>
+<p>to disable the SetRemoteAddress-call for multicast-endpoints per SD Instance.</p>
+<p>By default this new option is enabled which represents the old behavior and only the first server is configured</p>
+<p>correctly.</p>
+<p>FEAT-3326</p>
+<p>Extension</p>
+<p>IPv4 and IPv6 dual stack use-cases are now supported by the DaVinci Configurator Pro upstream mapping.</p>
+<p>FEAT-3378</p>
+<p>Extension</p>
+<p>DaVinci Configurator Pro now provides the upstream mapping for the System Template element pduCol-</p>
+<p>lectionSemantics for SocketConnectionIpduIdentifier. The result is mapped to the ECUC parameter SoAdIfTrig-</p>
+<p>gerTransmit.</p>
+<p>FEAT-3388</p>
+<p>Extension</p>
+<p>The DHCP client is now able the request that same IP address after a reboot. Therefore the IP address can be</p>
+<p>included into the DHCPDISCOVER message.</p>
+<p>The IP address must be stored by the application in non volatile data and provided to the DHCP client after</p>
+<p>reboot.</p>
+<p><b>Documentation in SIP</b></p>
+<p>The required API is described in TechnicalReference_TcpIp.pdf chapter &quot;DHCPv4 Requested IP</p>
+<p>Address Callout”.</p>
+<p>FEAT-3441</p>
+<p>Extension</p>
+<p>The DoIP component now supports more that 255 target addresses as defined by AUTOSAR RFC 79727.</p>
+<p>FEAT-3472</p>
+<p>Information</p>
+<p>Wakeup line based activation is now released in the MICROSAR Ethernet transceiver.</p>
+<p>FEAT-2465</p>
+<p>FEAT-705</p>
+<p>Information</p>
+<p>The runtime of Sd_RxIndication() has been optimized.</p>
+<p>FEAT-2989</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Ethernet</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Gateway</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Information</p>
+<p>The RAM consumption of the PduR was reduced. The reduction becomes significant if there are many low-level</p>
+<p>interface routings configured.</p>
+<p>FEAT-3285</p>
+<p><b>Inter Process Communication (IPC)</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The MICROSAR IPC (Inter Processor Communication) has been completely reworked. A new set of modules</p>
+<p>(vIpc...) has been introduced which allows transmission and reception of data packets of configurable size</p>
+<p>between different cores of a microcontroller or different processes of a POSIX OS. With this release MICROSAR</p>
+<p>IPC supports inter core communication via shared memory for MICROSAR and POSIX based operating systems.</p>
+<p>FEAT-2937</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Gateway</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>MICROSAR integration:</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Inter Process Communication (IPC)</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>POSIX integration with MICROSAR:</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Inter Process Communication (IPC)</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Planned AdaptiveMICROSAR integration:</p>
+<p><b>Additional Information</b></p>
+<p>The solution will be extended in the near future by the following capabilities:</p>
+<p><b>&gt;</b> Support for communication with AdaptiveMICROSAR and MICROSAR guests in POSIX systems.</p>
+<p><b>&gt;</b> Inter-microcontroller communication via SPI and UART.</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Inter Process Communication (IPC)</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>J1939</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The upstream mapping for J1939 NAME messages has been implemented for DBC based configurations.</p>
+<p>In the DBC file, NAME messages are identified as NM messages with PGN 0x9300. Such messages trigger the</p>
+<p>ECUC parameter J1939NmAcceptsCommandedName to be set for the sending and receiving J1939NmNode.</p>
+<p><b>Additional Information</b></p>
+<p>The messages (PGN 0x9300) themselves are not derived to the ECU configuration as this is not</p>
+<p>required by the embedded software.</p>
+<p>FEAT-2862</p>
+<p><b>Measurement and Calibration</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The a2l file that is generated by the Rte now includes the display format that has been defined on DataPrototype</p>
+<p>level in the SWC design.</p>
+<p>FEAT-3159</p>
+<p>Extension</p>
+<p>Introduction of a new API Xcp_SetStimMode() that allows modification of the STIM handling:</p>
+<p><b>&gt;</b> Single Shot Mode (default and the old behavior): A newly received STIM list is written when Xcp_Event is</p>
+<p>called for the corresponding Event channel and invalidated afterwards.</p>
+<p><b>&gt;</b> Continuous mode (new behavior, can be activated by Xcp_SetStimMode()): A newly received STIM list is</p>
+<p>written when Xcp_Event is called for the corresponding channel. Its state is kept so that it is written again</p>
+<p>after the Xcp_Event function is called again for the same Event channel.</p>
+<p>FEAT-3275</p>
+<p><b>Runtime</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The Rte now supports external SWC triggers (ExternalTriggerOccurredEvent) with the RTE API Rte_Trigger for</p>
+<p>ECU internal SWC interaction.</p>
+<p>FEAT-2476</p>
+<p>Extension</p>
+<p>To simplify multi core projects a new validator has been added by the Os. In the EcuC module configuration is</p>
+<p>now ensured that AUTOSAR cores have logical IDs from 0 to n and Non-AUTOSAR cores from n+1 to m when m</p>
+<p>FEAT-2733</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>J1939</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>cores are configured in the Os.</p>
+<p>Extension</p>
+<p>The Os core has been extended with several new features.</p>
+<p><b>&gt;</b> Support shared stack for tasks with same internal resource</p>
+<p><b>&gt;</b> Support shared stack for non-preemptive Basic tasks</p>
+<p><b>&gt;</b> Reference to OS_APPMODE_ANY outside OS configuration shall result in a validation error</p>
+<p><b>&gt;</b> If missing, the Os now creates the core definition in the ECUC module automatically</p>
+<p><b>&gt;</b> The Timing Hooks can now be used in serial production up to ASIL D</p>
+<p>FEAT-2815</p>
+<p>FEAT-2816</p>
+<p>FEAT-3190</p>
+<p>FEAT-3204</p>
+<p>Extension</p>
+<p>The Rte now supports inter-partition communication of NvRAM S/R ports.</p>
+<p>FEAT-2974</p>
+<p>Extension</p>
+<p>The Rte supports the API Rte_IrvIWriteRef.</p>
+<p>FEAT-3182</p>
+<p>Extension</p>
+<p>The Rte now recognizes the usage of Rte API types as internal datatypes that are used by SWCs internally. In</p>
+<p>the past this caused compiler errors due to type redefinitions.</p>
+<p>FEAT-3335</p>
+<p>Information</p>
+<p>The Rte C/S communication use case using SomeIpXf use-case has been released. This includes the release of</p>
+<p>the E2E profiles 5 and 6 of E2eXf.</p>
+<p>FEAT-2586</p>
+<p>FEAT-2484</p>
+<p><b>Security</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>Crypto (SW) now supports additional algorithms:</p>
+<p><b>&gt;</b> RSA for generating and verifying signatures with PSS and PKCS#1 v.1.5 - Prehashing Variants: SHA-1, SHA-</p>
+<p>256</p>
+<p><b>&gt;</b> RSA encryption and decryption with PKCS#1 v.1.5</p>
+<p><b>&gt;</b> RSA CRT DSA Verification with PKCS#1 v.1.5 - Prehashing Variants: SHA-1 and SHA-256</p>
+<p><b>&gt;</b> ECDSA with curve ANSIp256r1, NIST P-256, SECp256r1 for generating and verifying signatures - Prehashing</p>
+<p>Variants: None, SHA-1, SHA-256</p>
+<p><b>&gt;</b> HMAC with SHA1 and SHA256</p>
+<p><b>&gt;</b> ECDHE with curve ANSIp256r1 and SECp256r</p>
+<p>FEAT-2735</p>
+<p>FEAT-3143</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Security</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>&gt;</b> Concatenation KDF (Nist special publication 800-56A)</p>
+<p><b>&gt;</b> Certificate installation and update according to ISO15118</p>
+<p><b>&gt;</b> CTR-DRBG using AES-128 according to NIST SP 800-90A with and without Derivation Function</p>
+<p>Extension</p>
+<p>It is now possible to configure a secured area with a PDU. The SecOC has been extended to support such</p>
+<p>secured areas based on AUTOSAR RfC 77090.</p>
+<p>FEAT-3073</p>
+<p>Extension</p>
+<p>The SecOC retry mechanism has been improved to fasten up response time. If the current freshness value did</p>
+<p>not lead to successful MAC authentication the FvM will be queried immediately for new freshness value and a</p>
+<p>new authentication attempt will be started.</p>
+<p>Previously the second attempt was executed in the next MainFunction.</p>
+<p>FEAT-3079</p>
+<p>Extension</p>
+<p>The handling of the key update in the Crypto (SW) has been improved. Key can now only be updated by itself or</p>
+<p>a configured Master Key.</p>
+<p>FEAT-3157</p>
+<p>Information</p>
+<p>The runtime of Crypto (Sw) has been optimized by caching AES round keys in the driver.</p>
+<p>The optimization can be enabled with the switch CryptoGen-</p>
+<p>eral/CryptoMacPrimitives/CryptoCmacAesRoundkeyReuse</p>
+<p>FEAT-3420</p>
+<p><b>State Management</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The CanNm now supports the retry of the first message transmission request as specified in the AUTOSAR 4.2.</p>
+<p>The functionality is optional and configurable.</p>
+<p>FEAT-3390</p>
+<p>Extension</p>
+<p>The CanNm settings RepeatMsgInd, NodeDetection and NodeId are now configurable per channel and support</p>
+<p>post-build selectable (IDM).</p>
+<p>FEAT-3405</p>
+<p>Information</p>
+<p>The Fiat NM ClassB and ClassC network management modules as well as the CddFiat module have been</p>
+<p>released for QM projects with the following use-cases:</p>
+<p><b>&gt;</b> ClassB Slave Clamp30</p>
+<p><b>&gt;</b> ClassB Slave Clamp15</p>
+<p><b>&gt;</b> ClassB Master</p>
+<p>FEAT-2529</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>State Management</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>&gt;</b> ClassC Non-Wakeup</p>
+<p><b>&gt;</b> ClassC Wakeup Slave</p>
+<p>Information</p>
+<p>The runtime of the BswM module has been improved.</p>
+<p>FEAT-3172</p>
+<p><b>V2G</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The Smart Charging solution of Vector now supports the energy transfer mode WPT (Wireless Power Transfer)</p>
+<p>according to ISO/IEC 15118 ED2 CD2.</p>
+<p>Please note: This feature is provided by a dedicated vScc add-on.</p>
+<p>FEAT-2765</p>
+<p>Information</p>
+<p>QM release of the GB/T 27930 charging component vCanCcGbt.</p>
+<p>FEAT-2534</p>
+<p><b>vVIRTUALtarget</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>AUTOSAR 4.3 based Crypto (Hw) modules are now simulated by a dedicated vVIRTUALtarget.Basic Crypto mod-</p>
+<p>ule.</p>
+<p><b>Additional Information</b></p>
+<p>The Crypto (Sw) module configuration is not considered as the algorithms are executed in software</p>
+<p>anyhow.</p>
+<p>FEAT-2716</p>
+<p>FEAT-3425</p>
+<p>Extension</p>
+<p>vVIRTUALtarget.Basic projects that are configured to generate code for both the real and the virtual target are</p>
+<p>now easier to handle:</p>
+<p><b>&gt;</b> The API Infix as it is used by many MCAL modules is now considered by the vVIRTUALtarget.Basic BSW mod-</p>
+<p>ules automatically. This removes the need to adapt higher layer modules to the API names.</p>
+<p>FEAT-3288</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>V2G</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Watchdog</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Information</p>
+<p>The TechnicalReference of WdgM has been updated with respect to the supported AR 4.2 functionality. Addi-</p>
+<p>tionally, the module now also reports AR4.2.2 as supported AR version.</p>
+<p>No additional features have been realized.</p>
+<p>FEAT-3029</p>
+<p><b>Tooling</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The compatibility evaluation of constants between application- and implementation data types is now more pre-</p>
+<p>cise and allows more use-cases:</p>
+<p><b>&gt;</b> Several receivers of a port can now use application- or implementation data types with physical and internal</p>
+<p>init values, respectively. In the past this triggered error RTE40248.</p>
+<p><b>&gt;</b> The DaVinci Developer feature &quot;Adapt Connected Port Prototypes“ now creates constants that are compatible</p>
+<p>with the application data types that are used for the adapted port.</p>
+<p>FEAT-3133</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Watchdog</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>DaVinci Developer port prototype context menue:</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Select options:</p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>The Rte now throws RTE51035 in some projects that have been working with previous Rte versions. However the</p>
+<p>configuration used to be invalid in the past. This has not been relevant in the past as the Rte did not support that</p>
+<p>feature.</p>
+<p>The error RTE51035 is thrown if the application / implementation init values of 1:N connected ports do not</p>
+<p>match. To resolve the issue, correct the init value configuration according to the hints provided by error mes-</p>
+<p>sage.</p>
+<p>Extension</p>
+<p>The difference view of DaVinci Configurator Pro allows filtering of differences e.g. for</p>
+<p><b>&gt;</b> show only diffs in CAN module</p>
+<p><b>&gt;</b> show only diffs of ComIPdus</p>
+<p>FEAT-2449</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>This allows to focus on relevant topics during a Diff&amp;Merge session.</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Improved layout of Difference Details View:</p>
+<p>Extension</p>
+<p>DaVinci Developer now provides a new convenience functionality that allows easy creation of a NvBlockSwc</p>
+<p>matching to given ports. NV Block Descriptors are automatically created and mapped to the ports.</p>
+<p>FEAT-2485</p>
+<p>Extension</p>
+<p>DaVinci Developer provides a new convenience function that allows easy creation of a new NvBlock based on a</p>
+<p>existing NvPort including a 1:1 port mapping.</p>
+<p>FEAT-2485</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The assistant is launched from a NvSWC-T: New -&gt; From Port...</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The wizard allows selecting the Nv blocks that shall be created. The assistant illustrates only NvPorts that do not</p>
+<p>yet have a mapping.</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Once confirmed the assistant create the NvBlock for the selected NvPort:</p>
+<p>Additionally the port mapping between the NvBlock and the NvPort is created:</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>Additional Information</b></p>
+<p>read/write DIDs, which are provided by the transformed struct-interfaces</p>
+<p>Extension</p>
+<p>The platform functions can now be used in DaVinci Developer and DaVinci Configurator for filtering of system</p>
+<p>template elements (such as SWCs and port mappings).</p>
+<p>Additionally, the usability of DaVinci Developer has been improved regarding assignment of objects to platform</p>
+<p>functions and selective merge of platform functions.</p>
+<p>FEAT-2494</p>
+<p>FEAT-2785</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The DaVinci Developer platform function look and feel is now in-line with DaVinci Configurator Pro from where it</p>
+<p>is launched:</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Function selection that shall be considered during the Diff&amp;Merge session in DaVinci Developer:</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The DaVinci Developer difference illustration and merge control is now similar to DaVinci Configurator Pro (as</p>
+<p>introduced in R19):</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The general concept of the function based Diff&amp;Merge:</p>
+<p><b>Documentation in SIP</b></p>
+<p>The usage of the platform support concept is explained in detail in AN-ISC-8-1208_DaVin-</p>
+<p>ciTeamAndPlatformSupport.pdf</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>Project diff/merge function of DaVinci Developer 4 has been improved:</p>
+<p>Navigation from Difference View to Object Browser is now possible</p>
+<p>FEAT-2494</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The Object Browser can now be used to compare two objects including sub-objects and references.</p>
+<p>Extension</p>
+<p>The user interface of DaVinci Configurator Pro has been improved with respect to the display of variant projects:</p>
+<p>FEAT-2553</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>&gt;</b> Properties View: The ‘Variant’ tab is now shown for multi-instance parameters</p>
+<p><b>&gt;</b> In configuration reports, variant container and parameter are now only shown once with a column that indic-</p>
+<p>ates the value for each variant.</p>
+<p>Extension</p>
+<p>It is now possible to start the DaVinci Configurator Pro configuration report generation from command line.</p>
+<p>FEAT-2553</p>
+<p>Extension</p>
+<p>The layout of DaVinci Configurator Pro form pages was optimized so that existing space is used in a better way:</p>
+<p><b>&gt;</b> Controls on form pages are now wider for better display of long content/strings</p>
+<p><b>&gt;</b> Scrolling behavior has been improved especially in case of multiple nested trees or tables</p>
+<p><b>&gt;</b> Display option in the toolbar of the main window: toggles the way how references are displayed (complete</p>
+<p>path or short name only)</p>
+<p>FEAT-2553</p>
+<p>Extension</p>
+<p>The Input File Assistant of DaVinci Configurator Pro has been reworked to improve usability and to allow the sup-</p>
+<p>port of future use-cases.</p>
+<p>FEAT-2594</p>
+<p>Extension</p>
+<p>Various usability and performance improvements in the user interface of DaVinci Configurator Pro:</p>
+<p><b>&gt;</b> Use-case editor expansion and selection state in grid is preserved during variant switch</p>
+<p><b>&gt;</b> Basic editor expansion and selection state in tree is preserved during variant switch</p>
+<p><b>&gt;</b> Automatic selection of newly created elements in grids</p>
+<p><b>&gt;</b> Performance optimization for large grids views</p>
+<p>FEAT-2791</p>
+<p>Extension</p>
+<p>The ECU Software Components Editor of DaVinci Configurator Pro has been enhanced with better support of</p>
+<p>incomplete designs and usability improvements.</p>
+<p>FEAT-2857</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>&gt;</b> Red: Set a Port Terminator to mark an intentionally unconnected port, create delegation ports from within</p>
+<p>DaVinci Configurator Pro.</p>
+<p><b>&gt;</b> Blue: General grid filter to search for arbitrary items</p>
+<p><b>&gt;</b> Green: Quick overview to show if the port is connected to other SWCs or to network signals</p>
+<p><b>&gt;</b> Orange: New tree structures to ease access to the configuration</p>
+<p>Extension</p>
+<p>The DaVinci Configurator Pro automation interface was extended</p>
+<p><b>&gt;</b> by a new high-level convenience API that allows simple adding of 1:1 SWC port mappings and 1:1 data map-</p>
+<p>pings</p>
+<p><b>&gt;</b> by the possibility to import module configurations</p>
+<p>FEAT-2942</p>
+<p>FEAT-3344</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>There is a new type of validation result in DaVinci Configurator Pro that points out a license violation. License</p>
+<p>violations occur if a MICROSAR feature is used that has not (yet) been licensed. Please contact Vector if such a</p>
+<p>validation result pops up.</p>
+<p><b>Additional Information</b></p>
+<p>The MICROSAR Product Information provides more details on the usage of features that have not</p>
+<p>been licensed.</p>
+<p>FEAT-2979</p>
+<p>Extension</p>
+<p>DaVinci tools now inform users on a imminent evaluation license expiration. The warning will be shown starting</p>
+<p>14 days before the license expires and considers both, tool and SIP license.</p>
+<p>FEAT-3041</p>
+<p>Extension</p>
+<p>DaVinci tools and code generators now support AUTOSAR 4.3.1 schema.</p>
+<p><b>Additional Information</b></p>
+<p>The schema support does not imply that additional AR4.3.1 features have been implemented.</p>
+<p>FEAT-3078</p>
+<p>Extension</p>
+<p>DaVinci Developer now supports SERVICE-PROXY-SW-COMPONENT-TYPE.</p>
+<p>FEAT-3113</p>
+<p>Extension</p>
+<p>Post-Build Selectable (MICROSAR Identity Manager) now also supports variant communication clusters without</p>
+<p>the need for a workaround in the upstream mapping process.</p>
+<p>FEAT-3158</p>
+<p>Extension</p>
+<p>The Vector ARXML Editor now stores and restores the last user settings and window layout.</p>
+<p><b>Additional Information</b></p>
+<p>The tool is distributed and updated using the DaVinci External Components Setup. Please update your</p>
+<p>local installation.</p>
+<p>FEAT-3231</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>It is now possible to add a new DaVinci Developer workspace to an existing .dpa project from within DaVinci</p>
+<p>Configurator Pro.</p>
+<p>FEAT-3254</p>
+<p>Extension</p>
+<p>The DaVinci Configurator Pro reference selection dialog now shows the elements that make use of the items that</p>
+<p>can be chosen. This simplifies the selection of the correct reference targets especially when dealing with ref-</p>
+<p>erences on global PDUs.</p>
+<p>FEAT-3263</p>
+<p>Extension</p>
+<p>In DaVinci Configurator Pro it is now possible to hide validation messages based on their severity. This allows</p>
+<p>focusing on the typically more relevant errors of the configuration.</p>
+<p>FEAT-3343</p>
+<p>Extension</p>
+<p>The SipModificationChecker now also considers changes in XML, PDF files as well as MSSV plugins for SafeBSW</p>
+<p>deliveries.</p>
+<p>FEAT-3403</p>
+<p>Information</p>
+<p>The DaVinci tools now support the new Vector license model.</p>
+<p>FEAT-2552</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>Additional Information</b></p>
+<p>The existing licenses (Flexnet and Keyman) remain valid and are supported also in future.</p>
+<p>Information</p>
+<p>The Production Error Editor of DaVinci Configurator Pro supports now all production errors (Dem Event ref-</p>
+<p>erences) of all modules, including third party MCAL modules. In the past some Events have been missing.</p>
+<p>Additionally the user interface was reworked to improve usability.</p>
+<p>FEAT-2800</p>
+<p>FCA SLP5 | Release Notes</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>2 Release 19</b></p>
+<p><b>General</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The MemMap.h template now supports module specific MemMap files as defined by AR4.2</p>
+<p>FEAT-2455</p>
+<p><b>Communication</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The Com module now supports PDUs that are not mapped to a PDU group. In this case the PDU is now initially</p>
+<p>started and never stopped as defined by AUTOSAR.</p>
+<p>FEAT-2726</p>
+<p>Extension</p>
+<p>The Com module now supports MASKED_NEW_EQUALS_X and MASKED_NEW_DIFFERS_X filters for Signal</p>
+<p>Group Arrays. This is relevant if the ComXf is used.</p>
+<p>FEAT-2833</p>
+<p>Extension</p>
+<p>Signal groups that are handled by the ComXf module can now also be routed by the Com signal gateway.</p>
+<p>FEAT-2864</p>
+<p>Extension</p>
+<p>IpduM now provides a request queue for TriggerTransmit of container PDUs according to AR4.2.</p>
+<p>FEAT-2968</p>
+<p>Extension</p>
+<p>The CAN stack now supports Rx ranges for non- NM PDUs.</p>
+<p>FEAT-3091</p>
+<p>Information</p>
+<p>The transformer modules ComXf and E2eXf have been released as QM.</p>
+<p>FEAT-2498</p>
+<p>Information</p>
+<p>The FlexRay stack now supports multiple FlexRay controllers. This feature has been released.</p>
+<p>Note: For one cluster only a single controller can be used.</p>
+<p>FEAT-2725</p>
+<p><b>Diagnostics</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The Dem has been reworked to support multi-core and safety projects in an optimized way. The DTC handling is</p>
+<p>processed on the core where the DTC status is updated. This reduces the costs for inter-core communication</p>
+<p>drastically.</p>
+<p>As part of the rework the APIs of the DEM modules have been updated to AR4.3 definition.</p>
+<p>FEAT-2761</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>General</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Note: With R19 this feature may not yet be rolled out to all programs.</p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>The DEM configuration need to be reworked mainly in order to define the application context of the master and</p>
+<p>the satellite instances.</p>
+<p>Due to AR4.3 API changes, the application may have to be adapted according to the updated APIs.</p>
+<p>Extension</p>
+<p>The following services of the Dcm are now released for safety-projects: 0x10, 0x14, 0x19, 0x27, 0x28, 0x3E,</p>
+<p>0x85</p>
+<p>FEAT-2505</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Diagnostics</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Note: Not all services are safe yet. These services must be disabled if Dcm is used in safety projects. More</p>
+<p>information can be found in the safety manual.</p>
+<p>Extension</p>
+<p>Dem now supports the following new functionalities:</p>
+<p><b>&gt;</b> Dem_GetOperationCycleState</p>
+<p><b>&gt;</b> indicator state CONT_BLINKING for OBD MIL</p>
+<p>FEAT-2783</p>
+<p>Extension</p>
+<p>Dem and Dcm have been adapted to FCA specifications CS.00099 and CS.00100.</p>
+<p>FEAT-2784</p>
+<p>Extension</p>
+<p>Dem provides the API Dem_GetDTCSuppression(). The API returns the suppression status of a given DTC.</p>
+<p>FEAT-2892</p>
+<p>Extension</p>
+<p>The Dcm S/R communication using vDiagXf now supports</p>
+<p><b>&gt;</b> array data types: uint8[], sint8[], uint16[], sint16[], uint32[], sint32[]</p>
+<p><b>&gt;</b> uint8 as Boolean data type</p>
+<p>FEAT-2962</p>
+<p>FEAT-2770</p>
+<p>Extension</p>
+<p>The Dem configuration workflow using a Diagnostic Extract now supports more than 255 DTCs without the need</p>
+<p>to manually assign dedicated DemFreezeFrameClass and DemEnableConditionGroups.</p>
+<p>FEAT-3106</p>
+<p>Information</p>
+<p>The vDes module has been released as QM. The component allows synchronization of Dem DTC status inform-</p>
+<p>ation from a slave controller to the master controller that runs the diagnostic (MICROSAR) stack. A typical use-</p>
+<p>case is to allow a second processor (e.g. running POSIX OS to set DTC status. The communication takes place</p>
+<p>over the MICROSAR IPC solution.</p>
+<p>FEAT-2492</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Diagnostics</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>vDES can also be used to integrate POSIX based controllers:</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Diagnostics</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>Ethernet</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>VLAN-based UdpNm can now be derived from a AR4.3 System Template.</p>
+<p>FEAT-2522</p>
+<p>Extension</p>
+<p>Optimized modelling of (SOME/IP) client/server calls is now supported as defined by AR4.3. This allows to use</p>
+<p>the same pair of PDUs and System Signals for multiple clients, which use the same server service on the same</p>
+<p>Ethernet channel (VLAN).</p>
+<p>FEAT-2666</p>
+<p>Extension</p>
+<p>Support more than 255 DoIP Target Addresses</p>
+<p>FEAT-2985</p>
+<p>Information</p>
+<p>The feature IPv4 Fragmentation in the TcpIp module (FEAT-1481) has been released.</p>
+<p>FEAT-2479</p>
+<p><b>Gateway</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Information</p>
+<p>The Mirroring module (vMirror) has been released as QM. It allows CAN to CAN mirroring</p>
+<p>FEAT-2729</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Ethernet</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>As well as the mirroring of several internal networks to (diagnostic) Ethernet connector</p>
+<p><b>IPC</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Information</p>
+<p>The IPC communication CAN over SPI has been released. This special CAN driver allows a CAN like com-</p>
+<p>munication (with respect to upper layer modules and configuration) over an SPI channel.</p>
+<p>FEAT-2746</p>
+<p><b>J1939</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The CAN stack now supports baudrate detection as it is defined by the J1939-16 standard.</p>
+<p>FEAT-2738</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>IPC</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Note: This feature is available for selected CAN drivers only.</p>
+<p>Extension</p>
+<p>J1939 Commanded NAME support is now provided.</p>
+<p>FEAT-2862</p>
+<p><b>Measurement and Calibration</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The vRtm net runtime measurement can now be used with the latest Gen7 MICROSAR Os. Net runtime meas-</p>
+<p>urement eliminates the runtime of tasks that interrupt the execution of the code that shall be measured.</p>
+<p>FEAT-2789</p>
+<p>Extension</p>
+<p>The map and curve support of the Rte now supports plain array implementation data types in combination with</p>
+<p>shared Axis.</p>
+<p>FEAT-3119</p>
+<p>Extension</p>
+<p>The a2l display format can now be defined on Data Prototype level for all kinds of MC relevant elements in the</p>
+<p>SWC design. The Rte will export this information to the generated Rte.a2l.</p>
+<p>FEAT-3159</p>
+<p>Information</p>
+<p>The vRtm multi-core option has been released. This allows runtime-measurement on any core as well as cross-</p>
+<p>core communication response time measurements.</p>
+<p>FEAT-2571</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Measurement and Calibration</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Information</p>
+<p>The multi-core option of XCP has been released. The multi-core option allows XCP to consistently access data</p>
+<p>that is accessed by an application that runs on a different core than the XCP module is executed on.</p>
+<p>FEAT-2618</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Measurement and Calibration</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Information</p>
+<p>The script that allows vRtm to measure runnable runtimes has been released. The script not only configures</p>
+<p>vRtm and the Rte but also generates the required Rte hook functions. The script can be triggered within the</p>
+<p>DaVinci Configurator Pro &quot;Script Tasks&quot; View.</p>
+<p>Using the Script Task View the scripted can be launched:</p>
+<p>FEAT-2692</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Measurement and Calibration</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The script will realize all necessary items e.g. in Rte and vRtm configuration:</p>
+<p>Information</p>
+<p>The precision of vRtm has been improved additionally by a reworked overhead calculation.</p>
+<p>FEAT-2845</p>
+<p><b>Nv Memory</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The Fee (Small Sector) as typically used for RH850 has been extended with an additional erase pattern in each</p>
+<p>dataset. This further increases the reset robustness of the component.</p>
+<p><b>Migration notes for existing projects:</b></p>
+<p>FEAT-3025</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Nv Memory</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The breaking change affects projects only that shall be able to access flash data that has been written with the</p>
+<p>previous version of the Fee (Small Sector).</p>
+<p>The old Fee flash data are no longer compatible with the flash format of the new Fee. The new Fee reports exist-</p>
+<p>ing data to be inconsistent.</p>
+<p>Existing flash data cannot be read by the new Fee.</p>
+<p>A manual update strategy is required such as:</p>
+<p><b>&gt;</b> use the old Fee (from the old SIP) to retrieve stored data from the ECU and store that data externally</p>
+<p><b>&gt;</b> update the SIP with the new Fee</p>
+<p><b>&gt;</b> download the old data with the new Fee</p>
+<p>A build in update mechanism is not provided.</p>
+<p>Extension</p>
+<p>The CRC compare mechanism defined by AUTOSAR has been introduced in NvM. It may reduce the need to store</p>
+<p>data to NV memory in case no modifications have been made.</p>
+<p>Note: Since CRC might be insufficient to detect changes (different data, same CRC) using this feature might res-</p>
+<p>ult in losing most recent data.</p>
+<p>FEAT-2914</p>
+<p><b>Rte</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The Rte now supports scaling (offset and factor) of data that is connected with a group signal.</p>
+<p>FEAT-2998</p>
+<p>Information</p>
+<p>The MICROSAR RTE has been certified for safety related projects up to ASIL D.</p>
+<p>FEAT-2768</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Rte</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Rte</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Security</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Information</p>
+<p>The AR4.3 based CRYPTO stack is now available as ASIL. The stack includes the Crypto (SW), CryIf, Csm and,</p>
+<p>SecOC. Hardware based CRYPTO drivers are available on request.</p>
+<p>Please note: Some algorithms realized by CRYPTO (SW) are not fully verified yet and will be completed in the fol-</p>
+<p>lowing release cycles.</p>
+<p>Note: The AR4.3 based CRYPTO stack has not yet been rolled out to all programs.</p>
+<p>FEAT-2447</p>
+<p>FEAT-2500</p>
+<p>FEAT-2502</p>
+<p>FEAT-2767</p>
+<p>Information</p>
+<p>Crypto (SW) has now a better runtime performance due to the pre calculation of Sub Key and Roundkeys.</p>
+<p>FEAT-2509</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Security</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Information</p>
+<p>The BSWMD of CRYPTO stack modules have been reworked to be compliant with the final AR4.3 definition. No</p>
+<p>manual migration effort is to be expected.</p>
+<p>Note: The AR4.3 based CRYPTO stack has not yet been rolled out to all programs.</p>
+<p>FEAT-3044</p>
+<p><b>Time Synchronization</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Breaking</p>
+<p>Change</p>
+<p>The time synchronization stack (CanTsyn, FrTsyn, EthTsyn and StbM) is now realized and released (QM) based</p>
+<p>on AR4.3 architecture specification. Currently the modules are still AR4.2 compliant on the network.</p>
+<p>Note: Not all AR4.3 features have been implemented yet. These will be completed in R20 including the pos-</p>
+<p>sibility to switch the network compatibility between AR4.3 and AR4.2.</p>
+<p>Overview MICROSAR Time Synchronization Stack:</p>
+<p>FEAT-2457</p>
+<p>FEAT-2461</p>
+<p>FEAT-2466</p>
+<p>FEAT-2473</p>
+<p>FEAT-2474</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Time Synchronization</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Terms (Source: AUTOSAR SWS STBM):</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Time Synchronization</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>Time master nodes: Multiple timing domains are not supported by CanTsyn and FrTsyn within a single PDU. The</p>
+<p>past limitation was removed.</p>
+<p>FEAT-2517</p>
+<p><b>V2G</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The charging standard GB/T 27930 is now supported by a new MICROSAR component vCanCcGbt.</p>
+<p>FEAT-2534</p>
+<p>Extension</p>
+<p>The charging standard CHAdeMO is now supported by a new MICROSAR component vCanCcCdm. Initially v1.1 of</p>
+<p>FEAT-2752</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>V2G</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>the standard has been realized.</p>
+<p><b>Tooling</b></p>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>DaVinci Configurator Pro supports copy and past operation of configuration data. This allows easy to use con-</p>
+<p>figuration data exchange e.g. between different projects or configuration trees.</p>
+<p>FEAT-2481</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>Additional Information</b></p>
+<p>Copy and paste of configuration elements</p>
+<p>Copy grids to CSV format</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>DaVinci Developer has an improved diff- and merge functionality that allows selective merge decisions. The UI</p>
+<p>has been reworked to give a user experience similar to the diff- and merge functionality of DaVinci Configurator</p>
+<p>Pro.</p>
+<p>Launch the difference mode:</p>
+<p>Highlevel difference illustration in Object Browser using icons:</p>
+<p>FEAT-2494</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The Differences View shows more details and allows resolving differences in the toolbar:</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The configuration report provided by DaVinci Configurator Pro can now be created via command line.</p>
+<p>FEAT-2553</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>Central display option in DaVinci Configurator Pro to reference parameters either with full path or only as short</p>
+<p>name</p>
+<p>FEAT-2553</p>
+<p>Extension</p>
+<p>The Find View of DaVinci Configurator Pro now provides a search criterion &quot;IsVariant&quot; that allows searching for</p>
+<p>elements that are actually different in the configured variants.</p>
+<p>Use the Help dialogue to find out more about the different query possibilities. Alternatively you can hit &quot;CTRL +</p>
+<p>SPACE&quot; in the query editor to get a context sensitive list of possible options.</p>
+<p>FEAT-2553</p>
+<p>Extension</p>
+<p>Product line approach supported by DaVinci Configurator Pro and DaVinci Developer: SWCs and ECUC containers</p>
+<p>can be assigned to platform functions. Selective diff/merge enables simple take-over of complete platform func-</p>
+<p>tions from a baseline project to individual customer projects.</p>
+<p>FEAT-2785</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>The tool allows to merge function related configuration items in one block:</p>
+<p>Selection of functions that shall be merged within the Diff&amp;Merge Assistant auf DaVinci Configurator Pro:</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p>Extension</p>
+<p>The UI of DaVinci Configurator has been improved:</p>
+<p><b>&gt;</b> Basic editor: the expansion and selection state of the tree is restored after switching the displayed variant</p>
+<p><b>&gt;</b> Grids now supports multiple filtered columns</p>
+<p>FEAT-2791</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Tooling</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p><b>Type</b></p>
+<p><b>Description</b></p>
+<p><b>Change ID</b></p>
+<p><b>&gt;</b> If a new element is created in the tree this new element is selected automatically</p>
+<p>Extension</p>
+<p>The CAN baudrate configuration has been improved for devices that result in many possible register settings.</p>
+<p>FEAT-2879</p>
+<p>Extension</p>
+<p>DaVinci Configurator Pro.WF now provides more powerful automation interface APIs to access and modify the</p>
+<p>task- and data mapping as well as the creation of component prototypes.</p>
+<p>This feature allows automation scripts to be created with less effort as the APIs abstract from the complex AR</p>
+<p>data structure.</p>
+<p>FEAT-2942</p>
+<p>Extension</p>
+<p>When migrating a project from one SIP to another the derivative selection is now migrated.</p>
+<p>FEAT-3011</p>
+<p>Extension</p>
+<p>DaVinci Configurator Pro now provides the possibility to split a SystemTemplate with prebuild variance into non</p>
+<p>variant configuration files that can be used in the process to setup a new project.</p>
+<p>The variant split is available as command line option of DaVinci Configurator Pro (DVCfgCmd.exe): using --</p>
+<p>exportPreBuildVariants &lt;VARIANTS&gt;</p>
+<p>Find out the full command and more details in the Help dialogue.</p>
+<p>FEAT-3095</p>
+<p>Extension</p>
+<p>DaVinci Configurator Pro now blocks the possibility to configure PublishedInformation (defined in the BSWMD)</p>
+<p>as it is defined by AUTOSAR. This feature is currently limited to non MICROSAR modules.</p>
+<p>STORY-1021</p>
+<p>Information</p>
+<p>DaVinci Developer has been realized as a 64-bit application to support large projects with more available</p>
+<p>memory.</p>
+<p>FEAT-2944</p>
+<p>Release Notes FCA SLP5 | Release 19</p>
+<p><b>Tooling</b></p>
+</body>
+</html>
+{% endraw %}

@@ -1,0 +1,425 @@
+---
+layout: default
+title: AN-ISC-8-1188_Custom_Flash_Drivers
+nav_order: 6
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p> </p>
+<p> </p>
+<p><b>Custom Flash Drivers </b></p>
+<p>Version 1.0 </p>
+<p>2016-02-16 </p>
+<p>Application Note AN-ISC-8-1188 </p>
+<p><b>Author </b></p>
+<p>Alexander Starke </p>
+<p><b>Restrictions </b></p>
+<p>Customer confidential – Vector decides </p>
+<p><b>Abstract </b></p>
+<p>This application note describes the steps to be taken when embedding a custom flash </p>
+<p>driver into a Vector Bootloader </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>Table of Contents </b></p>
+<p><b>1</b></p>
+<p> </p>
+<p><b>Overview ........................................................................................................................................ 2</b></p>
+<p> </p>
+<p><b>2</b></p>
+<p> </p>
+<p><b>HIS Flash Driver Interface ............................................................................................................ 2</b></p>
+<p> </p>
+<p><b>3</b></p>
+<p> </p>
+<p><b>Polling Function ............................................................................................................................ 3</b></p>
+<p> </p>
+<p>3.1</p>
+<p> </p>
+<p>General Information ............................................................................................................. 3</p>
+<p> </p>
+<p>3.2</p>
+<p> </p>
+<p>Internal Bootloader Time Base ............................................................................................ 4</p>
+<p> </p>
+<p>3.3</p>
+<p> </p>
+<p>Watchdog Handling .............................................................................................................. 4</p>
+<p> </p>
+<p>3.4</p>
+<p> </p>
+<p>(Adaptive) RCR-RP Handling .............................................................................................. 4</p>
+<p> </p>
+<p>3.5</p>
+<p> </p>
+<p>Pipelined Programming (Early Acknowledge) ..................................................................... 5</p>
+<p> </p>
+<p>3.6</p>
+<p> </p>
+<p>Pipelined Verification ........................................................................................................... 5</p>
+<p> </p>
+<p><b>4</b></p>
+<p> </p>
+<p><b>Downloadable Flash Driver .......................................................................................................... 6</b></p>
+<p> </p>
+<p><b>5</b></p>
+<p> </p>
+<p><b>Additional Resources ................................................................................................................... 7</b></p>
+<p> </p>
+<p><b>6</b></p>
+<p> </p>
+<p><b>Contacts ......................................................................................................................................... 7</b></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Custom Flash Drivers</p>
+<p> </p>
+<p>Copyright © 2016 - Vector Informatik GmbH </p>
+<p>2 </p>
+<p>Contact Information:   www.vector.com   or +49-711-80 670-0 </p>
+<p><b>1 </b></p>
+<p><b>Overview </b></p>
+<p>The Vector Bootloader uses a standardized flash API, which has been developed by the HIS </p>
+<p>consortium. This standardized flash API offers the possibility to easily extend a Vector Bootloader by </p>
+<p>custom flash drivers. </p>
+<p>Custom flash drivers might be used for various reasons: </p>
+<p><b>&gt; </b></p>
+<p>Adding support for updating additional external flash memory devices </p>
+<p><b>&gt; </b></p>
+<p>Adding support for updating additional external EEPROM devices </p>
+<p><b>&gt; </b></p>
+<p>Adding support for multi-processor flashing </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Vector offers implementation services for any of the above options. Please state your use-</p>
+<p>case and we will help you judge whether to implement a solution on your own or use our </p>
+<p>services. </p>
+<p> </p>
+<p> </p>
+<p>This document is intended to provide OEM independent information. If the following explanations do </p>
+<p>not fit with your use-case please do not hesitate to ask for our support. </p>
+<p><b>2 </b></p>
+<p><b>HIS Flash Driver Interface </b></p>
+<p>A thorough description of the HIS flash driver interface can be found online. Please check section 0. </p>
+<p>Typically your delivery is going to contain one or more HIS-compliant drivers which can be treated as </p>
+<p>a blueprint for an own implementation. Please check the following folders: </p>
+<p>.\BSW\Fbl\fbl_flio.* </p>
+<p>.\BSW\Flash\flashdrv.* </p>
+<p>.\BSW\Eep </p>
+<p>The flash API consists of the following functions: </p>
+<p>IO_ErrorType FlashDriver_InitSync( void * ); </p>
+<p>IO_ErrorType FlashDriver_DeinitSync( void * ); </p>
+<p>IO_ErrorType FlashDriver_RReadSync( IO_MemPtrType, IO_SizeType, IO_PositionType ); </p>
+<p>IO_ErrorType FlashDriver_RWriteSync( IO_MemPtrType, IO_SizeType, IO_PositionType ); </p>
+<p>IO_ErrorType FlashDriver_REraseSync( IO_SizeType, IO_PositionType ); </p>
+<p>IO_ErrorType FlashDriver_VerifySync( void * ); </p>
+<p>IO_U32 FlashDriver_GetVersionOfDriver( void ); </p>
+<p>If you implement your own driver you will have to replace “Flash” with you own unique memory device </p>
+<p>descriptor in most cases to avoid name collisions. </p>
+<p>The functions </p>
+<p>InitSync()</p>
+<p> and </p>
+<p>DeinitSync()</p>
+<p> implement the memory device initialization, which </p>
+<p>might include the initialization of additional peripherals, e.g. SPI or I²C. </p>
+<p>The function </p>
+<p>RReadSync()</p>
+<p> is responsible to read the requested amount of data from the provided </p>
+<p>address into the given buffer. The Bootloader assumes that read accesses do not require any address </p>
+<p>alignment. If that is the case such behavior must be abstracted by this function. </p>
+<p>Please note, that the function </p>
+<p>RReadSync()</p>
+<p> deserves special attention. Most, if not all, Bootloader </p>
+<p>flash drivers will implement the </p>
+<p>RReadSync()</p>
+<p> function in the flash driver wrapper (fbl_flio.*). This is to </p>
+<p>allow presence pattern or version checks during start-up, when a downloaded flash driver is not (yet) </p>
+<p>available. Nevertheless it is absolutely valid to solely implement the read logic in the downloadable </p>
+<p>part, if the previously mentioned use-case does not apply. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Custom Flash Drivers</p>
+<p> </p>
+<p>Copyright © 2016 - Vector Informatik GmbH </p>
+<p>3 </p>
+<p>Contact Information:   www.vector.com   or +49-711-80 670-0 </p>
+<p>The </p>
+<p>RWriteSync()</p>
+<p> is responsible to actually write the provided data. When programming </p>
+<p>downloaded data the Bootloader memory stack will take care, that write address and length will </p>
+<p>always be correctly aligned (see also segment size description below). In other use-cases, e.g. when </p>
+<p>the driver is called by custom code, this may not be guaranteed. Hence the driver should ensure only </p>
+<p>correctly aligned address and length parameters are accepted. Additionally this function must verify </p>
+<p>that the provided buffer contents have actually been written, e.g. by implementing a read-back of the </p>
+<p>data. </p>
+<p>The </p>
+<p>REraseSync()</p>
+<p> function shall erase the provided memory range. The Bootloader will provide </p>
+<p>erase regions with the segmentation configured in the flash block table in the configuration tool. If </p>
+<p>multiple physical flash sectors are grouped together in the flash block table this function is responsible </p>
+<p>to abstract the underlying hardware and erase all of them which are in range. Additionally this function </p>
+<p>shall verify that the requested memory range has actually been erased, e.g. by implementing a read-</p>
+<p>back of the data. </p>
+<p>The function </p>
+<p>VerifySync()</p>
+<p>is a Vector extension to the API. </p>
+<p>VerifySync()</p>
+<p> is used if a 3</p>
+<p>rd</p>
+<p>-party </p>
+<p>flash API requires that a certain verify function is called once programming has finished. </p>
+<p>The function </p>
+<p>GetVersionOfDriver()</p>
+<p> is required by some OEMs. For a statically linked driver this </p>
+<p>version is fixed, if the driver is downloadable this function shall provide the version information of the </p>
+<p>downloaded driver if it is available. </p>
+<p>An important property of each memory device is the so called segment size. The segment size is the </p>
+<p>minimum number of bytes that has to be written at once. It has to be defined by each memory driver </p>
+<p>with a value that depends on the hardware characteristics. </p>
+<p>#define FLASH_SEGMENT_SIZE    0x08u </p>
+<p>Another important property is the erase (deleted) value of a memory cell. Most devices implement </p>
+<p>0xFF but some hardware platforms deviate from the convention. </p>
+<p>#define FBL_FLASH_DELETED     0xFFu </p>
+<p>The string FLASH in the previous defines needs to be replaced by the name of your custom flash </p>
+<p>driver. </p>
+<p>Depending on your environment (hardware platform, compiler) a flash driver might be either </p>
+<p>relocatable or non-relocatable. </p>
+<p>Relocatable flash drivers can be downloaded into a RAM buffer which is linked to an arbitrary RAM </p>
+<p>address. The Bootloader enforces that such kind of flash drivers are always downloaded to address </p>
+<p>0x00000000 (address based download). See chapter 4 for additional information regarding the RAM </p>
+<p>buffer handling. </p>
+<p>For non-relocatable flash drivers the RAM buffer needs to be linked to the same address the flash </p>
+<p>driver is linked to. The Bootloader cross-checks the flash driver download address with the RAM buffer </p>
+<p>address (address based download). </p>
+<p>Typically you do not need to set this attribute for your custom driver as it is inherited by the flash driver </p>
+<p>in your delivery. </p>
+<p>#define FLASH_DRIVER_(NOT_)RELOCATABLE </p>
+<p><b>3 </b></p>
+<p><b>Polling Function </b></p>
+<p><b>3.1 </b></p>
+<p><b>General Information </b></p>
+<p>Depending on the OEM and project requirements the Bootloader needs to execute certain tasks </p>
+<p>during flash programming, e.g.: </p>
+<p><b>&gt; </b></p>
+<p>Handle the watchdog </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Custom Flash Drivers</p>
+<p> </p>
+<p>Copyright © 2016 - Vector Informatik GmbH </p>
+<p>4 </p>
+<p>Contact Information:   www.vector.com   or +49-711-80 670-0 </p>
+<p><b>&gt; </b></p>
+<p>Receive bus messages, e.g. the next transfer data (see also 3.5) </p>
+<p><b>&gt; </b></p>
+<p>Trigger RCR-RP messages (request correctly received, response pending) </p>
+<p><b>&gt; </b></p>
+<p>Answer diagnostic status requests </p>
+<p>The Bootloader internally uses the function </p>
+<p>FblLookForWatchdog()</p>
+<p> to implement the above listed </p>
+<p>functionalities. In order to avoid any interferences of your flash driver with the Bootloaders core </p>
+<p>functionality please check that this function: </p>
+<p><b>&gt; </b></p>
+<p>Is unconditionally called by your driver while it is waiting for a hardware operation to complete </p>
+<p>(write, erase, SPI transfer …) </p>
+<p><b>&gt; </b></p>
+<p>Is called by your driver at a “reasonable rate” in each data processing loop </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Implementing a custom flash driver without verifying that the call rate matches the projects </p>
+<p>requirements introduces significant risks. The Bootloader may work as expected on your </p>
+<p>desk, but might fail later on in the field. You should also take performance degradation into </p>
+<p>account, e.g. caused by flash memory aging.  </p>
+<p> </p>
+<p> </p>
+<p>You have to verify the call rate of </p>
+<p>FblLookForWatchdog()</p>
+<p> in your custom flash driver. Vector </p>
+<p>typically adds a GPIO pin toggle in </p>
+<p>ApplFblWdTrigger()</p>
+<p> which is expected to be called with a fixed </p>
+<p>interval (configurable in the configuration tool with a resolution of 1 ms). We observe the pin toggle </p>
+<p>using appropriate measurement hardware (e.g. a scope with statistical functions) to verify the </p>
+<p>implementation. Deviations from the expected toggle rate are documented in the test report of your </p>
+<p>delivery. </p>
+<p><b>3.2 </b></p>
+<p><b>Internal Bootloader Time Base </b></p>
+<p>The Bootloader has an internal 1 ms time base. Make sure to call </p>
+<p>FblLookForWatchdog()</p>
+<p> at least </p>
+<p>each 1 ms, otherwise the Bootloader is going to lose timer events. Be aware, that specific bus </p>
+<p>systems, e.g. FlexRay put further constraints on the required call rate. </p>
+<p>Exception: Bootloaders which use a 3</p>
+<p>rd</p>
+<p>-party flash API (library) that does not allow fulfilling this rule. </p>
+<p>Those Bootloaders implement timer interrupts to ensure proper functionality. </p>
+<p><b>3.3 </b></p>
+<p><b>Watchdog Handling </b></p>
+<p>The watchdog trigger interval depends on your projects requirements. Check that the call frequency of </p>
+<p>FblLookForWatchdog()</p>
+<p> allows the Bootloader to fulfill those requirements. Especially window </p>
+<p>watchdogs might introduce constraints regarding watchdog trigger deviations. </p>
+<p><b>3.4 </b></p>
+<p><b>(Adaptive) RCR-RP Handling </b></p>
+<p>The RCR-RP handling in our Bootloaders has two implementation variants: </p>
+<p>1</p>
+<p>st</p>
+<p>: Before starting a potentially long-lasting operation the Bootloader issues a RCR-RP and further </p>
+<p>RCR-RP messages are generated using the OEM-specific P2</p>
+<p>Server</p>
+<p> time. </p>
+<p>2</p>
+<p>nd</p>
+<p>: The Bootloader issues RCR-RP messages only if required, which is called adaptive RCR-RP. This </p>
+<p>requires that all long-lasting operations are broken down into small time chunks. In between those </p>
+<p>chunks the Bootloader is able to check whether a RCR-RP message has to be generated. See also </p>
+<p>chapter 3.5. </p>
+<p>Both variants only affect the write procedure, which is the processing of a UDS TransferData </p>
+<p>message. During erase we always use the 1</p>
+<p>st</p>
+<p> variant. </p>
+<p>The 1</p>
+<p>st</p>
+<p> variant does not impose any additional constraints on the </p>
+<p>FblLookForWatchdog()</p>
+<p> handling </p>
+<p>(aside from those listed in 3.2). </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Custom Flash Drivers</p>
+<p> </p>
+<p>Copyright © 2016 - Vector Informatik GmbH </p>
+<p>5 </p>
+<p>Contact Information:   www.vector.com   or +49-711-80 670-0 </p>
+<p>The 2</p>
+<p>nd</p>
+<p> variant has some caveats. As already outlined the data to be written has to be broken into </p>
+<p>small chunks. The processing time of a single chunk shall not be larger than P2</p>
+<p>Server</p>
+<p>/2. Please check </p>
+<p>the data sheet of your memory device for the worst-case write timing. The chunk size can be </p>
+<p>configured in the configuration tool and is called “write segmentation”. This size is currently used for all </p>
+<p>flash drivers embedded in the Bootloader. Its size must be aligned with a flash segment sizes. </p>
+<p> </p>
+<p>Figure 3-1 GENy </p>
+<p> </p>
+<p>Figure 3-2 DaVinci Configurator </p>
+<p><b>3.5 </b></p>
+<p><b>Pipelined Programming (Early Acknowledge) </b></p>
+<p>The feature pipelined programming is available for some OEMs and platforms. When using pipelined </p>
+<p>programming the Bootloader optionally starts to receive the next UDS TransferData while it is </p>
+<p>processing (i.e. writing to memory) the previous TransferData, if there is enough spare time during </p>
+<p>data transfer. This is typically the case for slow bus interfaces or platforms with high flash memory </p>
+<p>performance. It improves the total update time of an ECU as the available bus bandwidth can be used </p>
+<p>more efficiently. </p>
+<p>The implemented procedure is similar to the (adaptive) RCR-RP handling, as outlined in the previous </p>
+<p>section (3.4, 2</p>
+<p>nd</p>
+<p> variant). </p>
+<p><b>3.6 </b></p>
+<p><b>Pipelined Verification </b></p>
+<p>The feature pipelined verification is available for some OEMs and platforms. When using pipelined </p>
+<p>verification the Bootloader optionally starts to compute the checksum and/or hash over already written </p>
+<p>data, if there is enough spare time during data transfer. This is typically the case for slow bus </p>
+<p>interfaces or platforms with high computation performance. It improves the total update time of an </p>
+<p>ECU as the final verification step (e.g. RoutineControl CheckMemory) can be executed very fast as </p>
+<p>most work has already been done. </p>
+<p>The basic procedure is similar to that used by (adaptive) RCR-RP handling and pipelined </p>
+<p>programming. The Bootloader takes small chunks of data and starts to compute a checksum and/or </p>
+<p>hash. In between the chunks the Bootloader checks if the next UDS TransferData message has been </p>
+<p>received. The chunk size is configurable in the generation tool, using the parameter “verification </p>
+<p>segmentation”. This size is currently used for all flash drivers embedded in the Bootloader. In most </p>
+<p>cases the read performance of a memory device does not deviate over its live time. The processing </p>
+<p>time of a single chunk shall not be larger than P2</p>
+<p>Server</p>
+<p>/2. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Custom Flash Drivers</p>
+<p> </p>
+<p>Copyright © 2016 - Vector Informatik GmbH </p>
+<p>6 </p>
+<p>Contact Information:   www.vector.com   or +49-711-80 670-0 </p>
+<p><b>4 </b></p>
+<p><b>Downloadable Flash Driver </b></p>
+<p>Some OEMs specify a downloadable flash driver (also called secondary bootloader, SBL). In a few </p>
+<p>cases it might be useful to have a downloadable custom flash driver. </p>
+<p>Advantages: </p>
+<p><b>&gt; </b></p>
+<p>Additional security, as the flash driver code is not located in the ECU during normal operation and </p>
+<p>might thus not unintentionally be executed. </p>
+<p><b>&gt; </b></p>
+<p>Flash driver can be updated in the field. If the flash driver is statically linked with the bootloader a </p>
+<p>bootloader update is the only way to realize an update. This is more complex and not specified by </p>
+<p>most OEMs. </p>
+<p>Disadvantages: </p>
+<p><b>&gt; </b></p>
+<p>Increased complexity inside the Bootloader </p>
+<p><b>&gt; </b></p>
+<p>Increased RAM consumption, all downloaded drivers are stored in RAM </p>
+<p><b>&gt; </b></p>
+<p>Additional post-build steps might be required </p>
+<p>Having a downloadable flash driver requires to split the logic into a flash driver wrapper (we call it </p>
+<p>fbl_flio) and the flash driver itself (flashdrv). </p>
+<p>The tester will then download the flash driver contents during the update procedure. The flash driver </p>
+<p>wrapper is responsible to check if an appropriate flash driver is located in the temporary RAM buffer. </p>
+<p>Thereafter it can use the downloaded flash driver to modify the memory contents as requested by the </p>
+<p>tester. </p>
+<p>There are a few possibilities how to use an additional custom flash driver together with the existing </p>
+<p>Vector flash driver. The most straight-forward solution is to reserve some margin at the end of the 1</p>
+<p>st</p>
+<p> </p>
+<p>flash driver and thereafter append the 2</p>
+<p>nd</p>
+<p> flash driver, typically in a post-build step. This adaptation is </p>
+<p>transparent for the delivered bootloader. Your custom flash driver wrapper must be aware of the </p>
+<p>relative offset, of course. </p>
+<p> </p>
+<p>Figure 4-1 Flash Driver Layout </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>Note </b></p>
+<p>This approach may be the only option, depending on the OEM. For some OEMs the </p>
+<p>Bootloader will only allow the further download, when all configured drivers (downloaded </p>
+<p>and statically linked) were initialized successfully. </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Custom Flash Drivers</p>
+<p> </p>
+<p>Copyright © 2016 - Vector Informatik GmbH </p>
+<p>7 </p>
+<p>Contact Information:   www.vector.com   or +49-711-80 670-0 </p>
+<p>Another option is to download the respective flash driver before downloading the actual data, which </p>
+<p>means having multiple flash driver containers. This procedure is only valid for a few OEMs. </p>
+<p><b>5 </b></p>
+<p><b>Additional Resources </b></p>
+<p>HIS Flash Programming (document overview) </p>
+<p>HIS Flash Driver Specification v130 </p>
+<p>Flash Driver API v213 </p>
+<p>Vector Homepage - Flash Bootloader </p>
+<p>Flash Bootloader Product Information </p>
+<p><b>6 </b></p>
+<p><b>Contacts </b></p>
+<p>For a full list with all Vector locations and addresses worldwide, please visit http://vector.com/contact/. </p>
+<p> </p>
+</body>
+</html>
+{% endraw %}

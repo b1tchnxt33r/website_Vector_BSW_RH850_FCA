@@ -1,0 +1,1224 @@
+---
+layout: default
+title: TechnicalReference_FBL_RH850
+nav_order: 31
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>Flash Bootloader Hardware </b></p>
+<p>TechnicalReference </p>
+<p> </p>
+<p>CANfbl Renesas RH850 </p>
+<p> </p>
+<p> </p>
+<p>Version 1.00.01 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Authors </p>
+<p>Christian Bäuerle; Robert Schäffner </p>
+<p>Status </p>
+<p>Released </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>2 / 23 </p>
+<p><b>Document Information </b></p>
+<p><b>History </b></p>
+<p><b>Author </b></p>
+<p><b>Date </b></p>
+<p><b>Version </b></p>
+<p><b>Remarks </b></p>
+<p>Christian Bäuerle </p>
+<p>2013-06-12 </p>
+<p>01.00.00 </p>
+<p>Creation </p>
+<p>Robert Schäffner </p>
+<p>2015-05-29 </p>
+<p>01.00.01 </p>
+<p>Removed template parts </p>
+<p>Table 1-1  </p>
+<p>History of the Document </p>
+<p><b>Reference Documents </b></p>
+<p><b>No. </b></p>
+<p><b>Source </b></p>
+<p><b>Title </b></p>
+<p><b>Document No. </b></p>
+<p><b>Version </b></p>
+<p>[1] </p>
+<p>Renesas </p>
+<p>RH850/F1L Group User’s manual </p>
+<p> </p>
+<p> </p>
+<p>[2] </p>
+<p>Renesas </p>
+<p>V850E3v5 Architecture Specifications </p>
+<p> </p>
+<p> </p>
+<p>[3] </p>
+<p>Renesas </p>
+<p>T01 - Self-Programming Library for  </p>
+<p>Code Flash (RV40 Flash) </p>
+<p>EALC-SD-1045-</p>
+<p>1E00b </p>
+<p> </p>
+<p>Table 1-2  </p>
+<p>References Documents </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>3 / 23 </p>
+<p><b>Contents </b></p>
+<p><b>1</b></p>
+<p> </p>
+<p><b>Introduction .................................................................................................................... 6</b></p>
+<p> </p>
+<p>1.1</p>
+<p> </p>
+<p>Configurations covered by this Technical Reference ....................................... 6</p>
+<p> </p>
+<p>1.1.1</p>
+<p> </p>
+<p>Microcontrollers ............................................................................................... 6</p>
+<p> </p>
+<p>1.2</p>
+<p> </p>
+<p>Compilers ........................................................................................................ 6</p>
+<p> </p>
+<p><b>2</b></p>
+<p> </p>
+<p><b>Memory Model ................................................................................................................ 7</b></p>
+<p> </p>
+<p>2.1</p>
+<p> </p>
+<p>[#hw_mem] - Design the Memory Layout ........................................................ 7</p>
+<p> </p>
+<p>2.2</p>
+<p> </p>
+<p>Memory Mapping ............................................................................................ 7</p>
+<p> </p>
+<p>2.2.1</p>
+<p> </p>
+<p>Memory mapping of application and FBL ........................................................ 7</p>
+<p> </p>
+<p>2.2.2</p>
+<p> </p>
+<p>Memory range of the FBL ................................................................................ 7</p>
+<p> </p>
+<p>2.2.3</p>
+<p> </p>
+<p>Memory range of the application ..................................................................... 8</p>
+<p> </p>
+<p>2.2.4</p>
+<p> </p>
+<p>Bootloader Sections ........................................................................................ 8</p>
+<p> </p>
+<p>2.2.5</p>
+<p> </p>
+<p>Compiler-/Linker specific memory mapping issues .......................................... 9</p>
+<p> </p>
+<p>2.3</p>
+<p> </p>
+<p>[#hw_intvect] - The Interrupt Vector Tables ...................................................... 9</p>
+<p> </p>
+<p>2.3.1</p>
+<p> </p>
+<p>Bootloader Vector Table ................................................................................ 10</p>
+<p> </p>
+<p>2.3.2</p>
+<p> </p>
+<p>Application Vector Table ................................................................................ 10</p>
+<p> </p>
+<p>2.3.3</p>
+<p> </p>
+<p>Vector base address registers ....................................................................... 11</p>
+<p> </p>
+<p>2.3.4</p>
+<p> </p>
+<p>Special measures for NMI ............................................................................. 11</p>
+<p> </p>
+<p><b>3</b></p>
+<p> </p>
+<p><b>Hardware Layer ............................................................................................................ 12</b></p>
+<p> </p>
+<p>3.1</p>
+<p> </p>
+<p>Flash Memory and Flash Driver .................................................................... 12</p>
+<p> </p>
+<p>3.1.1</p>
+<p> </p>
+<p>Special clock parameters and clock settings.................................................. 12</p>
+<p> </p>
+<p>3.1.2</p>
+<p> </p>
+<p>Flash Code Buffer Size ................................................................................. 12</p>
+<p> </p>
+<p>3.1.3</p>
+<p> </p>
+<p>ID Authentication ........................................................................................... 12</p>
+<p> </p>
+<p>3.1.4</p>
+<p> </p>
+<p>Rebuilding the flash driver binary .................................................................. 13</p>
+<p> </p>
+<p>3.2</p>
+<p> </p>
+<p>[#hw_size] - Flash Segment Size .................................................................. 14</p>
+<p> </p>
+<p>3.3</p>
+<p> </p>
+<p>CAN Driver .................................................................................................... 14</p>
+<p> </p>
+<p>3.3.1</p>
+<p> </p>
+<p>CAN Channels .............................................................................................. 14</p>
+<p> </p>
+<p>3.3.1.1</p>
+<p> </p>
+<p>Number of Supported Channels ...................................................... 15</p>
+<p> </p>
+<p>3.3.1.2</p>
+<p> </p>
+<p>Channel Settings for Pipelined Programming .................................. 16</p>
+<p> </p>
+<p>3.3.2</p>
+<p> </p>
+<p>Sleep Mode ................................................................................................... 16</p>
+<p> </p>
+<p>3.4</p>
+<p> </p>
+<p>Timer ............................................................................................................. 16</p>
+<p> </p>
+<p>3.5</p>
+<p> </p>
+<p>Startup Code ................................................................................................. 17</p>
+<p> </p>
+<p>3.6</p>
+<p> </p>
+<p>Hardware Registers....................................................................................... 17</p>
+<p> </p>
+<p>3.7</p>
+<p> </p>
+<p>Misc .............................................................................................................. 18</p>
+<p> </p>
+<p><b>4</b></p>
+<p> </p>
+<p><b>Build .............................................................................................................................. 19</b></p>
+<p> </p>
+<p>4.1</p>
+<p> </p>
+<p>Code executed from RAM ............................................................................. 19</p>
+<p> </p>
+<p>4.1.1</p>
+<p> </p>
+<p>Use of relocatable Code ................................................................................ 19</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>4 / 23 </p>
+<p>4.1.2</p>
+<p> </p>
+<p>Use of Code linked to RAM ........................................................................... 19</p>
+<p> </p>
+<p>4.1.3</p>
+<p> </p>
+<p>Greenhills ...................................................................................................... 20</p>
+<p> </p>
+<p>4.2</p>
+<p> </p>
+<p>Compiler Options .......................................................................................... 20</p>
+<p> </p>
+<p>4.2.1</p>
+<p> </p>
+<p>Inline Function Prologues .............................................................................. 20</p>
+<p> </p>
+<p>4.2.2</p>
+<p> </p>
+<p>Optimizations ................................................................................................ 21</p>
+<p> </p>
+<p>4.3</p>
+<p> </p>
+<p>Linker Parameters ......................................................................................... 21</p>
+<p> </p>
+<p><b>5</b></p>
+<p> </p>
+<p><b>Glossary and Abbreviations ........................................................................................ 22</b></p>
+<p> </p>
+<p>5.1</p>
+<p> </p>
+<p>Abbreviations ................................................................................................ 22</p>
+<p> </p>
+<p><b>6</b></p>
+<p> </p>
+<p><b>Contact .......................................................................................................................... 23</b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>5 / 23 </p>
+<p><b>Illustrations </b></p>
+<p>Figure 1-1</p>
+<p> </p>
+<p>Manuals and References for the Flash Bootloader ..................................... 6</p>
+<p> </p>
+<p>Figure 2-1</p>
+<p> </p>
+<p>Memory Mapping ........................................................................................ 7</p>
+<p> </p>
+<p>Figure 2-2</p>
+<p> </p>
+<p>Flash Block Configuration using GENy ....................................................... 8</p>
+<p> </p>
+<p>Figure 3-1</p>
+<p> </p>
+<p>Clock parameter setting in GENy .............................................................. 12</p>
+<p> </p>
+<p>Figure 3-2</p>
+<p> </p>
+<p>Directory of flash driver project ................................................................. 13</p>
+<p> </p>
+<p>Figure 3-3</p>
+<p> </p>
+<p>CAN channel configuration in GENy ......................................................... 15</p>
+<p> </p>
+<p>Figure 3-4</p>
+<p> </p>
+<p>Maximum number of CAN channels ......................................................... 16</p>
+<p> </p>
+<p>Figure 3-5</p>
+<p> </p>
+<p>Component Hw_Rh850Cpu ...................................................................... 18</p>
+<p> </p>
+<p><b> </b></p>
+<p><b>Tables </b></p>
+<p>Table 1-1 </p>
+<p> </p>
+<p>History of the Document ............................................................................. 2</p>
+<p> </p>
+<p>Table 1-2 </p>
+<p> </p>
+<p>References Documents .............................................................................. 2</p>
+<p> </p>
+<p>Table 2-1 </p>
+<p> </p>
+<p>Bootloader memory sections ...................................................................... 9</p>
+<p> </p>
+<p>Table 3-1 </p>
+<p> </p>
+<p>Timer Configuration Code ......................................................................... 17</p>
+<p> </p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>6 / 23 </p>
+<p><b>1 </b></p>
+<p><b>Introduction </b></p>
+<p>This  document  covers  the  hardware-related  particularities  of  the  Flash  Bootloader.  It </p>
+<p>complements the explanations started in the user manual with hardware-specific details. </p>
+<p>All references there are resumed here in this document again and explained in detail. </p>
+<p>The connection between a reference in the user manual and its specific description in this </p>
+<p>document is the headline. Both the reference and its explanation can be found below the </p>
+<p>same headline. </p>
+<p><b>User Manual</b></p>
+<p><b>Technical</b></p>
+<p><b>Reference</b></p>
+<p><b>Hardware</b></p>
+<p><b>Technical</b></p>
+<p><b>Reference</b></p>
+<p><b>OEM</b></p>
+<p><b>Flash Tool</b></p>
+<p><b>Documentation</b></p>
+<p><b>You are here</b></p>
+<p>#hw_&lt;xxx&gt;</p>
+<p>headline</p>
+<p>headline</p>
+<p>#oem_&lt;yyy&gt;</p>
+<p> </p>
+<p>Figure 1-1 </p>
+<p>Manuals and References for the Flash Bootloader </p>
+<p>Additionally  this  headline  is marked  with  the  ID  of  the  reference  from  the  User  Manual. </p>
+<p>This ID looks like: </p>
+<p><b>[#hw_&lt;xxx&gt;]</b></p>
+<p>. </p>
+<p><b>1.1 </b></p>
+<p><b>Configurations covered by this Technical Reference </b></p>
+<p>This Technical Reference covers the following controllers and compilers: </p>
+<p><b>1.1.1 </b></p>
+<p><b>Microcontrollers </b></p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Renesas RH850 F1L </p>
+<p><b>1.2 </b></p>
+<p><b>Compilers </b></p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>GreenHills </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>7 / 23 </p>
+<p><b>2 </b></p>
+<p><b>Memory Model </b></p>
+<p><b>2.1 </b></p>
+<p><b>[#hw_mem] - Design the Memory Layout </b></p>
+<p>For more general information about this see the UserManual_FlashBootloader in the chapter <b>Design </b></p>
+<p><b>Memory Layout</b>. </p>
+<p><b>2.2 </b></p>
+<p><b>Memory Mapping </b></p>
+<p><b>2.2.1 </b></p>
+<p><b>Memory mapping of application and FBL </b></p>
+<p>The FBL will reside in the memory space starting from the address 0, because the interrupt </p>
+<p>vector table is also located at this address and it must be part of the FBL. This is required </p>
+<p>so that the bootloader is started after PowerOn or reset. </p>
+<p> </p>
+<p><b>F  l  a  s  h    M  e  m  o  r  y</b></p>
+<p><b>R  A  M</b></p>
+<p><b>F l a s h  M e m o r y</b></p>
+<p><b>Memory Map</b></p>
+<p><b>F  l  a  s  h    M  e  m  o  r  y</b></p>
+<p><b>R  A  M</b></p>
+<p><b>F l a s h  M e m o r y</b></p>
+<p><b>Memory Map</b></p>
+<p>Application</p>
+<p><b>Interrupt Vector Table</b></p>
+<p><b>[FBL]</b></p>
+<p><b>IsValid</b></p>
+<p></p>
+<p><b>Invalidate</b></p>
+<p></p>
+<p><b>Validate</b></p>
+<p><b>Bootloader</b></p>
+<p>Transport Protocol,</p>
+<p>KWP2000-Services,</p>
+<p>CAN Driver</p>
+<p><b>Interrupt Vector Table</b></p>
+<p><b>[Application]</b></p>
+<p><b>FLAG  0 invalid, 1 vaild</b></p>
+<p><b>Flash Driver</b></p>
+<p> </p>
+<p>Figure 2-1 </p>
+<p>Memory Mapping </p>
+<p><b>2.2.2 </b></p>
+<p><b>Memory range of the FBL </b></p>
+<p>Depending on the Bootloader configuration and used compiler optimization, the Bootloader </p>
+<p>occupies  one  or  more  flash  blocks.  These  flash  blocks  are  used  by  the  Bootloader </p>
+<p>exclusively and have to be configured to “Protected” in the flash block table to protect the </p>
+<p>Bootloader from being erased or overwritten. </p>
+<p>The  size  of  the  FBL  depends  on  the  used  car  manufacturer  specification  and  the </p>
+<p>configuration. </p>
+<p>Depending </p>
+<p>on </p>
+<p>these </p>
+<p>requirements, </p>
+<p>the </p>
+<p>FBL </p>
+<p>can </p>
+<p>exceed </p>
+<p>the </p>
+<p>size </p>
+<p>of </p>
+<p>32Kbytes. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>8 / 23 </p>
+<p> </p>
+<p><b>2.2.3 </b></p>
+<p><b>Memory range of the application </b></p>
+<p>The application can start directly after the Bootloader and may occupy all memory regions </p>
+<p>which are not reserved for the Bootloader. The Flash sectors which can be used by the </p>
+<p>application are configured in the “FlashBlockTable” configuration dialog in the generation </p>
+<p>tool GENy, setting the device type to “Flash”. </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 2-2 </p>
+<p>Flash Block Configuration using GENy </p>
+<p><b>2.2.4 </b></p>
+<p><b>Bootloader Sections </b></p>
+<p>There  are  a  few  RAM/ROM  sections  that  must  be  defined  to  a  fixed  location. They  are </p>
+<p>used  to  locate  the  data  within  a  determined  memory  area.  It  may  also  be  necessary  to </p>
+<p>specify </p>
+<p>shared </p>
+<p>memory </p>
+<p>locations </p>
+<p>that </p>
+<p>are </p>
+<p>accessed </p>
+<p>within </p>
+<p>the </p>
+<p>application </p>
+<p>and </p>
+<p>the </p>
+<p>Bootloader (e.g. interrupt vector table of the application or the FBL header). </p>
+<p>The following sections must be defined in the linker command file: </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>9 / 23 </p>
+<p><b>Section Name </b></p>
+<p><b>Address </b></p>
+<p>.intvect </p>
+<p>The interrupt vector table of the bootloader at address 0 </p>
+<p>.FBLHEADER </p>
+<p>This section defines the location of the Bootloader header structure </p>
+<p>“FblHeader”. This structure includes information like the Bootloader version, </p>
+<p>the start address of the Bootloader, etc. </p>
+<p>This address must be compliant to the address configured in the generation </p>
+<p>tool in the field “Header Address” in the FBL-options. </p>
+<p>.APPLVECT </p>
+<p>Start address of application interrupt vector table validation flag. </p>
+<p>The application interrupt vector table flag is used to determine if an application </p>
+<p>was downloaded and to get the start address of the application. Normally, the </p>
+<p>section APPLVECT should be placed right before the application interrupt </p>
+<p>vector table. </p>
+<p>FLASHDRV </p>
+<p>Allocates the memory for the flash driver. The size of the array is defined in </p>
+<p>the generation tool as the “Flash code buffer size (bytes)” parameter. </p>
+<p>The array flashCode[] allocates the memory. </p>
+<p>Please note that there can be additional flashCode[]-arrays if there is more </p>
+<p>than one flash driver variant present (e.g. if the OEM specification requires a </p>
+<p>downloadable driver and the Bootloader uses a compiled in driver for the </p>
+<p>EepM module. </p>
+<p>Table 2-1  </p>
+<p>Bootloader memory sections </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Please note that depending on the used car manufacturer, some other sections must </p>
+<p>be also included. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>Linker command file examples can be found in document chapter Linker Parameters. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>2.2.5 </b></p>
+<p><b>Compiler-/Linker specific memory mapping issues </b></p>
+<p> </p>
+<p><b>2.3 </b></p>
+<p><b>[#hw_intvect] - The Interrupt Vector Tables </b></p>
+<p>For more general information about this see the UserManual_FlashBootloader in the chapter The Interrupt </p>
+<p>Vector Tables and Fbl_vect.c / Applvect.c(.h) - The Interrupt Vector Tables. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>10 / 23 </p>
+<p><b>2.3.1 </b></p>
+<p><b>Bootloader Vector Table </b></p>
+<p>The interrupt vector table of the bootloader covers the exception vectors at the offsets from </p>
+<p>0x00 – 0xF0. These are the vectors of RESET, SYSERR, HVTRAP, up to FEINT. All these </p>
+<p>vectors reference the startup code of the bootloader to make sure that these events are </p>
+<p>handled  even  if  no  valid  application  is  available.  If  a  special  handling  of  one  of  these </p>
+<p>vectors  is  needed,  please  adapt  the  bootloader  vector  table  fbl_vect.c  to  implement  a </p>
+<p>specific handler call. </p>
+<p>Besides  these  exceptions,  no  other  vectors  are  implemented  in  the  bootloader  vector </p>
+<p>table. Since exception/interrupt control registers are available that permit the remapping of </p>
+<p>the vector table address, it is no longer necessary to use the redirection mechanism from </p>
+<p>bootloader vector table to application vector table with jump opcodes.  </p>
+<p>It is therefore mandatory that download applications initialize the vector base registers on </p>
+<p>startup and before interrupts are enabled. </p>
+<p> </p>
+<p><b>2.3.2 </b></p>
+<p><b>Application Vector Table </b></p>
+<p>The application vector table consists of the reset vector entry only. This entry is used by </p>
+<p>the bootloader to start the application if it is valid after Reset or PowerOn. It also provides </p>
+<p>a flag that tells the Bootloader that the application interrupt vector table is valid/present. </p>
+<p>This flag must be set to APPLVECT_FROM_APPL in the application. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The fbl_applvect.c file doesn’t contain the application vector table itself.  </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>This table must be located at a fixed address to provide the Bootloader with the </p>
+<p>memory address of the application interrupt vector table validation flag. Please make </p>
+<p>sure to locate the application interrupt vector table validation flag at the same address </p>
+<p>in the Bootloader and in the application itself. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>An example implementation is provided with every Bootloader delivery: </p>
+<p></p>
+<p> The Bootloader demonstration project includes a placeholder called fbl_applvect.c </p>
+<p></p>
+<p> The demonstration application includes the file applvect.c. This file includes the </p>
+<p>address of the application’s startup code which is used to start the application </p>
+<p>software by the Bootloader. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>11 / 23 </p>
+<p><b>2.3.3 </b></p>
+<p><b>Vector base address registers </b></p>
+<p>The RH850 has got three Exception/Interrupt control registers. RBASE is the Reset Base </p>
+<p>Register  and  contains  the  reset  vector  address.  The  exception  vector  base  address  is </p>
+<p>controlled  by  the  EBASE  register. The  INTBP  register provides  the  base address  of  the </p>
+<p>interrupt handler address table. For detailed information for these registers please see [3]. </p>
+<p>These  registers  permit  to  store  the  reset  vector,  the  exception  vectors  and  the  interrupt </p>
+<p>vectors at three different locations. Since the bootloader only provides the reset- and the </p>
+<p>exception vectors, it is important to initialize RBASE and EBASE in the bootloader startup </p>
+<p>code. </p>
+<p><b>2.3.4 </b></p>
+<p><b>Special measures for NMI </b></p>
+<p>The NMI (FENMI) is handled by the Bootloader’s startup code. Normally, the NMI handlers </p>
+<p>invoke the startup code of the Bootloader to restart the Bootloader after a NMI occurred. If </p>
+<p>NMI  handling  is  required  in  your  Bootloader,  you  have  to  implement  the  corresponding </p>
+<p>handlers. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>While restarting the Bootloader can be an appropriate choice, the application software </p>
+<p>normally has to handle NMIs. Please ensure your application software includes the </p>
+<p>needed handlers and activates its own table by setting the corresponding base register. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>12 / 23 </p>
+<p><b>3 </b></p>
+<p><b>Hardware Layer </b></p>
+<p>The  relevant  hardware  components  of  the  Flash-Bootloader  are  the  CAN-controller,  the </p>
+<p>hardware-timer  and  flash  memory.  This  chapter  describes  the  relevant  properties  and </p>
+<p>configuration settings for these components. </p>
+<p><b>3.1 </b></p>
+<p><b>Flash Memory and Flash Driver </b></p>
+<p>The flash driver uses the Renesas Self Programming Library (FCL) for flash programming. </p>
+<p>The flash driver file flashdrv.c performs an interface adaption between the bootloader (HIS </p>
+<p>– interface) and the FCL.  </p>
+<p><b>3.1.1 </b></p>
+<p><b>Special clock parameters and clock settings </b></p>
+<p>The  FCL  requires  the  CPU  clock  (CPUCLK)  frequency  as  a  parameter.  The  bootloader </p>
+<p>calls the flash driver with the value that is configured in the GENy FblDrvCan_-component  </p>
+<p>Internal System Clock as a parameter. Please make sure that you enter the correct value </p>
+<p>in GENy as shown below. </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 3-1 </p>
+<p>Clock parameter setting in GENy </p>
+<p><b>3.1.2 </b></p>
+<p><b>Flash Code Buffer Size </b></p>
+<p>The  bootloader  reserves  a  configurable  amount  of  RAM  to  store  the  flash  driver.  Per </p>
+<p>default,  8KBytes  are  reserved  for  this  buffer.  The  flash  driver  size  is  about  6KBytes. </p>
+<p>Depending on the used compiler, flash technology and the compiler options the size of the </p>
+<p>flash driver may be different. Please refer to the delivered flashdrv.hex file for the actual </p>
+<p>size  of  the  flash  driver.  It  is  necessary  to  keep  in  mind  that  future  updates  of  the  flash </p>
+<p>driver can be of greater size so that it is recommended to have a sufficient buffer size in </p>
+<p>reserve.  </p>
+<p><b>3.1.3 </b></p>
+<p><b>ID Authentication </b></p>
+<p>The  RH850  requires  an  ID  authentication  when  the  flash  library  is  initialized.  The  ID </p>
+<p>consists </p>
+<p>of </p>
+<p>four </p>
+<p>32 </p>
+<p>bit </p>
+<p>unsigned </p>
+<p>integer </p>
+<p>values. </p>
+<p>The </p>
+<p>FBL </p>
+<p>uses </p>
+<p>the </p>
+<p>defines </p>
+<p>FLASH_AUTH_ID_0, FLASH_AUTH_ID_1, FLASH_AUTH_ID_2 and FLASH_AUTH_ID_3 </p>
+<p>to  specify  these  four  ID  values.  Per  default,  all  ID-  values  are  set  to  FFFFFFFFh.  It  is </p>
+<p>possible  to  redefine  these  ID  codes  to  specific  values  by  defining  the  codes  in  a  user-</p>
+<p>configuration file for GENy: </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>13 / 23 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>User configuration file fragment with authentication ID defines: </p>
+<p>/*-----------------------------------------------------------------------------*/ </p>
+<p># define FLASH_AUTH_ID_0 0xFFFFFFFFul </p>
+<p># define FLASH_AUTH_ID_1 0xFFFFFFFFul </p>
+<p># define FLASH_AUTH_ID_2 0xFFFFFFFFul </p>
+<p># define FLASH_AUTH_ID_3 0xFFFFFFFFul </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>3.1.4 </b></p>
+<p><b>Rebuilding the flash driver binary  </b></p>
+<p>The flash driver is delivered with a build project based on the Vector MakeSupport. It can </p>
+<p>be found in the delivery in the Flash folder that is located in BSW. </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 3-2 </p>
+<p>Directory of flash driver project </p>
+<p>The  subdirectory  “Build”  contains  a  build  system  to  rebuild  the flash  driver. You  have  to </p>
+<p>adapt your compilers installation path in the file “Makefile”. Then the flash driver can be </p>
+<p>rebuilt by executing m.bat. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>Compiler path setting in Makefile: </p>
+<p>#------------------------------------------------------------------------------ </p>
+<p>#------------------------- MUST be filled out --------------------------------- </p>
+<p># Define Compiler path </p>
+<p># E.g.: COMPILER_BASE = C:\Uti\HC08\HIWARE </p>
+<p>#       COMPILER_BIN  = $(COMPILER_BASE)\prog </p>
+<p>#       COMPILER_INC  = $(COMPILER_BASE)\lib\hc08c\include </p>
+<p>#       COMPILER_LIB  = $(COMPILER_BASE)\lib\hc08c\lib </p>
+<p>#------------------------------------------------------------------------------ </p>
+<p>COMPILER_BASE = D:\uti\PPC\WindRiver\5.9.0\diab\5.9.0.0 </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>14 / 23 </p>
+<p> </p>
+<p>When rebuilding the flash driver it is important to consider compiler options, linker mapping </p>
+<p>and configuration settings of the FCL. Bootloader and flash driver have been tested with </p>
+<p>the settings of the delivery. Other settings have not been tested and should not be used. </p>
+<p>The  FCL  permits  several  configurations.  For  further  details  see  the  FCL  configuration </p>
+<p>header file fcl_cfg.h and [3].  </p>
+<p>It is mandatory that the execution mode of the FCL is configured to use the status check </p>
+<p>by </p>
+<p>user. </p>
+<p>This </p>
+<p>is </p>
+<p>done </p>
+<p>in </p>
+<p>file </p>
+<p>fcl_cfg.h </p>
+<p>by </p>
+<p>setting </p>
+<p>the </p>
+<p>define </p>
+<p>switch </p>
+<p>R_FCL_COMMAND_EXECUTION_MODE        to  R_FCL_HANDLER_CALL_USER.  This </p>
+<p>permits watchdog servicing and handling of other dynamic tasks by the bootloader flash </p>
+<p>driver during flash operations. This setting is already configured in the bootloader delivery </p>
+<p>and must not be changed. </p>
+<p>Some  compilers support  a  small  data  area option  (SDA).  If  this  compiler option  is used </p>
+<p>please make sure that the corresponding base pointers have got the same value in the </p>
+<p>bootloader and the flash driver.  </p>
+<p>The  flash  driver  is  not  relocatable.  The  RAM  buffer  array  for  the  flash  driver  in  the </p>
+<p>bootloader needs to be located at the exactly same address as the address of the flash </p>
+<p>driver itself. </p>
+<p>After the build process, the hex file of the flash driver is probably segmented and consists </p>
+<p>of more than on memory segment. Most bootloader implementations do not support the </p>
+<p>download of a segmented flash driver. Therefore, it is necessary to fill the gaps between </p>
+<p>the segments with fill code in order to obtain a single-region file. This can be done by a </p>
+<p>batch process using HexView. </p>
+<p><b>3.2 </b></p>
+<p><b> [#hw_size] - Flash Segment Size </b></p>
+<p>For more general information about this see the UserManual_FlashBootloader in the chapter <b>Flash </b></p>
+<p><b>Segment Size </b></p>
+<p>The flash segment size describes the minimum writable data size. The flash segment size </p>
+<p>of the RH850 F1L is 256 bytes. Depending on the OEM reprogramming requirements, it is </p>
+<p>necessary  to  align  the  download  addresses  to  integer  multiple  of  this  size. This  can  be </p>
+<p>accomplished by an additional processing step with HexView after building the application. </p>
+<p> </p>
+<p><b>3.3 </b></p>
+<p><b>CAN Driver </b></p>
+<p><b>3.3.1 </b></p>
+<p><b>CAN Channels </b></p>
+<p>The channel which is used for communication can be chosen in GENy. Depending on the </p>
+<p>derivative, different possibilities are provided. </p>
+<p>The  channel  configuration  dialog  is  the  same  for  the  bootloader  CAN  driver  and  the </p>
+<p>standard  Vector  CAN  driver.  Since  the  standard  Vector  CAN  driver  provides  a  greater </p>
+<p>flexibility than the bootloader CAN driver, there are several options in this dialog that are </p>
+<p>not relevant for FBL configuration. </p>
+<p>The relevant settings for the FBL are: </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>15 / 23 </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>“BCFG” and “Bustiming Configuration” for setting up the baud rate </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>“Physical Controller” for setting the CAN channel </p>
+<p> </p>
+<p> </p>
+<p>Figure 3-3 </p>
+<p>CAN channel configuration in GENy </p>
+<p>The Acceptance Filter Configuration can be ignored because the FBL uses a fixed set of </p>
+<p>CAN message objects for download communication. CAN interrupt priority, FullCAN object </p>
+<p>allocation, BasicCan and RX fifo settings are also not relevant for the FBL. </p>
+<p> </p>
+<p><b>3.3.1.1 </b></p>
+<p><b>Number of Supported Channels </b></p>
+<p>The  RSCAN  cell  supports  a  different  number  of  physical  CAN  channels.  In  the  field </p>
+<p>“Maximum number of CAN channels” of the component FblDrvCan_Rh850RscanCrx, the </p>
+<p>actual number of channels of the current derivative needs to be entered. When a physical </p>
+<p>CAN  channel  is  chosen  in  the  “Physical  Controller”  field,  GENy  checks  if  this  selection </p>
+<p>complies  with  the  configured  maximum  number  of  CAN  channels  in  order  to  avoid </p>
+<p>incorrect configurations. In case of a mismatch, GENy generates an error message. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>16 / 23 </p>
+<p> </p>
+<p> </p>
+<p>Figure 3-4 </p>
+<p>Maximum number of CAN channels </p>
+<p><b>3.3.1.2 </b></p>
+<p><b>Channel Settings for Pipelined Programming </b></p>
+<p>For pipelined programming, more than one (logical) channel can be configured, but only </p>
+<p>one  physical  channel  is  used.  If  more  than  one  logical  channel  is  mapped  to  the  same </p>
+<p>physical  channel  in  the  “Physical  controller”  field,  GENY  generates  an  error  message. </p>
+<p>Therefore,  please  set  the  Physical  controller  to  a  different  value  for  the  other  logical </p>
+<p>channels. GENy generates the bootloader configuration for the physical channel according </p>
+<p>to the setting of logical channel 0. </p>
+<p> </p>
+<p><b>3.3.2 </b></p>
+<p><b>Sleep Mode </b></p>
+<p>The  implementation  of  FblCanSleep()  enters  the  reset  mode  of  the  bootloader  CAN </p>
+<p>channel and deactivates the CAN clock. </p>
+<p>Since  the  CAN  cell  does  not </p>
+<p>provide </p>
+<p>a  means  to  detect </p>
+<p>the  sleep  state,  function </p>
+<p>FblCanIsAsleep() always returns 0 and cannot be used to detect a wakeup condition. </p>
+<p><b>3.4 </b></p>
+<p><b>Timer </b></p>
+<p>The hardware independent modules of the Bootloader require a 1ms time base to derive </p>
+<p>the necessary call cycles of cyclic functions from that time base. </p>
+<p>The RH850 uses the Timer Array Unit D (TAUD). One channel is used to generate the 1ms </p>
+<p>time base. An additional channel is used as a free-running timer that can be used as a </p>
+<p>base for generating the security access seed value. </p>
+<p>Like the other hardware specific configurations, the timer module is also configured with </p>
+<p>the configuration tool GENy. TAUD is supplied with the PCLK.  Please specify the  PCLK </p>
+<p>frequency of your system as the timer clock frequency. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>17 / 23 </p>
+<p><b>Symbolic Constant </b></p>
+<p><b>Description </b></p>
+<p>FBL_TIMER_RELOAD_VALUE </p>
+<p>Timer reload value for 1ms base cycle. </p>
+<p>Table 3-1  </p>
+<p>Timer Configuration Code </p>
+<p> </p>
+<p><b>3.5 </b></p>
+<p><b>Startup Code </b></p>
+<p>There is a sample startup code provided with the Bootloader demonstration project. This </p>
+<p>startup code performs several configuration and preparation tasks before the Bootloader’s </p>
+<p>main function can be started. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>The startup code is provided as a part of the Bootloader demonstration project. Please </p>
+<p>use your own startup code or review the startup code carefully to ensure the startup </p>
+<p>code is correct and fits into your usecase. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p>The following tasks have to be handled by the startup code: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Initialization of the global pointer (GP). </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Initialization of the text pointer (TP) </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Initialization of the stack pointer (SP) </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>RAM initialisation. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Copy routines linked to RAM from flash to RAM. </p>
+<p>Code is copied into RAM using the __start() library function </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Keep in mind that there will be two startup-codes executed subsequently, first the </p>
+<p>startup-code of the Bootloader, then the startup-code of your application. </p>
+<p>Don’t forget to change the TLB structure according to your own MMU configuration. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>Please see the demonstration startup code for an example. </p>
+<p> </p>
+<p><b>3.6 </b></p>
+<p><b>Hardware Registers </b></p>
+<p>Access  to  hardware  registers is provided  by  macros  and  type  definitions  in  the fbl_sfr.h </p>
+<p>header </p>
+<p>file. </p>
+<p>There </p>
+<p>is </p>
+<p>only </p>
+<p>support </p>
+<p>of </p>
+<p>those </p>
+<p>hardware </p>
+<p>registers </p>
+<p>that </p>
+<p>are </p>
+<p>absolutely </p>
+<p>necessary  for  the  Bootloader.  These  are  the  CAN  controller  registers,  the  ports  for </p>
+<p>transceiver control, timer, watchdog and I/O port registers. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>18 / 23 </p>
+<p> </p>
+<p><b>3.7 </b></p>
+<p><b>Misc </b></p>
+<p>In  GENy,  the  component  Hw_Rh850Cpu  is  visible.  Settings  in  this  component  are  not </p>
+<p>relevant for the Flash-Bootloader. It is not necessary to make any changes here. </p>
+<p> </p>
+<p> </p>
+<p>Figure 3-5 </p>
+<p>Component Hw_Rh850Cpu </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>19 / 23 </p>
+<p><b>4 </b></p>
+<p><b>Build  </b></p>
+<p><b>4.1 </b></p>
+<p><b>Code executed from RAM </b></p>
+<p>The Bootloader has to execute some code from RAM during flash memory is erased or </p>
+<p>written.  Depending  on  the  amount  of  functionality  which  is  needed  during  flashing,  two </p>
+<p>approaches </p>
+<p>to </p>
+<p>execute </p>
+<p>code </p>
+<p>from </p>
+<p>RAM </p>
+<p>are </p>
+<p>used. </p>
+<p>Please </p>
+<p>note </p>
+<p>that </p>
+<p>one </p>
+<p>of </p>
+<p>these </p>
+<p>approaches is selected during the Bootloader package creation and that there is no option </p>
+<p>to configure this behavior. </p>
+<p> </p>
+<p><b>4.1.1 </b></p>
+<p><b>Use of relocatable Code </b></p>
+<p>If  the  Bootloader  just  needs  to  maintain  watchdog  handling  functionality,  the  watchdog </p>
+<p>handling code can be linked to flash memory and be copied from flash memory to RAM </p>
+<p>during </p>
+<p>the </p>
+<p>Bootloader’s </p>
+<p>startup. </p>
+<p>The </p>
+<p>two </p>
+<p>functions </p>
+<p>FblLookForWatchdog() </p>
+<p>and </p>
+<p>ApplFblWdTrigger() are copied to RAM in this configuration. No special precautions while </p>
+<p>rebuilding the Bootloader have to be taken. </p>
+<p>This  variant  can  is  used  if  the  function  FblCopyWatchdog()  is  present  in  the  fbl_wd </p>
+<p>module. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>No function calls from ApplFblWdTrigger() are allowed if relocatable code is used for </p>
+<p>watchdog handling because function calls are normally not relocatable. </p>
+<p>The functions copied to RAM are not debuggable because there are no symbols </p>
+<p>generated to the target addresses. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>4.1.2 </b></p>
+<p><b>Use of Code linked to RAM </b></p>
+<p>Some  use  cases  require  code  to  be  linked  to  RAM  because  function  calls  have  to  be </p>
+<p>executed  or  more  functionality  has  to  be  maintained  during  flashing,  e.g.  if  pipelined </p>
+<p>programming is used or a complete communication stack has to be used to send response </p>
+<p>pending messages. </p>
+<p>To locate this functionality in RAM, some special compiler features are used. Basically, all </p>
+<p>compilers use the same method: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Functions which have to be linked to RAM are placed in special sections or complete </p>
+<p>modules are marked to be linked to RAM. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The compiler links these modules to RAM address space. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>20 / 23 </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>An image of the code and data linked to RAM is created. This image is linked into flash </p>
+<p>memory. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Some address information to find the image in flash and target addresses in RAM is </p>
+<p>created. </p>
+<p>Code linked to RAM using this method can be debugged normally because the debugging </p>
+<p>symbols are located at the execution addresses of the code. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The addresses which can be supplied to normal jump instructions are not big enough </p>
+<p>to perform a jump from flash memory to RAM and back. Bootloader which have to </p>
+<p>execute such jumps either include a memmap.h file which inserts far jumps or have to </p>
+<p>be compiled with far jump compiler options. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>The implementations of code in RAM differ for every compiler. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>Please see the Bootloader demonstration project’s linker control file and startup code </p>
+<p>for examples. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>4.1.3 </b></p>
+<p><b>Greenhills </b></p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>ROM images of RAM code are created using the linker’s ROM() command. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The linker automatically generates a table which is used to copy all images to all target </p>
+<p>addresses. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The code is copied by the startup code supplied with the Bootloader demo using </p>
+<p>library routine. </p>
+<p> </p>
+<p><b>4.2 </b></p>
+<p><b>Compiler Options </b></p>
+<p><b>4.2.1 </b></p>
+<p><b>Inline Function Prologues </b></p>
+<p>Greenhills compilers use independent functions to perform function prologue tasks. These </p>
+<p>function prologues cause errors while calling watchdog handling functions out of the flash </p>
+<p>driver. To avoid these problems, the function prologues have to be inlined on Greenhills </p>
+<p>compilers: </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>21 / 23 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>Inline function prologues with Greenhills compilers: </p>
+<p>-inline_prologue </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>4.2.2 </b></p>
+<p><b>Optimizations </b></p>
+<p>The  Greenhills  compiler  options  –Ospace  and  –no_commons  have  been  tested  for  the </p>
+<p>bootloader and should be applicable without problems. </p>
+<p><b>4.3 </b></p>
+<p><b>Linker Parameters </b></p>
+<p>There is a linker control file supplied with every Bootloader demonstration project. Please </p>
+<p>see this file for linker parameter and linker handling examples. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>22 / 23 </p>
+<p><b>5 </b></p>
+<p><b>Glossary and Abbreviations </b></p>
+<p><b>5.1 </b></p>
+<p><b>Abbreviations </b></p>
+<p><b>Abbreviation </b></p>
+<p><b>Description </b></p>
+<p>CAN </p>
+<p>Controller Area Network </p>
+<p>DMA </p>
+<p>Direct Memory Access </p>
+<p>ECU </p>
+<p>Electronic Control Unit </p>
+<p>EepM </p>
+<p>EEPROM Manager </p>
+<p>EepMgr </p>
+<p>EEPROM Manager </p>
+<p>FBL </p>
+<p>Flash Bootloader </p>
+<p>NMI </p>
+<p>Non-Maskable Interrupt </p>
+<p>TAU </p>
+<p>Timer Array Unit </p>
+<p>SFR </p>
+<p>Special Function Register </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>TechnicalReference Flash Bootloader Hardware </p>
+<p></p>
+<p>2015, Vector Informatik GmbH </p>
+<p>Version: 1.00.01 </p>
+<p>based on template version 3.2.0 </p>
+<p>23 / 23 </p>
+<p><b>6 </b></p>
+<p><b>Contact </b></p>
+<p>Visit our website for more information on </p>
+<p> </p>
+<p><b>&gt; </b> News </p>
+<p><b>&gt; </b> Products </p>
+<p><b>&gt; </b> Demo software </p>
+<p><b>&gt; </b> Support </p>
+<p><b>&gt; </b> Training data </p>
+<p><b>&gt; </b> Addresses </p>
+<p> </p>
+<p><b>www.vector.com </b></p>
+</body>
+</html>
+{% endraw %}

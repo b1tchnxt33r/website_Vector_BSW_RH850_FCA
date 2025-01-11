@@ -1,0 +1,4083 @@
+---
+layout: default
+title: TechnicalReference_FBL_Fca
+nav_order: 30
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>1 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>Flash Bootloader OEM </b></p>
+<p>Technical Reference </p>
+<p> </p>
+<p>FCA UDS (SLP5) </p>
+<p>Version 0.9 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Authors </p>
+<p>Christian Bäuerle </p>
+<p>Status </p>
+<p>Not Released </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>2 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Document Information </b></p>
+<p><b>History </b></p>
+<p><b>Author </b></p>
+<p><b>Date </b></p>
+<p><b>Version  Remarks </b></p>
+<p>Christian Bäuerle  2018-07-12 </p>
+<p>0.9 </p>
+<p>Creation </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>3 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Reference Documents </b></p>
+<p><b>No. </b></p>
+<p><b>Source </b></p>
+<p><b>Title </b></p>
+<p><b>Version </b></p>
+<p>[1] </p>
+<p> </p>
+<p>ISO </p>
+<p>14229 Road Vehicles – Unified diagnostic services (UDS) </p>
+<p>Part 1: Specification and Requirements </p>
+<p>2013 </p>
+<p>[2] </p>
+<p> </p>
+<p>ISO </p>
+<p>15765 Road Vehicles – Diagnostics on CAN </p>
+<p>Part 3: Implementation of Unified Diagnostic Services </p>
+<p>2004 </p>
+<p>[3] </p>
+<p> </p>
+<p>Vector </p>
+<p>AN-ISC-8-1188 – Custom Flash Drivers </p>
+<p>1.0 </p>
+<p>[4] </p>
+<p> </p>
+<p>HIS </p>
+<p>Security Module Specification </p>
+<p>1.0 </p>
+<p>[5] </p>
+<p> </p>
+<p>Vector </p>
+<p>User Manual Flash Bootloader </p>
+<p>2.7 </p>
+<p>[6] </p>
+<p> </p>
+<p>Vector </p>
+<p>Technical Reference HexView </p>
+<p>1.12.2 </p>
+<p>[7] </p>
+<p> </p>
+<p>Vector </p>
+<p>Manual vFlash </p>
+<p>3.5 </p>
+<p>[8] </p>
+<p> </p>
+<p>Vector </p>
+<p>NV-Wrapper – Technical Reference </p>
+<p>1.0 </p>
+<p>[9] </p>
+<p> </p>
+<p>Vector </p>
+<p>AN-ISC-8-1143 – Bootloader Validation Strategies </p>
+<p>1.0 </p>
+<p>[10]  </p>
+<p>Vector </p>
+<p>Technical Reference Security Module / Security Module Basic </p>
+<p>2.2.0 </p>
+<p>[11]  </p>
+<p>Vector </p>
+<p>AN-ISC-8-1188 – Custom Flash Drivers </p>
+<p>1.0 </p>
+<p>[12]  </p>
+<p>Vector </p>
+<p>Technical Reference Communication Wrapper PDU Router </p>
+<p>3.2 </p>
+<p>[13]  </p>
+<p>FCA </p>
+<p>CS.00100 Comprehensive Standard Unified Diagnostic Services </p>
+<p>(UDS) On CAN </p>
+<p>2016-</p>
+<p>12-07 </p>
+<p>[14]  </p>
+<p>FCA </p>
+<p>CS.00101 ECU Flash Reprogramming Requirements - UDS </p>
+<p>2018-</p>
+<p>03-23 </p>
+<p>[15]  </p>
+<p>FCA </p>
+<p>CS.00102 Standardized Diagnostic Data </p>
+<p>2016-</p>
+<p>12-07 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>We have configured the programs in accordance with your specifications in the </p>
+<p>questionnaire. Whereas the programs do support other configurations than the one </p>
+<p>specified in your questionnaire, Vector´s release of the programs delivered to your </p>
+<p>company is expressly restricted to the configuration you have specified in the </p>
+<p>questionnaire. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>4 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Contents </b></p>
+<p><b>1</b></p>
+<p> </p>
+<p><b>Introduction................................................................................................................... 8</b></p>
+<p> </p>
+<p><b>2</b></p>
+<p> </p>
+<p><b>Download concept ........................................................................................................ 9</b></p>
+<p> </p>
+<p>2.1</p>
+<p> </p>
+<p>Overview ............................................................................................................ 9</p>
+<p> </p>
+<p><b>3</b></p>
+<p> </p>
+<p><b>Flash Bootloader Delivery .......................................................................................... 10</b></p>
+<p> </p>
+<p>3.1</p>
+<p> </p>
+<p>Bootloader Components .................................................................................. 10</p>
+<p> </p>
+<p>3.2</p>
+<p> </p>
+<p>Bootloader Integration ...................................................................................... 10</p>
+<p> </p>
+<p><b>4</b></p>
+<p> </p>
+<p><b>Bootloader Installation ............................................................................................... 12</b></p>
+<p> </p>
+<p>4.1</p>
+<p> </p>
+<p>[#oem_files] - Bootloader package structure .................................................... 12</p>
+<p> </p>
+<p>4.2</p>
+<p> </p>
+<p>Demonstration Bootloader ............................................................................... 14</p>
+<p> </p>
+<p><b>5</b></p>
+<p> </p>
+<p><b>Generation Tool (DaVinci Configurator 5) ................................................................. 15</b></p>
+<p> </p>
+<p>5.1</p>
+<p> </p>
+<p>Project Setup and Communication Stack Configuration ................................... 15</p>
+<p> </p>
+<p>5.2</p>
+<p> </p>
+<p>Bootloader Configuration ................................................................................. 16</p>
+<p> </p>
+<p>5.2.1</p>
+<p> </p>
+<p>General Bootloader Options ............................................................. 16</p>
+<p> </p>
+<p>5.2.2</p>
+<p> </p>
+<p>OEM Bootloader Options ................................................................. 21</p>
+<p> </p>
+<p>5.2.3</p>
+<p> </p>
+<p>Memory Configuration ...................................................................... 22</p>
+<p> </p>
+<p>5.2.3.1</p>
+<p> </p>
+<p>Memory Device Table .................................................... 22</p>
+<p> </p>
+<p>5.2.3.2</p>
+<p> </p>
+<p>Flash Block Table ........................................................... 22</p>
+<p> </p>
+<p>5.2.3.3</p>
+<p> </p>
+<p>Logical Block Table ........................................................ 23</p>
+<p> </p>
+<p>5.2.3.4</p>
+<p> </p>
+<p>NV-Wrapper Configuration ............................................. 24</p>
+<p> </p>
+<p>5.2.4</p>
+<p> </p>
+<p>Security Module Configuration ......................................................... 26</p>
+<p> </p>
+<p>5.2.4.1</p>
+<p> </p>
+<p>Check Routine Without Additional CRC and Without </p>
+<p>Additional Signature ....................................................... 26</p>
+<p> </p>
+<p>5.2.4.2</p>
+<p> </p>
+<p>Check Routine with additional CRC32 and without </p>
+<p>additional Signature ....................................................... 29</p>
+<p> </p>
+<p>5.2.4.3</p>
+<p> </p>
+<p>Check Routine without additional CRC32 and with </p>
+<p>additional Signature ....................................................... 30</p>
+<p> </p>
+<p>5.2.4.4</p>
+<p> </p>
+<p>Check Routine with additional CRC32 and with </p>
+<p>additional Signature ....................................................... 32</p>
+<p> </p>
+<p>5.3</p>
+<p> </p>
+<p>Running the Generator .................................................................................... 32</p>
+<p> </p>
+<p><b>6</b></p>
+<p> </p>
+<p><b>User callback files and hardware specific adaptions ............................................... 34</b></p>
+<p> </p>
+<p>6.1</p>
+<p> </p>
+<p>Startup code .................................................................................................... 34</p>
+<p> </p>
+<p>6.2</p>
+<p> </p>
+<p>Hardware, Input/Output and miscellaneous Callbacks ..................................... 34</p>
+<p> </p>
+<p>6.3</p>
+<p> </p>
+<p>Validation and non-volatile memory callbacks .................................................. 43</p>
+<p> </p>
+<p>6.4</p>
+<p> </p>
+<p>Diagnostic Service Callbacks ........................................................................... 53</p>
+<p> </p>
+<p>6.5</p>
+<p> </p>
+<p>Watchdog Callbacks ........................................................................................ 56</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>5 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>7</b></p>
+<p> </p>
+<p><b>Build your Bootloader ................................................................................................ 58</b></p>
+<p> </p>
+<p>7.1</p>
+<p> </p>
+<p>Bootloader specific linker requirements ............................................................ 58</p>
+<p> </p>
+<p><b>8</b></p>
+<p> </p>
+<p><b>Adapt your application ............................................................................................... 60</b></p>
+<p> </p>
+<p>8.1</p>
+<p> </p>
+<p>Memory Layout ................................................................................................ 60</p>
+<p> </p>
+<p>8.2</p>
+<p> </p>
+<p>Application Start ............................................................................................... 60</p>
+<p> </p>
+<p>8.2.1</p>
+<p> </p>
+<p>Controllers with a configurable interrupt base address ..................... 60</p>
+<p> </p>
+<p>8.2.2</p>
+<p> </p>
+<p>Controllers with interrupt jump tables ............................................... 60</p>
+<p> </p>
+<p>8.3</p>
+<p> </p>
+<p>Shared files between FBL and application ....................................................... 60</p>
+<p> </p>
+<p>8.4</p>
+<p> </p>
+<p>Shared memory between FBL and application ................................................. 61</p>
+<p> </p>
+<p>8.5</p>
+<p> </p>
+<p>Transition between Bootloader and Application ................................................ 62</p>
+<p> </p>
+<p>8.5.1</p>
+<p> </p>
+<p>[#oem_start] [#oem_trans] - Programming Session Request ........... 62</p>
+<p> </p>
+<p>8.5.2</p>
+<p> </p>
+<p>ECU Reset and Default Session Request ........................................ 63</p>
+<p> </p>
+<p><b>9</b></p>
+<p> </p>
+<p><b>Memory Drivers .......................................................................................................... 64</b></p>
+<p> </p>
+<p>9.1</p>
+<p> </p>
+<p>Flash Driver ..................................................................................................... 64</p>
+<p> </p>
+<p>9.2</p>
+<p> </p>
+<p>Non-volatile Memory Driver .............................................................................. 64</p>
+<p> </p>
+<p>9.3</p>
+<p> </p>
+<p>Memory driver requirements ............................................................................ 64</p>
+<p> </p>
+<p><b>10</b></p>
+<p> </p>
+<p><b>Miscellaneous ............................................................................................................. 66</b></p>
+<p> </p>
+<p>10.1</p>
+<p> </p>
+<p>[#oem_valid] - Application validation ................................................................ 66</p>
+<p> </p>
+<p>10.1.1</p>
+<p> </p>
+<p>Presence Patterns ........................................................................... 66</p>
+<p> </p>
+<p>10.1.1.1</p>
+<p> </p>
+<p>Storage of application valid flag ..................................... 67</p>
+<p> </p>
+<p>10.1.2</p>
+<p> </p>
+<p>[#oem_time] - Validation OK – Application faulty .............................. 69</p>
+<p> </p>
+<p>10.2</p>
+<p> </p>
+<p>[#oem_sec] Seed / Key Mechanism ................................................................. 69</p>
+<p> </p>
+<p>10.3</p>
+<p> </p>
+<p>[#oem_seccomp] - Security module ................................................................. 70</p>
+<p> </p>
+<p>10.4</p>
+<p> </p>
+<p>Data Processing Support ................................................................................. 70</p>
+<p> </p>
+<p>10.4.1</p>
+<p> </p>
+<p>tProcParam ...................................................................................... 71</p>
+<p> </p>
+<p>10.5</p>
+<p> </p>
+<p>[#oem_multi] - Multiple ECU Support ............................................................... 71</p>
+<p> </p>
+<p>10.6</p>
+<p> </p>
+<p>Pipelined Programming and Pipelined Verification ........................................... 72</p>
+<p> </p>
+<p>10.7</p>
+<p> </p>
+<p>Bootmanager ................................................................................................... 73</p>
+<p> </p>
+<p>10.8</p>
+<p> </p>
+<p>FCA-Specific Functionality ............................................................................... 73</p>
+<p> </p>
+<p>10.8.1</p>
+<p> </p>
+<p>Download of SWIL / Flash Driver ..................................................... 73</p>
+<p> </p>
+<p>10.8.2</p>
+<p> </p>
+<p>Abnormal Shutdown ......................................................................... 73</p>
+<p> </p>
+<p>10.8.3</p>
+<p> </p>
+<p>Flash Erase Detection ...................................................................... 74</p>
+<p> </p>
+<p>10.8.4</p>
+<p> </p>
+<p>Update of Identification Data ............................................................ 74</p>
+<p> </p>
+<p>10.8.5</p>
+<p> </p>
+<p>Update of FCA Identification Data .................................................... 74</p>
+<p> </p>
+<p>10.8.6</p>
+<p> </p>
+<p>Software Compatibility Information ................................................... 74</p>
+<p> </p>
+<p><b>11</b></p>
+<p> </p>
+<p><b>vFlash Configuration .................................................................................................. 75</b></p>
+<p> </p>
+<p><b>12</b></p>
+<p> </p>
+<p><b>Glossary and Abbreviations ...................................................................................... 77</b></p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>6 </p>
+<p>based on template version 5.1.0 </p>
+<p>12.1</p>
+<p> </p>
+<p>Glossary .......................................................................................................... 77</p>
+<p> </p>
+<p>12.2</p>
+<p> </p>
+<p>Abbreviations ................................................................................................... 77</p>
+<p> </p>
+<p><b>13</b></p>
+<p> </p>
+<p><b>Contact ........................................................................................................................ 78</b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>7 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Illustrations </b></p>
+<p>Figure 1-1</p>
+<p> </p>
+<p>Manual and References for the Flash Bootloader ....................................... 8</p>
+<p> </p>
+<p>Figure 4-1</p>
+<p> </p>
+<p>Bootloader Folder Structure ...................................................................... 13</p>
+<p> </p>
+<p>Figure 5-1</p>
+<p> </p>
+<p>Bootloader Configuration in Basic Editor ................................................... 16</p>
+<p> </p>
+<p>Figure 5-2</p>
+<p> </p>
+<p>General Bootloader Options Part 1 ........................................................... 17</p>
+<p> </p>
+<p>Figure 5-3</p>
+<p> </p>
+<p>General Bootloader Options Part 2 ........................................................... 19</p>
+<p> </p>
+<p>Figure 5-4</p>
+<p> </p>
+<p>OEM specific Bootloader options .............................................................. 21</p>
+<p> </p>
+<p>Figure 5-5</p>
+<p> </p>
+<p>Memory Device Table ............................................................................... 22</p>
+<p> </p>
+<p>Figure 5-6</p>
+<p> </p>
+<p>Flash Block Table...................................................................................... 22</p>
+<p> </p>
+<p>Figure 5-7</p>
+<p> </p>
+<p>Logical Block Table ................................................................................... 23</p>
+<p> </p>
+<p>Figure 5-8</p>
+<p> </p>
+<p>NV-Wrapper configuration ......................................................................... 25</p>
+<p> </p>
+<p>Figure 5-9</p>
+<p> </p>
+<p>Meta Data Configuration ........................................................................... 25</p>
+<p> </p>
+<p>Figure 5-10</p>
+<p> </p>
+<p>Components of the security module .......................................................... 26</p>
+<p> </p>
+<p>Figure 5-11</p>
+<p> </p>
+<p>Security Class “Vendor” ............................................................................ 27</p>
+<p> </p>
+<p>Figure 5-12</p>
+<p> </p>
+<p>Configuration of security class Vendor ...................................................... 29</p>
+<p> </p>
+<p>Figure 5-13</p>
+<p> </p>
+<p>Configuration of security class DDD ......................................................... 29</p>
+<p> </p>
+<p>Figure 5-14</p>
+<p> </p>
+<p>Configuration options for security class DDD ............................................ 30</p>
+<p> </p>
+<p>Figure 5-15</p>
+<p> </p>
+<p>Security Class C or CCC .......................................................................... 31</p>
+<p> </p>
+<p>Figure 5-16</p>
+<p> </p>
+<p>Configuration options for security class C/CCC ........................................ 31</p>
+<p> </p>
+<p>Figure 5-17</p>
+<p> </p>
+<p>Configuration options for security class C/CCC with additional CRC32 ..... 32</p>
+<p> </p>
+<p>Figure 10-1</p>
+<p> </p>
+<p>Presence Pattern ...................................................................................... 67</p>
+<p> </p>
+<p>Figure 10-2</p>
+<p> </p>
+<p>Presence Pattern Examples ..................................................................... 68</p>
+<p> </p>
+<p>Figure 10-3</p>
+<p> </p>
+<p>Data processing sequence ....................................................................... 71</p>
+<p> </p>
+<p>Figure 10-4</p>
+<p> </p>
+<p>Multiple ECU setup ................................................................................... 72</p>
+<p> </p>
+<p>Figure 11-1</p>
+<p> </p>
+<p>vFlash Configuration ................................................................................. 75</p>
+<p> </p>
+<p><b> </b></p>
+<p><b>Tables </b></p>
+<p>Table 4-1 </p>
+<p> </p>
+<p>Bootloader Folder Structure ...................................................................... 14</p>
+<p> </p>
+<p>Table 5-1 </p>
+<p> </p>
+<p>General Bootloader Options Part 1 ........................................................... 19</p>
+<p> </p>
+<p>Table 5-2 </p>
+<p> </p>
+<p>General Bootloader Options Part 2 ........................................................... 21</p>
+<p> </p>
+<p>Table 5-3 </p>
+<p> </p>
+<p>OEM specific Bootloader Options ............................................................. 22</p>
+<p> </p>
+<p>Table 5-4 </p>
+<p> </p>
+<p>Memory Device Table ............................................................................... 22</p>
+<p> </p>
+<p>Table 5-5 </p>
+<p> </p>
+<p>Flash Block Table...................................................................................... 23</p>
+<p> </p>
+<p>Table 5-6 </p>
+<p> </p>
+<p>Logical Block Table ................................................................................... 24</p>
+<p> </p>
+<p>Table 5-7 </p>
+<p> </p>
+<p>Generated Files ........................................................................................ 33</p>
+<p> </p>
+<p>Table 7-1 </p>
+<p> </p>
+<p>RAM/ROM linkage .................................................................................... 59</p>
+<p> </p>
+<p>Table 10-1 </p>
+<p> </p>
+<p>Type Definition - tProcParam .................................................................... 71</p>
+<p> </p>
+<p>Table 11-1 </p>
+<p> </p>
+<p>vFlash Configuration ................................................................................. 76</p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>8 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>1 </b></p>
+<p><b>Introduction </b></p>
+<p>This </p>
+<p>document </p>
+<p>covers </p>
+<p>the </p>
+<p>OEM-specific </p>
+<p>particularities </p>
+<p>of </p>
+<p>the </p>
+<p>flash </p>
+<p>bootloader. </p>
+<p>It </p>
+<p>complements  the  explanations  started  in  the  user  manual  with  OEM-specific  details. All </p>
+<p>references there are resumed here in this document again and explained in detail. </p>
+<p>The connection between a reference in the user manual and its specific description in this </p>
+<p>document is the headline. Both the reference and its explanation can be found below the </p>
+<p>same headline </p>
+<p> </p>
+<p> </p>
+<p>Figure 1-1 </p>
+<p>Manual and References for the Flash Bootloader </p>
+<p> </p>
+<p>Additionally, this headline is marked with the ID of the reference from the User Manual. This </p>
+<p>ID looks like: [#oem_&lt;yyy&gt;]. </p>
+<p> </p>
+<p> </p>
+<p><b>User Manual</b></p>
+<p><b>Technical</b></p>
+<p><b>Reference</b></p>
+<p><b>Hardware</b></p>
+<p><b>Technical</b></p>
+<p><b>Reference</b></p>
+<p><b>OEM</b></p>
+<p><b>Flash Tool</b></p>
+<p><b>Documentation</b></p>
+<p><b>You are here</b></p>
+<p>#hw_&lt;xxx&gt;</p>
+<p>headline</p>
+<p>headline</p>
+<p>#oem_&lt;yyy&gt;</p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>9 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>2 </b></p>
+<p><b>Download concept </b></p>
+<p><b>2.1 </b></p>
+<p><b>Overview </b></p>
+<p>The flash tool (Diagnostic Tester) uses the UDS protocol to  communicate with the ECU. </p>
+<p>Inside the ECU the UDS communication is handled by the flash bootloader (aka FBL). The </p>
+<p>flash bootloader supports a subset of diagnostic services which are necessary for the flash </p>
+<p>download process. </p>
+<p>The  download  sequence  is  implemented  accoprding  to  [14].  Diagnostic  services  are </p>
+<p>implemented according to [13] and [15]  </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>10 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>3 </b></p>
+<p><b>Flash Bootloader Delivery </b></p>
+<p><b>3.1 </b></p>
+<p><b>Bootloader Components </b></p>
+<p>The flash bootloader delivery contains the following components: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Flash bootloader source code </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Configuration Tool DaVinci Configurator 5 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>A separate license has to be obtained to run DaVinci Configurator 5. Please contact </p>
+<p>your Vector sales contact if you need to obtain a license. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Flash Driver source code and executable </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Non-volatile memory module. Normally, a dummy EEPROM driver is delivered with the </p>
+<p>bootloader. Drivers for external EEPROMs or EEPROM emulations can be ordered as </p>
+<p>optional components. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Security module (Security class DDD). Other security classes are optional. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Optional decompression module. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>vFlash template </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>The vFlash framework is not licensed with the bootloader. A license of the vFlash </p>
+<p>framework has to be obtained separately. Please contact your Vector sales contact if </p>
+<p>you need to obtain a license. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>HexView. HexView can be used to show and change the contents of various binary </p>
+<p>formats. It can also be used for signature and checksum calculations </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>MakeSupport: Make system which can be used to compile the bootloader. </p>
+<p> </p>
+<p><b>3.2 </b></p>
+<p><b>Bootloader Integration </b></p>
+<p>The integration of a flash bootloader project is described in this manual. If you are not familiar </p>
+<p>with Vector bootloaders, please see [5] for more information. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>11 </p>
+<p>based on template version 5.1.0 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Bootloader integration steps </b></p>
+<p>1.  Install the bootloader package </p>
+<p>2.  Start your own integration project </p>
+<p>3.  Configure the bootloader using the configuration tool </p>
+<p>4.  Adjust the user callback files from template </p>
+<p>5.  Build the bootloader </p>
+<p>6.  Adapt your application software </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>12 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>4 </b></p>
+<p><b>Bootloader Installation </b></p>
+<p><b>4.1 </b></p>
+<p><b>[#oem_files] - Bootloader package structure </b></p>
+<p>For more general information about this see the UserManual_FlashBootloader in the chapter <b>Extract the files </b></p>
+<p><b>to a folder on your PC. </b></p>
+<p><b> </b></p>
+<p>You will get your software as an installer. After installation, a directory structure with several </p>
+<p>subfolders will be created: </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>13 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p> </p>
+<p>Figure 4-1 </p>
+<p>Bootloader Folder Structure </p>
+<p> </p>
+<p><b>Directory </b></p>
+<p><b>Description </b></p>
+<p>BSW </p>
+<p>Contains the bootloader source code (core </p>
+<p>files and template files). Files without leading </p>
+<p>underscore found in BSW and subfolders </p>
+<p>mustn’t be changed. </p>
+<p>_Common </p>
+<p>Common modules, e.g. ECU- and compiler-</p>
+<p>specific type definitions. </p>
+<p>Can, CanIf </p>
+<p>MSR CAN-Driver </p>
+<p>CanTp </p>
+<p>MSR Transport Layer </p>
+<p>Eep </p>
+<p>EEPROM driver. If no EEPROM driver has </p>
+<p>been ordered, this directory contains the </p>
+<p>dummy EEPROM driver. </p>
+<p>Fbl </p>
+<p>Bootloader source files. </p>
+<p>_Template </p>
+<p>Contains the bootloader template files. You </p>
+<p>have to adapt these files for your project. </p>
+<p>FblAsrStubs </p>
+<p>Stub components for MSR components which </p>
+<p>are not used in the FBL. </p>
+<p>FblBm </p>
+<p>Boot manager core files </p>
+<p>FblCw </p>
+<p>Communication Wrapper </p>
+<p>Flash </p>
+<p>Flash driver. Includes its own make system </p>
+<p>and binary file in Build. </p>
+<p>PduR </p>
+<p>PDU Router </p>
+<p>SecMod </p>
+<p>SecMod contains the security module. </p>
+<p>Depending on the security class supported by </p>
+<p>the bootloader, a library and source code can </p>
+<p>be included. </p>
+<p>VStdLib </p>
+<p>Library with helper functions </p>
+<p>WrapNv </p>
+<p>Wrapper layer between non-volatile memory </p>
+<p>callback file and non-volatile memory driver. </p>
+<p>DaVinci </p>
+<p>Configurator. </p>
+<p>This folder contains the generation tool - </p>
+<p>DaVinciConfigurator </p>
+<p>Demo </p>
+<p>Root directory of demonstration application </p>
+<p>and demonstration bootloader. </p>
+<p>DemoAppl </p>
+<p>Root directory of demonstration application. </p>
+<p>This application is used to demonstrate the </p>
+<p>transition from application to bootloader and </p>
+<p>back. </p>
+<p>DemoFbl </p>
+<p>An example how the bootloader could be </p>
+<p>used. </p>
+<p>This example uses the bootloader source files </p>
+<p>from the Fbl directory and the adapted </p>
+<p>template files from “source” and “include </p>
+<p>subdirectories. </p>
+<p>DemoKeys </p>
+<p>Demonstration keys for use with security class </p>
+<p>C or CCC. This directory is optional. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>14 </p>
+<p>based on template version 5.1.0 </p>
+<p>Config </p>
+<p>Example bootloader configuration (either </p>
+<p>GENy or Cfg5) </p>
+<p>Appl </p>
+<p>This directory contains the bootloader </p>
+<p>demonstration project. </p>
+<p>GenData </p>
+<p>Generated files used in the demonstration </p>
+<p>bootloader. </p>
+<p> </p>
+<p> </p>
+<p><b>Directory </b></p>
+<p><b>Description </b></p>
+<p>include </p>
+<p>Adapted header templates of demonstration project. </p>
+<p>source </p>
+<p>Adapted Source templates of demonstration project. </p>
+<p>Doc </p>
+<p>Bootloader documentation, e.g. UserManual, this manual, Reference Manual </p>
+<p>Hardware, Reference Manual Security Module (optional) and project specific </p>
+<p>documentation. </p>
+<p>FlashTool </p>
+<p>vFlash template installer, example Seed/Key DLL and Visual Studio project to </p>
+<p>adapt the Seed/Key DLL. </p>
+<p>Generators </p>
+<p>Project specific part of the generation tool. </p>
+<p>MakeSupport </p>
+<p>Make system to recompile the demonstration bootloader. </p>
+<p>Misc </p>
+<p>Additional tools like HexView. </p>
+<p>Table 4-1  </p>
+<p>Bootloader Folder Structure </p>
+<p><b>4.2 </b></p>
+<p><b>Demonstration Bootloader </b></p>
+<p>The .\Demo\DemoFbl\Appl directory contains an exemplary bootloader integration project. </p>
+<p>The bootloader template files from .\BSW\Fbl\_Template have been copied to “source” and </p>
+<p>“include” subdirectories of the DemoFbl directory. The “GenData” subdirectory contains the </p>
+<p>necessary files for the configuration of the bootloader. These files are created by the DaVinci </p>
+<p>Configurator. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>15 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>5 </b></p>
+<p><b>Generation Tool (DaVinci Configurator 5) </b></p>
+<p>Bootloaders which are delivered with an Autosar 4 based communication stack from Vector </p>
+<p>use </p>
+<p>the </p>
+<p>generation </p>
+<p>tool </p>
+<p>DaVinci </p>
+<p>Configurator </p>
+<p>5. </p>
+<p>This </p>
+<p>configuration </p>
+<p>is </p>
+<p>the </p>
+<p>standard </p>
+<p>configuration. GENy based configurations will be delivered if the bootloader configuration </p>
+<p>isn’t supported by a Autosar based configuration. </p>
+<p>The communication stack uses a standard Autosar 4 communication stack up to the PduR </p>
+<p>component. The bootloader diagnostics module is added as a CDD. </p>
+<p><b>5.1 </b></p>
+<p><b>Project Setup and Communication Stack Configuration </b></p>
+<p>The project setup is described in [12] Technical Reference Communication Wrapper PDU </p>
+<p>Router, chapter 4 – Configuration. </p>
+<p>The  list  of  components  used  to  configure  the  bootloader  is  described  in  [12], Table  4-1 </p>
+<p>“Bootloader Component Selection”. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The list of components which are part of the SIP but have to be added manually is </p>
+<p>extended compared to the list in [12]. </p>
+<p></p>
+<p> Fbl </p>
+<p></p>
+<p> FblHal </p>
+<p></p>
+<p> Smh </p>
+<p></p>
+<p> WrapNv </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>16 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>5.2 </b></p>
+<p><b>Bootloader Configuration </b></p>
+<p> </p>
+<p>Figure 5-1 </p>
+<p>Bootloader Configuration in Basic Editor </p>
+<p>The Bootloader configuration is done in the Fbl module. Additionally, a user configuration </p>
+<p>file can be used for project specific configuration items. </p>
+<p> </p>
+<p><b>5.2.1 </b></p>
+<p><b>General Bootloader Options </b></p>
+<p>The following options are available in the General Bootloader Options: </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>17 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p>Figure 5-2 </p>
+<p>General Bootloader Options Part 1 </p>
+<p> </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Adaptive Data Transfer Rcrrp </p>
+<p>Not used by FCA SLP5 bootloaders </p>
+<p>Application State Task </p>
+<p>Application background function ApplFblStateTask() is called. </p>
+<p>Application Timer Task </p>
+<p>When selected, the FBL will periodically call ApplFblTask() </p>
+<p>while it is idle. This function may be customized to implement </p>
+<p>idle task operations. </p>
+<p>Common Data </p>
+<p>Enables a user-defined data structure which is referenced by </p>
+<p>FblHeader. This structure can be used to hand over constant </p>
+<p>data from the bootloader to the application software. </p>
+<p>Compression Mode </p>
+<p>Optional feature. If activated, the bootloader provides an </p>
+<p>interface to decompress data. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>18 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Data Processing Buffer Size </p>
+<p>[Byte] </p>
+<p>If encryption or compression mode is enabled, the buffer size </p>
+<p>used by these data processing functions can be configured </p>
+<p>here. </p>
+<p>Diagnostic Buffer Size [Byte] </p>
+<p>This is the amount of memory (in bytes) reserved for data in </p>
+<p>diagnostic request messages. The maximum value is </p>
+<p>depending on the used communication stack. </p>
+<p>Encryption Mode </p>
+<p>Optional feature. If activated, the Bootloader provides a </p>
+<p>framework to decrypt data after download. </p>
+<p>Fill Code </p>
+<p>When writing data to a non-volatile memory device, the number </p>
+<p>of bytes written must be a multiple of the device’s write-</p>
+<p>segment size. If an address-region does not end at a write-</p>
+<p>segment boundary, the FBL will fill the unused bytes with the </p>
+<p>value specified in this field. </p>
+<p>The fill code is also used if gap filling is activated. </p>
+<p>Flash Driver Usage </p>
+<p>Configures how the flash driver is copied to RAM </p>
+<p></p>
+<p> Download Driver: Flash Driver is downloaded to ECU with </p>
+<p>the configured bus system. </p>
+<p></p>
+<p> Use Flash Driver from ROM: Flash Driver is stored in an </p>
+<p>encrypted ROM image in the bootloader's flash memory and </p>
+<p>copied to RAM before initialization. </p>
+<p>Optional Flash Driver Download: Flash Driver can be </p>
+<p>downloaded to the ECU. If it isn't downloaded, the flash driver </p>
+<p>from an internal image will be used. </p>
+<p>Gap Filling </p>
+<p>This feature is used to fill unused areas of a logical block with a </p>
+<p>specific value. </p>
+<p>Gateway Support </p>
+<p>Not used by FCA SLP5 bootloaders </p>
+<p>Header Address </p>
+<p>The address of the constant FblHeader has to be entered here. </p>
+<p>The value has to match the address used by your linker to map </p>
+<p>the header to its proper location. </p>
+<p>Input Verification </p>
+<p>Not used by FCA SLP5 bootloaders </p>
+<p>Internal Memory Copy </p>
+<p>Activates a bootloader specific memory copy function. If </p>
+<p>deactivated, the memory copy function of the compiler library is </p>
+<p>used. </p>
+<p>Maximum Number Of </p>
+<p>Segments </p>
+<p>Maximum number of segments in a logical block. This value </p>
+<p>specifies how many sections are allowed for one logical block. </p>
+<p>Output Verification </p>
+<p>Standard verification method: Download is verified during the </p>
+<p>Routine Control - Check Memory service. </p>
+<p>Please note: Either Pipelined or Output Verification has to be </p>
+<p>configured. </p>
+<p>P2 Server [ms] </p>
+<p>P2 diagnostic timeout. The bootloader will send a response or </p>
+<p>response pending message before this timeout expires. </p>
+<p>P2* Service [ms] </p>
+<p>P2* diagnostic timeout. This timeout will be used instead of the </p>
+<p>P2 timeout if a response pending message has been sent. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>19 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Pipelined Programming </p>
+<p>Optional feature. If activated, the bootloader will process and </p>
+<p>write downloaded data while the following data is transferred to </p>
+<p>the bootloader. </p>
+<p>This feature is also known as “Double Buffered Download” or </p>
+<p>“Early Acknowledge”. </p>
+<p>Table 5-1  </p>
+<p>General Bootloader Options Part 1 </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-3 </p>
+<p>General Bootloader Options Part 2 </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>20 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Pipelined Verification </p>
+<p>Optional feature: Download is verified in background while </p>
+<p>additional data is received. </p>
+<p>Presence Pattern </p>
+<p>If this option is enabled, the bootloader will use flash memory </p>
+<p>at the end of each logical block to store the block validity </p>
+<p>information instead of using NV-memory. </p>
+<p>Processed Verification </p>
+<p>Not used by FCA SLP5 bootloaders. </p>
+<p>Project State </p>
+<p>Project state controls the number of internal checks done by </p>
+<p>the bootloader. There are 3 levels available: </p>
+<p></p>
+<p> Integration: Detailed checks to find configuration errors. This </p>
+<p>level should be activated during the integration phase. </p>
+<p></p>
+<p> Production: Checks for all errors which might occur during </p>
+<p>normal use of the bootloader. Should be used if the </p>
+<p>bootloader is ready for production. </p>
+<p></p>
+<p> Production (reduced checks): Can be used to reduce code </p>
+<p>size. Please note that errors probably are detected later and </p>
+<p>that error messages like NRCs are more difficult to interpret </p>
+<p>if this setting is activated. We therefore recommend using </p>
+<p>the Production error reporting level. </p>
+<p>Response After Reset </p>
+<p>This setting is used to decide if the Bootloader should send a </p>
+<p>positive response to default session or reset requests </p>
+<p>(deactivated) or the application software should send this </p>
+<p>response after a reset.  </p>
+<p>If activated, the bootloader will send a response pending </p>
+<p>message before issuing the reset. </p>
+<p>S3 Server Extended Session </p>
+<p>Not used by FCA SLP5 bootloaders. </p>
+<p>S3 Server Programming </p>
+<p>Session </p>
+<p>Not used by FCA SLP5 bootloaders. </p>
+<p>Sleep Mode </p>
+<p>If this switch is enabled, ApplFblBusSleep() will be called after </p>
+<p>a configurable time without diagnostic communication has </p>
+<p>expired. </p>
+<p>Sleep Time [ms] </p>
+<p>Activation time of sleep mode. </p>
+<p>Start Function </p>
+<p>The bootloader provides a function to start the programming </p>
+<p>session from the application (The function can be called using </p>
+<p>the FblHeader structure). If this feature is enabled, flags in </p>
+<p>shared RAM or non-volatile memory are not needed to invoke </p>
+<p>the bootloader. </p>
+<p>Stay In Boot </p>
+<p>Not used by FCA SLP5 bootloaders. </p>
+<p>Suspend Driver Operation </p>
+<p>Not used by FCA SLP5 bootloaders. </p>
+<p>Unaligned Data Transfer </p>
+<p>If activated, the bootloader will request to receive the full </p>
+<p>diagnostic buffer and handles flash segment alignment </p>
+<p>internally.  </p>
+<p>Otherwise, the tester has to send data with the length aligned </p>
+<p>to the flash segment size. </p>
+<p>User Config File </p>
+<p>The path and name of a file to be included in the generated </p>
+<p>configuration file Fbl_Cfg.h may be specified. The file may be </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>21 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>used to activate features of the FBL that are not included in the </p>
+<p>Cfg5 components. Normally, this field is blank. </p>
+<p>User Routine </p>
+<p>Enables a callback function which allows the implementation of </p>
+<p>additional routine identifiers. </p>
+<p>User Service </p>
+<p>Enables a callback function which allows the implementation of </p>
+<p>additional diagnostic services. </p>
+<p>User Subfunction </p>
+<p>Enables a callback function which could be used to add </p>
+<p>additional sub-functions to existing services. </p>
+<p>Verification Function </p>
+<p>Not used by FCA SLP5 bootloaders. </p>
+<p>Verification Segmentation </p>
+<p>[Byte] </p>
+<p>Length of data blocks sent to security module for verification. </p>
+<p>Watchdog Service </p>
+<p>Enables watchdog handling by the bootloader. </p>
+<p>Watchdog Trigger Cycle [ms] </p>
+<p>Specifies the interval in milliseconds between the calls of the </p>
+<p>watchdog handling function ApplFblWDTrigger(). </p>
+<p>Write Segmentation [Byte] </p>
+<p>Size of data packets handed over to the flash driver. </p>
+<p>Table 5-2  </p>
+<p>General Bootloader Options Part 2 </p>
+<p> </p>
+<p><b>5.2.2 </b></p>
+<p><b>OEM Bootloader Options </b></p>
+<p>The following options are OEM-dependent settings: </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-4 </p>
+<p>OEM specific Bootloader options </p>
+<p> </p>
+<p><b>Coinfiguration Option </b></p>
+<p><b>Description </b></p>
+<p>Access Delay Time [ms] </p>
+<p>Delay time is active after three unsuccessful seed/key </p>
+<p>attempts. All further security access requests will be rejected </p>
+<p>during the delay time. </p>
+<p>Default value is 10 seconds. Setting this value to 0 will disable </p>
+<p>this feature. </p>
+<p>Application Validity Flag </p>
+<p>Configures, if the result of the Check Programming  </p>
+<p>Dependencies service is used to determine if an application  </p>
+<p>software is present or if the application validity is established </p>
+<p>on  </p>
+<p>every startup (based on logical block validity information). </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>22 </p>
+<p>based on template version 5.1.0 </p>
+<p>Check Programming </p>
+<p>Preconditions Service </p>
+<p>If activated, the service Routine Control – Check Programming  </p>
+<p>Preconditions is mandatory before the bootloader switches to  </p>
+<p>programming session. </p>
+<p>Table 5-3  </p>
+<p>OEM specific Bootloader Options </p>
+<p> </p>
+<p><b>5.2.3 </b></p>
+<p><b>Mem</b>o<b>ry Configuration </b></p>
+<p>The memory configuration module is used to configure the memory layout used to store </p>
+<p>application software and calibration data. </p>
+<p>The memory configuration is divided into 3 modules: </p>
+<p><b>5.2.3.1 </b></p>
+<p><b>Memory Device Table </b></p>
+<p>All available memory devices have to be configured in the memory table. The driver used </p>
+<p>for the internal flash memory is configured as default option. </p>
+<p>Additional memory drivers like EEPROM drivers or drivers for external flash devices can be </p>
+<p>added here. These  drivers must  conform  to the  HIS memory  driver interface. A  detailed </p>
+<p>description of the flash driver interface can be found in [3]. </p>
+<p> </p>
+<p>Figure 5-5 </p>
+<p>Memory Device Table </p>
+<p> </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Short Name </p>
+<p>Name used to identify the device in the flash block table. Also </p>
+<p>used as prefix to the driver interface functions. </p>
+<p>01 Segment Size [Byte] </p>
+<p>Smallest writeable data segment. </p>
+<p>02 Erased Value </p>
+<p>Device specific erase value. </p>
+<p>Table 5-4  </p>
+<p>Memory Device Table </p>
+<p> </p>
+<p> </p>
+<p><b>5.2.3.2 </b></p>
+<p><b>Flash Block Table </b></p>
+<p>The flash block table is used to map memory devices and logical blocks  to flash blocks. </p>
+<p>Blocks configured here should relate to physically erasable areas (1 or more physical flash </p>
+<p>blocks depending on the flash driver implementation and the flash block size). </p>
+<p> </p>
+<p>Figure 5-6 </p>
+<p>Flash Block Table </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>23 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Short Name </p>
+<p>Name of flash block. </p>
+<p>01 Start Address </p>
+<p>Start address of the flash block. Has to be aligned to the start </p>
+<p>address of an erasable flash block. </p>
+<p>02 End Address </p>
+<p>End Address. Has to be the end of an erasable flash block. </p>
+<p>03 Memory Device Ref </p>
+<p>Select the memory device used for this flash block. </p>
+<p>04 Logical Block Ref </p>
+<p>Select the logical block which uses this flash block. </p>
+<p>05 Description </p>
+<p>Comment to identify the block. </p>
+<p>Table 5-5  </p>
+<p>Flash Block Table </p>
+<p> </p>
+<p><b>5.2.3.3 </b></p>
+<p><b>Logical Block Table </b></p>
+<p>The  logical  block  table  is  used  to  divide  the  reprogrammable  memory  of  the  ECU  into </p>
+<p>different  logical  blocks.  They  are  writeable  independently  and  can  be  used  for  e.g.  an </p>
+<p>application and a calibration block. </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-7 </p>
+<p>Logical Block Table </p>
+<p> </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Short Name </p>
+<p>Name of logical block. The name is used as reference in the </p>
+<p>flash block table. </p>
+<p>02 Block Type </p>
+<p>Type of logical block. Supported block types are Boot, Code </p>
+<p>and Data. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>24 </p>
+<p>based on template version 5.1.0 </p>
+<p>03 Disposability </p>
+<p>Used to determine if a block is mandatory or optional during </p>
+<p>application validation. </p>
+<p>04 Start Address </p>
+<p>Set automatically by flash block table. </p>
+<p>05 End Address </p>
+<p>Set automatically by flash block table. </p>
+<p>08 Max Reprog Attempts </p>
+<p>This value has to be set to the maximum allowed erase cycles </p>
+<p>of your hardware. If 0 is set, no reprogramming attempt check </p>
+<p>is done. </p>
+<p>09 Input Verification </p>
+<p>Not used by FCA SLP5 bootloaders. </p>
+<p>10 Processed Verification </p>
+<p>Not used by FCA SLP5 bootloaders. </p>
+<p>11 Pipelined Verification </p>
+<p>If ordered, the verification routine for pipelined verification is </p>
+<p>configured here. </p>
+<p>12 Output Verification </p>
+<p>The verification routine for output verification is configured </p>
+<p>here. </p>
+<p>13 Description </p>
+<p>Comment to describe the block in generated code. </p>
+<p>Table 5-6  </p>
+<p>Logical Block Table </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Be careful to set all needed blocks to “mandatory”. Otherwise they are not used to </p>
+<p>determine the application’s overall validity. </p>
+<p>You also have to make sure the flash blocks used by the bootloader are not configured </p>
+<p>to any logical block to ensure the bootloader cannot erase itself. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>5.2.3.4 </b></p>
+<p><b>NV-Wrapper Configuration </b></p>
+<p>The bootloader stores a set of control information in non-volatile memory. This can be done </p>
+<p>using  an  address  based  memory  like  an  external  EEPROM  or  an  ID  based  EEPROM </p>
+<p>emulation like the EepM module. </p>
+<p>The  NV-Wrapper  provides  an  abstraction  layer  between  these  memory  devices  and  the </p>
+<p>bootloader’s fbl_apnv layer. Please see [8] for more information. </p>
+<p>The following NV-memory entries are pre-configured in your bootloader. The figure below </p>
+<p>shows the preconfigured NV-memory layout of the FCA bootloader.  </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>25 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p>Figure 5-8 </p>
+<p>NV-Wrapper configuration </p>
+<p>MetaData is a table which stores information needed for every logical block. Please see the </p>
+<p>following figure for details: </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-9 </p>
+<p>Meta Data Configuration </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>26 </p>
+<p>based on template version 5.1.0 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>The number of Meta Data entries must correspond to the configured number of logical </p>
+<p>blocks. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>5.2.4 </b></p>
+<p><b>Security Module Configuration </b></p>
+<p>This  section  gives  an  overview  of  the  security  module  configuration.  For  more  detailed </p>
+<p>information please see the technical reference of the Security Module see [4]  </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-10 </p>
+<p>Components of the security module </p>
+<p>FCA  specifies  several  options  for flash  download  verification  (see  [15]). The  component </p>
+<p>SmhVerification provides the possibility to configure the desired variant. Depending on the </p>
+<p>configuration, </p>
+<p>the </p>
+<p>bootloader </p>
+<p>expects </p>
+<p>a </p>
+<p>specific </p>
+<p>format </p>
+<p>of </p>
+<p>the </p>
+<p>diagnostic </p>
+<p>requests </p>
+<p>RoutineControl – checkProgram (31h 01h F000h). </p>
+<p> </p>
+<p><b>5.2.4.1 </b></p>
+<p><b>Check Routine Without Additional CRC and Without Additional Signature </b></p>
+<p>This option provides a two-bytes checksum in the routine option record of the diagnostic </p>
+<p>request.  The  FCA  bootloader  supports  this  options  with  a  customer-specific  verification </p>
+<p>routine.  </p>
+<p>The  standard  bootloader  delivery  does  not  provide  an  implementation  of  this  customer-</p>
+<p>specific verification function </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>27 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-11 </p>
+<p>Security Class “Vendor”    </p>
+<p>The </p>
+<p>verification </p>
+<p>function </p>
+<p>is </p>
+<p>implemented </p>
+<p>with </p>
+<p>the </p>
+<p>following </p>
+<p>prototype. </p>
+<p>You </p>
+<p>find </p>
+<p>the </p>
+<p>documentation of the parameter type in [10] . </p>
+<p>SecM_StatusType SecM_VerifyClassVendor( V_MEMRAM1 SecM_SignatureParamType V_MEMRAM2 </p>
+<p>V_MEMRAM3 * pVerifyParam ) </p>
+<p> </p>
+<p> </p>
+<p>Security class Vendor is enabled on the SmhVerification component with the corresponding </p>
+<p>check  box. Additionally,  on  the  SmhMonolithicVerification  component,  the  security  class </p>
+<p>“Vendor” has to be chosen in the combo box. Make sure that the CRC Offset is set to 0.  </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The configurable CRC Offset and Signature Offset in bytes starts with the routine </p>
+<p>option record of the RoutineControl – checkProgram request. The routine option record </p>
+<p>is the parameter for the verification routine of the security module and is used to </p>
+<p>compare the internally computed checksum with the reference value. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>The following example shows the implementation of a simple byte checksum: </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>28 </p>
+<p>based on template version 5.1.0 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>vuint16 checksum; </p>
+<p>SecM_StatusType SecM_VerifyClassVendor( V_MEMRAM1 SecM_SignatureParamType V_MEMRAM2 </p>
+<p>V_MEMRAM3 * pVerifyParam ) </p>
+<p>{ </p>
+<p>   SecM_StatusType result; </p>
+<p>   vuint32 idx; </p>
+<p> </p>
+<p>   switch(pVerifyParam-&gt;sigState) </p>
+<p>   { </p>
+<p>      case SEC_HASH_INIT: </p>
+<p>      { </p>
+<p>         checksum = 0; </p>
+<p>         result = SECM_OK; </p>
+<p>         break; </p>
+<p>      } </p>
+<p> </p>
+<p>      case SEC_HASH_COMPUTE: </p>
+<p>      { </p>
+<p>         for(idx = 0; idx &lt; pVerifyParam-&gt;sigByteCount; idx++) </p>
+<p>         { </p>
+<p>            checksum += pVerifyParam-&gt;sigSourceBuffer[idx]; </p>
+<p>         } </p>
+<p>         result = SECM_OK; </p>
+<p>         break; </p>
+<p>      } </p>
+<p> </p>
+<p>      case SEC_HASH_FINALIZE: </p>
+<p>      { </p>
+<p>         result = SECM_OK; </p>
+<p>         break;         </p>
+<p>      } </p>
+<p> </p>
+<p>      case SEC_SIG_VERIFY: </p>
+<p>      { </p>
+<p>         vuint16 checksumRef; </p>
+<p>         checksumRef = pVerifyParam-&gt;sigSourceBuffer[0]; </p>
+<p>         checksumRef &lt;&lt;= 8u; </p>
+<p>         checksumRef |= pVerifyParam-&gt;sigSourceBuffer[1]; </p>
+<p>         if (checksumRef == checksum ) </p>
+<p>         { </p>
+<p>            result = SECM_OK; </p>
+<p>         } </p>
+<p>         else </p>
+<p>         { </p>
+<p>            result = SECM_NOT_OK; </p>
+<p>         } </p>
+<p>         break;  </p>
+<p>      } </p>
+<p> </p>
+<p>      default: </p>
+<p>      { </p>
+<p>         result = SECM_NOT_OK; </p>
+<p>         break; </p>
+<p>      } </p>
+<p>   } </p>
+<p> </p>
+<p>   return result; </p>
+<p>} </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>29 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-12 </p>
+<p>Configuration of security class Vendor </p>
+<p> </p>
+<p><b>5.2.4.2 </b></p>
+<p><b>Check Routine with additional CRC32 and without additional Signature </b></p>
+<p>This option provides a four bytes CRC32 value in the routine option record of the diagnostic </p>
+<p>service request. </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-13 </p>
+<p>Configuration of security class DDD </p>
+<p>Enable this option by setting the check box for security class DDD. Additionally, the CRC </p>
+<p>Offset must be set to 2 because the CRC32 value in the service request is preceded by a </p>
+<p>two-bytes length information. </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>30 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-14 </p>
+<p>Configuration options for security class DDD </p>
+<p> </p>
+<p> </p>
+<p><b>5.2.4.3 </b></p>
+<p><b>Check Routine without additional CRC32 and with additional Signature </b></p>
+<p>This option provides a 20- or 128 bytes signature value in the routine option record of the </p>
+<p>diagnostic service request. </p>
+<p>This option is enabled by setting the check box for security class C/CCC.The Signature </p>
+<p>Offset must be set to 2 because as with the CRC32 the signature value in the service request </p>
+<p>is preceded by a two-bytes length information. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>31 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-15 </p>
+<p>Security Class C or CCC </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-16 </p>
+<p>Configuration options for security class C/CCC </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>32 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p><b>5.2.4.4 </b></p>
+<p><b>Check Routine with additional CRC32 and with additional Signature </b></p>
+<p>This option provides the CRC32- and the signature value in the request. To configure this </p>
+<p>option,  like  for  security  class  C/CCC  the  security  class  has  to  be  activated  on  the </p>
+<p>SmhVerification component. Additionally, the “CRC Written” has to be enabled. The service </p>
+<p>request </p>
+<p>contains </p>
+<p>the </p>
+<p>CRC- </p>
+<p>and </p>
+<p>the </p>
+<p>signature </p>
+<p>value </p>
+<p>with </p>
+<p>the </p>
+<p>corresponding </p>
+<p>length </p>
+<p>information. Therefore,  the  offset for the  CRC  must  be  set  to  two  and  the  offset  for the </p>
+<p>signature must be set to eight bytes. </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-17 </p>
+<p>Configuration options for security class C/CCC with additional CRC32 </p>
+<p> </p>
+<p><b>5.3 </b></p>
+<p><b>Running the Generator </b></p>
+<p>When you have finished your configuration, you need to run the generator to produce the </p>
+<p>files needed to compile the FBL. To generate the files, click on the generate button on the </p>
+<p>toolbar, or select “Generate System” from the Project menu. The following table describes </p>
+<p>the contents of the generated files: </p>
+<p> </p>
+<p><b>File Name </b></p>
+<p><b>Contents </b></p>
+<p>Can*.c/h </p>
+<p>CAN communication stack </p>
+<p>ComStack_Cfg.h </p>
+<p>Global communication stack definitions </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>33 </p>
+<p>based on template version 5.1.0 </p>
+<p>Det_Cfg.h </p>
+<p>Development Error Tracer configuration </p>
+<p>Fbl_Cfg.h </p>
+<p>Global bootloader configuration </p>
+<p>Fbl_Fbt.c/h </p>
+<p>Flash block table </p>
+<p>FblHal_Cfg.h </p>
+<p>Hardware specific configuration. </p>
+<p>Fbl_Lbt.c/h </p>
+<p>Logical block table </p>
+<p>FblCw_Cbk.h </p>
+<p>Communication Wrapper callback definitions </p>
+<p>PduR_*.c/h </p>
+<p>PDU Router configuration </p>
+<p>SecM*.c/h </p>
+<p>Security module configuration </p>
+<p>v_cfg.h </p>
+<p>Vector platform definitions </p>
+<p>WrapNv_Cfg.h </p>
+<p>NvWrapper configuration. Defines a wrapper layer between ID </p>
+<p>and address based NV-memory stacks. </p>
+<p>Table 5-7  </p>
+<p>Generated Files </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>34 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>6 </b></p>
+<p><b>User callback files and hardware specific adaptions </b></p>
+<p>The bootloader includes a set of files that must be adapted and reviewed by you to make </p>
+<p>sure they fit the needs of your ECU and application. All files found at .\BSW\Fbl\_Template </p>
+<p>require customization. </p>
+<p>To use these files, please follow these steps: </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>User callback file setup </b></p>
+<p>1.  Copy the files from .\BSW\Fbl\_Template to your project. </p>
+<p>2.  Remove the leading underscores from these files. </p>
+<p>3.  Adapt them to your needs. </p>
+<p>4.  Include them into your project setup and build the bootloader. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>Please pay attention when adapting callback functions. If a routine (such as an EEPROM </p>
+<p>function) takes a long time to run, it is possible that the ECU’s watchdog timer will force the </p>
+<p>ECU to reset. You should also be careful when using library routines such as memcpy(). </p>
+<p>To avoid a reset, you must call FblLookForWatchdog() at least once per millisecond. More </p>
+<p>often is desirable. Failure to meet this requirement may lead to unexpected resets while </p>
+<p>programming the ECU. If the function is called during a service request before the response </p>
+<p>has been given, call the routine FblRealTimeSupport() instead of FblLookForWatchdog(). </p>
+<p>This will also maintain the response-pending of the service request. </p>
+<p><b>6.1 </b></p>
+<p><b>Startup code </b></p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p>Caution </p>
+<p>It is absolutely necessary that you adapt the startup code for the bootloader to your </p>
+<p>specific hardware platform and configuration. </p>
+<p>Please be aware that there will be two startup codes executed subsequently (the </p>
+<p>startup code of the bootloader and the startup code of your application) and that there </p>
+<p>are write-once registers on several platforms. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>6.2 </b></p>
+<p><b>Hardware, Input/Output and miscellaneous Callbacks </b></p>
+<p>The file fbl_ap.c contains functions to handle hardware specific operations, e.g. input/output </p>
+<p>control. </p>
+<p>The following  pages  describe  each function. When building  your  bootloader,  you  should </p>
+<p>review the implementation of each function, and adapt them to conform with your ECUs </p>
+<p>requirements. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>35 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblInit( void )</p>
+<p> </p>
+<p><b>Functional Description </b></p>
+<p>Perform basic hardware and I/O initialization, e.g. PLL and CAN output PINs. If a non-volatile memory </p>
+<p>driver is needed to decide if the application should be started or not, the driver has to be initialized in this </p>
+<p>function as well. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>ApplFblInit() is executed before the application software is started. Please keep in mind that it will be </p>
+<p>executed on every startup. </p>
+<p><b>&gt; </b></p>
+<p>If the watchdog is initialized in ApplFblInit(), it will run if the application software is started. The </p>
+<p>bootloader will begin to handle the watchdog later during its initialization. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblStartup( vuint8 initposition ) </p>
+<p><b>Parameter </b></p>
+<p>initposition </p>
+<p>The call context of this function is defined by this parameter. </p>
+<p><b>Functional Description </b></p>
+<p>This function is called during the bootloader initialization before and after each initialization step. User-</p>
+<p>specific initialization steps are added to the bootloader initialization using this function. </p>
+<p>The parameter of ApplFblStartup() determines the bootloader initialization step and if the function is called </p>
+<p>before or after the initialization step. The following parameters are supported: </p>
+<p></p>
+<p>  (kFblInitPreCallback | kFblInitBaseInitialization): First call. No initializations are done by the bootloader </p>
+<p>at this point </p>
+<p></p>
+<p>  (kFblInitPreCallback | kFblInitFblCommunication): Call before the communication stack of the </p>
+<p>bootloader is initialized. </p>
+<p></p>
+<p>  (kFblInitPreCallback | kFblInitFblFinalize): Call before the bootloader initialization is finalized. At this </p>
+<p>point, the bootloader decided not to start the application software independent of the startup </p>
+<p>configuration. </p>
+<p></p>
+<p>  (kFblInitPostCallback | kFblInitBaseInitialization): Called after the hardware pre-initialization. At this </p>
+<p>point, ApplFblInit() normally is called to initialize the hardware for both bootloader and application. </p>
+<p></p>
+<p>  (kFblInitPostCallback | kFblInitFblCommunication): Called after the communication stack is initialized. </p>
+<p></p>
+<p>  (kFblInitPostCallback | kFblInitFblFinalize): Called after the bootloader initialization is finalized. At this </p>
+<p>point, all core modules are fully initialized. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function is called several times during the bootloader initialization. </p>
+<p><b>&gt; </b></p>
+<p>The second call of this function can be positioned before or after the decision if the application software </p>
+<p>should be started. This depends on the startup configuration, e.g. if Force Boot Mode is used or not. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblCheckProgConditions( void )</p>
+<p> </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>If all conditions are correct, the function returns kFblOk, otherwise kFblFailed. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>36 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Functional Description </b></p>
+<p>This function is called after receiving the service request sessionControl ProgrammingSession to check the </p>
+<p>programming conditions like reprogramming counter, ambient temperature, programming voltage, etc. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblCheckConditions( vuint8 * pbDiagData, tTpDataType diagReqDataLen ) </p>
+<p><b>Parameter </b></p>
+<p>pbDiagData </p>
+<p>diagReqDataLen </p>
+<p>Pointer to diagnostic data buffer </p>
+<p>Request data length </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>kFblOk or kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>This is a general condition-check function. It is called for all diagnostic services and can be used to check </p>
+<p>conditions, which are necessary for the diagnostic service. </p>
+<p>If a condition is not fulfilled, please trigger the respective NRC and return kFblFailed. </p>
+<p>An example use case would be to check the ECU’s voltage while the transfer data service is received and </p>
+<p>issue the NRCs $92 and $93. </p>
+<p> </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblCheckHwSwCompatibility( vuint8 blockIdx ) </p>
+<p><b>Parameter </b></p>
+<p>blockIdx </p>
+<p>Index of logical block  </p>
+<p><b>Return code </b></p>
+<p>Vuint8 </p>
+<p>Check result </p>
+<p><b>&gt; </b></p>
+<p>kDiagDependencyCheckFailedSwHw  </p>
+<p><b>&gt; </b></p>
+<p>kDiagDependencyCheckOk </p>
+<p><b>Functional Description </b></p>
+<p>This function checks if the given logical block is compatible with the current hardware. The implementation </p>
+<p>example of this function uses a hard-coded hardware number to check the hardware compatibility. This </p>
+<p>version number of two bytes is compared with the hardware version of the application header of the logical </p>
+<p>block. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblCheckSwSwCompatibility( void ) </p>
+<p><b>Return code </b></p>
+<p>Vuint8 </p>
+<p>Check result </p>
+<p><b>&gt; </b></p>
+<p>kDiagDependencyCheckFailedSwSw </p>
+<p><b>&gt; </b></p>
+<p>kDiagDependencyCheckOk </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>37 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Functional Description </b></p>
+<p>This function checks if the programmed logical blocks are compatible. This is done by comparing the </p>
+<p>software compatibility version information. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblCheckProgDependencies( void )</p>
+<p> </p>
+<p><b>Return code </b></p>
+<p>Vuint8 </p>
+<p>If program dependencies are fulfilled, 0x00. Otherwise != 0x00 </p>
+<p><b>Functional Description </b></p>
+<p>This function is used to check the dependencies between bootloader and application software. The </p>
+<p>application software modules have to be verified against each other here as well. </p>
+<p>There are 2 possibilities when this function is called: </p>
+<p></p>
+<p>  During application startup and compatibility check service if </p>
+<p>FBL_APPL_ENABLE_STARTUP_DEPENDENCY_CHECK is set. This setting can be controlled by the </p>
+<p>GENy option “Application Validity Flag”. </p>
+<p></p>
+<p>  From compatibility check service </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplTrcvrNormalMode( void ) </p>
+<p><b>Functional Description </b></p>
+<p>This function is used to configure your CAN bus transceiver for normal CAN communication. You must </p>
+<p>implement this routine to perform the necessary Input/Output operations to control the transceiver state. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplTrcvrSleepMode( void ) </p>
+<p><b>Functional Description </b></p>
+<p>This function is used to configure CAN bus transceiver for low-power (sleep) operation. You must </p>
+<p>implement this routine to perform the necessary Input/Output operations to control the transceiver state. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblSetVfp( void ) </p>
+<p><b>Functional Description </b></p>
+<p>The purpose of this routine is to turn on the power supply required to program non-volatile memory.  If your </p>
+<p>ECU does not require an external power source to erase and program memory, then this function may be </p>
+<p>left empty. It’s been called shortly before the flashdriver will be initialized. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function can remain empty on most hardware platforms. It is needed e.g. on some V850 </p>
+<p>controllers. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblResetVfp( void ) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>38 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Functional Description </b></p>
+<p>The purpose of this routine is to turn off the power supply required to program non-volatile memory.  If your </p>
+<p>ECU does not require an external power source to erase and program memory, then this function may be </p>
+<p>left empty. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function can remain empty on most hardware platforms. It is needed e.g. on some V850 </p>
+<p>controllers. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblReset( void ) </p>
+<p><b>Functional Description </b></p>
+<p>This function is responsible for resetting the ECU. For example, you may execute a restart instruction (if </p>
+<p>available), jump to the reset vector, or use the watchdog. The choice is up to you, and depends on your </p>
+<p>ECU hardware. This function is called when it is necessary to reset the ECU. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>Jumping directly to the ECU’s reset vector should be considered a last-choice option. Some ECUs </p>
+<p>contain registers that may be accessed only once – it is possible that the FBL will be unable to re-</p>
+<p>initialize them when it is restarted via a jump to the reset vector. </p>
+<p><b>&gt; </b></p>
+<p>Do not waste too much time in this function (e.g. through an endless loop waiting for a long-lasting </p>
+<p>watchdog trigger). This can cause unwanted delay on the network operation or service tester. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblSecuritySeedInit( void )</p>
+<p> </p>
+<p><b>Return code </b></p>
+<p>vuint8 </p>
+<p>Status of seed initialization </p>
+<p><b>Functional Description </b></p>
+<p>This function can be used to Initialize seed values. For example, a random number generator can be </p>
+<p>started here. This function will be called, when a TP message is received. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function has to be linked to RAM if pipelined programming is configured. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblSecuritySeed( void ) </p>
+<p><b>Return code </b></p>
+<p>vuint8 </p>
+<p>Status of seed generation </p>
+<p><b>Functional Description </b></p>
+<p>This function is called to obtain the security-seed for the ECU. The function is called when a Security-</p>
+<p>Access (service $27) request is received containing a request-seed sub-function. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>See also ApplFblSecurityKey() </p>
+<p><b>&gt; </b></p>
+<p>The default implementation calls the function SecM_GenerateSeed() of the security module. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>39 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblSecurityKey( void ) </p>
+<p><b>Return code </b></p>
+<p>vuint8 </p>
+<p>Status of key verification </p>
+<p><b>Functional Description </b></p>
+<p>The purpose of this function is to verify that the security-key supplied in the diagnostic request is equal to </p>
+<p>the expected security-key.  The expected security-key is based upon the security-seed returned by </p>
+<p>ApplFblSecuritySeed(). </p>
+<p>This function is called when a Security-Access (service $27) request containing the send-key sub-function </p>
+<p>is received. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>See also ApplFblSecuritySeed() </p>
+<p><b>&gt; </b></p>
+<p>The default implementation calls the function SecM_ComputeKey() of the security module. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblSecurityInit( void ) </p>
+<p><b>Return code </b></p>
+<p>vuint8 </p>
+<p>Status of security module initialization </p>
+<p><b>Functional Description </b></p>
+<p>This function can be used to initialize user specific functionality of the Seed/Key algorithm. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblInitDataProcessing( tProcParam * procParam ) </p>
+<p><b>Parameter </b></p>
+<p>procParam </p>
+<p>Pointer to data processing parameter structure </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>kFblOk/kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>ApplFblInitDataProcessing is called during processing of a RequestDownload service request with a data </p>
+<p>format identifier value != 0x00 </p>
+<p>The function should perform any necessary initialization required for application specific data processing </p>
+<p>functions (e.g. decryption/decompression algorithms). </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function can be used to process (decompress or decrypt) data. It includes an implementation in </p>
+<p>case an decompression or decryption module has been ordered with the bootloader. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblDataProcessing( tProcParam * procParam ) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>40 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Parameter </b></p>
+<p>procParam </p>
+<p>Pointer to data processing parameter structure </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>kFblOk/kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>This function is called to allow for user specific download data processing (e.g. data decompression and/or </p>
+<p>decryption). </p>
+<p>The bootloader will call this function in every Transfer-Data request if the preceding Request-Download </p>
+<p>request contained a non-zero data-format-identifier parameter. The input data corresponds to the data </p>
+<p>which has been received with the TransferData request, the output data will be written to the target </p>
+<p>memory. </p>
+<p>The function is responsible for decrypting and/or decompressing data. The decrypted/decompressed </p>
+<p>results must be placed in the output buffer procParam structure.  The number of output bytes may be </p>
+<p>different from the number of input bytes so that this function also has to make sure that the output length </p>
+<p>variable is set to the correct value. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function is only provided if Vector data processing modules (decryption and/or decompression) are </p>
+<p>part of the bootloader package. In this case, the function will be used as a wrapper for the dedicated </p>
+<p>decryption/decompression module. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblDeinitDataProcessing( tProcParam * procParam ) </p>
+<p><b>Parameter </b></p>
+<p>procParam </p>
+<p>Pointer to data processing parameter structure </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>kFblOk/kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>The FBL calls this function in order to conclude the data processing for the current contiguous address </p>
+<p>range. All remaining input data bytes have to be processed and passed to the output buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function is only provided if Vector data processing modules (decryption and/or decompression) are </p>
+<p>part of the bootloader package. In this case, the function will be used as a wrapper for the dedicated </p>
+<p>decryption/decompression module. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblTask( void ) </p>
+<p><b>Functional Description </b></p>
+<p>This function is called every millisecond if the bootloader is in idle state. It is not called during flash </p>
+<p>operations. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>41 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function is called only if the configuration selects “Enable ApplTask”. </p>
+<p><b>&gt; </b></p>
+<p>This function is only called while the FBL is idle. Calling intervals exceeding the TpCallCycle can occur </p>
+<p>while the FBL handles diagnostic service requests. This normally occurs while erasing and writing non-</p>
+<p>volatile memory. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblStateTask( void ) </p>
+<p><b>Functional Description </b></p>
+<p>This function is called continuously if the bootloader is in idle state. It is not called during flash operations. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function is called only if the configuration selects “Enable ApplTask”. </p>
+<p><b>&gt; </b></p>
+<p>This function is only called while the FBL is idle. Calling intervals exceeding the TpCallCycle can occur </p>
+<p>while the FBL handles diagnostic service requests. This normally occurs while erasing and writing non-</p>
+<p>volatile memory. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblCanParamInit( void ) </p>
+<p><b>Functional Description </b></p>
+<p>This function is used if the configuration selects “Enable Can Configuration”, or if the configuration defines </p>
+<p>Multiple-ECUs (for example door ECUs (left door/ right door)).  The routine is called as part of the FBL </p>
+<p>initialization sequence when started from both reset and from the application. </p>
+<p>The purpose of the function is to allow the setting or modification of the CAN-ID and bus timing parameters. </p>
+<p>They can be set based upon runtime conditions instead of fixed ones at compile-time. Usually, only the </p>
+<p>CAN-IDs need to be adapted. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>Two global variables are involved with the FBL communication initialization: fblCanIdTable, and </p>
+<p>CanInitTable. </p>
+<p><b>&gt; </b></p>
+<p>fblCanIdTable contains the diagnostic message request CAN-IDs (the functionally-address ID, and the </p>
+<p>physically-addressed ID), as well as the CAN bus timing and other hardware initialization parameters. </p>
+<p><b>&gt; </b></p>
+<p>At compile time, the constant kFblCanIdTable contains the fixed request and response message CAN-</p>
+<p>IDs and the bus timing parameters, based on the database and configuration settings (results from the </p>
+<p>generated files from “Geny”).  The table is copied to fblCanIdTable just before the FBL calls this </p>
+<p>function. </p>
+<p><b>&gt; </b></p>
+<p>The ApplFblCanParamInit() function in the fbl_ap.c file contains an exemplary implementation. It allows </p>
+<p>the user to overwrite the default settings before the CAN-controller is initialized. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblCanBusOff( void ) </p>
+<p><b>Functional Description </b></p>
+<p>The FBL checks internally for communication errors via FblCanErrorTask() in the main loop. This function is </p>
+<p>called from FblCanErrorTask() while the CAN controller is in a bus-off state. </p>
+<p>This is a notification that the ECU cannot transmit messages. A strategy to re-initialize the CAN cell and/or </p>
+<p>controller has to implemented here to make sure the controller won’t be stuck in a bus off state. </p>
+<p>The example implementation resets the ECU. Please make sure that the reset complies with your ECU’s </p>
+<p>requirements. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>42 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblBusSleep( void )</p>
+<p> </p>
+<p><b>Functional Description </b></p>
+<p>This function indicates transition to bus silence. By calling this function the FBL indicates the application </p>
+<p>that the CAN bus has to go to bus sleep. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>If possible, the ECU must be set into sleep mode in this function. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblStartApplication( void ) </p>
+<p><b>Functional Description </b></p>
+<p>This function is used to start the application software. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>When this function is called, ApplFblInit() has been executed. </p>
+<p><b>&gt; </b></p>
+<p>The non-volatile memory driver has most likely been initialized. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblSetShutdownStatus(tFblShutdownStatus status) </p>
+<p><b>Parameter </b></p>
+<p>status </p>
+<p>Shutdown status, the supported values are </p>
+<p>kFblShutdownStatusNormal </p>
+<p>kFblShutdownStatusAbnormal </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>kFblOk/kFblFailed </p>
+<p><b>Functional Description </b></p>
+<p>This function sets the shutdown status. Per default, the shutdown status is set to “abnormal” so that an </p>
+<p>abnormal shutdown can be detected at PowerOn/Reset. If a normal reset shall be issued, this function is </p>
+<p>called to set the shutdown status to “normal” </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>The status is stored in a global variable. </p>
+<p><b>&gt; </b></p>
+<p>The global variable must be located in a common memory area of application and bootloader </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblShutdownStatus ApplFblGetShutdownStatus(void) </p>
+<p><b>Return code </b></p>
+<p>tFblShutdownStatus </p>
+<p> </p>
+<p>Current shutdown status </p>
+<p>kFblShutdownStatusNormal </p>
+<p>kFblShutdownStatusAbnormal</p>
+<p> </p>
+<p><b>Functional Description </b></p>
+<p>This function returns the shutdown status. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>43 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>None </p>
+<p>Call context </p>
+<p><b>&gt; </b></p>
+<p>This function is called from ApplFblIsValidApp(). If an abnormal shutdown is detected the FBL does not </p>
+<p>start the application immediately. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblClrShutdownStatus(void) </p>
+<p><b>Functional Description </b></p>
+<p>This function sets the shutdown status to the default state “abnormal” </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>None </p>
+<p>Call context </p>
+<p><b>&gt; </b></p>
+<p>This function is called from ApplFbl </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblFatalError( FBL_DECL_ASSERT_EXTENDED_INFO(vuint8 errorCode) ) </p>
+<p><b>Parameter </b></p>
+<p>errorCode </p>
+<p>module </p>
+<p>line </p>
+<p>Code number of the encountered assertion </p>
+<p>Name of the affected module (Only if extended info is enabled) </p>
+<p>Line number where the assertion occurred (configuration dependent) </p>
+<p><b>Functional Description </b></p>
+<p>If the bootloader assertions are enabled, this function will be called in case an invalid bootloader state is </p>
+<p>encountered. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>FUNC(Std_ReturnType, DET_CODE) ApplFbl_DetEntryHandler( uint16 ModuleId, uint8 InstanceId, </p>
+<p>uint8 ApiId, uint8 ErrorId ) </p>
+<p><b>Parameter </b></p>
+<p>ModuleId </p>
+<p>InstanceId </p>
+<p>ApiId </p>
+<p>ErrorId </p>
+<p>Code number of the encountered assertion </p>
+<p>Name of the affected module (Only if extended info is enabled) </p>
+<p>Line number where the assertion occurred (configuration dependent) </p>
+<p>Line number where the assertion occurred (configuration dependent) </p>
+<p><b>Functional Description </b></p>
+<p>This function is called by Det to filter error states which shall actually issue a DET error. </p>
+<p> </p>
+<p> </p>
+<p><b>6.3 </b></p>
+<p><b>Validation and non-volatile memory callbacks </b></p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>44 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Prototype </b></p>
+<p>static tFblResult ApplFblChgBlockValid( vuint8 mode, tBlockDescriptor descriptor ) </p>
+<p><b>Parameter </b></p>
+<p>Mode </p>
+<p>tBlockDescriptor </p>
+<p>Determines if a block is validated or invalidated. </p>
+<p>Block descriptor of logical block to be validated or invalidated. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Validation information stored correctly. </p>
+<p><b>Functional Description </b></p>
+<p>This function changes the validation flag of a logical block in NV-memory. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>The value is stored inverted. </p>
+<p><b>&gt; </b></p>
+<p>Not used if presence patterns are activated. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>static vsint16 ApplFblGetPresencePatternBaseAddress( vuint8 blockNr, </p>
+<p>                                                     IO_PositionType * pPresPtnAddr, </p>
+<p>                                                     IO_SizeType * pPresPtnLen )</p>
+<p> </p>
+<p><b>Parameter </b></p>
+<p>blockNr </p>
+<p>pPresPtnAddr </p>
+<p>pPresPtnLen </p>
+<p>Logical block number </p>
+<p>Presence pattern base address (output value) </p>
+<p>Presence pattern length (output value) </p>
+<p><b>Return code </b></p>
+<p>memSegment </p>
+<p>Returns the index of the selected flash block. If no flash block is found, a </p>
+<p>negative value is returned. </p>
+<p><b>Functional Description </b></p>
+<p>This function calculates the start address of the presence patterns of a specific logical block. It uses the </p>
+<p>logical block table to calculate the address, which is normally at the very end of a logical block. </p>
+<p> </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>static tFblResult ApplFblSetModulePresence( tBlockDescriptor * blockDescriptor ) </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor </p>
+<p>Pointer to logical block descriptor. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>kFblOk if operation was successful, otherwise kFblFailed. </p>
+<p><b>Functional Description </b></p>
+<p>This function sets the presence pattern for a specific logical block. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>Previous erase operation must have cleared this area. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>45 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>static tFblResult ApplFblClrModulePresence( tBlockDescriptor * blockDescriptor )</p>
+<p> </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor </p>
+<p>Pointer to logical block descriptor. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>kFblOk if operation was successful, otherwise kFblFailed. </p>
+<p><b>Functional Description </b></p>
+<p>This function writes a value into the presence mask. This invalidates the block. Note that the presence </p>
+<p>pattern area must be cleared by a following erase operation. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>static tFblResult ApplFblChkModulePresence( tBlockDescriptor * blockDescriptor ) </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor </p>
+<p>Pointer to logical block descriptor. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Returns if a logical block is valid. </p>
+<p><b>Functional Description </b></p>
+<p>This function checks the presence pattern and mask if it indicates together a valid application. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblAdjustLbtBlockData( tBlockDescriptor * blockDescriptor ) </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor </p>
+<p>Pointer to logical block descriptor. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Returns if a logical block is valid. </p>
+<p><b>Functional Description </b></p>
+<p>This function is called by the diagnostic layer after the logical block has been erased according to the </p>
+<p>definition of the logical block table. Now in this function the logical block size can be re-adjusted to the </p>
+<p>flashable area. This gives the possibility to disallow the download of data into a particular area. With the </p>
+<p>use of presence pattern this function is used to spare the presence pattern and mask area from the </p>
+<p>download, so that no data can be downloaded into this section. Only after successful validation of the </p>
+<p>logical block the function ApplFblSetPresencePattern is allowed to write into this area. Otherwise, an invalid </p>
+<p>download could lead to valid presence pattern and accidental start of an invalid application. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>The block descriptor handed over by the diagnostics module is changed by this function. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>46 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Prototype </b></p>
+<p>tFblAddress ApplFblGetModuleHeaderAddress( vuint8 blockNr ) </p>
+<p><b>Parameter </b></p>
+<p>blockNr </p>
+<p>Logical block number to get module header address from. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Start address of the module header information </p>
+<p><b>Functional Description </b></p>
+<p>This function is used to determine the start address of the application’s module header information which </p>
+<p>contains the software version information </p>
+<p>In the exemplary implementation, the module header information is expected at the start address of each </p>
+<p>Logical Block and this function returns the start address of the given Logical Block. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblProgStatus ApplFblExtProgRequest( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblProgStatus </p>
+<p>External programming request set or not </p>
+<p><b>Functional Description </b></p>
+<p>Function is called on power-on reset to check if an external programming request exists. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>The programming request flag will be reset by this function. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tApplStatus ApplFblGetApplStatus( void ) </p>
+<p><b>Return code </b></p>
+<p>tApplStatus </p>
+<p>Validty status of the application </p>
+<p>kApplValid – Application is valid </p>
+<p>kApplInvalid – Application is not valid </p>
+<p><b>Functional Description </b></p>
+<p>Returns kApplValid if application is valid (all mandatory blocks available) and application start is allowed. </p>
+<p>Otherwise it returns kApplInvalid. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tApplStatus ApplFblIsValidApp( void ) </p>
+<p><b>Return code </b></p>
+<p>tApplStatus </p>
+<p>Application validity status </p>
+<p><b>Functional Description </b></p>
+<p>Returns kApplValid if application is valid (all mandatory blocks available) and application start is allowed. </p>
+<p>Otherwise it returns kApplInvalid. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>47 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function checks if an abnormal shutdown occured. If an abnormal shutdown is detected in this </p>
+<p>function, the return code is kApplInvalid. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblValidateApp( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Validation success </p>
+<p><b>Functional Description </b></p>
+<p>Returns OK if the application valid flag has been successfully written. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblInvalidateApp( void ) </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Invalidation success </p>
+<p><b>Functional Description </b></p>
+<p>Returns OK if the application valid flag has been successfully removed. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblValidateBlock( tBlockDescriptor blockDescriptor ) </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor </p>
+<p>Block descriptor structure of logical block which is currently validated. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Validation information has been written correctly. </p>
+<p><b>Functional Description </b></p>
+<p>Function is called after a successful download (CRC check was successful) to validate the logical block. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblInvalidateBlock( tBlockDescriptor blockDescriptor ) </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor </p>
+<p>Block descriptor structure of logical block which is currently invalidated. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Validation information has been deleted correctly. </p>
+<p><b>Functional Description </b></p>
+<p>Whenever the bootloader needs to delete data, this function is called to invalidate the current logical block. </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>48 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblStoreFingerprint( vuint8 * buffer ) </p>
+<p><b>Parameter </b></p>
+<p>buffer </p>
+<p>Pointer to received fingerprint. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Result of storage operation. </p>
+<p><b>Functional Description </b></p>
+<p>This function is called by the WriteDataByIdentifier service to store the received fingerprint in a temporary </p>
+<p>RAM buffer. The fingerprint is written into a non-volatile memory when the corresponding logical block is </p>
+<p>invalidated. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblErrorNotification( tFblErrorType errorType, tFblErrorCode errorCode ) </p>
+<p><b>Parameter </b></p>
+<p>errorType </p>
+<p>errorCode </p>
+<p>Indicates the error type (see fbl_def.h for a list of error types) </p>
+<p>Error code returned by the memory driver routine </p>
+<p><b>Functional Description </b></p>
+<p>Call-back function for diagnostic trouble code entries. This function is called whenever a programming error </p>
+<p>occurs. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblWriteCRCTotal( tBlockDescriptor * blockDescriptor, </p>
+<p>                                 vuint32 crcStart, </p>
+<p>                                 vuint32 crcLength, </p>
+<p>                                 vuint32 crcValue )</p>
+<p> </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor </p>
+<p>crcStart </p>
+<p>crcLength </p>
+<p>crcValue </p>
+<p>Information about the logical block being downloaded. </p>
+<p>Start address of checksum calculation area </p>
+<p>Length of checksum calculation area </p>
+<p>Checksum </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Write access result. </p>
+<p><b>Functional Description </b></p>
+<p>This function saves the CRC total to non-volatile memory. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblRWSecurityAccessDelayFlag( vuint8 mode, vuint8 value ) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>49 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Parameter </b></p>
+<p>mode </p>
+<p>value </p>
+<p>Indicates if security access delay flag should be written or read. </p>
+<p>Value to be written </p>
+<p><b>Return code </b></p>
+<p>vuint8 </p>
+<p>Status of security access delay flag. </p>
+<p><b>Functional Description </b></p>
+<p>This function handles the security access delay flag.  If the delay flag is set, a security access won’t be </p>
+<p>possible (programming won’t be possible). The delay flag is set after three unlock attempts. After a certain </p>
+<p>time period (default value: 10 minutes) the flag is cleared and the next attempt is possible. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblIncProgCounts( tBlockDescriptor blockDescriptor ) </p>
+<p>tFblResult ApplFblIncProgAttempts( tBlockDescriptor blockDescriptor ) </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor </p>
+<p>Handle of current logical block. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Indicates if the NV-memory access was successful. </p>
+<p><b>Functional Description </b></p>
+<p>These functions are used to incement the programming counter and programming attempt counter for each </p>
+<p>logical block. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>Values are stored inverted. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblGetProgCounts( tBlockDescriptor blockDescriptor, vuint16 * progCounts ) </p>
+<p>tFblResult ApplFblGetProgAttempts( tBlockDescriptor blockDescriptor, </p>
+<p>                                   vuint16 * progAttempts ) </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor </p>
+<p>progCounts/Attempts </p>
+<p>Handle of current logical block. </p>
+<p>Count of successful program updates or programming attempts. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Indicates if the NV-memory access was successful. </p>
+<p><b>Functional Description </b></p>
+<p>Both functions are used to read the programming and programming attempt counters from NV-memory. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblWriteSecAccessInvalidCount(vuint8 * invalidCount) </p>
+<p><b>Parameter </b></p>
+<p>invalidCount </p>
+<p>Number of invalid security access attempts. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>50 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Indicates if the NV-memory access was successful. </p>
+<p><b>Functional Description </b></p>
+<p>Write number of invalid security access attempts. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>Value is stored inverted. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblReadSecAccessInvalidCount(vuint8 * invalidCount) </p>
+<p><b>Parameter </b></p>
+<p>invalidCount </p>
+<p>Number of invalid security access attempts. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Indicates if the NV-memory access was successful. </p>
+<p><b>Functional Description </b></p>
+<p>Read number of invalid security access attempts. </p>
+<p><b>Particularities and Limitations </b></p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint16 ApplFblGetPromMaxProgAttempts(vuint8 blockNr) </p>
+<p><b>Parameter </b></p>
+<p>blockNr </p>
+<p>Number of logical block. </p>
+<p><b>Return code </b></p>
+<p>vuint16 </p>
+<p>Maximum number of allowed programming attempts. </p>
+<p><b>Functional Description </b></p>
+<p>This function returns the number of allowed programming attempts for a given logical block. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblGetSecAccessDelayFlag( void ) </p>
+<p><b>Return code </b></p>
+<p>vuint8 </p>
+<p>0 if security access delay flag is not set, != 0 if set. </p>
+<p><b>Functional Description </b></p>
+<p>Returns the state of the security access delay flag. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblSetSecAccessDelayFlag( void ) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>51 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Return code </b></p>
+<p>vuint8 </p>
+<p>State of non-volatile memory access. </p>
+<p><b>Functional Description </b></p>
+<p>Sets the security access delay flag in NV-memory. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblClrSecAccessDelayFlag( void ) </p>
+<p><b>Return code </b></p>
+<p>vuint8 </p>
+<p>State of non-volatile memory access. </p>
+<p><b>Functional Description </b></p>
+<p>Clears the security access delay flag in NV-memory. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblReadResetResponseFlag( vuint8* buffer ); </p>
+<p><b>Parameter </b></p>
+<p>buffer </p>
+<p>Read buffer </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Returns if NV-memory access was successful. </p>
+<p><b>Functional Description </b></p>
+<p>Reads the reset response flag from NV-memory. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>Has to be evaluated in both application and bootloader. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblWriteResetResponseFlag( vuint8* buffer ) </p>
+<p><b>Parameter </b></p>
+<p>buffer </p>
+<p>Buffer with reset response flag. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Returns if NV-memory access was successful. </p>
+<p><b>Functional Description </b></p>
+<p>Write reset response flag to NV-memory before reset. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblGetBlockHash( vuint8 blockNr, vuint8 *targetBuffer ) </p>
+<p><b>Parameter </b></p>
+<p>blockNr </p>
+<p>targetBuffer </p>
+<p>Number of logical block </p>
+<p>Buffer for logical block hash </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>52 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Return kFblOk if logical block is successfully copied into the buffer referenced </p>
+<p>by targetBuffer </p>
+<p><b>Functional Description </b></p>
+<p>This function is called when the RoutineConrol – getLogicalBlockHash is received. It has to provide the </p>
+<p>logical block hash of the requested logical block for the diagnostic response. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblProgStatusUpdate(vuint8 progStatSet, vuint8 progStatClr) </p>
+<p><b>Parameter </b></p>
+<p>progStatSet </p>
+<p>progStatClr </p>
+<p>Status bits to be set </p>
+<p>Status bits to be cleared </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Return kFblOk if the programming status is updated successfully. </p>
+<p><b>Functional Description </b></p>
+<p>Update the programming status in NVM </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>eraseVer </p>
+<p> </p>
+<p><b>Parameter </b></p>
+<p>eraseVer </p>
+<p>Erase Verification Status </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Return kFblOk if the programming status is updated successfully. </p>
+<p><b>Functional Description </b></p>
+<p>Update the programming status in NVM </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFlashStatus ApplFblGetBlockErased( tBlockDescriptor blockDescriptor ) </p>
+<p><b>Parameter </b></p>
+<p>blockDescriptor</p>
+<p> </p>
+<p>The blockDescriptor provides information about the logical block in </p>
+<p>question, like the block number, the block start address and the block </p>
+<p>length. </p>
+<p><b>Return code </b></p>
+<p>kFlashErased </p>
+<p>Flash area of logical block is actually erased and can be programmed </p>
+<p>without further flash erase operation </p>
+<p>kFlashNotErased </p>
+<p>Flash area of logical block is not erased. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>53 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Functional Description </b></p>
+<p><b>&gt; </b></p>
+<p>The Bootloader maintains the memory status information in the fingerprint status byte for each logical </p>
+<p>block. After the erase routine is successfully passed for a logical block the memory status is set to state </p>
+<p>“Memory Erased”. Furthermore, with the first flash write access to a logical block, the memory status </p>
+<p>information is set to “Memory Programmed”. </p>
+<p><b>&gt; </b></p>
+<p>Function ApplFblGetBlockErased is called from the RoutineControl – eraseMemory service </p>
+<p>implementation if the memory status information is set to “Memory Erased” in order to make sure that the </p>
+<p>flash erase operation for the current logical block can be safely omitted. Therefore, this function should </p>
+<p>return kFlashErased only if it is absolutely sure that the flash erase operation is not necessary.. </p>
+<p><b>&gt; </b></p>
+<p>If this function returns “kFlashErased”, no flash erase operation is performed for the current logical block.  </p>
+<p><b>&gt; </b></p>
+<p>This function may be also called for other flash device types that the internal flash. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>It depends on the applied flash memory hardware if a flash erase operation needs to be </p>
+<p>performed just before a programming operation because of e.g. the charge level of the flash </p>
+<p>cells.  </p>
+<p>The data retention time can be seriously violated if un-erased flash memory is programmed. </p>
+<p>Flash devices can be damaged if un-erased flash memory is programmed. </p>
+<p> </p>
+<p> </p>
+<p><b>6.4 </b></p>
+<p><b>Diagnostic Service Callbacks </b></p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>static tFblResult ApplFblReadProgAttemptCounter(vuint8 *targetBuffer, vuint32 blockType) </p>
+<p><b>Parameter </b></p>
+<p>targetBuffer </p>
+<p>blockType </p>
+<p> </p>
+<p>The provided data is copied into the targetBuffer. </p>
+<p>Type of logical block </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Returns if NV-memory access was successful. </p>
+<p><b>Functional Description </b></p>
+<p>The programming attempt counter and the maximum number of programming attempts are copied into the </p>
+<p>target buffer for all logical blocks of the given block type. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>static tFblResult ApplFblReadEcuDiagnosticIdentification(vuint8 *targetBuffer) </p>
+<p><b>Parameter </b></p>
+<p>targetBuffer </p>
+<p>The diagnostic identification is copied into this buffer. </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Returns if NV-memory access was successful. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>54 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Functional Description </b></p>
+<p>This function copies the requested ECU Diagnostic Identification into the target buffer. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>static tFblResult ApplFblReadVehicleManufEcuHwNumber(vuint8 *targetBuffer) </p>
+<p><b>Parameter </b></p>
+<p>targetBuffer </p>
+<p>Buffer for ECU Hardware Number </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Returns if NV-memory access was successful. </p>
+<p><b>Functional Description </b></p>
+<p>This function copies the requested DID data into the target buffer. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplDiagUserService( vuint8 * pbDiagData, tTpDataType diagReqDataLen ) </p>
+<p>void ApplDiagUserRoutine( vuint8 * pbDiagData, tTpDataType diagReqDataLen ) </p>
+<p>void ApplDiagUserSubFunction( vuint8 * pbDiagData, tTpDataType diagReqDataLen ) </p>
+<p><b>Parameter </b></p>
+<p>pbDiagData </p>
+<p>diagReqDataLen </p>
+<p>Pointer to diag service data (after SID!) </p>
+<p>Service data length (without SID!) </p>
+<p><b>Functional Description </b></p>
+<p>The flash bootloader supports a set of diagnostic services. All diagnostic services not supported by the </p>
+<p>bootloader are passed to three call-back functions. </p>
+<p>The call-back function ApplDiagUserService is called whenever the bootloader receives an unknown </p>
+<p>service identifier, ApplDiagUserSubFunction is called whenever the bootloader receives an unknown sub-</p>
+<p>function identifier and ApplDiagUserRoutine is called whenever the bootloader receives an unknown </p>
+<p>routine identifier.. </p>
+<p> </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblCheckProgPreconditions( vuint8 * pbDiagData, tTpDataType diagReqDataLen) </p>
+<p><b>Parameter </b></p>
+<p>pbDiagData </p>
+<p>diagReqDataLen </p>
+<p>Pointer to diag service data (after SID!) </p>
+<p>Service data length (without SID!) </p>
+<p><b>Functional Description </b></p>
+<p>Check programming preconditions. This function is called when the corresponding diagnostic service is </p>
+<p>received.  </p>
+<p> </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblReadDataByIdentifier( vuint8 * pbDiagData, tTpDataType diagReqDataLen ) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>55 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Parameter </b></p>
+<p>pbDiagData </p>
+<p>diagReqDataLen </p>
+<p>Pointer to diag service data (after SID!) </p>
+<p>Service data length (without SID!) </p>
+<p><b>Functional Description </b></p>
+<p>This function is called to handle Read-Data-By-Identifier requests. </p>
+<p>The routine must retrieve the data-identifier (DID) from the message buffer, fill the message buffer with the </p>
+<p>appropriate response, and set the global variable DiagDataLength to the number of bytes added to the </p>
+<p>buffer. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 ApplFblWriteDataByIdentifier( vuint8 * pbDiagData, tTpDataType diagReqDataLen ) </p>
+<p><b>Parameter </b></p>
+<p>pbDiagData </p>
+<p>diagReqDataLen </p>
+<p>Pointer to diag service data (after SID!) </p>
+<p>Service data length (without SID!) </p>
+<p><b>Return code </b></p>
+<p>vuint8 </p>
+<p>Success of NV-memory access. </p>
+<p><b>Functional Description </b></p>
+<p>This function is called to handle Write-Data-By-Identifier requests. </p>
+<p>The routine must retrieve the data-identifier (DID) from the message buffer. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function supports a special return value besides kFblOk and kFblFailed to signal that a fingerprint </p>
+<p>has been received: kDiagReturnValidationOk. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult ApplFblReportDTCByStatusMask( vuint8* pbDiagData, tTpDataType diagReqDataLen ) </p>
+<p><b>Parameter </b></p>
+<p>pbDiagData </p>
+<p>diagReqDataLen </p>
+<p>Pointer to diag service data (after SID!) </p>
+<p>Service data length (without SID!) </p>
+<p><b>Return code </b></p>
+<p>tFblResult </p>
+<p>Success of NV-memory access. </p>
+<p><b>Functional Description </b></p>
+<p>Service function for diagnostic service ReportDTCByStatus </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>This function sends the positive response </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblInitErrStatus( void ) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>56 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Functional Description </b></p>
+<p>This routine is called to initialize the global variables used to save the FBL state when an error occurs. The </p>
+<p>state may be retrieved by sending a Read-Data-By-Identifier request with a data-identifier of $7F. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>FBL error state is available only if project state is set to „Integration“ </p>
+<p> </p>
+<p><b>6.5 </b></p>
+<p><b>Watchdog Callbacks </b></p>
+<p><b>Prototype </b></p>
+<p>void ApplFblWDInit( void ) </p>
+<p><b>Functional Description </b></p>
+<p>The purpose of this function is to start the watchdog function of the ECU. The function is called only after </p>
+<p>the FBL has determined that it will not start the application (It is called shortly after the first call of </p>
+<p>ApplFblStartup()). </p>
+<p>If the watchdog is initialized in this routine, then the FBL may start the application without starting the </p>
+<p>watchdog.  In this case, the application will be responsible for starting the watchdog itself. </p>
+<p>The FBL uses a hardware timer to determine when to reset the watchdog (via ApplFblWDTrigger()). The </p>
+<p>timer is initialized shortly after this routine is called. You must ensure that the watchdog timer will not reset </p>
+<p>the ECU before the FBL can call the trigger function for the first time. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>In addition to initializing the hardware responsible for the watchdog, the global variable WDTimer must </p>
+<p>be initialized to the number of “ticks” that define the interval between calls to the trigger function.  The </p>
+<p>interval is determined from your configuration, and is defined by the macro FBL_WATCHDOG_TIME. </p>
+<p><b>&gt; </b></p>
+<p>You may decide to initialize the watchdog hardware in the ECU startup code or in ApplFblInit(). </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblWDLong( void ) </p>
+<p><b>Functional Description </b></p>
+<p>The purpose of this function is to synchronize the start of the application with the watchdog.  The call gives </p>
+<p>you the opportunity to ensure that the watchdog will not interrupt the application’s startup. </p>
+<p>The function is called just before the bootloader starts your application. </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>The function is not called when the FBL jumps to the application directly after power-on. The call is </p>
+<p>made when the FBL is ready to start the O.S. after a download. Care should be taken if the watchdog </p>
+<p>(WD) is initialized in ApplFblInit(), as no synchronization is performed. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void ApplFblWDShort( void ) </p>
+<p><b>Particularities and Limitations </b></p>
+<p><b>&gt; </b></p>
+<p>Currently not used in bootloader. </p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void V_CALLBACK_NEAR ApplFblWDTrigger( void ) </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>57 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Functional Description </b></p>
+<p>This function is called by FblLookForWatchdog() and contains the actual watchdog trigger code. Depending </p>
+<p>on the configuration, please note the following points: </p>
+<p></p>
+<p>  If the function is copied by FblCopyWatchdog(), it has to be relocatable and normally no function calls </p>
+<p>out of this function are allowed. </p>
+<p></p>
+<p>  If the function is placed in RAM by the linker, it has to be present before the first call. </p>
+<p></p>
+<p>  If any function calls are done, the called functions have to be placed in RAM as well. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>58 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>7 </b></p>
+<p><b>Build your Bootloader </b></p>
+<p>The bootloader demonstration is delivered with a make system which can be used to build </p>
+<p>the bootloader. The following files control how your bootloader is built: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Makefile: Compiler dependent settings like the path to your compiler installation and </p>
+<p>compiler options. To rebuild the demonstrations bootloader, you have to adapt the </p>
+<p>compiler path in this file. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>#------------------------------------------------------------------------------ </p>
+<p>#------------------------- MUST be filled out --------------------------------- </p>
+<p># Define Compiler path </p>
+<p># E.g.: COMPILER_BASE = C:\Uti\HC08\HIWARE </p>
+<p>#       COMPILER_BIN  = $(COMPILER_BASE)\prog </p>
+<p>#       COMPILER_INC  = $(COMPILER_BASE)\lib\hc08c\include </p>
+<p>#       COMPILER_LIB  = $(COMPILER_BASE)\lib\hc08c\lib </p>
+<p>#------------------------------------------------------------------------------ </p>
+<p>COMPILER_BASE = &lt;path to your compiler&gt;</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Makefile.config: Project specific settings. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Makefile.&lt;platform&gt;.&lt;compiler&gt;.ALL.make: This file is used to generate the linker </p>
+<p>control file. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Makefile.project.part.defines: Files and modules included in your bootloader project </p>
+<p>are configured in this file. </p>
+<p><b>7.1 </b></p>
+<p><b>Bootloader specific linker requirements </b></p>
+<p>The bootloader has to execute parts of its code from RAM because flash read accesses are </p>
+<p>normally not permitted while flash memory is written or erased. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>Please see the linker control file and the MemMap.h file of the bootloader </p>
+<p>demonstration project as an example. </p>
+<p>These files also can be used to get a detailed list of functions which have to be linked </p>
+<p>to RAM. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>Please make sure the following parts of the bootloader are linked to RAM: </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>59 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Bootloader use case        </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Module / function </b></p>
+<p>Standard Bootloader </p>
+<p>Pipelined Verification </p>
+<p>Pipelined Programming </p>
+<p>FblLookForWatchdog() </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>FblLookForWatchdogVoid() </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>ApplFblWdTrigger() </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>FblMemRxNotification() </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>FblDiagRx*() </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>FblDiagTx*() </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>FblDiagDefaultPostHandler, other post handler functions </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>fbl_hw.c (Code and constants) </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>fbl_cw.c (Code and constants) </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>fbl_tp.c (Code and constants) </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>Communication Stack (Code and constants) </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>Table 7-1  </p>
+<p>RAM/ROM linkage </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Depending on your hardware, additional functions or modules may have to be linked to </p>
+<p>RAM. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>60 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>8 </b></p>
+<p><b>Adapt your application </b></p>
+<p><b>8.1 </b></p>
+<p><b>Memory Layout </b></p>
+<p>Bootloader and application mostly occupy different memory areas. There is only one shared </p>
+<p>area  which  is  linked  to  the  application  memory  by  the  bootloader  and  used  to  start  the </p>
+<p>application software. </p>
+<p>The  bootloader  has  to  be  linked  to  a  memory  area  which  can  be  started  by  your </p>
+<p>microcontroller,  e.g.  by  the  reset  vector  or  a  reset  data  structure.  Please  see  also </p>
+<p>[#hw_mem]. </p>
+<p><b>8.2 </b></p>
+<p><b>Application Start </b></p>
+<p>The application software is started using the so-called application vector table. This data </p>
+<p>structure is included in the bootloader but linked to the application memory. It is overwritten </p>
+<p>by the application during flashing. </p>
+<p>There  are  2  variants  of  this  table.  Controllers  with  a  configurable  interrupt  vector  base </p>
+<p>address  include  a  smaller  table;  controllers  without  a  configurable  interrupt  vector  base </p>
+<p>address include a complete interrupt vector table in bootloader and application. </p>
+<p><b>8.2.1 </b></p>
+<p><b>Controllers with a configurable interrupt base address </b></p>
+<p>Controllers with a configurable interrupt vector base address need to include a data structure </p>
+<p>which includes the start address of the application software. This structure is included in the </p>
+<p>file fbl_applvect.c and normally consists of a magic word and the address. A similar structure </p>
+<p>has to be added to the application software and linked to the exactly same address than the </p>
+<p>bootloader uses. </p>
+<p><b>8.2.2 </b></p>
+<p><b>Controllers with interrupt jump tables </b></p>
+<p>If  the  interrupt  vector  base  address  is  not  configurable,  it  is  normally  located  in  the </p>
+<p>bootloader’s  address  space.  The  bootloader  includes  a  interrupt  vector  table  with  jump </p>
+<p>opcodes.  These  jump  opcodes  point  to  a  second  vector  table  which  is  placed  in  the </p>
+<p>application memory and can be used like the original interrupt vector table. This table also </p>
+<p>is linked with the bootloader (mostly fbl_applvect.c, but an assembler version may be used </p>
+<p>depending </p>
+<p>on </p>
+<p>the </p>
+<p>compiler). </p>
+<p>The </p>
+<p>application </p>
+<p>variant </p>
+<p>can </p>
+<p>be </p>
+<p>created </p>
+<p>from </p>
+<p>the </p>
+<p>file </p>
+<p>.\BSW\Fbl\_Template\_applvect.c. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Please note that the position of the interrupt vector table is fixed by the bootloader </p>
+<p>setup and cannot be changed independently by the application software. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>8.3 </b></p>
+<p><b>Shared files between FBL and application </b></p>
+<p>Bootloader and application do not have to share files. However, if some files are shared data </p>
+<p>exchange between both is made easier. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>61 </p>
+<p>based on template version 5.1.0 </p>
+<p>The FblHeader structur is defined in fbl_main.h. Access macros which can be used in the </p>
+<p>application  software  are  also  defined  in  this  file. The  fbl_main.h  header file  depends  on </p>
+<p>fbl_def.h and fbl_cfg.h. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>If “fbl_main.h”, “fbl_def.h” and “fbl_cfg.h” are used in the application software, you have </p>
+<p>to make sure the files are consistent between bootloader and application. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>8.4 </b></p>
+<p><b>Shared memory between FBL and application </b></p>
+<p>There is no memory, which is shared between the FBL and the application. Each project </p>
+<p>(FBL and application) uses its own stack, RAM and ROM. </p>
+<p>Besides this, bootloader and application have to share some information: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The transition between from bootloader to application and back has to be coordinated. </p>
+<p>In general, a reset response flag and a programming request flag has to be passed </p>
+<p>between both. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Depending on your ECU’s requirements, process data like fingerprints or version </p>
+<p>numbers have to be exchanged between bootloader and application. </p>
+<p>User specific extensions can be added using the so-called common data structure. This data </p>
+<p>structure is added to FblHeader and can be defined according to the data which has to be </p>
+<p>shared between bootloader and application. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The common data structure can be activated by the switch </p>
+<p>FBL_ENABLE_COMMON_DATA in a user configuration file. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>The type definition and constant which contains the shared data should be added to a user </p>
+<p>modifiable file like fbl_ap.c. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>The variable name of this structure has to be fblCommonData. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>62 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>8.5 </b></p>
+<p><b>Transition between Bootloader and Application </b></p>
+<p><b>8.5.1 </b></p>
+<p><b>[#oem_start] [#oem_trans] - Programming Session Request </b></p>
+<p>There are two possibilities to handle the programming session request: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Shared memory: A shared memory location either in non-volatile memory or </p>
+<p>uninitialized RAM is used to hand over the programming session request. This </p>
+<p>memory area has to be written by the application software. After a reset has been </p>
+<p>issued, the bootloader has to read the programming session request flag in </p>
+<p>ApplFblExtProgRequest() and clear the flag. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>FblStart is used. The FblStart-feature provides a possibility to store the programming </p>
+<p>session request flag completely in bootloader context. The FblHeader-structure </p>
+<p>provides a function pointer to a bootloader function called “FblStart()”. This function </p>
+<p>can be called using CallFblStart();. The function in bootloader context is started, a flag </p>
+<p>will be set in RAM and the bootloader issues a reset. After this reset, the flag is read </p>
+<p>by ApplFblExtProgRequest(). </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>CallFblStart() does not return to the application software. Please make sure all </p>
+<p>necessary download tasks, e.g. shutting down the OS and running NVM tasks, are </p>
+<p>finished before executing CallFblStart() </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Consider the usage of RAM pattern carefully. It can cause issues, e.g. as follows: </p>
+<p>1. </p>
+<p>The bootloader cannot be started, because the RAM contents get lost after </p>
+<p>reset (e.g. by a short loss of power on the micro or initialization through the </p>
+<p>startup code). </p>
+<p>2. </p>
+<p>The bootloader is accidentally started after power-up, because the RAM </p>
+<p>location contains by coincidence the specified pattern named above.  </p>
+<p>3. </p>
+<p>The RAM pattern will be allocated by the bootloader anywhere in RAM. This </p>
+<p>may overlap with data inside the application. If you write into fblStartMagicFlag[] </p>
+<p>either by call of CallFblStart() or ApplSetStartMagicFlag(), you potentially </p>
+<p>overwrite your data with these. The ECU should be shutdown then immediately. </p>
+<p>This could otherwise cause unpredictable behavior of the ECU. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>If additional data should be transmitted with the FblStart function call, a parameter can be </p>
+<p>used to transmit this data. It is copied to a memory area which is placed together with the </p>
+<p>magic flag. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>63 </p>
+<p>based on template version 5.1.0 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Vector SLP3 bootloaders do not support a FblStart() parameter by default. A parameter </p>
+<p>can be added using the switch FBL_MAIN_ENABLE_FBLSTART_PARAM, but the </p>
+<p>respective data structures have to be defined in user callback files. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>To define a parameter for the FblStart() function, the following settings have to be made: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>FBL_MAIN_ENABLE_FBLSTART_PARAM has to be set. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The parameter type tFblStartParamter has to be defined. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>A pointer to this parameter (as void pointer) and the size of the parameter have to be </p>
+<p>added to the FblStart() function call. </p>
+<p> </p>
+<p><b>8.5.2 </b></p>
+<p><b>ECU Reset and Default Session Request </b></p>
+<p>If an ECU Reset request or a Default Session Request is received by the bootloader, there </p>
+<p>are two possibilities to handle the response: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The response is sent by the bootloader and the reset is issued after the response was </p>
+<p>sent. This is the easier variant, but the tester has to take into account that the reset </p>
+<p>takes some time. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The bootloader sends a Response Pending message, sets a flag and issues a reset. </p>
+<p>The application software has to read this flag and send the response. This feature is </p>
+<p>called “Response After Reset”. In this case, the next request can be sent immediately, </p>
+<p>but the flag has to be handed over via RAM or non-volatile memory. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>64 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>9 </b></p>
+<p><b>Memory Drivers </b></p>
+<p><b>9.1 </b></p>
+<p><b>Flash Driver </b></p>
+<p>The flash driver uses the HIS interface as described in [3]. The flash driver is downloaded </p>
+<p>to the ECU. It is copied and executed into RAM during runtime. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>There is usually no need to compile, link, or modify the flash driver in any way. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>Relocatable flash drivers should always be located at address 0x00000000. </p>
+<p>Additional flash drivers can be added to the bootloader configuration by yourself. </p>
+<p><b>9.2 </b></p>
+<p><b>Non-volatile Memory Driver </b></p>
+<p>The  bootloader  needs  to  use  a  non-volatile  memory  driver  like  an  EEPROM  driver  or </p>
+<p>EEPROM emulation to store bootloader process data. The standard bootloader does not </p>
+<p>include such a driver. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>The dummy EEPROM driver included in every bootloader delivery must not be used for </p>
+<p>production ECUs because it does not store data reset safe. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>Non-volatile  memory  accesses  can  be  configured  by  NV-Wrapper  (see  [8])  and  are </p>
+<p>encapsulated in fbl_apnv.c/h. </p>
+<p>Either module based EEPROM emulations or HIS interface (see [3]) EEPROM drivers can </p>
+<p>be used. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>If you don’t want to use your own driver, various EEPROM drivers or EEPROM </p>
+<p>emulations can be ordered with the bootloader. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>9.3 </b></p>
+<p><b>Memory driver requirements </b></p>
+<p>Additional  memory  drivers  have  to  fulfill  a  few  requirements  to  fit  into  the  bootloader </p>
+<p>environment. These requirements are valid to flash driver, EEPROM drivers and EEPROM </p>
+<p>emulations. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The drivers have to provide a synchronous interface. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>65 </p>
+<p>based on template version 5.1.0 </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Drivers mustn’t use interrupts. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>The drivers have to call FblLookForWatchdog() at least once a millisecond. It is </p>
+<p>required to call it more often. </p>
+<p>A detailed description of memory driver requirements can be found in [11] AN-ISC-8-1188 – </p>
+<p>Custom Flash Drivers. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>66 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>10  Miscellaneous </b></p>
+<p><b>10.1 </b></p>
+<p><b> [#oem_valid] - Application validation </b></p>
+<p>For more general information about this see the UserManual_FlashBootloader in the chapter <b>Proposals for </b></p>
+<p><b>Handling the Validation Area. </b></p>
+<p><b> </b></p>
+<p>The  bootloader  has  to  decide  if  a  valid  application  software  is  present  or  not.  If  the </p>
+<p>application is valid, the bootloader will start the application on the ECU’s startup. </p>
+<p>There are several variants to handle the application validation. Please see [9] for a short </p>
+<p>description of the available variants. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>FCA SLP5 bootloaders use the following validation strategy by default: </p>
+<p></p>
+<p>  The application’s overall validity is established in service CheckProgrammingDependencies. </p>
+<p></p>
+<p>  During startup, the result of this check is evaluated. </p>
+<p></p>
+<p>  Either non-volatile memory or presence patterns can be used to store the validity </p>
+<p>information. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>FCA </p>
+<p>SLP5 </p>
+<p>bootloaders </p>
+<p>use </p>
+<p>the </p>
+<p>functions  ApplFblIsValidApp(),  ApplFblValidateApp(), </p>
+<p>ApplFblInvalidateApp(), ApplFblInvalidateBlock() and ApplFblValidateBlock() to control the </p>
+<p>application valid status. An application wide compatibility check should be implemented in </p>
+<p>ApplFblCheckProgDependencies(). </p>
+<p>A second validation strategy without application wide validation flag can be selected in a </p>
+<p>user configuration file in DaVinci (deactivation of “Application Validity Flag”): </p>
+<p>This configuration switch deactivates the application wide validation flag and uses the logical </p>
+<p>block validity flags combined with a compatibility check during the bootloader startup phase </p>
+<p>to establish the application validity. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Please note that using memory with ECC functionality may be critical to determine the </p>
+<p>application validity. If such a memory is used, the read function has to be able to </p>
+<p>handle errors. </p>
+<p>Otherwise, the application and bootloader may get stuck in an endless reset loop </p>
+<p>because ECC errors trigger a reset or exception on every startup. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>10.1.1 </b></p>
+<p><b>Presence Patterns </b></p>
+<p>Instead of using flags in EEPROM, the validation status can be written into the flash memory </p>
+<p>of the respective logical block. Due to the fact that you cannot program a flash cell twice, </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>67 </p>
+<p>based on template version 5.1.0 </p>
+<p>two segments are used to mark the logical block as valid or invalid. The handling of presence </p>
+<p>patterns is optional and can be activated in GENy. </p>
+<p>The validation and invalidation is handled with two patterns at the end of each logical block: </p>
+<p>the mask value and the presence pattern. The mask and the pattern have a size of at least </p>
+<p>two bytes. The location of these values is reserved in the logical block to avoid that the </p>
+<p>application overwrites these locations. </p>
+<p>The  reason  for  having  two  values,  the  pattern  and  the  mask,  is  because  most  flash </p>
+<p>manufacturers do not allow writing to a flash cell two times without a preceding erase. The </p>
+<p>validation/invalidation concept is based on a conjunction of the erased-status of the mask </p>
+<p>and the presence pattern value. </p>
+<p> </p>
+<p>Figure 10-1 </p>
+<p>Presence Pattern </p>
+<p><b>Invalidate</b>: </p>
+<p>The mask value is written to its inverse of the erased state (the erased state is </p>
+<p>stored in the LogicalBlockTable). This makes the logical block invalid without </p>
+<p>re-writing to the presence pattern location. </p>
+<p><b>Validate</b>: </p>
+<p>The presence pattern is written to its location. Since both, the Pattern values </p>
+<p>and mask has been erased, it is possible to re-write and the mask contains the </p>
+<p>required erased state. </p>
+<p><b>IsValid</b>: The logical block is treaded as present, if the presence pattern has been written </p>
+<p>and the mask value contains its erased state.  </p>
+<p> </p>
+<p>The </p>
+<p>erasure </p>
+<p>will </p>
+<p>happen </p>
+<p>between </p>
+<p>the </p>
+<p>call </p>
+<p>to </p>
+<p>ApplFblInvalidateBlock() </p>
+<p>and </p>
+<p>ApplFblValidateBlock(). This ensures that the mask and value have been erased before. </p>
+<p>The whole procedure guarantees that in any case the logical block is valid or not depending </p>
+<p>on the actual state. Even if the erasure occurs from top to bottom or vice versa or the erasure </p>
+<p>is interrupted, the logical block is invalid. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Presence patterns either are used to store the application overall validity (if an </p>
+<p>application valid flag is used) or the logical block validity. </p>
+<p>If the application valid flag is used, the block validity information is stored in non-volatile </p>
+<p>memory. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>10.1.1.1 </b></p>
+<p><b>Storage of application valid flag </b></p>
+<p>The application valid flag is shared over all logical blocks. To provide flexibility regarding the </p>
+<p>sequence of logical blocks, the presence patterns are stored according to the following rules: </p>
+<p>1. </p>
+<p>Every logical block contains one application validity pattern. One valid application </p>
+<p>pattern will be interpreted as application valid pattern even if all other patterns are </p>
+<p>undefined or invalidated. </p>
+<p>Presence Pattern Value</p>
+<p>Presence Pattern Mask</p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>68 </p>
+<p>based on template version 5.1.0 </p>
+<p>2. </p>
+<p>If one logical block is erased, the application validity patterns in all logical blocks are </p>
+<p>invalidated. </p>
+<p>3. </p>
+<p>After a successful compatibility check, the presence pattern in the last logical block </p>
+<p>which has been flashed is validated. This ensures that only one block contains the </p>
+<p>application valid flag </p>
+<p>4. </p>
+<p> During startup, all logical blocks are checked for an application valid flag. If the </p>
+<p>application valid flag is found, the application is started by the bootloader. </p>
+<p>Figure  10-2  -  Presence  Pattern  Examples  demonstrates  four  states  of  an  ECU  using </p>
+<p>presence patterns to store the application valid flag. </p>
+<p> </p>
+<p>Figure 10-2 </p>
+<p>Presence Pattern Examples </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>State 1: ECU completely erased. Both presence patterns are recognized as invalid </p>
+<p>and the application is not started. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>State 2: Logical block #1 and logical block #2 have been flashed successfully. Both </p>
+<p>blocks are compatible and the presence pattern is placed at the end of the logical </p>
+<p>block which has been flashed at last. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>State 3: Logical block #1 shall be re-programmed, but erasing the first logical block </p>
+<p>failed. Both patterns have been invalidated before erasing block #1, then erasing of </p>
+<p>block #1 started and a reset occurred. After this reset, the application is not started. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>State 4: Logical block #1 has been re-programmed and the compatibility check </p>
+<p>succeeded. The presence pattern is placed into block #1, the application is started </p>
+<p>after reset. </p>
+<p>PP valid</p>
+<p>PP erased</p>
+<p>PP erased</p>
+<p>PP erased</p>
+<p>PP valid</p>
+<p>PP invalid</p>
+<p>Logical block #2</p>
+<p>valid</p>
+<p>Logical block #2</p>
+<p>valid</p>
+<p>Logical block #1</p>
+<p>erased</p>
+<p>Logical block #2</p>
+<p>erased</p>
+<p>Logical block #1</p>
+<p>valid</p>
+<p>Logical block #1</p>
+<p>valid</p>
+<p>State 2</p>
+<p>State 4</p>
+<p>State 1</p>
+<p>PP invalid</p>
+<p>Logical block #2</p>
+<p>valid</p>
+<p>PP invalid</p>
+<p>Logical block #1</p>
+<p>partly erased</p>
+<p>State 3</p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>69 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p><b>10.1.2 </b></p>
+<p><b>[#oem_time] - Validation OK – Application faulty </b></p>
+<p>For more general information about this see the UserManual_FlashBootloader in the chapter <b>Validation OK </b></p>
+<p><b>– Application faulty. </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>10.2 </b></p>
+<p><b>[#oem_sec] Seed / Key Mechanism </b></p>
+<p>The Seed/Key mechanism is implemented in user callback files. The diagnostic layer uses </p>
+<p>the functions ApplFblSecuritySeed() and ApplFblSecurityKey() to create seed values and </p>
+<p>verify </p>
+<p>the </p>
+<p>keys. </p>
+<p>The </p>
+<p>actual </p>
+<p>calculation </p>
+<p>is </p>
+<p>done </p>
+<p>in </p>
+<p>the </p>
+<p>module </p>
+<p>Sec_SeedKeyVendor.c/Sec_SeedKey_Cfg.h  which </p>
+<p>can  be  seen  as  a  template  for  a </p>
+<p>Seed/Key module. Length of Seed and Key and the used algorithm can be configured in </p>
+<p>there. </p>
+<p>The ApplFblSecuritySeed() function is called to obtain a (pseudo) random value to be sent </p>
+<p>to  the  tester. The  function  is  called  when  a  security  access  service  request  is  received </p>
+<p>containing a request seed sub-function. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>The request seed service should return a random value. Please check if your ECU is </p>
+<p>set up correctly so that a random value is returned. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>There is no safe key calculation algorithm included in this bootloader by default. Please </p>
+<p>use the specified callbacks to implement your own, safe algorithm. </p>
+<p>The example implementation is based on a simple XOR operation with the key </p>
+<p>constant configured in GENy. </p>
+<p>Please note that the example DLL delivered with the bootloader implements a non-</p>
+<p>configurable constant of 0xFFFFFFFF. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p>The  following  settings  can  be  done  in  the  security  access  template.  The  settings  are </p>
+<p>documented in detail by comments in the template files. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Size of seed and key: SEC_SEED_LENGTH, SEC_KEY_LENGTH </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Format of seed and key (Byte arrays or word arrays). </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Security access algorithm implementation: SecM_ComputeKeyVendor() </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>70 </p>
+<p>based on template version 5.1.0 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The Seed/Key calculation DLL used by vFlash has to be adapted as well if the </p>
+<p>Seed/Key algorithm is changed. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>10.3 </b></p>
+<p><b>[#oem_seccomp] - Security module </b></p>
+<p>The security module configuration is described in a separate document – see [10] for more </p>
+<p>information. </p>
+<p><b>10.4 </b></p>
+<p><b>Data Proc</b>e<b>ssing Support </b></p>
+<p>In  order to  support  encrypted  and/or compressed files,  the  FBL  provides  three  interface </p>
+<p>functions that process the received data before programming. </p>
+<p>ApplFblInitDataProcessing is called to initialize the data processing functionality with each </p>
+<p>RequestDownload service request. </p>
+<p>ApplFblDataProcessing is called to perform data processing for data that is received with </p>
+<p>each TransferData service request. </p>
+<p>ApplFblDeinitDataProcessing </p>
+<p>is </p>
+<p>called </p>
+<p>to </p>
+<p>conclude </p>
+<p>the </p>
+<p>data </p>
+<p>processing </p>
+<p>when </p>
+<p>a </p>
+<p>RequestTransferExit service request is received. </p>
+<p>The order of data processing operations must be considered when the download files are </p>
+<p>prepared. The standard sequence is depicted in the figure below. There may be deviations </p>
+<p>from this sequence for special use cases. </p>
+<p>In the first step, the signature or the CRC checksum is generated upon the raw download </p>
+<p>data in order to perform the counterpart operation on the ECU after the downloaded data </p>
+<p>have  been  programmed  into  NV-memory.  If  downloading  of  compressed  data  shall  be </p>
+<p>supported, the compressed download file is computed next. The compression step should </p>
+<p>be performed before a potential encryption of the download data because the compression </p>
+<p>algorithm normally does not have much effect on encrypted data. Therefore, the last step is </p>
+<p>the encryption. During download, the reverse operations are performed on the ECU. </p>
+<p> </p>
+<p> </p>
+<p>Generate Signature / CRC</p>
+<p>Start</p>
+<p>Generate compressed file</p>
+<p>for download</p>
+<p>Encrypt compressed file</p>
+<p>Decrypt download data</p>
+<p>Decopression</p>
+<p>Signature / CRC verification</p>
+<p>on programmed data</p>
+<p><b>Start with raw download </b></p>
+<p><b>data</b></p>
+<p><b>Download</b></p>
+<p><b>ECU</b></p>
+<p><b>Tester</b></p>
+<p>Generate Signature / CRC</p>
+<p>Start</p>
+<p>Generate compressed file</p>
+<p>for download</p>
+<p>Encrypt compressed file</p>
+<p>Decrypt download data</p>
+<p>Decopression</p>
+<p>Signature / CRC verification</p>
+<p>on programmed data</p>
+<p><b>Start with raw download </b></p>
+<p><b>data</b></p>
+<p><b>Download</b></p>
+<p><b>ECU</b></p>
+<p><b>Tester</b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>71 </p>
+<p>based on template version 5.1.0 </p>
+<p>Figure 10-3 </p>
+<p>Data processing sequence </p>
+<p><b>10.4.1 </b></p>
+<p><b>tProcParam </b></p>
+<p>The data processing interface uses the tProcParam data structure in order to handle the </p>
+<p>input and output parameters. </p>
+<p><b>tProcParam </b></p>
+<p>Element </p>
+<p>Type </p>
+<p>Description </p>
+<p>dataBuffer </p>
+<p>vuint8* </p>
+<p>Pointer to input data buffer </p>
+<p>dataLength </p>
+<p>vuint16 </p>
+<p>Size of input data </p>
+<p>dataOutBuffer </p>
+<p>vuint8* </p>
+<p>Pointer to output data buffer </p>
+<p>dataOutLength </p>
+<p>vuint16 </p>
+<p>Size of output data </p>
+<p>dataOutMaxLength </p>
+<p>vuint16 </p>
+<p>Size of output data buffer </p>
+<p>wdTriggerFct </p>
+<p>vuint8 (*wdTriggerFct)(void) </p>
+<p>Pointer to watchdog service function </p>
+<p>mode </p>
+<p>vuint8 </p>
+<p>Data processing mode; equals the DFI which is passed </p>
+<p>with RequestDownload </p>
+<p>Table 10-1  </p>
+<p>Type Definition - tProcParam </p>
+<p> </p>
+<p><b>10.5 </b></p>
+<p><b>[#oem_multi] - Multiple ECU Support </b></p>
+<p>This bootloader supports a so-called multiple ECU support. If this option is activated, several </p>
+<p>CAN identifiers are prepared to be used by the bootloader. During the bootloader startup, </p>
+<p>the  function ApplFblCanParamInit()  can  be  used  to  select  the  required  identifier. This  is </p>
+<p>useful for  configuration  which  include  several  ECUs  of  the  same  kind,  e.g.  door  control </p>
+<p>ECUs, in one vehicle. </p>
+<p>Multiple ECUs can be activated in GENy by selecting more than one node in the channel </p>
+<p>setup dialog: </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>72 </p>
+<p>based on template version 5.1.0 </p>
+<p> </p>
+<p>Figure 10-4 </p>
+<p>Multiple ECU setup </p>
+<p>The GENy module FblWrapperCom_Can allows manual adaptions of the settings which are </p>
+<p>read from the network database. To keep these manual adaptions in case a new database </p>
+<p>is  selected,  the  configuration  has  to  be  updated  manually  in  a  second  step  using  the </p>
+<p>“Restore default” button in the GENy module FblWrapperCom_Can. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Manually adapted configuration settings will be overwritten in case the communication </p>
+<p>setup is reset. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>10.6 </b></p>
+<p><b>Pipelined Programming and Pipelined Verification </b></p>
+<p>Optionally, FCA SLP5 bootloaders can use the “Pipelined Programming” and/or “Pipelined </p>
+<p>Verification”  feature  to  speed  up  the  programming  process.  If  one  of  these  features  is </p>
+<p>enabled, some tasks are executed in parallel to speed up the download process: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Pipelined Verification: Written data is verified while additional data is received. </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Pipelined Programming: Received data is processed and written to flash while data is </p>
+<p>received. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>73 </p>
+<p>based on template version 5.1.0 </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>If Pipelined Programming is activated, errors message from the bootloader may be </p>
+<p>delayed. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The possible speedup is hardware dependent. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>10.7 </b></p>
+<p><b>Bootmanager </b></p>
+<p>The FCA SLP5 Flash-Bootloader provides a configurable and adaptable boot manager. The </p>
+<p>boot manager sources can be found in folder Bsw\FblBm. The basic operation of the boot </p>
+<p>manager  is  to  perform  a  set  of  boot  condition  checks.  If  a  boot  condition  is  fulfilled,  a </p>
+<p>corresponding callout function is called. Both the condition check and the corresponding </p>
+<p>action  are  performed  in  callout  functions.  The  template  implementations  of  the  callout </p>
+<p>functions can be found in Bsw\Fbl\_Template\fbl_apbm.c.  </p>
+<p>The boot condition checks can be freely parameterized by a checklist. The boot manager </p>
+<p>processes  the  checklist  subsequently.  Basically,  the  boot manager can  check  e.g.  if  the </p>
+<p>Flash-Bootloader,  a  Flash-Bootloader-Updater  or  the  application  is  valid. To  perform  the </p>
+<p>check, the corresponding application has to provide the information structure tBmInfoHeader </p>
+<p>which is defined in fbl_bmtypes.h. With this information structure, the boot manager can </p>
+<p>determine the validity status of the corresponding application can perform a verification step </p>
+<p>and can call it if the check is successful. </p>
+<p> </p>
+<p><b>10.8 </b></p>
+<p><b>FCA-Specific Functionality </b></p>
+<p><b>10.8.1 </b></p>
+<p><b>Download of SWIL / Flash Driver </b></p>
+<p>Per default the flash driver is part of the bootloader code in ROM and is copied into RAM </p>
+<p>when the download sequence is started. Optionally, the flash driver can be downloaded as </p>
+<p>SWIL  in  the  download  sequence.  The  FBL  can  be  configured  accordingly  with  the </p>
+<p>configuration  option  “Flash  Driver  Usage”  on  the  FblGeneral  component  of  the  DaVinci </p>
+<p>Configurator. </p>
+<p>After an application download has been completed the flash driver code is removed from its </p>
+<p>RAM buffer. </p>
+<p><b>10.8.2 </b></p>
+<p><b>Abnormal Shutdown </b></p>
+<p>The FCA SLP5 FBL permits to detect an abnormal shutdown. In this case, the FBL does not </p>
+<p>start  the  application  immediately  after  PowerOn/Reset  if  a  valid  application  is  available. </p>
+<p>Instead a configurable time window in bootloader is activated that can be used to perform a </p>
+<p>download. This can be helpful if the application has got some fault that leads to an abnormal </p>
+<p>shutdown </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>74 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>10.8.3 </b></p>
+<p><b>Flash Erase Detection </b></p>
+<p>The FBL provides an option to determine if the flash memory of a logical block has been </p>
+<p>previously erased.  </p>
+<p>If this option is enabled, the Bootloader checks the memory status flag after a RoutineControl </p>
+<p>– eraseMemory request is received. In case that the memory status flag indicates “flash </p>
+<p>erased”, additionally the callback function ApplFblGetBlockErased () is called to ensure that </p>
+<p>the  flash  erase  routine  can  be  omitted. The  flash  erase  routine  is  not  carried  out  if  the </p>
+<p>callback function returns the code “kFlashErased” in order to speed-up the download. </p>
+<p><b>10.8.4 </b></p>
+<p><b>Update of Identification Data </b></p>
+<p>After  a  successful  download,  the  FBL  copies  identification  data  from  the  downloaded </p>
+<p>application </p>
+<p>into </p>
+<p>NV-memory. </p>
+<p>This </p>
+<p>is </p>
+<p>done </p>
+<p>in </p>
+<p>function  ApplFblValidateBlock() </p>
+<p>and </p>
+<p>in </p>
+<p>ApplFblValidateApp().  </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Not all DIDs have to supported for a specificECU. Please adapt the functions . </p>
+<p>ApplFblValidateBlock() and ApplFblValidateApp() to copy the required information. </p>
+<p><b>  </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>10.8.5 </b></p>
+<p><b>Update of FCA Identification Data </b></p>
+<p>Several part number DIDs have to be updated in the download process and since it is not </p>
+<p>permitted to use the WriteDataByIdentifier service, the new part numbers must be part of </p>
+<p>the downloaded data. The FBL delivery provides a template structure which contains the </p>
+<p>new DID data that can be linked to the application. The definition of this structure can be </p>
+<p>found in the files applfbl.c/applfbl.h. This application header structure is used to update the </p>
+<p>identification information in NV-memory after a logical block respectively after the application </p>
+<p>is set as valid in the functions ApplFblValidateBlock() and ApplFblValidateApp(). Additionally, </p>
+<p>this structure provides compatibility versions for the dependency check. </p>
+<p><b>10.8.6 </b></p>
+<p><b>Software Compatibility Information </b></p>
+<p>To  perform  the  checks  for  Hardware-Software  and  Software-Software  compatibility,  the </p>
+<p>application header structure also contains compatibility version information that is used for </p>
+<p>the  RoutineControl  -checkProgrammingDependencies  service.  The  dpendency  check  is </p>
+<p>implemented in function ApplFblCheckProgDependencies(). </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>75 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>11  vFlash Configuration </b></p>
+<p>The address based vFlash template delivered with the bootloader offers some configuration </p>
+<p>options to synchronize the download sequence between bootloader and vFlash: </p>
+<p> </p>
+<p>Figure 11-1 </p>
+<p>vFlash Configuration </p>
+<p> </p>
+<p> </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Tester Serial Number </p>
+<p>ASCII string which is appended to the current date (3 Bytes BCD, </p>
+<p>YYMMDD) and sent in the write fingerprint request. The length of this </p>
+<p>request is (3 + length of TesterSerialNumber) Bytes. </p>
+<p>Default value is 6 Bytes. If the length should be changed in the </p>
+<p>bootloader, please add the following define to a user config file: </p>
+<p>#define kDiagRqlWriteDataByIdentifierFingerPrintParameter 0x09u </p>
+<p>Security level </p>
+<p>Selects the security level used for Seed/Key. Default is level 11. </p>
+<p>The configuration can be changed by a user configuration file: </p>
+<p>#define kDiagSubRequestSeed 0x11u </p>
+<p>#define kDiagSubSendKey 0x12u </p>
+<p>Communication Control </p>
+<p>Type </p>
+<p>Corresponds to the GENy setting “Communication Control Type”. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>76 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>Configuration Option </b></p>
+<p><b>Description </b></p>
+<p>Send </p>
+<p>DTCControlOptionRecord </p>
+<p>Corresponds to the GENy setting “Control DTC Option Record” </p>
+<p>Send </p>
+<p>CheckProgramming- </p>
+<p>Dependencies </p>
+<p>Corresponds to the GENy setting “Check Programming Preconditions </p>
+<p>Service. </p>
+<p>Table 11-1  </p>
+<p>vFlash Configuration </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>77 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>12  Glossary and Abbreviations </b></p>
+<p><b>12.1 </b></p>
+<p><b>Glossary </b></p>
+<p><b>Term </b></p>
+<p><b>Description </b></p>
+<p>NV-Memory </p>
+<p>Non-volatile memory which can be used to store small amounts of data </p>
+<p>during the bootloader’s runtime. </p>
+<p> </p>
+<p> </p>
+<p><b>12.2 </b></p>
+<p><b>Abbreviations </b></p>
+<p><b>Abbreviation </b></p>
+<p><b>Description </b></p>
+<p>ALFI </p>
+<p>Address/Length Format Identifier </p>
+<p>BCD </p>
+<p>Binary Coded Digit </p>
+<p>CAN </p>
+<p>Controller Area Network </p>
+<p>Cfg5 </p>
+<p>Vector DaVinci Configurator 5 </p>
+<p>DID </p>
+<p>Data Identifier </p>
+<p>DFI </p>
+<p>Data Format Identifier </p>
+<p>FBL </p>
+<p>Flash Bootloader </p>
+<p>ECU </p>
+<p>Electronic Control Unit </p>
+<p>HIS </p>
+<p>Herstellerinitiative Software </p>
+<p>ISO </p>
+<p>International Organization for Standardization </p>
+<p>LIN </p>
+<p>Local Interconnect Network </p>
+<p>SWIL </p>
+<p>Software Interlock </p>
+<p>UDS </p>
+<p>Unified Diagnostic Services </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader OEM </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 0.9 </p>
+<p>78 </p>
+<p>based on template version 5.1.0 </p>
+<p><b>13  Contact </b></p>
+<p>Visit our website for more information on </p>
+<p> </p>
+<p><b>&gt; </b> News </p>
+<p><b>&gt; </b> Products </p>
+<p><b>&gt; </b> Demo software </p>
+<p><b>&gt; </b> Support </p>
+<p><b>&gt; </b> Training data </p>
+<p><b>&gt; </b> Addresses </p>
+<p> </p>
+<p><b>www.vector.com </b></p>
+</body>
+</html>
+{% endraw %}

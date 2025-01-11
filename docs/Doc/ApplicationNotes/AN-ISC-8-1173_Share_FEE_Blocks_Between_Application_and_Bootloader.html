@@ -1,0 +1,772 @@
+---
+layout: default
+title: AN-ISC-8-1173_Share_FEE_Blocks_Between_Application_and_Bootloader
+nav_order: 4
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p> </p>
+<p><b>Share FEE Blocks Between Application and Bootloader </b></p>
+<p><b>Version 1.01.01 </b></p>
+<p><b>2017-01-11 </b></p>
+<p><b>Application Note AN-ISC-8-1173 </b></p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p>Author(s) </p>
+<p>Vogel, Nils, Andreas Wenckebach </p>
+<p>Restrictions </p>
+<p>Customer confidential - Vector decides </p>
+<p>Abstract </p>
+<p>This document shows how to share nonvolatile data between application and bootloader using the </p>
+<p>Vector FEE and DaVinci Configurator Pro for AUTOSAR 4 projects.</p>
+<p> </p>
+<p> </p>
+<p><i><b>Table of Contents </b></i></p>
+<p> </p>
+<p><b> 1  </b></p>
+<p><i>Copyright © 2017 - Vector Informatik GmbH </i></p>
+<p><b>Contact Information:   www.vector.com   or +49-711-80 670-0 </b></p>
+<p>1.0</p>
+<p> </p>
+<p>Overview .......................................................................................................................................................... 1</p>
+<p> </p>
+<p>2.0</p>
+<p> </p>
+<p>Preconditions on the FEE Layout .................................................................................................................... 2</p>
+<p> </p>
+<p>2.1</p>
+<p> </p>
+<p>MSR Module Precondition............................................................................................................................. 2</p>
+<p> </p>
+<p>2.2</p>
+<p> </p>
+<p>Config Limitations .......................................................................................................................................... 2</p>
+<p> </p>
+<p>2.2.1</p>
+<p> </p>
+<p>NvM Configuration in the Bootloader .......................................................................................................... 2</p>
+<p> </p>
+<p>2.2.2</p>
+<p> </p>
+<p>Block Limitation ........................................................................................................................................... 3</p>
+<p> </p>
+<p>2.3</p>
+<p> </p>
+<p>FEE Feature FeeFblConfig ........................................................................................................................... 3</p>
+<p> </p>
+<p>2.3.1</p>
+<p> </p>
+<p>Potential Problem with Regular AR Fee ..................................................................................................... 4</p>
+<p> </p>
+<p>2.3.2</p>
+<p> </p>
+<p>Vector FEE Bootloader Configuration......................................................................................................... 4</p>
+<p> </p>
+<p>3.0</p>
+<p> </p>
+<p>FEE Configuration with the DaVinci Configurator Pro ..................................................................................... 5</p>
+<p> </p>
+<p>3.1</p>
+<p> </p>
+<p>Step 1 Configure the NvM/FEE on Application Side. .................................................................................... 5</p>
+<p> </p>
+<p>3.2</p>
+<p> </p>
+<p>Step 2 Transfer the MEM Stack Configuration to the Bootloader ................................................................. 5</p>
+<p> </p>
+<p>3.3</p>
+<p> </p>
+<p>Step 3 Adapt the Imported Configuration to Your Needs .............................................................................. 7</p>
+<p> </p>
+<p>3.4</p>
+<p> </p>
+<p>Step 4 Add the Standard Definition of the NvM ............................................................................................ 8</p>
+<p> </p>
+<p>3.5</p>
+<p> </p>
+<p>Special configuration Aspects in Non DaVinci Configurator Pro Environments ......................................... 10</p>
+<p> </p>
+<p>3.5.1</p>
+<p> </p>
+<p>Further ASR Component Stubs required .................................................................................................. 10</p>
+<p> </p>
+<p>3.5.2</p>
+<p> </p>
+<p>Generation of the Fee Config for the Fbl .................................................................................................. 11</p>
+<p> </p>
+<p>4.0</p>
+<p> </p>
+<p>Usage of Fee Configuration in Flash Bootloader ........................................................................................... 11</p>
+<p> </p>
+<p>4.1</p>
+<p> </p>
+<p>Modules Required in the Flash Bootloader ................................................................................................. 11</p>
+<p> </p>
+<p>4.1.1</p>
+<p> </p>
+<p>Asr BSW Modules to Be Added to Flash Bootloader ............................................................................... 11</p>
+<p> </p>
+<p>4.1.2</p>
+<p> </p>
+<p>Asr Stub Modules to Be Used by the Fbl .................................................................................................. 11</p>
+<p> </p>
+<p>4.1.3</p>
+<p> </p>
+<p>Generated Modules .................................................................................................................................. 12</p>
+<p> </p>
+<p>4.2</p>
+<p> </p>
+<p>Initialization in Fbl ........................................................................................................................................ 12</p>
+<p> </p>
+<p>4.2.1</p>
+<p> </p>
+<p>Initialization Required ............................................................................................................................... 12</p>
+<p> </p>
+<p>4.3</p>
+<p> </p>
+<p>Synchronized Calls to Fee .......................................................................................................................... 13</p>
+<p> </p>
+<p>4.3.1</p>
+<p> </p>
+<p>Synchronized Read................................................................................................................................... 13</p>
+<p> </p>
+<p>4.3.2</p>
+<p> </p>
+<p>Synchronized Write ................................................................................................................................... 14</p>
+<p> </p>
+<p>4.4</p>
+<p> </p>
+<p>Data elements to Be Read and Written by Fbl ............................................................................................ 14</p>
+<p> </p>
+<p>4.5</p>
+<p> </p>
+<p>Configure Existing Flash Bootloader NVM Data for Fee ............................................................................. 15</p>
+<p> </p>
+<p>4.6</p>
+<p> </p>
+<p>Conclusion ................................................................................................................................................... 15</p>
+<p> </p>
+<p>5.0</p>
+<p> </p>
+<p>Contacts ......................................................................................................................................................... 15</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>1.0 </b></p>
+<p><b>Overview </b></p>
+<p>This application note addresses the case that nonvolatile data should be shared between application and </p>
+<p>bootloader and how this can be achieved by using the AR memory stack within the bootloader. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>2 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p> </p>
+<p>Figure 4-1 Shared FEE-Blocks between application and bootloader </p>
+<p><b>Chapter 2 </b>explains how the FEE works in the given use case and which are the necessary preconditions on the </p>
+<p>FEE layout. </p>
+<p><b>Chapter 3 </b>describes the necessary actions in the DaVinci Configurator Pro 5 step by step. </p>
+<p><b>2.0 </b></p>
+<p><b>Preconditions on the FEE Layout </b></p>
+<p>In general only a subset of the nonvolatile blocks needs to be shared between the application and the bootloader. </p>
+<p>This leads to some preconditions on the FEE layout which will be described in the following sub chapter. </p>
+<p>Please note it is assumed that all the bootloader blocks are known by the application. </p>
+<p><b>2.1 </b></p>
+<p><b>MSR Module Precondition </b></p>
+<p>At minimum the following AR Modules have to be used in bootloader: </p>
+<p></p>
+<p> </p>
+<p>AR MemIF </p>
+<p></p>
+<p> </p>
+<p>AR FEE </p>
+<p></p>
+<p> </p>
+<p>AR FLS </p>
+<p></p>
+<p> </p>
+<p>Stub for AR NVM or AR NVM (compare 2.2.1, 3.4) </p>
+<p> </p>
+<p>In case the flash bootloader does not include ASR components the following is needed additionally </p>
+<p></p>
+<p> </p>
+<p>Stubs for  AR DET and SCHM </p>
+<p>       </p>
+<p>This is necessary due to the fact that the FEE uses a dynamic data layout. Therefore it is not possible to address a </p>
+<p>memory block directly as it is in case of using EEPROM.   </p>
+<p><b>2.2 </b></p>
+<p><b>Config Limitations </b></p>
+<p>This chapter describes the bootloader configuration limitations. </p>
+<p><b>2.2.1 </b></p>
+<p><b>NvM Configuration in the Bootloader </b></p>
+<p>Using the AR NvM module is optional and depends on the project specific requirements. If NvM features are </p>
+<p>necessary for the block to be shared (e.g. RAM Block CRC or NvBlockType redundant block) the NvM has to be </p>
+<p>integrated as well. Please note that this approach leads to higher resource consumptions of about 30-40 kByte </p>
+<p>ROM in the bootloader.  </p>
+<p>Real ASR Nvm module usage is not detailed within this document. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>3 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p>In any case, you have to configure </p>
+<p>NvMDataSelectionBits</p>
+<p> parameter in order to allow the FEE calculates valid </p>
+<p>block numbers.  Currently it is therefore mandatory create an NvM stub in case no real NVM is present. </p>
+<p><b>2.2.2 </b></p>
+<p><b>Block Limitation </b></p>
+<p>The integrator has to assure that the block ID of the given FEE block is the same in both configurations APPL and </p>
+<p>bootloader. It is therefore recommended that NvM/FEE-Blocks to be shared are located at the beginning of the </p>
+<p>FEE Layout to be robust against later layout changes. </p>
+<p>You need to configure </p>
+<p>Fee Block ID fixed</p>
+<p> so that it does not get recalculated after layout changes as </p>
+<p>depicted in the following figures. </p>
+<p> </p>
+<p>Figure 4-2 Parameter FeeBlockIdFixed in DaVinci Configurator Pro Comfort Editor Memory Blocks </p>
+<p> </p>
+<p> </p>
+<p>Figure 4-3 Parameter FeeBlockIdFixed in the DaVinci Configurator Pro Basic Editor </p>
+<p> </p>
+<p><b>2.3 </b></p>
+<p><b>FEE Feature FeeFblConfig </b></p>
+<p>The Vector FEE provides a feature called </p>
+<p>FeeFblConfig</p>
+<p> which sets the FEE into a special bootloader mode. </p>
+<p>In this mode the FEE is able to detect and handle blocks which are not part of the bootloader configuration but </p>
+<p>which need to be handled in case of a sector switch.  </p>
+<p>This chapter describes quickly the problem non Vector solutions may have and how the Vector solution addresses </p>
+<p>this problem. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>4 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p><b>2.3.1 </b></p>
+<p><b>Potential Problem with Regular AR Fee </b></p>
+<p>The bootloader knows only its own blocks. But what happens in case of a sector switch in the bootloader? In case </p>
+<p>a regular FEE is used only the blocks known in the current configuration will be handled. This would lead to a loss </p>
+<p>of all data stored within the application blocks. To overcome this problem you would have to use an exact copy of </p>
+<p>your application configuration within your bootloader. But this approach would lead to the fact that you have to </p>
+<p>update the bootloader every time you change the Nv-layout of some of the application blocks which is not feasible. </p>
+<p> </p>
+<p>Figure 4-4 FEE Sector Switch with Regular AR FEE </p>
+<p><b>2.3.2 </b></p>
+<p><b>Vector FEE Bootloader Configuration </b></p>
+<p>Therefore the Vector FEE can be switched in a special bootloader mode. This enables the FEE to scan the flash </p>
+<p>image and detect valid application blocks even if they are not part of the bootloader configuration. This way Nv-</p>
+<p>blocks can easily be shared between bootloader and application without the need to keep all the application blocks </p>
+<p>within your bootloader configuration. </p>
+<p> </p>
+<p> </p>
+<p>Figure 4-5 FEE Sector Switch with Vector FEE </p>
+<p>Please note that the background sector switch (BSS) is disabled in this mode. The FEE works according to a </p>
+<p>single sector principle. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>5 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p><b>3.0 </b></p>
+<p><b>FEE Configuration with the DaVinci Configurator Pro </b></p>
+<p>This chapter shows the necessary actions to be done in the DaVinci Configurator Pro in order to share Nv-blocks </p>
+<p>between application and bootloader. The described use case just uses FLS and FEE. If you plan to use the NvM in </p>
+<p>the bootloader as well you can skip step 4  </p>
+<p>Note: </p>
+<p>Details on NvM and FEE configuration are not covered by this document </p>
+<p>For further information on how to configure NvM and FEE in general can be found in the technical reference of </p>
+<p>these modules. </p>
+<p><b>3.1 </b></p>
+<p><b>Step 1 Configure the NvM/FEE on Application Side. </b></p>
+<p>Configure your NV layout as needed for your project and start with the blocks to be shared. Make sure that the </p>
+<p>block IDs are fixed as described in 2.2.2. Verify that the shared blocks do have the smallest block IDs (beside the </p>
+<p>FeeConfigBlock) in your FEE partition. </p>
+<p> </p>
+<p> </p>
+<p>Figure 4-6 Step1 Configure NvM/FEE </p>
+<p> </p>
+<p><b>3.2 </b></p>
+<p><b>Step 2 Transfer the MEM Stack Configuration to the Bootloader </b></p>
+<p>Now you can export the MEM stack configuration from the application and import it into the bootloader. </p>
+<p>This gives you an easy start for the mem stack configuration of the bootloader. </p>
+<p> </p>
+<p>To export the configurations use the export wizard of the DaVinci Configurator Pro. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>6 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p> </p>
+<p>Figure 4-7 Export Configurations with DaVinci Configurator Pro </p>
+<p> </p>
+<p>Once this is done, you can import the configuration into your bootloader project.  </p>
+<p>Note: </p>
+<p>If your Fbl does not use DaVinci Configurator, but another tool (e.g. GENy), you have to create an </p>
+<p>empty configuration withinthe DaVinci Configurator first and import the configuration here in order </p>
+<p>to generate your Fee configuration (chapter 3.5 describes some more aspects for this situation). </p>
+<p>  </p>
+<p> </p>
+<p>Figure 4-8 Import Configuration with DaVinci Configurator </p>
+<p>The DaVinci Configurator automatically adds the new modules to your configuration. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>7 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p> </p>
+<p>Figure 4-9 Imported MEM Stack Modules </p>
+<p><b>3.3 </b></p>
+<p><b>Step 3 Adapt the Imported Configuration to Your Needs </b></p>
+<p>Once the import is done you can start to adapt the configuration to the needs of the bootloader. As we learned in </p>
+<p>chapter 2.3 we have to switch the FEE into the bootloader mode. </p>
+<p> </p>
+<p>Figure 4-10 FEE Bootloader Mode </p>
+<p> </p>
+<p>Now we can delete the blocks which are not needed in the bootloader. This can be easily done by the multi select </p>
+<p>feature of the DaVinci Configurator Pro. Mark the blocks you want to delete and hit the delete button. </p>
+<p> </p>
+<p>Figure 4-11 Delete Not Used FEE Blocks </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>8 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p>Last step: Disable features which are enabled for the application configuration but not used in the bootloader. The </p>
+<p>development and production error detection for example. You can use the validation messages of DaVinci </p>
+<p>Configurator Pro. It will execute the necessary actions automatically.  </p>
+<p> </p>
+<p>Figure 4-12 DaVinci Configurator Validation Rules </p>
+<p><b>3.4 </b></p>
+<p><b>Step 4 Add the Standard Definition of the NvM </b></p>
+<p>To be able to configure the parameter </p>
+<p>NvMDataSelectionBits</p>
+<p><i> </i>described in chapter 2.2.1 you have to add the </p>
+<p>AUTOSAR standard NvM definition to your configuration. This is only the case if you do not want to use the NvM in </p>
+<p>the bootlader. </p>
+<p>To do so, add the NvM standard definition using the project settings editor of the DaVinci Configurator Pro. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>9 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p> </p>
+<p>Figure 4-13 Add New Modules to Your Configuration </p>
+<p>Now configure the parameter </p>
+<p>NvMDataSelectionBits</p>
+<p> to the same value as in the application configuration. All </p>
+<p>the other parameter errors and warnings can be ignored as we do not want to use nor generate the NvM module. </p>
+<p> </p>
+<p>Figure 4-14 NvMDataSelectionBits </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>10 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p> </p>
+<p>Figure 4-15 Choose Nvm Fee Ref </p>
+<p> </p>
+<p>Figure 4-16 Nvm Stub Configuration to Allow Calculation of Valid Block Numbers </p>
+<p><b>3.5 </b></p>
+<p><b>Special configuration Aspects in Non DaVinci Configurator Pro Environments </b></p>
+<p>In case your flash bootloader is not configured with DaVinci Configurator Pro some further configuration aspects </p>
+<p>need to be considered. </p>
+<p><b>3.5.1 </b></p>
+<p><b>Further ASR Component Stubs required </b></p>
+<p> </p>
+<p>Figure 4-17 Add Stubs for Det, EcuC, MemIf from Application Software Integration Package </p>
+<p>After adding stubs for Det, EcuC and MemIf, some error may occur. Follow DaVinci Configurator Pro propositions </p>
+<p>to resolve these problems (e.g. add Fee reference to MemIf, resolve EcuC related errors (HW-dependent)). </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>11 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p><b>3.5.2 </b></p>
+<p><b>Generation of the Fee Config for the Fbl </b></p>
+<p>In case the configuration was created for Fbl Fee configuration only, only the minimum configuration Fee and Fls </p>
+<p>need to be generated </p>
+<p> </p>
+<p> </p>
+<p>Figure 4-18 Generation of Fbl Config </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>4.0 </b></p>
+<p><b>Usage of Fee Configuration in Flash Bootloader </b></p>
+<p>Once you imported the Fee configuration to the flash bootloader and are able to generate Fls/Fee configuration, </p>
+<p>the created output has to be added and compiled with the flash bootloader project. Additionally static Asr modules </p>
+<p>and some static sub files have to be added to flash bootloader. </p>
+<p> </p>
+<p><b>4.1 </b></p>
+<p><b>Modules Required in the Flash Bootloader </b></p>
+<p><b>4.1.1 </b></p>
+<p><b>Asr BSW Modules to Be Added to Flash Bootloader </b></p>
+<p>The following application core modules need to be added to your Fbl project: </p>
+<p><b>Fee </b></p>
+<p>.\Fee &gt; all content </p>
+<p><b>Det </b></p>
+<p>.\Det &gt; Det.h </p>
+<p><b>Fls </b></p>
+<p>.\Fls &gt; all content </p>
+<p>.\Mcal_&lt;Hw&gt; (Register definitions for Fls) </p>
+<p><b>MemIf </b></p>
+<p>.\MemIf &gt; all header files </p>
+<p><b>Other </b></p>
+<p>.\_Common &gt; all </p>
+<p>.\include of your project &gt; compiler_cfg.h   </p>
+<p>(remove further includes within compiler_cfg.h  (like Rte_Compiler_Cfg.h) </p>
+<p> </p>
+<p><b>4.1.2 </b></p>
+<p><b>Asr Stub Modules to Be Used by the Fbl </b></p>
+<p>The following stub modules are known to be required in the Fbl. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>12 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p><b>Det </b></p>
+<p>Det.c/Det_Cfg.h: Provide Prototype for function Det_ReportError </p>
+<p><b>SchM </b></p>
+<p>SchM_Fee.h </p>
+<p>#define SchM_Enter_Fee_FEE_EXCLUSIVE_AREA_0() </p>
+<p>#define SchM_Exit_Fee_FEE_EXCLUSIVE_AREA_0() </p>
+<p>SchM_Fls.h </p>
+<p>#define SchM_Enter_Fls(arg1, arg2) </p>
+<p>#define SchM_Exit_Fls(arg1, arg2) </p>
+<p>/* Function declaration is provided by SCHM */ </p>
+<p>FUNC(void, FLS_CODE) Fls_MainFunction(void); </p>
+<p><b> </b></p>
+<p><b>4.1.3 </b></p>
+<p><b>Generated Modules </b></p>
+<p>The generated modules that should be added to the Fbl are </p>
+<p> </p>
+<p><b>Fee </b></p>
+<p>Fee_Cfg.h </p>
+<p>Fee_Lcfg.c </p>
+<p>Fee_PrivateCfg.h </p>
+<p><b>Fls </b></p>
+<p>Fls_Cfg.h </p>
+<p> </p>
+<p><b>4.2 </b></p>
+<p><b>Initialization in Fbl </b></p>
+<p>Depending on when the required Fee elements are to be read, the initialization has to happen early enough to </p>
+<p>allow access to the required elements.  </p>
+<p><b>4.2.1 </b></p>
+<p><b>Initialization Required </b></p>
+<p>Fls and Fee need to be initialized. In both initializations the following logic applies (replace Fxx with Fee/Fls) </p>
+<p> </p>
+<p>Call Fxx_Init() </p>
+<p>while MEMIF_IDLE != Fxx_GetStatus() call Fxx_MainFunction()  </p>
+<p> </p>
+<p><b>Fee specific</b>: </p>
+<p>Depending on configuration call Fee_EnableFss() </p>
+<p>#if (FEE_FSS_CONTROL_API == STD_ON) </p>
+<p>   Fee_EnableFss(); </p>
+<p>#endif </p>
+<p> </p>
+<p>The location where the initialization needs to be done depends on the elements that need to be accessed via Fee. </p>
+<p>If elements need to be accessed before decision to jump to application (e.g. valid flag(s)), do the initialization within </p>
+<p>ApplFblInit()</p>
+<p>, otherwise within </p>
+<p>ApplFblStartup()</p>
+<p>, </p>
+<p>initposition == kStartupPostInit</p>
+<p>. If you need </p>
+<p>to do the initialization within </p>
+<p>ApplFblInit()</p>
+<p>, be sure to initialize watchdog and timer early in your configuration  </p>
+<p>(set  </p>
+<p>FBL_ENABLE_PRE_WDINIT / FBL_ENABLE_PRE_TIMERINIT</p>
+<p>) </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>13 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p><b>4.3 </b></p>
+<p><b>Synchronized Calls to Fee </b></p>
+<p>The bootloader usually requires synchronized calls to the Fee. The Fee API is usually asynchronous. A wrapper to </p>
+<p>embed the asynchronous API to synchronized calls should therefore be used. </p>
+<p><b>4.3.1 </b></p>
+<p><b>Synchronized Read </b></p>
+<p>Create a function to read from Fee in a synchronous  way, e.g. with prototype </p>
+<p>FblResult ApplFblNvRead ( vuint16 blockNumber, vuint16 blockOffset, V_MEMRAM1 vuint8   </p>
+<p>V_MEMRAM2 V_MEMRAM3 * pBuffer, vuint16 length ) </p>
+<p> </p>
+<p>Required implementation: </p>
+<p> </p>
+<p>If  Fee_Read(blockNumber, blockOffset, pBuffer, length ) == E_OK </p>
+<p>{ </p>
+<p> </p>
+<p>While MEMIF_IDLE != Fee_GetStatus()  </p>
+<p> </p>
+<p>{ </p>
+<p> </p>
+<p> </p>
+<p>Call Fls_MainFunction() </p>
+<p> </p>
+<p> </p>
+<p>Call Fee_MainFunction() </p>
+<p>      } </p>
+<p>      //Check  Fee_GetJobResult() == MEMIF_JOB_OK / MEMIF_BLOCK_INCONSISTENT /   </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> MEMIF_BLOCK_INVALID </p>
+<p> </p>
+<p>If Fee_GetJobResult() == MEMIF_JOB_OK </p>
+<p> </p>
+<p> </p>
+<p>return OK </p>
+<p> </p>
+<p>Else If Fee_GetJobResult() == MEMIF_BLOCK_INCONSISTENT OR  </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>MEMIF_BLOCK_INVALID  </p>
+<p> </p>
+<p> </p>
+<p>fill read buffer with FBL_FLASH_DELETED </p>
+<p> </p>
+<p> </p>
+<p>return OK </p>
+<p> </p>
+<p>Else  </p>
+<p> </p>
+<p> </p>
+<p>return failed </p>
+<p>} </p>
+<p>Else return failed </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>14 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p><b>4.3.2 </b></p>
+<p><b>Synchronized Write </b></p>
+<p>Create a function to write to Fee in a synchronous  way, e.g. with prototype </p>
+<p>FblResult ApplFblNvWrite ( vuint16 blockNumber, V_MEMRAM1 vuint8   V_MEMRAM2 </p>
+<p>V_MEMRAM3 * pBuffer) </p>
+<p> </p>
+<p>Required implementation: </p>
+<p>If  Fee_Write(blockNumber, pBuffer) == E_OK </p>
+<p>{ </p>
+<p> </p>
+<p>While MEMIF_IDLE != Fee_GetStatus() </p>
+<p> </p>
+<p>{  </p>
+<p> </p>
+<p> </p>
+<p>Call Fls_MainFunction() </p>
+<p> </p>
+<p> </p>
+<p>Call Fee_MainFunction() </p>
+<p>      } </p>
+<p> </p>
+<p>If  Fee_GetJobResult() == MEMIF_JOB_OK  </p>
+<p> </p>
+<p> </p>
+<p>return Ok </p>
+<p> </p>
+<p>Else  </p>
+<p> </p>
+<p> </p>
+<p>return failed </p>
+<p>} </p>
+<p>Else return failed </p>
+<p><b>4.4 </b></p>
+<p><b>Data elements to Be Read and Written by Fbl </b></p>
+<p>In order to read and write from and to the Fee, the API requires the block numbers of elements. These block </p>
+<p>numbers can be found in </p>
+<p>Fee_cfg.h</p>
+<p>, macros starting with </p>
+<p>FeeConf_FeeBlockConfiguration_Fee</p>
+<p>, e.g.: </p>
+<p> </p>
+<p> </p>
+<p>Figure 4-1 Example Fee Block Numbers Used in Flash Bootloader </p>
+<p> </p>
+<p>The length information required for read information has to be defined somewhere in the flash bootloader, e.g. for </p>
+<p>the example given above: </p>
+<p> </p>
+<p>#define FBL_NV_APPNBID_FEE_LENGTH                          2u </p>
+<p>#define FBL_NV_KEYNBID_FEE_LENGTH                          2u </p>
+<p>#define FBL_NV_SBAT_FEE_LENGTH                             822u </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Share FEE blocks between APPL and bootloader</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>15 </b></p>
+<p><i>Application Note AN-ISC-8-1173 </i></p>
+<p> </p>
+<p><b>4.5 </b></p>
+<p><b>Configure Existing Flash Bootloader NVM Data for Fee </b></p>
+<p>Existing NVM elements are read and written via the </p>
+<p>fbl_apnv.c/.h</p>
+<p> module. Usually functions and or macros are </p>
+<p>prepared to map to the generated WrapNv_cfg.h macros usable for either EEPROM or Eepm. For Fee </p>
+<p>configuration these elements now have to be mapped to synchronized Fee read/write functionality.  </p>
+<p> </p>
+<p>An example call that can be mapped to the corresponding fbl_apnv.c/.h function for reading the above mentioned </p>
+<p>element Fbl_SBATicket e.g. would be then: </p>
+<p>ApplFblNvRead(FeeConf_FeeBlockConfiguration_FeeFbl_SBATicket, 0u, </p>
+<p>(buffer),FBL_NV_SBAT_FEE_LENGTH) </p>
+<p> </p>
+<p><b>4.6 </b></p>
+<p><b>Conclusion </b></p>
+<p>After these steps you are ready to read and write the shared blocks within both configurations. Please test and </p>
+<p>verify your configuration. </p>
+<p><b>5.0 </b></p>
+<p><b>Contacts </b></p>
+<p>For a full list with all Vector locations and addresses worldwide, please visit http://vector.com/contact/. </p>
+<p> </p>
+</body>
+</html>
+{% endraw %}

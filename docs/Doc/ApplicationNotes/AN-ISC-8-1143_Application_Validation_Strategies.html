@@ -1,0 +1,512 @@
+---
+layout: default
+title: AN-ISC-8-1143_Application_Validation_Strategies
+nav_order: 1
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p><b> </b></p>
+<p><b>Bootloader Validation Strategies </b></p>
+<p><b>Version 1.0 </b></p>
+<p><b>2012-03-21 </b></p>
+<p><b>Application Note  AN-ISC-8-1143 </b></p>
+<p> </p>
+<p> </p>
+<p><i> </i></p>
+<p>Author(s) </p>
+<p>Achim Strobelt </p>
+<p>Restrictions </p>
+<p>Customer confidential - Vector decides </p>
+<p>Abstract </p>
+<p>This application note describes application validation strategies used in Vector </p>
+<p>Bootloaders.</p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><i><b>Table of Contents </b></i></p>
+<p><i><b> </b></i></p>
+<p><b> 1  </b></p>
+<p><i>Copyright © 2012 - Vector Informatik GmbH </i></p>
+<p><b>Contact Information:   www.vector.com   or +49-711-80 670-0 </b></p>
+<p>1.0</p>
+<p> </p>
+<p>Introduction ...................................................................................................................................................... 1</p>
+<p> </p>
+<p>1.1</p>
+<p> </p>
+<p>Scope ............................................................................................................................................................ 1</p>
+<p> </p>
+<p>2.0</p>
+<p> </p>
+<p>Validation Basics .............................................................................................................................................. 2</p>
+<p> </p>
+<p>2.1</p>
+<p> </p>
+<p>Module Validation .......................................................................................................................................... 2</p>
+<p> </p>
+<p>2.1.1</p>
+<p> </p>
+<p>Download Integrity ...................................................................................................................................... 2</p>
+<p> </p>
+<p>2.1.2</p>
+<p> </p>
+<p>Download Authenticity ................................................................................................................................ 2</p>
+<p> </p>
+<p>2.2</p>
+<p> </p>
+<p>Application Validation .................................................................................................................................... 3</p>
+<p> </p>
+<p>3.0</p>
+<p> </p>
+<p>Validation Approaches ..................................................................................................................................... 3</p>
+<p> </p>
+<p>3.1</p>
+<p> </p>
+<p>Pattern ........................................................................................................................................................... 3</p>
+<p> </p>
+<p>3.2</p>
+<p> </p>
+<p>Checksum/CRC ............................................................................................................................................. 3</p>
+<p> </p>
+<p>3.3</p>
+<p> </p>
+<p>Signatures ..................................................................................................................................................... 4</p>
+<p> </p>
+<p>3.4</p>
+<p> </p>
+<p>Validation Structure ....................................................................................................................................... 4</p>
+<p> </p>
+<p>4.0</p>
+<p> </p>
+<p>Storage of Validation Information .................................................................................................................... 4</p>
+<p> </p>
+<p>4.1</p>
+<p> </p>
+<p>EEPROM ....................................................................................................................................................... 4</p>
+<p> </p>
+<p>4.2</p>
+<p> </p>
+<p>Emulated EEPROM ....................................................................................................................................... 4</p>
+<p> </p>
+<p>4.3</p>
+<p> </p>
+<p>Presence Patterns ......................................................................................................................................... 5</p>
+<p> </p>
+<p>5.0</p>
+<p> </p>
+<p>Contacts ........................................................................................................................................................... 5</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>1.0 </b></p>
+<p><b>Introduction </b></p>
+<p>Today, most automotive ECUs support software download to be able to update the application software or data at </p>
+<p>any time. The Flash Bootloader from Vector provides a convenient way to fulfill this task according to the </p>
+<p>specification of the respective car manufacturer. While the process of downloading new software into the ECU is </p>
+<p>greatly simplified by the Bootloader, the ECU supplier has to apply an algorithm, which guarantees integrity and </p>
+<p>authenticity of the downloaded software/data. </p>
+<p><b>1.1 </b></p>
+<p><b>Scope </b></p>
+<p>Checking downloaded software/data usually takes some time to reveal the validity state. This is why the validity </p>
+<p>state is determined by the Bootloader directly after the download and stored within a special memory region called </p>
+<p>“Validation Area”. There are various kinds of methods for handling the validity information, the most common ones </p>
+<p>are setting a flag in EEPROM or storing a special pattern in flash memory. During start-up of the ECU, the </p>
+<p>Bootloader checks the validity information to decide whether to start the application software or to stay in the </p>
+<p>Bootloader. This approach allows short start-up times, which is a common requirement for automotive ECUs. </p>
+<p>This application note will mainly focus on the mechanisms, which can be used to perform the actual validation </p>
+<p>check. A method which can be used to store the validity information in the flash memory is described in chapter 4.3 </p>
+<p>Mask/Pattern Mechanism. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Bootloader Validation Strategies</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>2 </b></p>
+<p><i>Application Note  AN-ISC-8-1143 </i></p>
+<p> </p>
+<p><b>2.0 </b></p>
+<p><b>Validation Basics </b></p>
+<p>ECU software often includes several modules (e.g. the actual application and a calibration module). At least one of </p>
+<p>these modules is mandatory, and modules can be optional to add functionality or data for special use cases. </p>
+<p>To determine the validity of an application, several preconditions have to be fulfilled: </p>
+<p>•</p>
+<p> </p>
+<p>All mandatory modules have to be present. </p>
+<p>•</p>
+<p> </p>
+<p>All downloaded modules (mandatory and optional) have to be downloaded correctly. </p>
+<p>•</p>
+<p> </p>
+<p>The modules have to be compatible. </p>
+<p> </p>
+<p>The validation of an ECU’s software can be seen as a two-step validation. Depending on the Bootloader </p>
+<p>implementation, it is performed in one or two steps. </p>
+<p><b>2.1 </b></p>
+<p><b>Module Validation </b></p>
+<p>Module validation should ensure that the downloaded module has been downloaded correctly. Additionally, a </p>
+<p>check if the downloaded module is permitted to run on the ECU can be performed. </p>
+<p>The module validation is performed after a module has been downloaded, e.g. with a check routine request for </p>
+<p>each logical block or during a request transfer exit request. The validation result should be stored in non-volatile </p>
+<p>memory to avoid executing the complete validation sequence every time the validation state has to be checked. </p>
+<p><b>2.1.1 </b></p>
+<p><b>Download Integrity </b></p>
+<p>Before a downloaded module is used by the ECU, the Bootloader has to ensure that the file has been downloaded </p>
+<p>correctly. This includes checking if all data has been written to flash correctly and that the data was transferred </p>
+<p>correctly to the ECU. </p>
+<p>Data written to flash is read back by the flash driver immediately after writing and compared to the diagnostic </p>
+<p>buffer. This comparison ensures that the intended data was flashed. </p>
+<p>If a checksum is available in the downloaded data or was sent by a special service, this checksum can be used to </p>
+<p>cover the complete data transfer from tester to the ECU. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>If a CRC32 checksum is used to check the downloaded data, but no signature check is done, </p>
+<p>the module validation is called security class “DDD” or security class “None”.</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>2.1.2 </b></p>
+<p><b>Download Authenticity </b></p>
+<p>Some ECUs require that only software or data from a legitimate source is used on the ECU (e.g. in security </p>
+<p>relevant ECUs or as tuning protection). The authentication is normally done by calculation of a cryptographic </p>
+<p>signature over the downloaded data. The signature can be either supplied by the OEM or the ECU supplier. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Bootloader Validation Strategies</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>3 </b></p>
+<p><i>Application Note  AN-ISC-8-1143 </i></p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Depending on the OEM, several security classes for data authentication are defined. The most </p>
+<p>common security classes are security class “C” with a symmetric signature calculation and </p>
+<p>security class “CCC” with an asymmetric calculation.</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>2.2 </b></p>
+<p><b>Application Validation </b></p>
+<p>The application validation step has to ensure that all required modules are present on the ECU and that the </p>
+<p>downloaded modules are compatible with each other and with the used hardware/Bootloader combination. </p>
+<p>The Bootloader has to decide if the ECU’s application is started based on the application validation step. The </p>
+<p>application validation step can either be done at the end of the download sequence or during ECU start-up. If the </p>
+<p>application validity is determined at the end of the download sequence, the validity information has to be stored </p>
+<p>within a non-volatile memory (see next chapter). </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>If the application validity is checked on every start-up of the ECU, the checks will be based on </p>
+<p>the module validity flags and the startup time will be increased. On the other side, there is no </p>
+<p>additional non-volatile memory needed to store the application validity.</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>3.0 </b></p>
+<p><b>Validation Approaches </b></p>
+<p>There are several approaches to check the integrity and authenticity of downloaded data. This chapter describes </p>
+<p>some variants. </p>
+<p><b>3.1 </b></p>
+<p><b>Pattern </b></p>
+<p>The check for one or more patterns located in the memory area of downloaded data is a simple approach to check </p>
+<p>if the written data is the expected data. The validation function checks if the patterns are found at a known location. </p>
+<p>If the patterns are found, the validation function assumes the download has been correctly programmed. </p>
+<p>Usually, two patterns are used with this approach: one at the beginning and one at the end of the download. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>With a pattern check, not the complete data written is checked. Errors outside the patterns won’t </p>
+<p>be found.</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>3.2 </b></p>
+<p><b>Checksum/CRC </b></p>
+<p>A checksum/CRC check uses a checksum read from the downloaded data or sent by an additional service for the </p>
+<p>integrity check. The checksum is calculated over the complete downloaded data of a module. If the checksum is </p>
+<p>correct, the integrity of a complete module assumed. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Bootloader Validation Strategies</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>4 </b></p>
+<p><i>Application Note  AN-ISC-8-1143 </i></p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Checksum algorithms like CRC32 don’t provide an authenticity check because there’s no secret </p>
+<p>parameter involved during the checksum calculation.</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>3.3 </b></p>
+<p><b>Signatures </b></p>
+<p>Signature calculation algorithms combine a hash calculation and cryptographic routines to ensure the downloaded </p>
+<p>software’s integrity and authenticity.  </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Some Bootloader configurations skip the integrity check if a signature calculation is done.</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>3.4 </b></p>
+<p><b>Validation Structure </b></p>
+<p>A validation structure can be used to embed validity information into the downloaded data. The validation structure </p>
+<p>consists of block information including checksums/signatures which can be compared against the </p>
+<p>checksums/signatures that are calculated over the actual memory content. A validation structure can be used if no </p>
+<p>specific diagnostic service for transmission of the checksum/signature values is specified by the OEM. </p>
+<p> </p>
+<p><b>4.0 </b></p>
+<p><b>Storage of Validation Information </b></p>
+<p><b>4.1 </b></p>
+<p><b>EEPROM </b></p>
+<p>If an EEPROM is used to store the validation information, some bytes have to be reserved in the EEPROM’s </p>
+<p>memory. Data in EEPROM is writeable without needing to erase larger blocks and can be written very often </p>
+<p>compared to flash memory. On the other side, storing the data in EEPROM requires loading an additional driver to </p>
+<p>access the EEPROM. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>During the ECU’s start-up, the EEPROM driver has to be loaded twice: First, in the Bootloader </p>
+<p>to check if the application is valid, and a second time in the application.</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>4.2 </b></p>
+<p><b>Emulated EEPROM </b></p>
+<p>Emulated EEPROMs basically are used as the same way than EEPROMs. They use software modules like EepM </p>
+<p>or FEE to achieve EEPROM like behavior in flash memory. </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Bootloader Validation Strategies</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>5 </b></p>
+<p><i>Application Note  AN-ISC-8-1143 </i></p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>EEPROM emulations are often more complicated than EEPROM drivers. Especially the start-up </p>
+<p>times can be bigger than the start-up times of an EEPROM driver and the access times can </p>
+<p>depend on the amount of previously written data.</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>4.3 </b></p>
+<p><b>Presence Patterns </b></p>
+<p>Presence patterns (also called Mask/Pattern mechanism) use the memory inside each module to store the validity </p>
+<p>information. A pattern value is used to indicate that a module is valid and a mask value is used to invalidate an </p>
+<p>already written pattern. </p>
+<p>As presence patterns are stored inside the module’s memory, they normally are memory mapped and can be </p>
+<p>accessed without loading additional drivers. This can reduce the start-up time compared to the EEPROM/ </p>
+<p>Emulated EEPROM variants, but some memory from the application/data area has to be reserved for presence </p>
+<p>patterns. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>If a memory area with error recognition or correction is used to store the presence pattern, </p>
+<p>special care has to be taken to make sure that the software can handle the error. If the ECU </p>
+<p>reacts e.g. with a reset if an error occurs during reading the pattern, the ECU will be locked </p>
+<p>because the presence pattern will be read during every start-up. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>5.0 </b></p>
+<p><b>Contacts </b></p>
+<p> </p>
+<p> </p>
+<p><b>Germany  </b></p>
+<p><b>and all countries not named below: </b></p>
+<p><b> </b></p>
+<p><b>Vector Informatik GmbH </b></p>
+<p>Ingersheimer Str. 24 </p>
+<p>70499 Stuttgart </p>
+<p>GERMANY </p>
+<p>Phone: +49 711-80670-0 </p>
+<p>Fax: </p>
+<p>+49 711-80670-111 </p>
+<p>E-mail:  info@de.vector.com </p>
+<p> </p>
+<p> </p>
+<p><b>France, Belgium, Luxemburg: </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Vector France SAS </b></p>
+<p>168 Boulevard Camélinat </p>
+<p>92240 Malakoff  </p>
+<p>FRANCE </p>
+<p>Phone: +33 1 42 31 40 00 </p>
+<p>Fax: </p>
+<p>+33 1 42 31 40 09 </p>
+<p>E-mail:  information@fr.vector.com </p>
+<p> </p>
+<p> </p>
+<p><b>Sweden, Denmark, Norway,  </b></p>
+<p><b>Finland, Iceland: </b></p>
+<p><b> </b></p>
+<p><b>VecScan AB </b></p>
+<p>Theres Svenssons Gata 9 </p>
+<p>41755 Göteborg  </p>
+<p>SWEDEN </p>
+<p>Phone: +46 31 764 76 00 </p>
+<p>Fax: </p>
+<p>+46 31 764 76 19  </p>
+<p>E-mail:  info@se.vector.com </p>
+<p> </p>
+<p> </p>
+<p><b>United Kingdom, Ireland: </b></p>
+<p><b> </b></p>
+<p><b>Vector GB Ltd. </b></p>
+<p>Rhodium, Central Boulevard </p>
+<p>Blythe Valley Park </p>
+<p>Solihull, Birmingham </p>
+<p>West Midlands B90 8AS </p>
+<p>UNITED KINGDOM </p>
+<p>Phone: +44 121 50681-50 </p>
+<p>Fax: </p>
+<p>+44 121 50681-69 </p>
+<p> </p>
+<p>E-mail:  info@uk.vector.com </p>
+<p> </p>
+<p>  </p>
+<p><b>China: </b></p>
+<p><b> </b></p>
+<p><b>Vector Automotive Technology </b></p>
+<p><b>(Shanghai) Co., Ltd.  </b></p>
+<p>Sunyoung Center </p>
+<p>Room 1701, No.398 Jiangsu Road </p>
+<p>Changning District </p>
+<p>Shanghai 200050 </p>
+<p>P.R. CHINA </p>
+<p>Phone: +86 21 6432 5353 </p>
+<p>Fax:  </p>
+<p>+86 21 6432 5308 </p>
+<p>E-mail: info@cn.vector.com </p>
+<p> </p>
+<p><b> </b></p>
+<p><b>India: </b></p>
+<p><b> </b></p>
+<p><b>Vector Informatik India Pvt. Ltd. </b></p>
+<p>4/1/1/1, Sutar Icon, Sus Road, </p>
+<p>Pashan, Pune - 411 021 </p>
+<p>INDIA </p>
+<p> </p>
+<p> </p>
+<p>Phone: +91 20 2587 2023 </p>
+<p>Fax:  </p>
+<p>+91 20 2587 2025 </p>
+<p> </p>
+<p>E-mail: info@in.vector.com </p>
+<h1 style="page-break-before:always; "></h1>
+<p> </p>
+<p> </p>
+<p>Bootloader Validation Strategies</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><i><b> </b></i></p>
+<p><b>6 </b></p>
+<p><i>Application Note  AN-ISC-8-1143 </i></p>
+<p> </p>
+<p> </p>
+<p><b>USA, Canada, Mexico: </b></p>
+<p><b> </b></p>
+<p><b>Vector CANtech, Inc. </b></p>
+<p>39500 Orchard Hill Place, Suite 550 </p>
+<p>Novi, MI  48375 </p>
+<p>USA </p>
+<p> </p>
+<p> </p>
+<p>Phone: +1 248 449 9290 </p>
+<p>Fax: </p>
+<p>+1 248 449 9704 </p>
+<p>E-mail:  info@us.vector.com </p>
+<p> </p>
+<p> </p>
+<p><b>Japan: </b></p>
+<p><b> </b></p>
+<p><b>Vector Japan Co. Ltd. </b></p>
+<p>Tennozu Yusen Bldg. 16F </p>
+<p>2-2-20 Higashi-shinagawa, </p>
+<p>Shinagawa-ku, </p>
+<p>Tokyo 140-0002 </p>
+<p>JAPAN </p>
+<p>Phone: +81 3 5769 7800 </p>
+<p>Fax: </p>
+<p>+81 3 5769 6975 </p>
+<p>E-mail:  info@jp.vector.com </p>
+<p> </p>
+<p> </p>
+<p><b>Korea: </b></p>
+<p><b> </b></p>
+<p><b>Vector Korea IT Inc.</b></p>
+<p><b> </b></p>
+<p>#1406, Mario Tower, </p>
+<p>222-12 Guro-dong, Guro-gu  </p>
+<p>Seoul, 152-848 </p>
+<p>REPUBLIC OF KOREA </p>
+<p> </p>
+<p>Phone: +82 2 807 0600 </p>
+<p>Fax: </p>
+<p>+82 2 807 0601 </p>
+<p>E-mail:  info@kr.vector.com </p>
+<p> </p>
+<p> </p>
+<p> </p>
+</body>
+</html>
+{% endraw %}

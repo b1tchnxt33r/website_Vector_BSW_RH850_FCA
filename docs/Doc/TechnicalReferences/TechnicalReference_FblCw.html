@@ -1,0 +1,1692 @@
+---
+layout: default
+title: TechnicalReference_FblCw
+nav_order: 34
+parent: Doc
+---
+{% raw %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/transitional.dtd">
+<html>
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title></title>
+  <meta name="generator" content="LibreOffice 24.2.7.2 (Linux)"/>
+  <meta name="created" content="00:00:00"/>
+  <meta name="changed" content="00:00:00"/>
+</head>
+<body>
+<h1></h1>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b>Flash Bootloader </b></p>
+<p>Technical Reference </p>
+<p> </p>
+<p>Communication Wrapper PDU Router </p>
+<p>Version 3.02.00 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Authors </p>
+<p>Jörn  Herwig,  Ralf  Hägenläuer,  Andreas  Wenckebach, </p>
+<p>Achim Strobelt, Gunnar Meiss </p>
+<p>Status </p>
+<p>Released </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>2 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Document Information </b></p>
+<p><b>History </b></p>
+<p> </p>
+<p><b>Author </b></p>
+<p><b>Date </b></p>
+<p><b>Version </b></p>
+<p><b>Remarks </b></p>
+<p>Achim Strobelt </p>
+<p>2017-12-20 </p>
+<p>3.00.00 </p>
+<p>Cfg5 configuration module </p>
+<p>Achim Strobelt </p>
+<p>2018-03-12 </p>
+<p>3.01.00 </p>
+<p>Decline requests, ComM handling </p>
+<p>Achim Strobelt </p>
+<p>2018-05-05 </p>
+<p>3.02.00 </p>
+<p>Remove usage of ASR ComM module for CAN </p>
+<p> </p>
+<p><b>Reference Documents </b></p>
+<p><b>No. </b></p>
+<p><b>Source </b></p>
+<p><b>Title </b></p>
+<p><b>Version </b></p>
+<p>[1] </p>
+<p> </p>
+<p>Vector </p>
+<p>User Manual Flash Bootloader </p>
+<p>2.7 </p>
+<p>[2] </p>
+<p> </p>
+<p>Vector </p>
+<p>Technical Reference MICROSAR PDU Router – DaVinci </p>
+<p>Configurator </p>
+<p>3.00.00 </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>We have configured the programs in accordance with your specifications in the </p>
+<p>questionnaire. Whereas the programs do support other configurations than the one </p>
+<p>specified in your questionnaire, Vector´s release of the programs delivered to your </p>
+<p>company is expressly restricted to the configuration you have specified in the </p>
+<p>questionnaire. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>3 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Contents </b></p>
+<p><b>1</b></p>
+<p> </p>
+<p><b>Introduction .................................................................................................................... 6</b></p>
+<p> </p>
+<p>1.1</p>
+<p> </p>
+<p>Architecture Overview .............................................................................................. 6</p>
+<p> </p>
+<p><b>2</b></p>
+<p> </p>
+<p><b>Functional Description .................................................................................................. 7</b></p>
+<p> </p>
+<p>2.1</p>
+<p> </p>
+<p>Features ................................................................................................................... 7</p>
+<p> </p>
+<p>2.1.1</p>
+<p> </p>
+<p>Multiple Bus Types .......................................................................................... 7</p>
+<p> </p>
+<p>2.1.2</p>
+<p> </p>
+<p>Multiple Connections ....................................................................................... 7</p>
+<p> </p>
+<p>2.1.3</p>
+<p> </p>
+<p>Baud Rate Switch ............................................................................................ 8</p>
+<p> </p>
+<p><b>3</b></p>
+<p> </p>
+<p><b>Integration ...................................................................................................................... 9</b></p>
+<p> </p>
+<p>3.1</p>
+<p> </p>
+<p>Scope of Delivery ..................................................................................................... 9</p>
+<p> </p>
+<p>3.1.1</p>
+<p> </p>
+<p>Static Files ...................................................................................................... 9</p>
+<p> </p>
+<p>3.1.2</p>
+<p> </p>
+<p>Generated Files ............................................................................................... 9</p>
+<p> </p>
+<p><b>4</b></p>
+<p> </p>
+<p><b>Configuration................................................................................................................ 11</b></p>
+<p> </p>
+<p>4.1</p>
+<p> </p>
+<p>Preparation ............................................................................................................ 11</p>
+<p> </p>
+<p>4.2</p>
+<p> </p>
+<p>DaVinci Configurator .............................................................................................. 11</p>
+<p> </p>
+<p>4.2.1</p>
+<p> </p>
+<p>Project Creation ............................................................................................ 12</p>
+<p> </p>
+<p>4.2.1.1</p>
+<p> </p>
+<p>Load Network Description File ................................................................ 12</p>
+<p> </p>
+<p>4.2.1.2</p>
+<p> </p>
+<p>Component Selection ............................................................................. 13</p>
+<p> </p>
+<p>4.2.2</p>
+<p> </p>
+<p>DCM Module Configuration ........................................................................... 15</p>
+<p> </p>
+<p>4.2.2.1</p>
+<p> </p>
+<p>DcmDsl Section ...................................................................................... 16</p>
+<p> </p>
+<p>4.2.2.2</p>
+<p> </p>
+<p>DcmGeneral Section .............................................................................. 17</p>
+<p> </p>
+<p>4.2.2.3</p>
+<p> </p>
+<p>DcmDslConnections ............................................................................... 18</p>
+<p> </p>
+<p>4.2.3</p>
+<p> </p>
+<p>FlexRay Interface Module Configuration ....................................................... 19</p>
+<p> </p>
+<p>4.3</p>
+<p> </p>
+<p>Manual Configurations ........................................................................................... 19</p>
+<p> </p>
+<p>4.3.1</p>
+<p> </p>
+<p>ComM Channel Configuration ....................................................................... 19</p>
+<p> </p>
+<p>4.4</p>
+<p> </p>
+<p>Compiler and Linker Settings ................................................................................. 19</p>
+<p> </p>
+<p><b>5</b></p>
+<p> </p>
+<p><b>Interaction with Application Software ......................................................................... 21</b></p>
+<p> </p>
+<p>5.1</p>
+<p> </p>
+<p>Address Configuration ............................................................................................ 22</p>
+<p> </p>
+<p>5.2</p>
+<p> </p>
+<p>Transition from Application to Bootloader ............................................................... 22</p>
+<p> </p>
+<p>5.3</p>
+<p> </p>
+<p>Transition from Bootloader to Application ............................................................... 23</p>
+<p> </p>
+<p><b>6</b></p>
+<p> </p>
+<p><b>API Description ............................................................................................................ 24</b></p>
+<p> </p>
+<p>6.1</p>
+<p> </p>
+<p>Callback-Function API ............................................................................................ 24</p>
+<p> </p>
+<p>6.1.1</p>
+<p> </p>
+<p>Overview ....................................................................................................... 24</p>
+<p> </p>
+<p>6.1.2</p>
+<p> </p>
+<p>Function Description ..................................................................................... 24</p>
+<p> </p>
+<p>6.1.2.1</p>
+<p> </p>
+<p>ApplFblReadDcmDslRxTesterSourceAddr .............................................. 24</p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>4 </p>
+<p>based on template version 6.0.1 </p>
+<p>6.1.2.2</p>
+<p> </p>
+<p>ApplFblWriteDcmDslRxTesterSourceAddr .............................................. 25</p>
+<p> </p>
+<p>6.1.2.3</p>
+<p> </p>
+<p>ApplFblCanBusOff .................................................................................. 25</p>
+<p> </p>
+<p>6.1.2.4</p>
+<p> </p>
+<p>ApplFblCwWakeUp ................................................................................ 26</p>
+<p> </p>
+<p><b>7</b></p>
+<p> </p>
+<p><b>Glossary and Abbreviations ........................................................................................ 27</b></p>
+<p> </p>
+<p>7.1</p>
+<p> </p>
+<p>Abbreviations ......................................................................................................... 27</p>
+<p> </p>
+<p><b>8</b></p>
+<p> </p>
+<p><b>Contact.......................................................................................................................... 28</b></p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>5 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Illustrations </b></p>
+<p>Figure 1-1</p>
+<p> </p>
+<p>FBL Architecture Overview ......................................................................... 6</p>
+<p> </p>
+<p>Figure 4-1</p>
+<p> </p>
+<p>Input File Configuration ............................................................................. 12</p>
+<p> </p>
+<p>Figure 4-2</p>
+<p> </p>
+<p>VASE Script Confguration ......................................................................... 13</p>
+<p> </p>
+<p>Figure 4-3</p>
+<p> </p>
+<p>Module Selection in Project Settings ......................................................... 13</p>
+<p> </p>
+<p>Figure 4-4</p>
+<p> </p>
+<p>Overall DCM Module Structure ................................................................. 15</p>
+<p> </p>
+<p>Figure 4-5</p>
+<p> </p>
+<p>Configuration of Diagnostic Responses .................................................... 16</p>
+<p> </p>
+<p>Figure 4-6</p>
+<p> </p>
+<p>DcmGeneral Section ................................................................................. 17</p>
+<p> </p>
+<p>Figure 4-7</p>
+<p> </p>
+<p>Connection Configuration ......................................................................... 18</p>
+<p> </p>
+<p>Figure 4-8</p>
+<p> </p>
+<p>FrIf User Configuration File ....................................................................... 19</p>
+<p> </p>
+<p>Figure 5-1</p>
+<p> </p>
+<p>Dsl Protocol Rx Tester Source Addr in MICROSAR project ....................... 22</p>
+<p> </p>
+<p><b> </b></p>
+<p><b>Tables </b></p>
+<p>Table 3-1 </p>
+<p> </p>
+<p>Core Files ................................................................................................... 9</p>
+<p> </p>
+<p>Table 3-2 </p>
+<p> </p>
+<p>Generated Files ........................................................................................ 10</p>
+<p> </p>
+<p>Table 4-1 </p>
+<p> </p>
+<p>Bootloader Component Selection ............................................................. 14</p>
+<p> </p>
+<p>Table 4-2 </p>
+<p> </p>
+<p>DcmDsl Section ........................................................................................ 16</p>
+<p> </p>
+<p>Table 4-3 </p>
+<p> </p>
+<p>DcmGeneral Section ................................................................................. 18</p>
+<p> </p>
+<p>Table 4-4 </p>
+<p> </p>
+<p>Connection Configuration ......................................................................... 18</p>
+<p> </p>
+<p>Table 5-1 </p>
+<p> </p>
+<p>Transition to Bootloader ............................................................................ 22</p>
+<p> </p>
+<p>Table 5-2 </p>
+<p> </p>
+<p>Transition from Bootloader ........................................................................ 23</p>
+<p> </p>
+<p>Table 6-1 </p>
+<p> </p>
+<p>Callback-Function API .............................................................................. 24</p>
+<p> </p>
+<p>Table 6-2 </p>
+<p> </p>
+<p>FpplFblReadDcmDslRxTesterSourceAddr ................................................ 24</p>
+<p> </p>
+<p>Table 6-3 </p>
+<p> </p>
+<p>ApplFblWriteDcDslRxTesterSourceAddr ................................................... 25</p>
+<p> </p>
+<p>Table 6-4 </p>
+<p> </p>
+<p>ApplFblCanBusOff .................................................................................... 25</p>
+<p> </p>
+<p>Table 6-5 </p>
+<p> </p>
+<p>ApplFblCwWakeUp ................................................................................... 26</p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>6 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>1 </b></p>
+<p><b>Introduction </b></p>
+<p>This document covers the Communication Wrapper PDU Router component of the Flash </p>
+<p>Bootloader (FBL). </p>
+<p>The component is used in Bootloader environments where a sub-set of the MICROSAR </p>
+<p>communication </p>
+<p>stack, </p>
+<p>up </p>
+<p>to </p>
+<p>the </p>
+<p>PDU </p>
+<p>router </p>
+<p>is </p>
+<p>used. </p>
+<p>Above </p>
+<p>this </p>
+<p>an </p>
+<p>additional </p>
+<p>communication wrapper layer adapts the PduR interface to the respective FBL interfaces. </p>
+<p>From the ASR point of view this wrapper (FblWrapperCom / FblCw) is implemented as a </p>
+<p>CDD with communication stack contribution. </p>
+<p><b>1.1 </b></p>
+<p><b>Architecture Overview </b></p>
+<p>The  following  figure  shows  the  location  of  the  Communication  Wrapper  in  the  FBL </p>
+<p>architecture. </p>
+<p> </p>
+<p>Figure 1-1 </p>
+<p>FBL Architecture Overview </p>
+<p> </p>
+<p>HIS </p>
+<p>Flash </p>
+<p>DRV</p>
+<p>HIS </p>
+<p>Flash IF</p>
+<p>HIS </p>
+<p>EEPROM</p>
+<p>IF</p>
+<p>HIS </p>
+<p>EEPROM</p>
+<p>DRV</p>
+<p>Decompression</p>
+<p>Security </p>
+<p>Module</p>
+<p>FBL </p>
+<p>WDG</p>
+<p>FBL </p>
+<p>Timer</p>
+<p>DET</p>
+<p>COMM</p>
+<p>FBL COM WRAPPER PDUR</p>
+<p>PDUR</p>
+<p>Multiple Memory</p>
+<p>I/O Manager</p>
+<p>FBL Components</p>
+<p>MSR </p>
+<p>Components</p>
+<p>Decryption</p>
+<p>ETH IF</p>
+<p>ETH </p>
+<p>DRV</p>
+<p>SOAD</p>
+<p>TC P/IP</p>
+<p>Stub</p>
+<p>Not used by FBL</p>
+<p>CAN </p>
+<p>DRV</p>
+<p>CAN IF</p>
+<p>Project and </p>
+<p>services</p>
+<p>FBL DIAG</p>
+<p>FBL </p>
+<p>MEM</p>
+<p>CAN TP</p>
+<p>ETH SM</p>
+<p>CAN </p>
+<p>TRCV</p>
+<p>ETH </p>
+<p>TRCV</p>
+<p>DOIP</p>
+<p>ECUM</p>
+<p>SCHM</p>
+<p>OS</p>
+<p>Flash Bootloader Application</p>
+<p>Microcontroller</p>
+<p>FR IF</p>
+<p>FR DRV</p>
+<p>FR </p>
+<p>TRCV</p>
+<p>FR TP</p>
+<p>FR SM</p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>7 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>2 </b></p>
+<p><b>Functional Description </b></p>
+<p>The  main  purpose  of  the  Communication  Wrapper  component  is  the  abstraction  of  the </p>
+<p>particularities  of  a  specific  communication  stack.  It  offers  a  specific  API  to  the  FBL </p>
+<p>diagnostics, </p>
+<p>allowing </p>
+<p>the </p>
+<p>reception </p>
+<p>and </p>
+<p>transmission </p>
+<p>of </p>
+<p>diagnostic </p>
+<p>requests </p>
+<p>and </p>
+<p>responses. </p>
+<p>In this context, the concept of so-called connections is used. A connection represents an </p>
+<p>individual diagnostic communication entity, consisting of the following elements:  </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Physical request PDUs (at least one) </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Functional request PDUs (optional, at least one if used) </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Physical response PDU  </p>
+<p>The PDUs are used to interface with a PDU router lower layer module, implementing the </p>
+<p>transport protocol API. </p>
+<p>Requests received on the physical or functional PDU of a specific connection are passed </p>
+<p>to the Bootloader diagnostic module. The respective response (if any) is transmitted on the </p>
+<p>matching physical response PDU. </p>
+<p><b>2.1 </b></p>
+<p><b>Features </b></p>
+<p>The Communication Wrapper PDU Router interfaces with the MICROSAR PDU router and </p>
+<p>other relevant components of the communication stack. </p>
+<p>Besides  the  basic  requirements  fulfilled  by  every  Communication  Wrapper  variant,  the </p>
+<p>Communication Wrapper PDU Router offers some additional features. </p>
+<p><b>2.1.1 </b></p>
+<p><b>Multiple Bus Types </b></p>
+<p>The communication isn’t limited to a single bus type. Instead, any bus type available for </p>
+<p>the MICROSAR communication stack can be added on demand. </p>
+<p>Currently, the following bus types are supported: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>CAN / ISO-TP (ISO 15765) </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Ethernet / DoIP </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Ethernet / SoAD </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>FlexRay / ISO-TP (ISO-10681) </p>
+<p><b>2.1.2 </b></p>
+<p><b>Multiple Connections </b></p>
+<p>Multiple connections can be configured. This multiplicity isn’t limited to a single channel or </p>
+<p>even bus type. Instead any valid combination of the following is possible: </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Multiple connections per channel and bus type, e.g. multiple tester instances with </p>
+<p>individual addresses </p>
+<p><b></b></p>
+<p><b> </b></p>
+<p>Multiple bus types, e.g. CAN and Ethernet </p>
+<p>Once a valid connection is established, requests from other connections are refused. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>8 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>2.1.3 </b></p>
+<p><b>Baud Rate Switch </b></p>
+<p>The  baud  rate  of  the channel associated  with  the  active  connection  can  be  switched  at </p>
+<p>run-time, e.g. when requested through a LinkControl service request. </p>
+<p>The available baud rates and specific hardware parameters can be configured in DaVinci </p>
+<p>Configurator. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Currently switching of the baud rates is only supported for CAN. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>9 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>3 </b></p>
+<p><b>Integration </b></p>
+<p><b>3.1 </b></p>
+<p><b>Scope of Delivery </b></p>
+<p>The  delivery  of  the  Communication  Wrapper  PDU  Router  contains  the  files  which  are </p>
+<p>described in the following chapters. </p>
+<p><b>3.1.1 </b></p>
+<p><b>Static Files </b></p>
+<p>The first group contains components found in the BSW\FblCw folder of your delivery. Do </p>
+<p>not  modify  the  contents  of  the  files  in  this  group  without  prior  written  permission  from </p>
+<p>Vector (modification of these files will void your warranty). </p>
+<p> </p>
+<p><b>File </b></p>
+<p><b>Description </b></p>
+<p>Fbl_cw.c/h </p>
+<p>Communication wrapper layer for ASR4 PDU router (PduR) </p>
+<p>Table 3-1  </p>
+<p>Core Files </p>
+<p><b>3.1.2 </b></p>
+<p><b>Generated Files </b></p>
+<p>The second set of files is generated by the configuration tool, DaVinci Configurator. You </p>
+<p>should not modify these files manually. </p>
+<p><b>File </b></p>
+<p><b>Description </b></p>
+<p>PduR_Dcm.h </p>
+<p>PDU router function API called by Communication Wrapper. </p>
+<p>FblCw_Cfg.h </p>
+<p>This file contains general configuration precompile switches of CONFIG-CLASS </p>
+<p>PRE_COMPILE data. </p>
+<p>Dcm_Cbk.h </p>
+<p>This is the generated header file of FblCw containing prototypes and symbolic </p>
+<p>PDU handles for lower layers, e.g. the PduR. </p>
+<p>FblCw_Lcfg.h </p>
+<p>This file contains: </p>
+<p><b>&gt; </b></p>
+<p>global constant macros </p>
+<p><b>&gt; </b></p>
+<p>global function macros </p>
+<p><b>&gt; </b></p>
+<p>global data types and structures </p>
+<p><b>&gt; </b></p>
+<p>global data prototypes </p>
+<p><b>&gt; </b></p>
+<p>global function prototypes </p>
+<p>of CONFIG-CLASS PRE-COMPILE and CONFIG-CLASS LINK data. </p>
+<p>FblCw_Lcfg.c </p>
+<p>This file contains: </p>
+<p><b>&gt; </b></p>
+<p>local constant macros </p>
+<p><b>&gt; </b></p>
+<p>local function macros </p>
+<p><b>&gt; </b></p>
+<p>local data types and structures </p>
+<p><b>&gt; </b></p>
+<p>local data prototypes </p>
+<p><b>&gt; </b></p>
+<p>local data </p>
+<p><b>&gt; </b></p>
+<p>global data </p>
+<p><b>&gt; </b></p>
+<p>global functions </p>
+<p>of CONFIG-CLASS PRE-COMPILE and CONFIG-CLASS LINK data. </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>10 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>File </b></p>
+<p><b>Description </b></p>
+<p>FblCw_PBcfg.h </p>
+<p>This file contains: </p>
+<p><b>&gt; </b></p>
+<p>global constant macros </p>
+<p><b>&gt; </b></p>
+<p>global function macros </p>
+<p><b>&gt; </b></p>
+<p>global data types and structures </p>
+<p><b>&gt; </b></p>
+<p>global data prototypes </p>
+<p><b>&gt; </b></p>
+<p>global function prototypes </p>
+<p>of CONFIG-CLASS POST-BUILD data. </p>
+<p>FblCw_PBcfg.c </p>
+<p>This file contains: </p>
+<p><b>&gt; </b></p>
+<p>local constant macros </p>
+<p><b>&gt; </b></p>
+<p>local function macros </p>
+<p><b>&gt; </b></p>
+<p>local data types and structures </p>
+<p><b>&gt; </b></p>
+<p>local data prototypes </p>
+<p><b>&gt; </b></p>
+<p>local data </p>
+<p><b>&gt; </b></p>
+<p>global data </p>
+<p>of CONFIG-CLASS POST-BUILD data. </p>
+<p>Table 3-2  </p>
+<p>Generated Files </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>11 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>4 </b></p>
+<p><b>Configuration </b></p>
+<p><b>4.1 </b></p>
+<p><b>Preparation </b></p>
+<p>The  additional  tools  “DaVinci  External  Components”  are  needed  to  execute  the  VASE </p>
+<p>script mentioned below. Please download the tools from the Vector homepage and install </p>
+<p>the component “Vector AUTOSAR Scripting Engine” and all components needed to run the </p>
+<p>scripting engine. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Reference</b> </p>
+<p>Version 2.7.1 can be downloaded from </p>
+<p>https://vector.com/vi_news_detail_de,,2816,1713167.html. </p>
+<p>Newer versions can be found as service pack of DaVinci Configurator. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>4.2 </b></p>
+<p><b>DaVinci Configurator </b></p>
+<p>The following guide shows how to configure a bootloader project in DaVinci Configurator. </p>
+<p>The focus is put on the OEM independent characteristics. </p>
+<p>Please see the OEM specific Technical Reference document for OEM specific settings. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Please note that this chapter documents bootloader specific settings only. For other </p>
+<p>settings, please refer the MICROSAR Technical Reference documents provided with </p>
+<p>your project. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>Vector Bootloaders normally run in polling mode. Polling mode must be activated in all </p>
+<p>bus components. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>12 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>4.2.1 </b></p>
+<p><b>Project Creation </b></p>
+<p>The creation of a DaVinci developer project must be done in several steps: </p>
+<p> </p>
+<p><b>4.2.1.1 </b></p>
+<p><b>Load Network Description File </b></p>
+<p>After a DaVinci Configurator project is created, the network setup must be configured with </p>
+<p>an <b>Input File</b>. These files could be Autosar ECU extract files or legacy network definitions </p>
+<p>like DBC or Fibex files. </p>
+<p> </p>
+<p> </p>
+<p>Figure 4-1 </p>
+<p>Input File Configuration </p>
+<p>The following steps are used to load network definitions: </p>
+<p>1. </p>
+<p>Load the system description file. </p>
+<p>2. </p>
+<p>If the system description file includes application messages which are not needed, </p>
+<p>activate the Fbl PDU system description extractor script. This script removes the </p>
+<p>unneeded messages from the bootloader configuration (see Figure 4-2 </p>
+<p>VASE Script </p>
+<p>Confguration). The script can be found in the directory .\ DaVinciConfigurator\VASE-</p>
+<p>Scripts\FblPduSystemDescrExtractor of your delivery. </p>
+<p>3. </p>
+<p>After network description and VASE script have been configured, use the link “Update </p>
+<p>the configuration now to commit the project modifications” to load the file into the </p>
+<p>project. The link is marked red in Figure 4-1 Input File Configuration. </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>13 </p>
+<p>based on template version 6.0.1 </p>
+<p> </p>
+<p>Figure 4-2 </p>
+<p>VASE Script Confguration </p>
+<p><b>4.2.1.2 </b></p>
+<p><b>Component Selection </b></p>
+<p>Most  of  the  components  needed  to  configure  the  bootloader  are  selected  automatically, </p>
+<p>but  it  is  necessary  to  add  some  components  manually  and  remove  other,  automatically </p>
+<p>added components. </p>
+<p>The  component  selection  is done  in  the  project  settings  tab of  the  DaVinci  Configurator </p>
+<p>project: </p>
+<p> </p>
+<p>Figure 4-3 </p>
+<p>Module Selection in Project Settings </p>
+<p>Depending on your setup, the following components must be selected (grey: automatically </p>
+<p>selected  and  part  of  SIP,  red:  manually  added  and  part  of  SIP,  blue:  part  of AUTOSAR </p>
+<p>standard definition): </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>14 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>Configuration </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Component Setup </b></p>
+<p>CAN Bootloader </p>
+<p>Option: CAN NM </p>
+<p>FlexRay </p>
+<p>Bootloader </p>
+<p>Option: FlexRay </p>
+<p>NM </p>
+<p>Eth FBL SoAd </p>
+<p>Eth FBL DoIP </p>
+<p>Option: Ethernet </p>
+<p>NM </p>
+<p>Can </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>CanIf </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>CanNm </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>CanTp </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>CanSM </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>ComM </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Dcm </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Det </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>DoIP </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>EcuC </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Eth </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>EthIf </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>EthNm </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>EthSM </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>EthTrcv </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Fbl </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>FblHal </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Fr </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>FrIf </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>FrNm </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>FrSM </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>FrTp </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>FrTrcv </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Mcu </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Nm </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p>Os </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>PduR </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Smh </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>SoAd </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>TcpIp </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p></p>
+<p> </p>
+<p></p>
+<p> </p>
+<p> </p>
+<p>Table 4-1  </p>
+<p>Bootloader Component Selection </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>15 </p>
+<p>based on template version 6.0.1 </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>Different variants (bus systems and options) can be combined. In this case, the </p>
+<p>modules required for a configuration have to be merged into one module set. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p><b>Caution </b></p>
+<p>If a new project is created, unneeded modules like EcuM can be selected by default. </p>
+<p>These modules have to be removed from the module configuration. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>4.2.2 </b></p>
+<p><b>DCM Module Configuration </b></p>
+<p> </p>
+<p> </p>
+<p>Figure 4-4 </p>
+<p>Overall DCM Module Structure </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>16 </p>
+<p>based on template version 6.0.1 </p>
+<p>The  DCM  module  is  used  to  configure  the  diagnostic  connections  of  the  ECU.  The </p>
+<p>connections </p>
+<p>are </p>
+<p>normally </p>
+<p>set </p>
+<p>automatically </p>
+<p>by </p>
+<p>DaVinci </p>
+<p>Configurator </p>
+<p>based </p>
+<p>on </p>
+<p>the </p>
+<p>connections defined in the project’s system description file. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The module includes some settings which will be used in future versions of the module </p>
+<p>but are not used yet. The important sections are marked red and green in Figure 4-4. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>4.2.2.1 </b></p>
+<p><b>DcmDsl Section </b></p>
+<p>The DcmDsl section includes settings which are connection-related: </p>
+<p> </p>
+<p>Figure 4-5 </p>
+<p>Configuration of Diagnostic Responses </p>
+<p>On  systems  with  more  than  one diagnostic  connections,  only  diagnostic  request  can  be </p>
+<p>handled at a time. This section permits to configure the handling of additional requests if a </p>
+<p>request is processed by the main connection. </p>
+<p> </p>
+<p><b>Setting </b></p>
+<p><b>Description </b></p>
+<p>Dsl Diag Resp Max Num Of </p>
+<p>Declined Requests </p>
+<p>Configure how many diagnostic connections can be used to </p>
+<p>decline requests. Should be configured to the amount of </p>
+<p>diagnostic connections – 1. </p>
+<p>Dsl Diag Resp On Second </p>
+<p>Declined Request </p>
+<p>If this switch is enabled, and if further requests are received on </p>
+<p>other connections, a negative response is sent for these </p>
+<p>requests. If this option is disabled, further requests are ignored. </p>
+<p>Table 4-2  </p>
+<p>DcmDsl Section </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>17 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>4.2.2.2 </b></p>
+<p><b>DcmGeneral Section </b></p>
+<p>The DcmGeneral section includes settings which are not connection-related: </p>
+<p> </p>
+<p>Figure 4-6 </p>
+<p>DcmGeneral Section </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>18 </p>
+<p>based on template version 6.0.1 </p>
+<p> </p>
+<p><b>Setting </b></p>
+<p><b>Description </b></p>
+<p>Baudrate Switch </p>
+<p>Activate interface for bus driver baud rate switch. Currently </p>
+<p>available for CAN only (OEM dependent). </p>
+<p>Can Hardware Loop Timeout </p>
+<p>Timeout value for CAN hardware loops (in cycles, typically 1 ms). </p>
+<p>Dev Error Detect </p>
+<p>Switches the Default Error Tracer (Det) detection and notification </p>
+<p>ON or OFF. </p>
+<p>Key Slot Mode </p>
+<p>Enable switching from key slot to all slot mode (FlexRay only for </p>
+<p>certain OEMs). </p>
+<p>Nw Status Rx Buffer Size </p>
+<p>Buffer size for the network status reception buffer. </p>
+<p>Queued Request </p>
+<p>Queued Request Feature (certain OEMs only). </p>
+<p>Respond All Request </p>
+<p>Currently not used. </p>
+<p>Task Cycle </p>
+<p>Currently not used. </p>
+<p>Task Time </p>
+<p>Currently not used </p>
+<p>User Config File </p>
+<p>Path to an external user configuration file used by the </p>
+<p>Configurator 5 generation tool. </p>
+<p>Version Info Api </p>
+<p>Currently not used. </p>
+<p>BSW Initialization Filter </p>
+<p>Autosar modules which shouldn’t be initialized automatically by </p>
+<p>the FblCw component can be added here. </p>
+<p>Table 4-3  </p>
+<p>DcmGeneral Section </p>
+<p> </p>
+<p><b>4.2.2.3 </b></p>
+<p><b>DcmDslConnections </b></p>
+<p>The DcmDslConnections category includes one container for each diagnostic connection. </p>
+<p>Physical requests, functional requests and responses are mapped to this connection. The </p>
+<p>Pdus of the underlying TPs are mapped here. </p>
+<p>There are settings for each connection which can be configured: </p>
+<p> </p>
+<p>Figure 4-7 </p>
+<p>Connection Configuration </p>
+<p> </p>
+<p><b>Setting </b></p>
+<p><b>Description </b></p>
+<p>Dsl Payload Limit </p>
+<p>Payload limitation for each connection. Can be used to </p>
+<p>handle different payload sizes for each connection. </p>
+<p>Dsl Protocol Rx Tester Source Addr </p>
+<p>Tester source address used to identify the diagnostic </p>
+<p>connection. This value must be set to the same value in </p>
+<p>application software and bootloader configuration. </p>
+<p>Table 4-4  </p>
+<p>Connection Configuration </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>19 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>4.2.3 </b></p>
+<p><b>FlexRay Interface Module Configuration </b></p>
+<p>In addition to the standard FrIf configuration, a user configuration file must be configured in </p>
+<p>bootloader context. </p>
+<p> </p>
+<p>Figure 4-8 </p>
+<p>FrIf User Configuration File </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>FrIf user configuration file </b></p>
+<p>The following define must be set with the user configuration file: </p>
+<p>#define FRIF_CUSTOM_JLE_SCHEDULING STD_ON</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>4.3 </b></p>
+<p><b>Manual Configurations </b></p>
+<p><b>4.3.1 </b></p>
+<p><b>ComM Channel Configuration </b></p>
+<p>If diagnostic connections use more than one ComM channel, the diagnostic connections </p>
+<p>must be assigned to a ComM channel. This assignment currently must be done  using a </p>
+<p>user configuration file: </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>Assign diagnostic connections to ComM channels: </p>
+<p>#define FBL_CW_DCM_COMM_MAPPING { ComMConf_ComMChannel_0, ComMConf_ComMChannel_1}</p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>4.4 </b></p>
+<p><b>Compiler and Linker Settings </b></p>
+<p>To  sustain  communication during non-volatile memory  operations,  e.g.  sending  RCR-RP </p>
+<p>messages  during  flash  programming,  either  parts  of  the  communication  stack  or  the </p>
+<p>complete bootloader have to be linked to RAM. Please make sure you adapt your linker </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>20 </p>
+<p>based on template version 6.0.1 </p>
+<p>control file and startup code to generate an image in flash memory and copy this image to </p>
+<p>RAM during startup. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Example </b></p>
+<p>Please have a look at the linker control file and the MemMap.h file of the FBL </p>
+<p>demonstration project of your delivery for an example. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Changes </b></p>
+<p>With the use of the MICROSAR communication stack this requirement isn’t limited to </p>
+<p>the pipelined programming use-case. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>21 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>5 </b></p>
+<p><b>Interaction with Application Software </b></p>
+<p>The  transition  between  bootloader  and  application  software  is  often  done  by  diagnostic </p>
+<p>services, e.g. a Session Control – Programming Session or a ECU Reset  – Hard Reset </p>
+<p>service. These services can be received by bootloader or application, but the response is </p>
+<p>sent by the other part of the ECU software. In this case, the diagnostic connection which </p>
+<p>has been used to receive the request must be used to send the response. </p>
+<p>If  more  than  one  diagnostic  connection  is  configured,  the  information  which  diagnostic </p>
+<p>connection is used must be shared between bootloader and application. Additionally,  an </p>
+<p>interface  which  ensures  that  the  connections  can  be  identified  on  both  sides  is  needed </p>
+<p>because  the  connections  used  by  bootloader  and  application  are  not  necessarily  the </p>
+<p>same. </p>
+<p>The bootloader provides two callback functions to read the connection information from the </p>
+<p>application and to store it to be used by the application. Please see the functions </p>
+<p>ApplFblReadDcmDslRxTesterSourceAddr and  </p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>22 </p>
+<p>based on template version 6.0.1 </p>
+<p>ApplFblWriteDcmDslRxTesterSourceAddr for details. </p>
+<p> </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p><b>Note </b></p>
+<p>The transition between bootloader and application is normally done by a reset of the </p>
+<p>ECU. The data which is handed over between bootloader and application must be </p>
+<p>stored in a memory area which isn’t affected by a reset, e.g. uninitialized RAM or non-</p>
+<p>volatile memory. </p>
+<p><b> </b></p>
+<p><b> </b></p>
+<p> </p>
+<p> </p>
+<p><b>5.1 </b></p>
+<p><b>Address Configuration </b></p>
+<p>The  tester  source  address  must  be  configured  to  the  same  value  in  application  and </p>
+<p>bootloader. </p>
+<p>The </p>
+<p>application </p>
+<p>configuration </p>
+<p>is </p>
+<p>shown </p>
+<p>in </p>
+<p>Figure </p>
+<p>5-1, </p>
+<p>the </p>
+<p>bootloader </p>
+<p>configuration is shown in Figure 4-7. </p>
+<p> </p>
+<p> </p>
+<p>Figure 5-1 </p>
+<p>Dsl Protocol Rx Tester Source Addr in MICROSAR project </p>
+<p> </p>
+<p><b>5.2 </b></p>
+<p><b>Transition from Application to Bootloader </b></p>
+<p>When running in the application, the bootloader is started with a diagnostic service and the </p>
+<p>response to this service is sent by the bootloader, the connection address must be handed </p>
+<p>over  to  the  bootloader.  This  is  normally  done  during  the  service  Session  Control  – </p>
+<p>Programming Session. </p>
+<p>The function Dcm_SetProgConditions(Dcm_ProgConditionsPtrType progConditions) in the </p>
+<p>application software (MSR) package can be used to activate the FBL. The following data </p>
+<p>must be handed over to the bootloader: </p>
+<p> </p>
+<p><b>Data Element </b></p>
+<p><b>Source </b></p>
+<p>Programming Request Flag </p>
+<p>Constant: kEepFblReprogram (0xB5u) </p>
+<p>Tester Source Address </p>
+<p>progConditions-&gt;TesterSourceAddr </p>
+<p>Table 5-1  </p>
+<p>Transition to Bootloader </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>23 </p>
+<p>based on template version 6.0.1 </p>
+<p>The data must be set in case the function is called after a Session Control – Programming </p>
+<p>Session  service  has  been  received.  The  application  software  should  send  a  RCR-RP </p>
+<p>message  and  issue  a  reset.  After  this  reset,  the  bootloader  should  send  the  response </p>
+<p>message. </p>
+<p> </p>
+<p><b>5.3 </b></p>
+<p><b>Transition from Bootloader to Application </b></p>
+<p>If the bootloader is left with a diagnostic service (e.g. Session Control – Default Session or </p>
+<p>ECU  Reset  –  Hard  Reset)  and  the  feature  “Response  After  Reset”  is  activated,  the </p>
+<p>application software must send the response to the request which has been received by </p>
+<p>the bootloader. </p>
+<p>The </p>
+<p>function </p>
+<p>Dcm_GetProgConditions(Dcm_ProgConditionsPtrType </p>
+<p>progConditions) </p>
+<p>is </p>
+<p>used to send the response message. </p>
+<p> </p>
+<p><b>Data Element </b></p>
+<p><b>Source </b></p>
+<p>Function return value </p>
+<p>Constant: DCM_WARM_START </p>
+<p>progConditions-&gt;Sid </p>
+<p>Reset Response Flag: </p>
+<p><b>&gt; </b></p>
+<p>RESET_RESPONSE_SDS_REQUIRED: 0x10 </p>
+<p><b>&gt; </b></p>
+<p>RESET_RESPONSE_ECURESET_REQUIRED: 0x11 </p>
+<p><b>&gt; </b></p>
+<p>RESET_RESPONSE_KEYOFFON_REQUIRED: 0x11 </p>
+<p>progConditions-&gt;SubFuncId </p>
+<p>Reset Response Flag: </p>
+<p><b>&gt; </b></p>
+<p>RESET_RESPONSE_SDS_REQUIRED: 0x01 </p>
+<p><b>&gt; </b></p>
+<p>RESET_RESPONSE_ECURESET_REQUIRED: 0x01 </p>
+<p><b>&gt; </b></p>
+<p>RESET_RESPONSE_KEYOFFON_REQUIRED: 0x03 </p>
+<p>progConditions-&gt;TesterSourceAddr </p>
+<p>Tester Source Address </p>
+<p>Table 5-2  </p>
+<p>Transition from Bootloader </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>24 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>6 </b></p>
+<p><b>API Description </b></p>
+<p>Only  the API  of  user-adaptable  callback functions  is  listed here. The bootloader internal </p>
+<p>APIS to the communication stack and the diagnostics are not included. </p>
+<p><b>6.1 </b></p>
+<p><b>Callback-Function API </b></p>
+<p><b>6.1.1 </b></p>
+<p><b>Overview </b></p>
+<p> </p>
+<p><b>Function API </b></p>
+<p><b>Typical location </b></p>
+<p>tFblResult ApplFblReadDcmDslRxTesterSourceAddr( vuint8 * buffer ) </p>
+<p>fbl_ap.c </p>
+<p>tFblResult ApplFblWriteDcmDslRxTesterSourceAddr( vuint8 * buffer ) </p>
+<p>fbl_ap.c </p>
+<p>void ApplFblCanBusOff( void ) </p>
+<p>fbl_ap.c </p>
+<p>vuint8 ApplFblCwWakeUp( void ) </p>
+<p>fbl_ap.c </p>
+<p>Table 6-1  </p>
+<p>Callback-Function API </p>
+<p> </p>
+<p><b>6.1.2 </b></p>
+<p><b>Function Description </b></p>
+<p><b>6.1.2.1 </b></p>
+<p><b>ApplFblReadDcmDslRxTesterSourceAddr </b></p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult </p>
+<p>ApplFblReadDcmDslRxTesterSourceAddr(vuint8 * buffer) </p>
+<p><b>Parameter </b></p>
+<p>buffer </p>
+<p>Pointer to target address buffer </p>
+<p><b>Return code </b></p>
+<p>kFblOk </p>
+<p>kFblFailed </p>
+<p>Read operation successful </p>
+<p>Read operation failed </p>
+<p><b>Functional Description </b></p>
+<p>This function is called to initialize the active connection from NV-memory. The connection is identified by the </p>
+<p>tester source address parameter of each diagnostic connection. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>&gt; </p>
+<p>This function is called when the FBL is started after reset. </p>
+<p>Table 6-2  </p>
+<p>FpplFblReadDcmDslRxTesterSourceAddr </p>
+<p> </p>
+<p> </p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>25 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>6.1.2.2 </b></p>
+<p><b>ApplFblWriteDcmDslRxTesterSourceAddr </b></p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>tFblResult </p>
+<p>ApplFblWriteDcmDslRxTesterSourceAddr(vuint8* buffer) </p>
+<p><b>Parameter </b></p>
+<p>buffer </p>
+<p>Pointer to target address buffer </p>
+<p><b>Return code </b></p>
+<p>kFblOk </p>
+<p>kFblFailed </p>
+<p>Write operation successful </p>
+<p>Write operation failed </p>
+<p><b>Functional Description </b></p>
+<p>This function is called to store the active connection in NV-memory. The connection is identified by the </p>
+<p>tester source address parameter of each diagnostic connection. </p>
+<p>Table 6-3  </p>
+<p>ApplFblWriteDcDslRxTesterSourceAddr </p>
+<p> </p>
+<p><b>6.1.2.3 </b></p>
+<p><b>ApplFblCanBusOff </b></p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>void </p>
+<p>ApplFblCanBusOff(void ) </p>
+<p><b>Parameter </b></p>
+<p>- </p>
+<p>- </p>
+<p><b>Return code </b></p>
+<p>- </p>
+<p>- </p>
+<p><b>Functional Description </b></p>
+<p>This call-back function is called if a CAN controller enters bus-off state. </p>
+<p><b>Particularities and Limitations </b></p>
+<p>&gt; </p>
+<p>Only applies to CAN connections. </p>
+<p>&gt; </p>
+<p>Currently, no controller dependent handling is implemented. The default bus-off call-back is used all the </p>
+<p>time. </p>
+<p>Table 6-4  </p>
+<p>ApplFblCanBusOff </p>
+<p> </p>
+<p><b> </b></p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>26 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>6.1.2.4 </b></p>
+<p><b>ApplFblCwWakeUp </b></p>
+<p> </p>
+<p><b>Prototype </b></p>
+<p>vuint8 </p>
+<p>ApplFblCwWakeUp( void ) </p>
+<p><b>Parameter </b></p>
+<p>- </p>
+<p>- </p>
+<p><b>Return code </b></p>
+<p>kFblOk </p>
+<p>kFblFailed </p>
+<p>Wake-up detected </p>
+<p>Otherwise </p>
+<p><b>Functional Description </b></p>
+<p>This call-back function is called if a wake-up condition is detected during sleep mode. </p>
+<p>Table 6-5  </p>
+<p>ApplFblCwWakeUp </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>27 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>7 </b></p>
+<p><b>Glossary and Abbreviations </b></p>
+<p><b>7.1 </b></p>
+<p><b>Abbreviations </b></p>
+<p><b>Abbreviation </b></p>
+<p><b>Description </b></p>
+<p>API </p>
+<p>Application Programming Interface </p>
+<p>CAN </p>
+<p>Controller Area Network </p>
+<p>ECU </p>
+<p>Electronic Control Unit </p>
+<p>FBL </p>
+<p>Flash Bootloader </p>
+<p>FR </p>
+<p>FlexRay </p>
+<p>ISO </p>
+<p>International Organiziation for Standardization </p>
+<p>MSR </p>
+<p>MICROSAR </p>
+<p>PDUR </p>
+<p>PDU Router </p>
+<p>RCR-RP </p>
+<p>Response Correctly Received, Response Pending </p>
+<p>TP </p>
+<p>Transport Protocol </p>
+<p>VASE </p>
+<p>Vector AUTOSAR Scripting Engine </p>
+<p> </p>
+<p> </p>
+<h1 style="page-break-before:always; "></h1>
+<p>Technical Reference Flash Bootloader </p>
+<p>© 2018 Vector Informatik GmbH </p>
+<p>Version 3.02.00 </p>
+<p>28 </p>
+<p>based on template version 6.0.1 </p>
+<p><b>8 </b></p>
+<p><b>Contact </b></p>
+<p>Visit our website for more information on </p>
+<p> </p>
+<p><b>&gt; </b> News </p>
+<p><b>&gt; </b> Products </p>
+<p><b>&gt; </b> Demo software </p>
+<p><b>&gt; </b> Support </p>
+<p><b>&gt; </b> Training data </p>
+<p><b>&gt; </b> Addresses </p>
+<p> </p>
+<p><b>www.vector.com </b></p>
+<p> </p>
+</body>
+</html>
+{% endraw %}
